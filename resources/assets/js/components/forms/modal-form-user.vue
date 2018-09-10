@@ -9,52 +9,54 @@
     <template slot="modal-body">
       <div class="row">
         <div class="col-sm-10 col-sm-offset-1">
-          <form class="form-horizontal" @keyup.enter="registrar">
+          <form class="" @keyup.enter="registrar">
 
             <spinner v-if="!formData.ready"></spinner>
             <div v-else>
-              <div class="col-sm-5">
+              <div class="col-sm-6">
                 <template v-for="input in entries.izq">
-                  <v-input :name="input" required="true"
+                  <rs-input :name="input" required="true"
                           v-model="formData.user[input.id]"
                           :msg="msg[input.id]"
                           @input="formData.user[input.id] = arguments[0]">
-                  </v-input>
+                  </rs-input>
                 </template>
               </div>
 
-              <div class="col-sm-5 col-sm-offset-2">
+              <div class="col-sm-6">
                 <template v-for="input in entries.der">
-                  <v-input :name="input" required="true"
+                  <rs-input :name="input" required="true"
                           type="password"
                           v-model="formData.user[input.id]"
                           :msg="msg[input.id]"
                           @input="formData.user[input.id] = arguments[0]">
-                  </v-input>
+                  </rs-input>
                 </template>
-
-                <div class="form-group">
-                  <label for="roles" class="control-label">
-                    <span class="glyphicon glyphicon-inbox"></span> Módulo:
-                  </label>
-                  <select id="module_id" required="true" class="form-control" v-model="formData.user.module_id">
-                    <option value="">Seleccione el Módulo</option>
-                    <option v-for="(module, key, index) in modules" :value="key">{{ module }}</option>
-                  </select>
-                  <small id="module_idHelp" class="form-text text-muted">
-                    <span v-text="msg.module_id"></span>
-                  </small>
-                </div>
 
                 <div class="form-group">
                   <label for="roles" class="control-label">
                     <span class="glyphicon glyphicon-compressed"></span> Roles:
                   </label>
-                  <v-multiselect v-model="formData.user.roles" :options="roles" :multiple="true" :hide-selected="true" :close-on-select="false"></v-multiselect>
+                  <rs-multiselect v-model="formData.user.roles" :options="roles" :multiple="true" :hide-selected="true" :close-on-select="false"></rs-multiselect>
                   <small id="rolesHelp" class="form-text text-muted">
                     <span v-text="msg.roles"></span>
                   </small>
                 </div>
+
+                <div class="form-group">
+                  <label for="approval_state" class="control-label">
+                    <span class="glyphicon glyphicon-compressed"></span> Estado:
+                  </label>
+                  <select id="approval_state" class="form-control" v-model="formData.user.approval_state" :disabled="formData.cond == 'create'">
+                    <option :value="null">Seleccione un estado</option>
+                    <option value="1">Aprovado</option>
+                    <option value="0">No Aprovado</option>
+                  </select>
+                  <small id="approval_stateHelp" class="form-text text-muted">
+                    <span v-text="msg.approval_state"></span>
+                  </small>
+                </div>
+
               </div>
             </div>
 
@@ -90,18 +92,21 @@ div.multiselect__tags {
     name: 'modal-form-user',
     components: {
       'modal': Modal,
-      'v-input': Input,
-      'v-multiselect': Multiselect,
+      'rs-input': Input,
+      'rs-multiselect': Multiselect,
     },
     props: ['formData'],
     data () {
       return {
         entries: {
           izq: [
+          {label: 'Usuario', id: 'user', icon: 'fa fa-user'},
           {label: 'Nombre', id: 'name', icon: 'fa fa-user'},
           {label: 'Apellido', id: 'last_name', icon: 'fa fa-user-o'},
           {label: 'Cédula', id: 'num_id', icon: 'fa fa-id-card-o'},
           {label: 'E-Mail', id: 'email', icon: 'fa fa-envelope'},
+          {label: 'Teléfono', id: 'phone', icon: 'fa fa-envelope'},
+          {label: 'Web', id: 'web', icon: 'fa fa-envelope'},
           ],
           der: [
           {label: 'Contraseña', id: 'password', icon: 'fa fa-lock'},
@@ -119,7 +124,8 @@ div.multiselect__tags {
           password: 'Contraseña.',
           password_confirmation: 'Confirmación de Contraseña.',
           roles: 'Rol a desempeñar.',
-          module_id: 'Modulo a desempeñar.'
+          approval_state: 'Aprobación de usuario.',
+          phone: 'Número telefonico.',
         }
       };
     },
@@ -132,7 +138,6 @@ div.multiselect__tags {
     },
     methods: {
       registrar: function (el) {
-        $(el.target).attr('disabled', 'disabled')
         this.restoreMsg(this.msg);
         if (this.formData.cond === 'create') {
           axios.post(this.formData.url, this.formData.user)

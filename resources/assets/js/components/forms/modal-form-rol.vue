@@ -8,22 +8,22 @@
 
     <template slot="modal-body">
       <div class="row">
-        <form id="roles-form" class="form-horizontal" @keyup.enter="registrar()">
+        <form id="roles-form" @keyup.enter="registrar()">
           <div class="col-md-10 col-md-offset-1">
 
             <spinner v-if="!formData.ready"></spinner>
             <div v-else>
-              <div class="col-md-5">
+              <div class="col-md-6">
                 <template v-for="input in entries.izq">
-                  <v-input :name="input" required="true"
+                  <rs-input :name="input" required="true"
                   v-model="formData.rol[input.id]"
                   :msg="msg[input.id]"
                   @input="formData.rol[input.id] = arguments[0]">
-                </v-input>
+                </rs-input>
               </template>
             </div>
 
-            <div class="col-md-5 col-md-offset-2">
+            <div class="col-md-6">
               <div class="form-group" v-for="input in entries.der">
                 <label for="special" class="control-label">
                   <span :class="'fa fa-'+input.icon"></span> {{ input.label }}
@@ -49,10 +49,10 @@
               </div>
             </div>
 
-            <v-checkbox-p v-if="!formData.rol.special"
+            <rs-checkbox-p v-if="!formData.rol.special"
             :user="formData.rol.permissions"
             @check="formData.rol.permissions = arguments[0]"
-            ></v-checkbox-p>
+            ></rs-checkbox-p>
 
           </div>
         </div>
@@ -79,8 +79,8 @@
     name: 'modal-form-rol',
     components: {
       'modal': Modal,
-      'v-input': Input,
-      'v-checkbox-p': Checkbox,
+      'rs-input': Input,
+      'rs-checkbox-p': Checkbox,
       datePicker
     },
     props: ['formData'],

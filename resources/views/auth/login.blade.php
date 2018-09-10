@@ -18,7 +18,7 @@
 
                     <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
                         <label for="email" class="control-label">Correo:</label>
-                        <input id="email" type="email" class="form-control" name="email"  placeholder="Email" value="root@sahum.gob.ve" required autofocus> {{-- {{ old('email') }} --}}
+                        <input id="email" type="email" class="form-control" name="email"  placeholder="Email" value="root@pingui.es" required autofocus> {{-- {{ old('email') }} --}}
                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                         @if ($errors->has('email'))
                         <span class="help-block">
@@ -68,6 +68,8 @@
                 @if(config('frontend.registration_open'))
                 <a href="{{ route('register') }}">Registra nueva membresía.</a>
                 @endif
+                <br>
+                <a href="/">Ir a los torneos.</a>
 
             </div>
             <!-- /.login-box-body -->

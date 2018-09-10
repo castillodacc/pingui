@@ -12,7 +12,6 @@ class RolesController extends Controller
 
     public function __construct()
     {
-        $this->middleware('onlyAjax');
         $this->middleware('can:rol,index')->only(['index']);
         $this->middleware('can:rol,show')->only(['show']);
         $this->middleware('can:rol,destroy')->only(['destroy']);
@@ -26,8 +25,8 @@ class RolesController extends Controller
      */
     public function index(Request $request)
     {
-        $roles = Role::dataForPaginate();
-        $roles->each(function ($r) {
+        $select = ['id', 'name', 'description', 'from_at', 'to_at', 'special'];
+        $roles = Role::dataForPaginate($select, function ($r) {
             $r->hours = $r->from_at . ' - ' . $r->to_at;
         });
         return $this->dataWithPagination($roles);

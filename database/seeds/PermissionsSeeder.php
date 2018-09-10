@@ -12,16 +12,6 @@ class PermissionsSeeder extends Seeder
     public function run()
     {
         /**
-         * Permisos de Modulos
-         */
-        App\Models\Permisologia\Permission::create([
-        	'name' => 'Cambiar de Modulo',
-        	'module' => 'module',
-        	'action' => 'changeModule',
-        	'description' => 'Permiso para cambiar de modulo'
-        ]);
-
-        /**
          * Permisos de usuarios
          */
         App\Models\Permisologia\Permission::create([
@@ -126,6 +116,234 @@ class PermissionsSeeder extends Seeder
         	'module' => 'permission',
         	'action' => 'update',
         	'description' => 'Permiso para Eliminar Permisos'
+        ]);
+
+        /**
+         * Permisos de Clubes
+         */
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Ver Clubes',
+            'module' => 'club',
+            'action' => 'index',
+            'description' => 'Permiso para ver Clubes'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Crear Club',
+            'module' => 'club',
+            'action' => 'store',
+            'description' => 'Permiso para registrar Club'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Ver Club',
+            'module' => 'club',
+            'action' => 'show',
+            'description' => 'Permiso para ver un Club'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Actualizar Club',
+            'module' => 'club',
+            'action' => 'update',
+            'description' => 'Permiso para actualizar Club'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Eliminar Club',
+            'module' => 'club',
+            'action' => 'destroy',
+            'description' => 'Permiso para Eliminar Club'
+        ]);
+
+        /**
+         * Permisos de Referees
+         */
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Ver Referees',
+            'module' => 'referee',
+            'action' => 'index',
+            'description' => 'Permiso para ver Referees'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Crear Referee',
+            'module' => 'referee',
+            'action' => 'store',
+            'description' => 'Permiso para registrar Referee'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Ver Referee',
+            'module' => 'referee',
+            'action' => 'show',
+            'description' => 'Permiso para ver un Referee'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Actualizar Referee',
+            'module' => 'referee',
+            'action' => 'update',
+            'description' => 'Permiso para actualizar Referee'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Eliminar Referee',
+            'module' => 'referee',
+            'action' => 'destroy',
+            'description' => 'Permiso para Eliminar Referee'
+        ]);
+
+        /**
+         * Permisos de Categorias Latinas
+         */
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Ver Categorias Latinas',
+            'module' => 'categories_l',
+            'action' => 'index',
+            'description' => 'Permiso para ver Categorias Latinas'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Crear Categoria Latina',
+            'module' => 'categories_l',
+            'action' => 'store',
+            'description' => 'Permiso para registrar Categoria Latina'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Ver Categoria Latina',
+            'module' => 'categories_l',
+            'action' => 'show',
+            'description' => 'Permiso para ver un Categoria Latina'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Actualizar Categoria Latina',
+            'module' => 'categories_l',
+            'action' => 'update',
+            'description' => 'Permiso para actualizar Categoria Latina'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Eliminar Categoria Latina',
+            'module' => 'categories_l',
+            'action' => 'destroy',
+            'description' => 'Permiso para Eliminar Categoria Latina'
+        ]);
+
+        /**
+         * Permisos de Categorias Opens
+         */
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Ver Categorias Opens',
+            'module' => 'categories_o',
+            'action' => 'index',
+            'description' => 'Permiso para ver Categorias Opens'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Crear Categoria Open',
+            'module' => 'categories_o',
+            'action' => 'store',
+            'description' => 'Permiso para registrar Categoria Open'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Ver Categoria Open',
+            'module' => 'categories_o',
+            'action' => 'show',
+            'description' => 'Permiso para ver un Categoria Open'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Actualizar Categoria Open',
+            'module' => 'categories_o',
+            'action' => 'update',
+            'description' => 'Permiso para actualizar Categoria Open'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Eliminar Categoria Open',
+            'module' => 'categories_o',
+            'action' => 'destroy',
+            'description' => 'Permiso para Eliminar Categoria Open'
+        ]);
+
+        /**
+         * Permisos de Categorias Standard
+         */
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Ver Categorias Standards',
+            'module' => 'categories_s',
+            'action' => 'index',
+            'description' => 'Permiso para ver Categorias Standards'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Crear Categoria Standard',
+            'module' => 'categories_s',
+            'action' => 'store',
+            'description' => 'Permiso para registrar Categoria Standard'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Ver Categoria Standard',
+            'module' => 'categories_s',
+            'action' => 'show',
+            'description' => 'Permiso para ver un Categoria Standard'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Actualizar Categoria Standard',
+            'module' => 'categories_s',
+            'action' => 'update',
+            'description' => 'Permiso para actualizar Categoria Standard'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Eliminar Categoria Standard',
+            'module' => 'categories_s',
+            'action' => 'destroy',
+            'description' => 'Permiso para Eliminar Categoria Standard'
+        ]);
+
+        /**
+         * Permisos de Torneos
+         */
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Ver Torneos',
+            'module' => 'tournament',
+            'action' => 'index',
+            'description' => 'Permiso para ver Torneos'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Crear Torneo',
+            'module' => 'tournament',
+            'action' => 'store',
+            'description' => 'Permiso para registrar Torneo'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Ver Torneo',
+            'module' => 'tournament',
+            'action' => 'show',
+            'description' => 'Permiso para ver un Torneo'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Actualizar Torneo',
+            'module' => 'tournament',
+            'action' => 'update',
+            'description' => 'Permiso para actualizar Torneo'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Eliminar Torneo',
+            'module' => 'tournament',
+            'action' => 'destroy',
+            'description' => 'Permiso para Eliminar Torneo'
         ]);
     }
 }

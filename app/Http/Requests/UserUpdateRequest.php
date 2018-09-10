@@ -25,9 +25,8 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'email'     => 'required|email|min:8|max:35|unique1:users|DomainValid',
-            'last_name' => 'required|alfa_space|min:3|max:15',
-            'module_id' => 'required|numeric',
-            'name'      => 'required|alfa_space|min:3|max:15',
+            'last_name' => 'required|alfa_space|min:3|max:50',
+            'name'      => 'required|alfa_space|min:3|max:50',
             'num_id'    => 'required|numeric|digits_between:6,8|exr_ced|unique1:users',
             'password'  => 'nullable|string|min:6|max:20|confirmed',
             'roles'     => 'required|array|max:2'
@@ -44,10 +43,13 @@ class UserUpdateRequest extends FormRequest
         return [
             'email'     => 'correo',
             'last_name' => 'apellido',
-            'module_id' => 'modulo',
+            'user'      => 'nombre de usuario',
             'name'      => 'nombre',
-            'num_id'    => 'cedula',
-            'password'  => 'contraseña'
+            'num_id'    => 'DNI',
+            'rol'    => 'perfil',
+            'phone'    => 'telefono',
+            'club_id'    => 'club',
+            'password'  => 'contraseña',
         ];
     }
 }

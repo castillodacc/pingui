@@ -5,7 +5,7 @@
 				<div class="box box-primary">
 					<div class="box-header"><b>{{ module }}.</b></div>
 					<div class="box-body" style="font-size: 16px;">
-						<table>
+						<table class="table table-condensed table-hover">
 							<tbody>
 								<tr class="form-inline"
 									v-for="(p, key, index) in permissions"

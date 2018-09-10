@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('/adminlte/css/AdminLTE.min.css') }}">
         <link rel="stylesheet" href="{{ asset('/adminlte/css/skins/'.config('frontend.theme').'.min.css') }}">
-        
+
         <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>

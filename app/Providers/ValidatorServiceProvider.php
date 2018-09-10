@@ -53,6 +53,7 @@ class ValidatorServiceProvider extends ServiceProvider
                     'sahum.gob.ve', 'gmail.com',
                     'hotmail.com', 'outlook.com',
                     'yahoo.com', 'mail.com',
+                    'pingui.es'
                 ];
                 return in_array($domain, $domains);
             }
@@ -87,7 +88,9 @@ class ValidatorServiceProvider extends ServiceProvider
          */
         Validator::extend('unique1', function($attribute, $value, $parameters)
         {
-            $match = DB::table($parameters[0])->where($attribute, '=', $value)->count();
+            $match = DB::table($parameters[0])
+            ->where((isset($parameters[1]))?$parameters[1]:$attribute, '=', $value)
+            ->count();
             if ($match > 1) {
                 return false;
             }

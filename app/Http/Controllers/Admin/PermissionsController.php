@@ -12,7 +12,6 @@ class PermissionsController extends Controller
 
     public function __construct()
     {
-        $this->middleware('onlyAjax');
         $this->middleware('can:permission,index')->only(['index']);
         $this->middleware('can:permission,show')->only(['show']);
     }
@@ -28,10 +27,10 @@ class PermissionsController extends Controller
         $permissions = Permission::withTrashed()
         ->orderBy(request()->order?:'id', request()->dir?:'DESC')
         ->search(request()->search)
+        ->select(['id', 'name', 'description', 'deleted_at'])
         ->paginate(request()->num?:10);
 
         $permissions->each(function ($p) {
-            $p->action = $p->module . '.' . $p->action;
             $p->active = ($p->deleted_at) ? 
             '<i class="glyphicon glyphicon-unchecked text-center"></i>' : 
             '<i class="glyphicon glyphicon-check text-center"></i>';
@@ -49,6 +48,7 @@ class PermissionsController extends Controller
     public function show($id)
     {
         $permission = Permission::withTrashed()->findOrFail($id);
+        $permission->state = !$permission->deleted_at;
         return response()->json($permission);
     }
 
@@ -62,8 +62,7 @@ class PermissionsController extends Controller
     public function update(PermissionUpdateRequest $request, $id)
     {
         $permission = Permission::withTrashed()->findOrFail($id);
-        ($request->deleted_at) ? $permission->delete() : $permission->restore();
         $permission->update($request->validated());
-        return response()->json($permission);
+        ($request->state) ? $permission->restore() : $permission->delete();
     }
 }

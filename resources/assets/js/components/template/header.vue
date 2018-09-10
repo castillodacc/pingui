@@ -13,8 +13,10 @@
             </a>
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                    <change-module></change-module>
-                    <li class="dropdown user user-menu">
+                    <li class="tasks-menu">
+                        <a href="/" class="">Ir a la principal</a>
+                  </li>
+                  <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img :src="all.user.logoPath" class="user-image" alt="">
                             <span class="hidden-xs" v-text="all.user.fullName"></span>
@@ -55,18 +57,13 @@
 </template>
 
 <script>
-    import changeModule from './../partials/change-module.vue';
     export default {
         name: 'v-header',
         props: ['all'],
-        components: {
-            'change-module': changeModule
-        },
         data()  {
             return {
                 token: window.token.content
             }
         },
-        mounted() {}
     }
 </script>

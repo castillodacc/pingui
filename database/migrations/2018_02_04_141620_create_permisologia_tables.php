@@ -37,7 +37,7 @@ class CreatePermisologiaTables extends Migration
 
         Schema::create('permissions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 25)->unique();
+            $table->string('name', 30)->unique();
             $table->string('module', 15); // users | roles ..
             $table->string('action', 15); // index | show | store | update | destroy
             $table->text('description')->nullable();

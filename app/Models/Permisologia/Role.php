@@ -16,7 +16,13 @@ class Role extends Model
      * @var array
      */
 	protected $fillable = [
-		'name', 'slug', 'description', 'from_at', 'to_at', 'special', 'deleted_at'
+		'name',
+        'slug',
+        'description',
+        'from_at',
+        'to_at',
+        'special',
+        'deleted_at'
 	];
 
     /**
@@ -24,7 +30,7 @@ class Role extends Model
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+    // protected $dates = ['deleted_at'];
 
     /**
      * Los atributos que deberían estar ocultos para las matrices.
@@ -32,7 +38,7 @@ class Role extends Model
      * @var array
      */
     protected $hidden = [
-        'created_at' , 'updated_at'
+        'created_at', 'updated_at', 'deleted_at'
     ];
 
     /**

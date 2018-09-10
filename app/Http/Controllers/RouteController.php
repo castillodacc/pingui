@@ -60,7 +60,7 @@ class RouteController extends Controller
      */
     public function canPermission(Request $request)
     {
-        $whiteList = ['error', 'profile'];
+        $whiteList = ['error', 'profile', 'dashboard'];
         if (in_array($request->p, $whiteList)) return response()->json(true);
         $separated = explode('.', $request->p);
         $module = $separated[0];
@@ -81,5 +81,12 @@ class RouteController extends Controller
         }
 
         return response()->json(false);
+    }
+
+    public function front()
+    {
+        $tournament2 = \App\Models\Tournament::take(10)->get();
+        $tournament = \App\Models\Tournament::paginate(10);
+        return view('frontend', compact('tournament', 'tournament2'));
     }
 }

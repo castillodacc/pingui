@@ -44,6 +44,7 @@ trait ModelsTrait
 	 */
 	public function assignPermissionsOneUser($roles)
 	{
+		$roles = (is_array($roles)) ? $roles : Array($roles);
 		$permissions = [];
 		foreach ($roles as $rol) {
 			$permissionsOfRol = Role::findOrFail($rol)->permissions->pluck('id')->toArray();
@@ -59,11 +60,11 @@ trait ModelsTrait
 	 */
 	public function permissionsOfUser()
 	{
-		if ($this->id == 1) return 'all-access';
-		foreach ($this->roles as $rol) {
-			if ($rol->special == 'all-access') return $rol->special;
-			if ($rol->special == 'no-access') return [];
-		}
+		// if ($this->id == 1) return 'all-access';
+		// foreach ($this->roles as $rol) {
+		// 	if ($rol->special == 'all-access') return $rol->special;
+		// 	if ($rol->special == 'no-access') return [];
+		// }
 		$all = [];
 		foreach ($this->permissions as $p) {
 			$all[] = $p->module . '.' . $p->action;
@@ -105,11 +106,17 @@ trait ModelsTrait
 	 * @model All
 	 * @return Object
 	 */
-	public static function dataForPaginate()
+	public static function dataForPaginate($select = ['*'], $changes = null, $options = [])
 	{
-		return Self::orderBy(request()->order?:'id', request()->dir?:'DESC')
+		$order = ($select[0] == '*') ? 'id' : $select[0];
+		$data = Self::orderBy(request()->order?:$order, request()->dir?:'ASC')
 		->search(request()->search)
+		->select($select)
 		->paginate(request()->num?:10);
+
+		if ($changes != null) $data->each(function ($d) use ($changes) {$changes($d); });
+
+		return $data;
 	}
 
 	/**

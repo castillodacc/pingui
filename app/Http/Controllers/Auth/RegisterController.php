@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Models\Permisologia\Role;
+use App\Models\Club;
 
 class RegisterController extends Controller
 {
@@ -28,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/perfil';
 
     /**
      * Create a new controller instance.
@@ -41,6 +43,18 @@ class RegisterController extends Controller
     }
 
     /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        $clubs = Club::get(['id', 'name', 'population', 'province']);
+        $roles = Role::whereIn('id', [2,3])->get(['id', 'name']);
+        return view('auth.register', compact('clubs', 'roles'));
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
@@ -50,15 +64,24 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'email'     => 'required|email|min:8|max:35|unique:users|DomainValid',
-            'last_name' => 'required|alfa_space|min:3|max:15',
-            'name'      => 'required|alfa_space|min:3|max:15',
+            'last_name' => 'required|alfa_space|min:3|max:50',
+            'user'      => 'required|alfa_space|min:3|max:20',
+            'name'      => 'required|alfa_space|min:3|max:50',
             'num_id'    => 'required|numeric|digits_between:6,8|exr_ced|unique:users',
+            'club_id'   => 'nullable|numeric',
+            'phone'     => 'nullable|numeric',
+            'rol'     => 'nullable|numeric',
+            'web'     => 'nullable|string',
             'password'  => 'required|string|min:6|max:20|confirmed',
         ],[],[
             'email'     => 'correo',
             'last_name' => 'apellido',
+            'user'      => 'nombre de usuario',
             'name'      => 'nombre',
-            'num_id'    => 'cédula',
+            'num_id'    => 'DNI',
+            'rol'    => 'perfil',
+            'phone'    => 'telefono',
+            'club_id'    => 'club',
             'password'  => 'contraseña',
         ]);
     }
@@ -71,12 +94,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'last_name' => $data['last_name'],
-            'num_id' => $data['num_id'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $data['password'] = Hash::make($data['password']);
+        $user = User::create($data);
+        $user->roles()->attach($data['rol']);
+        $user->assignPermissionsOneUser($data['rol']);
+        return $user;
     }
 }

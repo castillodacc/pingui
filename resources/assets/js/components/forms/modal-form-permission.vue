@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-modal id="permission-form">
+    <rs-modal id="permission-form">
 
       <h4 class="card-title" slot="modal-title">
         <span class="glyphicon glyphicon-edit"></span>
@@ -10,29 +10,29 @@
       <template slot="modal-body">
         <div class="row justify-content-center">
           <div class="col-md-10 col-md-offset-1">
-            <form id="PermissionsForm" class="form-horizontal" @keyup.enter="registrar">
+            <form id="PermissionsForm" @keyup.enter="registrar">
 
               <spinner v-if="!formData.ready"></spinner>
               <div v-else>
                 <template v-for="input in entries">
-                  <v-input :name="input" required="true"
+                  <rs-input :name="input" required="true"
                           :readonly="input.readonly"
                           v-model="formData.permission[input.id]"
                           :msg="msg[input.id]"
                           @input="formData.permission[input.id] = arguments[0]">
-                  </v-input>
+                  </rs-input>
                 </template>
 
                 <div class="form-group">
-                  <label for="deleted_at" class="control-label">
+                  <label for="state" class="control-label">
                     <span class="glyphicon glyphicon-inbox"></span> Activo:
                   </label>
-                  <select id="deleted_at" required="true" class="form-control" v-model="formData.permission.deleted_at">
-                    <option :value="false">Activo</option>
-                    <option :value="true">Inactivo</option>
+                  <select id="state" required="true" class="form-control" v-model="formData.permission.state">
+                    <option :value="true">Activo</option>
+                    <option :value="false">Inactivo</option>
                   </select>
-                  <small id="deleted_atHelp" class="form-text text-muted">
-                    <span v-text="msg.deleted_at"></span>
+                  <small id="stateHelp" class="form-text text-muted">
+                    <span v-text="msg.state"></span>
                   </small>
                 </div>
               </div>
@@ -47,7 +47,7 @@
         <button type="button" class="btn btn-primary" @click="registrar"><span class="glyphicon glyphicon-saved"></span> Guardar</button>
       </template>
 
-    </v-modal>
+    </rs-modal>
   </div>
 </template>
 
@@ -58,22 +58,18 @@
   export default {
     name: 'modal-form-permission',
     components: {
-      'v-modal': Modal,
-      'v-input': Input
+      'rs-modal': Modal,
+      'rs-input': Input
     },
     props: ['formData'],
     data () {
       return {
         msg: {
           name: 'Nombre del Permiso.',
-          module: 'Modulo a ejecutarse.',
-          action: 'Acción a Realizar.',
           description: 'Descripción a realizar.',
           deleted_at: 'Activar o Inactivar permiso.'
         },
         entries: [
-          {label: 'Módulo', id: 'module', icon: 'edit', readonly: true},
-          {label: 'Acción', id: 'action', icon: 'edit', readonly: true},
           {label: 'Nombre', id: 'name', icon: 'edit'},
           {label: 'Descripción', id: 'description', icon: 'edit'},
         ]
@@ -86,7 +82,7 @@
           axios.put(this.formData.url, this.formData.permission)
           .then(response => {
             toastr.success('Permiso Editado');
-            $('#permission-form').modal('toggle');
+            $('#permission-form').modal('hide');
             this.$emit('input');
           });
         }

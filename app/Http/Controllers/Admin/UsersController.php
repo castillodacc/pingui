@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ { UserStoreRequest, UserUpdateRequest, ChangePasswordRequest };
 use App\User;
-use App\Models\Module;
 use App\Models\Permisologia\Role;
 
 class UsersController extends Controller
@@ -14,11 +13,9 @@ class UsersController extends Controller
 
     public function __construct()
     {
-        $this->middleware('onlyAjax')->except(['initWithOneUser']);
         $this->middleware('can:user,index')->only(['index', 'dataForRegister']);
         $this->middleware('can:user,show')->only(['show']);
         $this->middleware('can:user,destroy')->only(['destroy']);
-        $this->middleware('can:user,initWithOneUser')->only(['initWithOneUser']);
     }
 
     /**
@@ -29,18 +26,15 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::dataForPaginate();
-
-        $users->each(function ($u) {
+        $select = ['id', 'user', 'name', 'last_name', 'num_id', 'email',];
+        $users = User::dataForPaginate($select, function ($u) {
             $rol = '';
             foreach ($u->roles as $r) {
                 $rol .= '<span class="badge">' . $r->name . '</span>';
             }
             $u->rol = $rol;
             $u->fullName = $u->fullName();
-            $u->modul = optional($u->module)->module;
         });
-
         return $this->dataWithPagination($users);
     }
 
@@ -122,12 +116,12 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function initWithOneUser($id)
+    /*public function initWithOneUser($id)
     {
         if ($id == 1 || \Auth::user()->id != 1) return abort(401, 'Unauthorized.');
         \Auth::loginUsingId($id);
         return redirect()->to('/');
-    }
+    }*/
 
     /**
      * Retorna los datos que se usaran para crear y editar.
@@ -136,30 +130,10 @@ class UsersController extends Controller
      */
     public function dataForRegister()
     {
-        $modules = Module::all()->pluck('module', 'id');
-        $roles = Role::all()->pluck('name', 'id');
+        // $modules = Module::all()->pluck('module', 'id');
+        // $roles = Role::all()->pluck('name', 'id');
         $roles = Role::all()->pluck('name');
         return response()->json(compact(['modules', 'roles']));
-    }
-
-    /**
-     * Retorna los datos que se usaran para cambiar el modulo.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function changeModule(Request $request)
-    {
-        if ($request->method() === 'GET') {
-            $module = \Auth::user()->module->toArray();
-            if (\Auth::user()->canActMod('module', 'changeModule')) {
-                $modules = Module::all()->pluck('module', 'id')->toArray();
-                $modules = array_diff($modules, $module);
-            }
-            return response()->json(compact('module', 'modules'));
-        } elseif ($request->method() === 'POST') {
-            $result = \Auth::user()->update(['module_id' => $request->key]);
-            return response()->json($result);
-        }
     }
 
 }

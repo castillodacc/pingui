@@ -25,13 +25,13 @@ $factory->define(App\User::class, function (Faker $faker) {
 	$name = $faker->firstName;
 	$user = $faker->bothify($name.'#?##?');
 	return [
+		'user' => $name,
 		'name' => $name,
 		'last_name' => $faker->lastName,
 		'num_id' => rand(500000, 50000000),
 		'email' => $user.$emails[rand(0, 5)],
 		'password' => bcrypt('secret'),
 		'remember_token' => str_random(10),
-		'module_id' => rand(1, 3)
 	];
 });
 

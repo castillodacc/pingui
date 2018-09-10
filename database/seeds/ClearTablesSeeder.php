@@ -13,7 +13,6 @@ class ClearTablesSeeder extends Seeder
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
         DB::table('users')->truncate();
-        DB::table('modules')->truncate();
         DB::table('roles')->truncate();
         DB::table('role_user')->truncate();
         DB::table('permissions')->truncate();

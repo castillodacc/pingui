@@ -26,24 +26,25 @@ Vue.use(VueRouter);
 
 Vue.mixin({
 	methods: {
-		can: function (accion = null) {
+		can (accion = null) {
 			let permissions = this.$root.permissions;
 			if (permissions === 'all-access') return true;
 			if (permissions === 'no-access') return false;
 			if (Array.isArray(accion)) {
+				let isset = false;
 				for(let i in accion) {
-					if (permissions.includes(accion[i])) return true;
+					if (permissions.includes(accion[i])) isset = true;
 				}
-				return false;
+				return isset;
 			}
 			return this.$root.permissions.includes(accion);
 		},
 		restoreMsg: function (msg) {
 			for(let i in msg) {
-				$('.modal small#'+i+'Help').text(msg[i]);
+				$('small#'+i+'Help').text(msg[i]);
 			}
 		},
-		deleted: function (url, updateTable, name) {
+		deleted: function (url, updateTable, name = 'name') {
 			let msg = toastr;
 			msg.options.tapToDismiss = false;
 			axios.get(url)
@@ -57,7 +58,7 @@ Vue.mixin({
 					toastr.clear();
 					axios.delete(url)
 					.then(response => {
-						updateTable();
+						updateTable('this');
 						toastr.success('Borrado Exitosamente');
 					});
 				});

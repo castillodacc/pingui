@@ -11644,6 +11644,16 @@ button.close {
   border-top-color: #ccc;
 }
 
+.login-box.register {
+  width: 560px;
+}
+
+@media (max-width: 570px) {
+  .login-box.register {
+    width: 360px;
+  }
+}
+
 label.remenber {
   position: absolute;
   top: -1px;
@@ -11659,5 +11669,14 @@ label.remenber {
 nav.navbar.navbar-static-top,
 nav.navbar.navbar-static-top a.sidebar-toggle {
   max-height: 50px !important;
+}
+
+select.form-control {
+  width: 100% !important;
+}
+
+div.multiselect__tags {
+  border-radius: 0px;
+  border-color: #d2d6de;
 }
 

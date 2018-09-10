@@ -17,6 +17,7 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#settings" data-toggle="tab" aria-expanded="true">Configuraciones</a></li>
                     <li><a href="#changePass" data-toggle="tab" aria-expanded="true">Cambio de Contraseña</a></li>
+                    <li><a href="#pareja" data-toggle="tab" aria-expanded="true">Pareja</a></li>
                 </ul>
                 <div class="tab-content">
                     <div id="settings" class="tab-pane active">
@@ -98,6 +99,36 @@
                             </div>
                         </form>
                     </div>
+                    <div id="pareja" class="tab-pane">
+                        <form class="form-horizontal" @submit.prevent="pareja">
+                            <!-- <div class="form-group">
+                                <label for="passwordOld" class="col-sm-3 control-label">Contraseña Actual:</label>
+                                <div class="col-sm-9">
+                                    <input type="password" class="form-control" id="passwordOld" placeholder="********" v-model="pass.passwordOld">
+                                    <small id="passwordOldHelp" class="form-text"></small>
+                                </div>
+                            </div> -->
+                            <!-- <div class="form-group">
+                                <label for="password" class="col-sm-3 control-label">Nueva Contraseña:</label>
+                                <div class="col-sm-9">
+                                    <input type="password" class="form-control" id="password" placeholder="********" v-model="pass.password">
+                                    <small id="passwordHelp" class="form-text"></small>
+                                </div>
+                            </div> -->
+                            <!-- <div class="form-group">
+                                <label for="password_confirmation" class="col-sm-3 control-label">Confirmar Contraseña:</label>
+                                <div class="col-sm-9">
+                                    <input type="password" class="form-control" id="password_confirmation" placeholder="********" v-model="pass.password_confirmation">
+                                    <small id="password_confirmationHelp" class="form-text"></small>
+                                </div>
+                            </div> -->
+                            <!-- <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <button type="submit" class="btn btn-success"> Guardar</button>
+                                </div>
+                            </div> -->
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -138,6 +169,9 @@
                     this.pass.password_confirmation = '';
                     toastr.success('Contraseña Actualizada');
                 });
+            },
+            pareja() {
+                
             },
             updateUser() {
                 var data = new  FormData();

@@ -4,31 +4,14 @@
 			<h3 class="box-title">Tabla de Roles: </h3>
 			<button type="button"
 			class="btn btn-default btn-xs"
-			data-tool="tooltip"
+			data-tooltip="tooltip"
 			title="Registrar Rol"
 			@click="openform('create')"
 			v-if="can('rol.store')"><span class="glyphicon glyphicon-plus"></span></button>
-			<button type="button"
-			class="btn btn-default btn-xs"
-			data-tool="tooltip"
-			title="Editar Rol"
-			@click="openform('edit')"
-			v-show="rol"
-			v-if="can('rol.update')"><span class="glyphicon glyphicon-edit"></span></button>
-			<button type="button"
-			class="btn btn-default btn-xs"
-			data-tool="tooltip"
-			title="Borrar Rol"
-			@click="deleted('/admin/roles/'+rol, $children[1].get, 'name')"
-			v-show="rol"><span class="glyphicon glyphicon-trash"></span></button>
-			<v-modal-form :formData="formData" @input="$children[1].get()"></v-modal-form>
+			<rs-modal-form :formData="formData" @input="$children[1].get('this')"></rs-modal-form>
 		</div>
 		<div class="box-body">
-			<div class="row">
-				<div class="col-md-12">
-					<v-table id="rol" :columns="tabla.columns" uri="/admin/roles" @output="rol = arguments[0]"></v-table>
-				</div>
-			</div>
+			<rs-table id="rol" :tabla="tabla" uri="/admin/roles"></rs-table>
 		</div>
 	</div>
 </template>
@@ -40,8 +23,8 @@
 	export default {
 		name: 'Roles',
 		components: {
-			'v-table': Tabla,
-			'v-modal-form': Modal,
+			'rs-table': Tabla,
+			'rs-modal-form': Modal,
 		},
 		data() {
 			return {
@@ -68,15 +51,19 @@
 					{ title: 'Descripción', field: 'description', sortable: true },
 					{ title: 'Activo', field: 'hours', sort: 'from_at', sortable: true },
 					{ title: 'Acceso especial', field: 'special' },
-					]
+					],
+                    options: [
+                    { ico: 'fa fa-edit', class: 'btn-info', title: 'Editar Rol', func: (id) => {this.openform('edit', id); }, action: 'rol.update'},
+                    { ico: 'fa fa-close', class: 'btn-danger', title: 'Borrar Rol', func: (id) => {this.deleted('/admin/roles/'+id, this.$children[1].get, 'name'); }, action: 'rol.destroy'},
+                    ]
 				}
 			};
 		},
 		methods: {
-			openform: function (cond, user = null) {
+			openform: function (cond, id = null) {
 				this.formData.ready = false;
 				if (cond == 'create') {
-					this.formData.title = ' Registrar Rol.';
+					this.formData.title = 'Registrar Rol.';
 					this.formData.url = '/admin/roles';
 					this.formData.ico = 'plus';
 					this.formData.rol = {
@@ -90,7 +77,7 @@
 					};
 					this.formData.ready = true;
 				} else if (cond == 'edit') {
-					this.formData.url = '/admin/roles/' + this.rol;
+					this.formData.url = '/admin/roles/' + id;
 					axios.get(this.formData.url)
 					.then(response => {
 						this.formData.ico = 'edit';
@@ -107,7 +94,7 @@
 						this.formData.ready = true;
 					});
 				}
-				$('#rol-form').modal('toggle');
+				$('#rol-form').modal('show');
 				this.formData.cond = cond;
 			}
 		}

@@ -4,39 +4,14 @@
             <h3 class="box-title">Tabla de Usuarios:</h3>
             <button type="button"
             class="btn btn-default btn-xs"
-            data-tool="tooltip"
+            data-tooltip="tooltip"
             title="Registrar Usuario"
             @click="openform('create')"
             v-if="can('user.store')"><span class="glyphicon glyphicon-plus"></span></button>
-            <button type="button"
-            class="btn btn-default btn-xs"
-            data-tool="tooltip"
-            title="Editar Usuario"
-            @click="openform('edit')"
-            v-show="user"
-            v-if="can('user.update')"><span class="glyphicon glyphicon-edit"></span></button>
-            <button type="button"
-            class="btn btn-default btn-xs"
-            data-tool="tooltip"
-            title="Borrar Usuario"
-            @click="deleted('/admin/users/'+user, $children[1].get, 'fullName')"
-            v-show="user"
-            v-if="can('user.destroy')"><span class="glyphicon glyphicon-trash"></span></button>
-            <a
-            class="btn btn-default btn-xs"
-            data-tool="tooltip"
-            title="Iniciar Sesión"
-            v-show="user"
-            v-if="can('user.initWithOneUser')"
-            :href="'/admin/init-session-user/'+user"><span class="glyphicon glyphicon-user"></span></a>
-            <v-modal-form :formData="formData" @input="$children[1].get()" v-if="can(['user.store','user.update'])"></v-modal-form>
+            <rs-modal-form :formData="formData" @input="$children[0].get('this')" v-if="can(['user.store','user.update'])"></rs-modal-form>
         </div>
         <div class="box-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <v-table id="users" :columns="tabla.columns" uri="/admin/users" @output="user = arguments[0]"></v-table>
-                </div>
-            </div>
+            <rs-table id="users" :tabla="tabla" uri="/admin/users"></rs-table>
         </div>
     </div>
 </template>
@@ -48,42 +23,36 @@
     export default {
         name: 'Users',
         components: {
-            'v-table': Tabla,
-            'v-modal-form': Modal,
+            'rs-table': Tabla,
+            'rs-modal-form': Modal,
         },
         data() {
             return {
-                user: null,
                 formData: {
                     ready: true,
                     title: '',
                     url: '',
                     ico: '',
                     cond: '',
-                    user:  {
-                        name: '',
-                        last_name: '',
-                        num_id: '',
-                        email: '',
-                        password: '',
-                        password_confirmation: '',
-                        roles: '',
-                        module_id: ''
-                    }
+                    user:  {}
                 },
                 tabla: {
                     columns: [
+                    { title: 'Usuario', field: 'user', sortable: true },
                     { title: 'Nombre y Apellido', field: 'fullName', sort: 'name', sortable: true },
-                    { title: 'Cédula', field: 'num_id', sortable: true },
+                    { title: 'DNI', field: 'num_id', sortable: true },
                     { title: 'Correo', field: 'email', sortable: true },
                     { title: 'Rol', field: 'rol' },
-                    { title: 'Módulo', field: 'modul', sort: 'module_id', sortable: true }
+                    ],
+                    options: [
+                    { ico: 'fa fa-edit', class: 'btn-info', title: 'Editar Usuario', func: (id) => {this.openform('edit', id); }, action: 'user.update'},
+                    { ico: 'fa fa-close', class: 'btn-danger', title: 'Borrar Usuario', func: (id) => {this.deleted('/admin/users/'+id, this.$children[0].get, 'fullName'); }, action: 'user.destroy'},
                     ]
                 }
             };
         },
         methods: {
-            openform: function (cond, user = null) {
+            openform: function (cond, id = null) {
                 this.formData.ready = false;
                 if (cond == 'create') {
                     this.formData.title = ' Registrar Usuario.';
@@ -95,13 +64,16 @@
                         num_id: '',
                         email: '',
                         password: '',
+                        phone: '',
+                        web: '',
+                        user: '',
                         password_confirmation: '',
+                        approval_state: 1,
                         roles: [],
-                        module_id: ''
                     };
                     this.formData.ready = true;
                 } else if (cond == 'edit') {
-                    this.formData.url = '/admin/users/' + this.user;
+                    this.formData.url = '/admin/users/' + id;
                     axios.get(this.formData.url)
                     .then(response => {
                         this.formData.ico = 'edit';

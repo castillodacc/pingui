@@ -15,42 +15,34 @@ class UserRootSeeder extends Seeder
     {
         $now = \Carbon\Carbon::now();
         
-        App\User::create([
+        $user = App\User::create([
+            'user'      => 'Root',
             'name'      => 'Root',
             'last_name' => 'Root',
             'num_id'    => '99999999',
-            'email'     => 'root@sahum.gob.ve',
+            'email'     => 'root@pingui.es',
             'password'  => bcrypt('secret'),
-            'module_id' => 1
         ]);
 
-        App\Models\Permisologia\Role::create([
+        $rol = App\Models\Permisologia\Role::create([
             'name'          => 'Administrador',
             'slug'          => 'SuperAdmin',
             'description'   => 'Acceso total a los Modulos.',
-            'from_at'       => \Carbon\Carbon::parse('08:00:00'),
-            'to_at'         => \Carbon\Carbon::parse('17:00:00'),
+            'from_at'       => null,
+            'to_at'         => null,
             'special'       => 'all-access'
         ]);
 
-        DB::table('role_user')->insert([
-            'user_id' => 1,
-            'role_id' => 1
-        ]);
+        DB::table('role_user')->insert(['user_id' => $user->id, 'role_id' => $rol->id]);
 
         $num = App\Models\Permisologia\Permission::all()->count();
+        $data = [];
+        $data2 = [];
         for ($i = 1; $i <= $num; $i++) { 
-            DB::table('permission_role')->insert([
-                'role_id' => 1,
-                'permission_id' => $i
-            ]);
+            $data[] = ['role_id' => 1, 'permission_id' => $i];
+            $data2[] = ['user_id' => $user->id, 'permission_id' => $i];
         }
-
-        for ($i = 1; $i <= $num; $i++) { 
-            DB::table('permission_user')->insert([
-                'user_id' => 1,
-                'permission_id' => $i
-            ]);
-        }
+        DB::table('permission_role')->insert($data);
+        DB::table('permission_user')->insert($data2);
     }
 }

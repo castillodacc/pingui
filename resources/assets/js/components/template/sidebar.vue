@@ -19,7 +19,7 @@
 				</div>
 			</div>
 
-			<form action="#" method="get" class="sidebar-form" id="sidebar-form">
+			<!-- <form action="#" method="get" class="sidebar-form" id="sidebar-form">
 				<div class="input-group">
 					<input type="text" name="q" class="form-control" placeholder="Search..." id="search-input">
 					<span class="input-group-btn">
@@ -28,9 +28,9 @@
 						</button>
 					</span>
 				</div>
-			</form>
+			</form> -->
 
-			<v-menu></v-menu>
+			<rs-menu></rs-menu>
 
 		</section>
 	</aside>
@@ -43,7 +43,7 @@
 		name: 'v-sidebar',
 		props: ['all'],
 		components: {
-			'v-menu': Menu
+			'rs-menu': Menu
 		}
 	}
 </script>

@@ -11,6 +11,16 @@
 |
 */
 
+// Route::group(['middleware' => 'guest'], function () {
+    Route::get('/', 'RouteController@front');
+    Route::get('/publicacion', function () {
+        return 'front end';
+    });
+    Route::get('/publicacion/{slug}', function ($slug) {
+        return $slug;
+    });
+// });
+
 /**
  * Rutas típicas de autentificación de la app.
  * reemplazando: Auth::routes();
@@ -28,12 +38,13 @@ Route::group(['namespace' => 'Auth'], function () {
     });
     Route::post('logout', 'LoginController@logout')->name('logout');
 });
+
 Route::post('app', 'RouteController@dataForTemplate');
 
 /**
  * Requieren autentificación.
  */
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'onlyAjax']], function () {
 
     /**
      * Admin, Acceso para usuarios con privilegios.
@@ -44,7 +55,7 @@ Route::group(['middleware' => 'auth'], function () {
         // Users Routes...
         Route::resource('users', 'UsersController')->except(['create', 'edit']);
         Route::post('get-data-users', 'UsersController@dataForRegister');
-        Route::get('init-session-user/{id}', 'UsersController@initWithOneUser');
+        // Route::get('init-session-user/{id}', 'UsersController@initWithOneUser');
 
         // Roles Routes...
         Route::resource('roles', 'RolesController')->except(['create', 'edit']);
@@ -53,9 +64,23 @@ Route::group(['middleware' => 'auth'], function () {
         // Permissions Routes...
         Route::resource('permissions', 'PermissionsController')->only(['index', 'show', 'update']);
 
-        Route::match(['post', 'get'], 'change-module-user', 'UsersController@changeModule');
-
     });
+
+    Route::resource('tournament', 'TournamentController')->except(['create', 'edit']);
+    Route::post('get-tournament', 'TournamentController@dataForRegister');
+
+    Route::resource('clubs', 'ClubsController')->except(['create', 'edit']);
+
+    Route::resource('referees', 'RefereeController')->except(['create', 'edit']);
+
+    Route::resource('category-s', 'CategorySController')->except(['create', 'edit']);
+    Route::post('categories-s', 'CategorySController@dataForRegister');
+
+    Route::resource('category-o', 'CategoryOController')->except(['create', 'edit']);
+    Route::post('categories-o', 'CategoryOController@dataForRegister');
+
+    Route::resource('category-l', 'CategoryLController')->except(['create', 'edit']);
+    Route::post('categories-l', 'CategoryLController@dataForRegister');
 
     Route::group(['prefix' => '/', 'namespace' => 'Dashboard', 'as' => 'Dashboard::'], function () {
         Route::get('profile', 'ProfileController@show');

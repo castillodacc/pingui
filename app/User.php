@@ -21,8 +21,21 @@ class User extends Authenticatable
         'last_name',
         'num_id',
         'email',
-        'module_id',
-        'password'
+        'password',
+        'phone',
+        'user',
+        'web',
+
+        'febd_num',
+        'category_l',
+        'trainer_l',
+        'category_s',
+        'trainer_s',
+        'group_l',
+        'group_s',
+        'club_id',
+
+        'approval_state',
     ];
 
     /**
@@ -44,15 +57,6 @@ class User extends Authenticatable
         'updated_at',
         'deleted_at',
     ];
-
-    /**
-     * Obtener el modulo que posee el usuario.
-     */
-    public function module()
-    {
-        // pertenece a
-        return $this->belongsTo(Models\Module::class);
-    }
 
     /**
      * Obtener los roles que posee el usuario.

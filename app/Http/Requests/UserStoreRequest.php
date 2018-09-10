@@ -25,12 +25,13 @@ class UserStoreRequest extends FormRequest
     {
         return [
             'email'     => 'required|email|min:8|max:35|unique:users|DomainValid',
-            'last_name' => 'required|alfa_space|min:3|max:15',
-            'module_id' => 'required|numeric',
-            'name'      => 'required|alfa_space|min:3|max:15',
+            'user'      => 'required|alfa_space|min:3|max:25',
+            'last_name' => 'required|alfa_space|min:3|max:50',
+            'name'      => 'required|alfa_space|min:3|max:50',
             'num_id'    => 'required|numeric|digits_between:6,8|exr_ced|unique:users',
             'password'  => 'required|string|min:6|max:20|confirmed',
-            'roles'     => 'nullable|array|max:2'
+            'phone'     => 'nullable|numeric',
+            'name'      => 'required|alfa_space|min:3|max:50',
         ];
     }
 
@@ -54,11 +55,13 @@ class UserStoreRequest extends FormRequest
         return [
             'email'     => 'correo',
             'last_name' => 'apellido',
-            'module_id' => 'módulo',
+            'user'      => 'nombre de usuario',
             'name'      => 'nombre',
-            'num_id'    => 'cédula',
+            'num_id'    => 'DNI',
+            'rol'    => 'perfil',
+            'phone'    => 'telefono',
+            'club_id'    => 'club',
             'password'  => 'contraseña',
-            'roles'     => 'roles'
         ];
     }
 }

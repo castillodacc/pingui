@@ -6,12 +6,26 @@
 				<table :id="id" class="table table-bordered table-hover table-condensed">
 					<thead>
 						<tr>
-							<th v-for="column in columns">{{ column.title }} <span class="fa fa-angle-left pull-right btn" v-if="column.sortable" @click="sort(column,$event)"></span></th>
+							<th v-for="c in tabla.columns">{{ c.title }} <span class="fa fa-angle-left pull-right btn btn-xs" v-if="c.sortable" @click="sort(c,$event)"></span></th>
+							<th v-if="is_possible">Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr v-for="r in rows" @click="selectRow(r)">
-							<td v-for="column in columns" v-html="textColum(r, column)" :class="column.class"></td>
+							<td v-for="c in tabla.columns" v-html="textColum(r, c)" :class="c.class"></td>
+							<td v-if="is_possible" class="text-center">
+								<template v-for="o in tabla.options">
+									<button
+									class="btn btn-xs"
+									data-tooltip="tooltip"
+									:title="o.title"
+									:class="o.class"
+									v-if="can(o.action)"
+									@click="o.func(r.id)">
+									<span :class="o.ico"></span></button>
+									<span v-if="tabla.options.length > 1"></span>
+								</template>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -22,9 +36,7 @@
 </template>
 
 <style>
-th span, tbody tr {
-	cursor: pointer;
-}
+th span, tbody tr {cursor: pointer;}
 </style>
 
 <script>
@@ -39,8 +51,21 @@ th span, tbody tr {
 		},
 		props: {
 			uri: {},
-			columns: {},
+			options: {
+				default: false
+			},
+			tabla: {
+				default: {
+					columns: {}
+				}
+			},
 			id: {},
+			o: {
+				default: ''
+			},
+			d: {
+				default: ''
+			},
 			n: {
 				default: function () {
 					return [10,20,30];
@@ -50,20 +75,31 @@ th span, tbody tr {
 				default: 10
 			}
 		},
+		computed: {
+			is_possible: function () {
+				let o = this.tabla.options;
+				for(let i in o) {
+					if (this.can(o[i].action)) {
+						return true;
+					}
+				}
+				return false;
+			}
+		},
 		data() {
 			return {
 				rows: [],
-				num: 10,
+				num: this.nc,
 				search: '',
-				dir: '',
-				order: '',
+				dir: this.d,
+				order: this.o,
 				pagination: {
-					'total': 0,
-					'to': 0,
-					'from': 0,
-					'per_page': 0,
-					'current_page': 0,
-					'last_page': 0
+					total: 0,
+					to: 0,
+					from: 0,
+					per_page: 0,
+					current_page: 0,
+					last_page: 0
 				},
 			}
 		},
@@ -104,6 +140,7 @@ th span, tbody tr {
 			get: function (page = null) {
 				let url =  this.uri + '?';
 				if (page) url += '&page=' + page;
+				if (page == 'this') url += '&page=' + this.pagination.current_page;
 				if (this.num) url += '&num=' + this.num;
 				if (this.search) url += '&search=' + this.search;
 				if (this.dir) url += '&dir=' + this.dir;
