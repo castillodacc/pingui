@@ -24,9 +24,12 @@ class UpdatePerfilUserRequest extends FormRequest
     public function rules()
     {
         return [
+            'user' => 'required|min:3|max:10|unique1:users',
+            'phone' => 'nullable',
+            'web' => 'nullable|string|min:3|max:40',
             'email' => 'required|email|DomainValid|unique1:users,email',
-            'last_name' => 'required|alfa_space|min:3|max:20',
-            'name' => 'required|alfa_space|min:3|max:20',
+            'last_name' => 'required|alfa_space|min:3|max:25',
+            'name' => 'required|alfa_space|min:3|max:25',
             'num_id' => 'required|numeric|exr_ced|unique1:users,num_id'
         ];
     }
@@ -39,6 +42,9 @@ class UpdatePerfilUserRequest extends FormRequest
     public function attributes()
     {
         return [
+            'user' => 'usuario',
+            'phone' => 'teléfono',
+            'club_id' => 'club',
             'email' => 'correo',
             'last_name' => 'apellido',
             'name' => 'nombre',

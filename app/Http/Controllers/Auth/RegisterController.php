@@ -65,7 +65,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'email'     => 'required|email|min:8|max:35|unique:users|DomainValid',
             'last_name' => 'required|alfa_space|min:3|max:50',
-            'user'      => 'required|alfa_space|min:3|max:20',
+            'user'      => 'required|alfa_space|min:3|max:20|unique:users',
             'name'      => 'required|alfa_space|min:3|max:50',
             'num_id'    => 'required|numeric|digits_between:6,8|exr_ced|unique:users',
             'club_id'   => 'nullable|numeric',

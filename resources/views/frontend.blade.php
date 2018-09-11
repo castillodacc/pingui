@@ -97,7 +97,7 @@
 			</div>
 		</section>
 		<div class="main front-page-main" style="background-color: #FFF">
-			<section id="competitions" class="module-small" style="min-height: 90vh">
+			<section id="competitions" class="module-small" style="min-height: 100vh">
 				<div class="container">
 					<div class="row multi-columns-row">
 						@foreach($tournament as $t)
@@ -125,7 +125,7 @@
 										</div>
 									</div>
 									<span class="onsale">Inscripción: {{ ($t->inscription) ? 'Abierta' : 'Cerrada' }}.</span><br>
-									<span class="woocommerce-Price-amount amount">Entradas: {{ number_format($t->entrance_price, 2) }}<span class="woocommerce-Price-currencySymbol"> €</span></span>
+									<span class="amount">Precio de Entradas: {{ number_format($t->entrance_price, 2) }}<span> €</span></span>
 									{{-- <ins>
 										<span class="woocommerce-Price-amount amount">12.00<span class="woocommerce-Price-currencySymbol">£</span></span>
 									</ins> --}}

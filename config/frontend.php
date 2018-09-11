@@ -73,5 +73,5 @@ return [
     |
     */
 
-    'theme' => 'skin-blue',
+    'theme' => 'skin-black-light',
 ];

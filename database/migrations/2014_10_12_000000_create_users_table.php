@@ -22,7 +22,18 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('phone')->nullable()->unique();
             $table->string('email', 50)->unique();
             $table->string('password')->nullable();
+
+            $table->string('international_id', 100)->nullable();
             $table->string('web', 100)->nullable();
+            $table->unsignedInteger('club_id')->nullable();
+            $table->unsignedInteger('febd_num')->nullable()->unique();
+            $table->unsignedInteger('category_l')->nullable();
+            $table->string('trainer_l', 50)->nullable();
+            $table->unsignedInteger('category_s')->nullable();
+            $table->string('trainer_s', 50)->nullable();
+            $table->unsignedInteger('group_l')->nullable();
+            $table->unsignedInteger('group_s')->nullable();
+
             // $table->unsignedInteger('approval_state')->nullable();
             $table->rememberToken();
             $table->timestamps();
@@ -38,7 +49,6 @@ class CreateUsersTable extends Migration
             $table->string('trainer_s', 50)->nullable();
             $table->unsignedInteger('group_l')->nullable();
             $table->unsignedInteger('group_s')->nullable();
-            $table->unsignedInteger('club_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

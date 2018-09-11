@@ -25,6 +25,7 @@ class User extends Authenticatable
         'phone',
         'user',
         'web',
+        'international_id',
 
         'febd_num',
         'category_l',

@@ -13,12 +13,12 @@
 
 // Route::group(['middleware' => 'guest'], function () {
     Route::get('/', 'RouteController@front');
-    Route::get('/publicacion', function () {
-        return 'front end';
-    });
-    Route::get('/publicacion/{slug}', function ($slug) {
-        return $slug;
-    });
+    // Route::get('/publicacion', function () {
+    //     return 'front end';
+    // });
+    // Route::get('/publicacion/{slug}', function ($slug) {
+    //     return $slug;
+    // });
 // });
 
 /**
@@ -86,6 +86,7 @@ Route::group(['middleware' => ['auth', 'onlyAjax']], function () {
         Route::get('profile', 'ProfileController@show');
         Route::post('change-pass', 'ProfileController@editPassword');
         Route::post('update-user', 'ProfileController@editUser');
+        Route::post('update-bailarin/{id}', 'ProfileController@bailarin');
     });
 
     Route::post('admin/app', 'RouteController@canPermission');
