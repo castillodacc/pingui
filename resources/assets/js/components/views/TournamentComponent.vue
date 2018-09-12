@@ -33,8 +33,8 @@
 					{ title: 'Fecha final', field: 'end', sortable: true, class: 'text-center' },
 					],
 					options: [
-					{ ico: 'fa fa-edit', class: 'btn-info', title: 'Editar Competencia', func: (id) => { this.$router.push({name: 'tournament.update', params: { id: id }})}, action: 'tournament.update'},
-					{ ico: 'fa fa-close', class: 'btn-danger', title: 'Eliminar Competencia', func: (id) => { this.deleted('/tournament/'+id, this.$children[1].get, 'name'); }, action: 'tournament.destroy'},
+					{ ico: 'fa fa-edit', class: 'btn-info', title: 'Editar', func: (id) => { this.$router.push({name: 'tournament.update', params: { id: id }})}, action: 'tournament.update'},
+					{ ico: 'fa fa-close', class: 'btn-danger', title: 'Eliminar', func: (id) => { this.deleted('/tournament/'+id, this.$children[1].get, 'name'); }, action: 'tournament.destroy'},
 					]
 				}
 			};

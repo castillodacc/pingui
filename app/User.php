@@ -75,4 +75,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Models\Permisologia\Permission::class);
     }
+
+    public function parejas()
+    {
+        return $this->hasMany(Models\Pareja::class);
+    }
 }

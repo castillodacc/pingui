@@ -10,7 +10,7 @@ class RouteController extends Controller
 {
 
     public function __construct() {
-        $this->middleware('auth')->except(['front']);
+        $this->middleware('auth')->except(['front', 'publication']);
     }
 
     /**
@@ -88,5 +88,11 @@ class RouteController extends Controller
         $tournament2 = \App\Models\Tournament::take(10)->get();
         $tournament = \App\Models\Tournament::paginate(10);
         return view('frontend', compact('tournament', 'tournament2'));
+    }
+
+    public function publication($slug)
+    {
+        $tournament = \App\Models\Tournament::where('slug', '=', $slug)->first();
+        return view('publicacion', compact('tournament', 'tournament'));
     }
 }

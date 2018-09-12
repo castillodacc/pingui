@@ -40,19 +40,18 @@ class CreateUsersTable extends Migration
             $table->softDeletes();
         });
 
-        /*Schema::create('parejas', function (Blueprint $table) {
+        Schema::create('parejas', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name', 70);
+            $table->string('last_name', 70);
+            $table->string('email', 70)->unique();
             $table->unsignedInteger('febd_num')->nullable()->unique();
-            $table->unsignedInteger('category_l')->nullable();
-            $table->string('trainer_l', 50)->nullable();
-            $table->unsignedInteger('category_s')->nullable();
-            $table->string('trainer_s', 50)->nullable();
-            $table->unsignedInteger('group_l')->nullable();
-            $table->unsignedInteger('group_s')->nullable();
-            $table->rememberToken();
+            $table->unsignedInteger('user_id');
             $table->timestamps();
             $table->softDeletes();
-        });*/
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
 
     }
 

@@ -26,6 +26,9 @@ class TournamentController extends Controller
     public function index()
     {
         $tournament = Tournament::dataForPaginate(['*'], function ($t) {
+            if (strlen($t->description) > 70) {
+                $t->description = substr($t->description, 0, 70) . '...';
+            }
             $t->inscription = ($t->inscription) ? 'Abierta' : 'Cerrada';
         });
         return $this->dataWithPagination($tournament);
@@ -41,15 +44,15 @@ class TournamentController extends Controller
     {
         $data = $this->validate($request, [
             'name' => 'required|string|min:5|max:40|unique:tournaments',
-            'description' => 'required|string|min:15|max:150',
+            'description' => 'required|string|min:15',
             'start' => 'required',
             'end' => 'required',
             'inscription' => 'required|boolean',
             'organizador' => 'required|string|min:2|max:40',
             'image' => 'required|image64:jpeg,jpg,png',
-            'results' => 'nullable',
-            'hours' => 'nullable',
-            'info' => 'nullable',
+            'results' => 'nullable|string|unique:tournaments',
+            'hours' => 'nullable|string|unique:tournaments',
+            'info' => 'nullable|string|unique:tournaments',
             'maps' => 'nullable|string',
             'price' => 'required|numeric|min:1|max:999',
             'entrance_price' => 'required|numeric|min:1|max:999',
@@ -76,6 +79,13 @@ class TournamentController extends Controller
             'subcategory_latino' => 'categoria latino',
             'subcategory_standar' => 'categoria standard',
         ]);
+
+        $data['slug'] = str_replace(' ', '-', $data['name']);
+        $slug = Tournament::where('slug', '=', $data['slug'])->count();
+        if ($slug > 0) {
+            $data['slug'] .= '-' . $slug;
+        }
+
         $data['end'] = str_replace('/', '-', $data['end']);
         if (!is_null($data['end'])) {
             $data['end'] = \Carbon::parse($data['end'])->format('Y-m-d');
@@ -88,9 +98,8 @@ class TournamentController extends Controller
 
         if ($request->image) {
             $imageData = $request->image;
-            $fileName = \Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
-            (new ImageManager)->make($request->image)->save(public_path('storage/').$fileName);
-            $data['image'] = $fileName;
+            $data['image'] = 'tournament-' . \Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+            (new ImageManager)->make($request->image)->save(public_path('storage\\') . $data['image']);
         }
 
         $tournament = Tournament::create($data);
@@ -126,8 +135,17 @@ class TournamentController extends Controller
         $tournament->end = \Carbon::parse($tournament->end)->format('d/m/Y');
         $tournament->referee_tournament = $tournament->referees->pluck('name');
         $tournament->category_open_tournament = $tournament->category_opens->pluck('name');
-        $tournament->subcategory_latino_tournament = $tournament->subcategory_latinos->pluck('name');
-        $tournament->subcategory_standar_tournament = $tournament->subcategory_standars->pluck('name');
+        $tournament->subcategory_latino_tournament = $tournament->subcategory_latinos->pluck('name', 'category_latino_id');
+        $tournament->subcategory_latino_tournament = $tournament->subcategory_latinos;
+        $tournament->subcategory_latino_tournament->each(function ($s) {
+            $s->name = $s->category_latino->name . ' - ' . $s->name;
+            unset($s->category_latino,$s->category_latino_id,$s->description,$s->id,$s->pivot);
+        });
+        $tournament->subcategory_standar_tournament = $tournament->subcategory_standars;
+        $tournament->subcategory_standar_tournament->each(function ($s) {
+            $s->name = $s->category_standar->name . ' - ' . $s->name;
+            unset($s->category_standar,$s->category_standar_id,$s->description,$s->id,$s->pivot);
+        });
         $tournament->hotels;
         unset($tournament->referees, $tournament->category_opens, $tournament->subcategory_latinos, $tournament->subcategory_standars);
         return response()->json($tournament);
@@ -142,30 +160,17 @@ class TournamentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->file('hours'));
-        $file = $request->file('hours');
-        $nombre = $file->getClientOriginalName();
-        \Storage::disk('local')->put($nombre,  \File::get($file));
-        return response()->json($request->file('hours'), 500);
-
-
-
-
-//indicamos que queremos guardar un nuevo archivo en el disco local
- 
-       return "archivo guardado";
-        
         $data = $this->validate($request, [
             'name' => 'required|string|min:5|max:40|unique1:tournaments',
-            'description' => 'required|string|min:15|max:150',
+            'description' => 'required|string|min:15',
             'start' => 'required',
             'end' => 'required',
             'inscription' => 'required|boolean',
             'organizador' => 'required|string|min:2|max:40',
             'image' => 'required|image64:jpeg,jpg,png',
-            'results' => 'nullable',
-            'hours' => 'nullable',
-            'info' => 'nullable',
+            'results' => 'nullable|string',
+            'hours' => 'nullable|string',
+            'info' => 'nullable|string',
             'maps' => 'nullable|string',
             'price' => 'required|numeric|min:1|max:999',
             'entrance_price' => 'required|numeric|min:1|max:999',
@@ -192,6 +197,13 @@ class TournamentController extends Controller
             'subcategory_latino' => 'categoria latino',
             'subcategory_standar' => 'categoria standard',
         ]);
+
+        $data['slug'] = str_replace(' ', '-', $data['name']);
+        $slug = Tournament::where('slug', '=', $data['slug'])->count();
+        if ($slug > 0) {
+            $data['slug'] .= '-' . $slug;
+        }
+
         $data['end'] = str_replace('/', '-', $data['end']);
         if (!is_null($data['end'])) {
             $data['end'] = \Carbon::parse($data['end'])->format('Y-m-d');
@@ -202,16 +214,18 @@ class TournamentController extends Controller
         }
         $data['record_id'] = \Auth::user()->id;
 
-        if (strlen($request->image) > 50) {
-            $imageData = $request->image;
-            $fileName = \Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
-            (new ImageManager)->make($request->image)->save(public_path('storage/').$fileName);
-            $data['image'] = $fileName;
+        if (is_readable(public_path("storage\$request->image"))) {
+        } else {
+            if (strlen($request->image) > 50) {
+                $imageData = $request->image;
+                $data['image'] = 'tournament-' . \Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+                (new ImageManager)->make($request->image)->save(public_path('storage\\') . $data['image']);
+            }
         }
 
         $tournament = Tournament::findOrFail($id);
         $tournament->update($data);
-
+        
         $id_hotels = $tournament->hotels->pluck('id')->toArray();
         $id_hotels_new = [];
         foreach ($data['hoteles'] as $h) {
@@ -266,5 +280,13 @@ class TournamentController extends Controller
             unset($c->category_standar, $c->category_standar_id);
         });
         return response()->json(compact('referees', 'category_opens', 'category_latinos', 'category_standars'));
+    }
+
+    public function upload($name)
+    {
+        $file = request()->file($name);
+        $nombre = str_replace(' ', '-', $file->getClientOriginalName());
+        \Storage::disk('local')->put("/$name/$nombre", \File::get($file));
+        return response()->json($nombre);
     }
 }

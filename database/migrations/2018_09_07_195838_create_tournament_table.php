@@ -16,6 +16,7 @@ class CreateTournamentTable extends Migration
         Schema::create('tournaments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 100)->unique();
+            $table->string('slug', 150)->nullable()->unique();
             $table->text('description')->nullable();
             $table->date('start');
             $table->date('end');
@@ -23,9 +24,9 @@ class CreateTournamentTable extends Migration
             $table->string('organizador');
             $table->string('image', 100)->nullable()->unique(); // ruta a imagen
             $table->string('results', 100)->nullable()->unique(); // ruta a resultados https://results.pingui.es/events.php?pod_id=%aca%
-            $table->string('hours', 100)->nullable()->unique(); // ruta a pdf
-            $table->string('maps', 100)->nullable()->unique(); // ruta a google maps
-            $table->string('info', 100)->nullable()->unique(); // ruta al pdf de la hoja informativa
+            $table->text('hours')->nullable(); // ruta a pdf
+            $table->text('maps')->nullable(); // ruta a google maps
+            $table->text('info')->nullable(); // ruta al pdf de la hoja informativa
             $table->unsignedInteger('price');
             $table->unsignedInteger('entrance_price');
             $table->unsignedInteger('record_id');

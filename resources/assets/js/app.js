@@ -41,7 +41,7 @@ Vue.mixin({
 		},
 		restoreMsg: function (msg) {
 			for(let i in msg) {
-				$('small#'+i+'Help').text(msg[i]);
+				$('small#'+i+'Help').html(msg[i]);
 			}
 		},
 		deleted: function (url, updateTable, name = 'name') {

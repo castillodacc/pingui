@@ -6,7 +6,7 @@
     <div class="box-body">
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
-          <form enctype="multipart/form-data" @submit.prevent="registrar">
+          <form id="tournament" enctype="multipart/form-data" @submit.prevent="registrar">
             <div class="col-md-6" v-for="input in entries[0]">
               <rs-input :name="input"
               :readonly="input.readonly"
@@ -61,19 +61,17 @@
                 <label for="hours" class="control-label">
                   <span class="edit"></span> Horario del evento:
                 </label>
-                <input id="hours" type="file" class="form-control" accept="application/pdf" @change="handleFileUpload">
+                <input id="hours" type="file" accept="application/pdf" @change="onSelected">
                 <small id="hoursHelp" class="form-text text-muted" v-html="msg.hours"></small>
               </div>
             </div>
-            <div class="row"><pre>{{ data.hours }}</pre></div>
 
             <div class="col-md-6">
               <div class="form-group">
                 <label for="info" class="control-label">
                   <span class="edit"></span> Información del evento:
                 </label>
-                <input id="info" type="file" accept="application/.pdf"> <!--  v-model="data.info" -->
-                <!-- // <input type="file" accept=".pdf" @change="onFileSelected" name="myfile"> -->
+                <input id="info" type="file" accept="application/pdf" @change="onSelected">
                 <small id="infoHelp" class="form-text text-muted" v-html="msg.info"></small>
               </div>
             </div>
@@ -120,7 +118,7 @@
 
             <div class="col-md-12">
               <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-6">
                   <div class="form-group">
                     <label for="hotel" class="control-label">
                       <span class="edit"></span> Nombre del hotel:
@@ -138,7 +136,7 @@
                     <small id="linkHelp" class="form-text text-muted" v-text="msg.link"></small>
                   </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                   <button type="button" class="btn btn-primary" style="margin-top: 27px;" @click="add"><span class="fa fa-plus"></span></button>
                 </div>
                 <div class="col-md-12">
@@ -175,7 +173,6 @@
       'rs-input': Input,
       'rs-multiselect': Multiselect,
       DatePicker
-
     },
     props: ['formData'],
     data () {
@@ -238,6 +235,8 @@
         .then(response => {
           this.title = 'Editar Competencia:';
           this.ico = 'edit';
+          let sub_standar = response.data.subcategory_standar_tournament;
+          let sub_latino = response.data.subcategory_latino_tournament;
           this.data = response.data;
           let h = response.data.hotels;
           for(let i in h) {
@@ -247,9 +246,19 @@
               id: h[i].id,
             });
           }
+
+          this.data.subcategory_latino_tournament = [];
+          for(let i in sub_latino) {
+            this.data.subcategory_latino_tournament.push(sub_latino[i].name);
+          }
+          this.data.subcategory_standar_tournament = [];
+          for(let i in sub_standar) {
+            this.data.subcategory_standar_tournament.push(sub_standar[i].name);
+          }
+
           if (response.data.image) {this.msg.image = '<a href="/storage/' + response.data.image + '" target="_blank">' + response.data.image + '<a>';}
-          if (response.data.hours) {this.msg.hours = '<a href="/storage/' + response.data.hours + '" target="_blank">' + response.data.hours + '<a>';}
-          if (response.data.info) {this.msg.info = '<a href="/storage/' + response.data.info + '" target="_blank">' + response.data.info + '<a>';}
+          if (response.data.hours) {this.msg.hours = '<a href="/storage/hours/' + response.data.hours + '" target="_blank">' + response.data.hours + '<a>';}
+          if (response.data.info) {this.msg.info = '<a href="/storage/info/' + response.data.info + '" target="_blank">' + response.data.info + '<a>';}
         });
       } else {
         this.title = 'Registrar Competencia:';
@@ -257,41 +266,6 @@
       }
     },
     methods: {
-      handleFileUpload(e){
-        let files = e.target.files || e.dataTransfer.files;
-        if (!files.length) return;
-        this.data[e.target.id] = files[0];
-        // console.log(this.data[e.target.id])
-        // let reader = new FileReader();
-        // reader.onload = (e) => {
-          // this.file = e.target.result;
-        // this.file = this.$refs.file.files[0];
-        // };
-        // reader.readAsDataURL(files[0]);
-        // this.$refs.files.files
-      },
-      getImage(e) {
-        let files = e.target.files || e.dataTransfer.files;
-        if (!files.length) return;
-        let reader = new FileReader();
-        reader.onload = (e) => {
-          this.data.image = e.target.result;
-        };
-        reader.readAsDataURL(files[0]);
-      },
-      add: function () {
-        if (this.link && this.hotel) {
-          this.hoteles.push({
-            link: this.link,
-            hotel: this.hotel,
-          });
-          this.link = '';
-          this.hotel = '';
-        }
-      },
-      remove: function (i) {
-        this.hoteles.splice(i, 1);
-      },
       get: function () {
         axios.post('/get-tournament')
         .then(response => {
@@ -315,8 +289,39 @@
           for(let i in this.category_standars) {
             this.category_standars_options.push(this.category_standars[i].name);
           }
-
         });
+      },
+      onSelected(e){
+        let files = e.target.files || e.dataTransfer.files;
+        let data = new FormData();
+        data.append(e.target.id, files[0]);
+        axios.post('/upload/' + e.target.id, data)
+        .then(response => {
+          this.data[e.target.id] = response.data;
+          this.msg[e.target.id] = '<a href="/storage/hours/' + response.data + '" target="_blank">' + response.data + '<a>';
+        });
+      },
+      getImage(e) {
+        let files = e.target.files || e.dataTransfer.files;
+        if (!files.length) return;
+        let reader = new FileReader();
+        reader.onload = (e) => {
+          this.data.image = e.target.result;
+        };
+        reader.readAsDataURL(files[0]);
+      },
+      add: function () {
+        if (this.link && this.hotel) {
+          this.hoteles.push({
+            link: this.link,
+            hotel: this.hotel,
+          });
+          this.link = '';
+          this.hotel = '';
+        }
+      },
+      remove: function (i) {
+        this.hoteles.splice(i, 1);
       },
       registrar: function () {
         this.restoreMsg(this.msg);
@@ -351,33 +356,25 @@
         this.data.subcategory_latino = category_latinos;
 
         let category_standars = [];
-        for(let i in this.category_standars) {
-          for(let r in this.data.subcategory_standar_tournament) {
+        for(let r in this.data.subcategory_standar_tournament) {
+          for(let i in this.category_standars) {
             if (this.category_standars[i].name == this.data.subcategory_standar_tournament[r]) {
               category_standars.push(this.category_standars[i].id);
             }
           }
         }
         this.data.subcategory_standar = category_standars;
+
         this.data.hoteles = this.hoteles;
-        // cache: false,
-    // contentType: false,
-    // processData: false
+
         if (this.$route.params.id) {
-          axios.put('/tournament/' + this.data.id, this.data, {
-            headers: {
-              // 'Content-Type': 'multipart/form-data',
-            }
-          })
+          axios.put('/tournament/' + this.data.id, this.data)
           .then(response => {
             toastr.success('Competencia Actualizada');
             this.$router.push({name: 'tournament.index'});
           });
         } else {
-          axios.post('/tournament', this.data, {
-            headers: {
-              // 'Content-Type': 'multipart/form-data'
-            }})
+          axios.post('/tournament', this.data)
           .then(response => {
             toastr.success('Competencia Registrada');
             this.$router.push({name: 'tournament.index'});

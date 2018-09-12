@@ -197,21 +197,28 @@
                             <div class="form-group">
                                 <label for="p_name" class="col-sm-3 control-label">Nombre:</label>
                                 <div class="col-sm-9">
-                                    <input type="text" id="p_name" class="form-control" v-model="pareja.name">
+                                    <input type="text" id="p_name" class="form-control" v-model="pareja.p_name">
                                     <small id="p_nameHelp" class="form-text"></small>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="p_last_name" class="col-sm-3 control-label">Apellido:</label>
                                 <div class="col-sm-9">
-                                    <input type="text" id="p_last_name" class="form-control" v-model="pareja.last_name">
-                                    <small id="p_nameHelp" class="form-text"></small>
+                                    <input type="text" id="p_last_name" class="form-control" v-model="pareja.p_last_name">
+                                    <small id="p_last_nameHelp" class="form-text"></small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="p_email" class="col-sm-3 control-label">Email:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="p_email" class="form-control" v-model="pareja.p_email">
+                                    <small id="p_emailHelp" class="form-text"></small>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="p_febd_num" class="col-sm-3 control-label">Número de FEBD:</label>
                                 <div class="col-sm-9">
-                                    <input type="text" id="p_febd_num" class="form-control" v-model="pareja.febd_num">
+                                    <input type="text" id="p_febd_num" class="form-control" v-model="pareja.p_febd_num">
                                     <small id="p_febd_numHelp" class="form-text"></small>
                                 </div>
                             </div>
@@ -232,6 +239,7 @@
     export default {
         data() {
             return {
+                pareja: {},
                 club: [],
                 pareja: {},
                 user: {
@@ -249,6 +257,13 @@
         created() {
             axios.get('profile')
             .then(response => {
+                if (response.data.pareja) {
+                    this.pareja.p_email = response.data.pareja.email;
+                    this.pareja.p_febd_num = response.data.pareja.febd_num;
+                    this.pareja.id = response.data.pareja.id;
+                    this.pareja.p_last_name = response.data.pareja.last_name;
+                    this.pareja.p_name = response.data.pareja.name;
+                }
                 this.user = response.data.user;
                 this.club = response.data.club;
             });
@@ -267,7 +282,10 @@
                 });
             },
             pare() {
-
+                axios.post('/update-pareja', this.pareja)
+                .then(response => {
+                    toastr.success('Datos Actualizados');
+                });
             },
             data_baile() {
                 let data = {

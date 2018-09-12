@@ -17,6 +17,7 @@ class Tournament extends Model
      */
     protected $fillable = [
         'name',
+        'slug',
         'description',
         'start',
         'end',

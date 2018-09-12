@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Http\Requests\ { ChangePasswordRequest, UpdatePerfilUserRequest };
-use App\Models\Club;
+use App\Models\ { Club, Pareja };
 
 class ProfileController extends Controller
 {
@@ -22,9 +22,10 @@ class ProfileController extends Controller
         $user->fullName = $user->fullName();
         $user->logoPath = $user->getLogoPath();
         $user->roles;
+        $pareja = $user->parejas->first();
         $user->module;
         $club = Club::get(['id', 'name']);
-        return response()->json(compact('user', 'club'));
+        return response()->json(compact('user', 'club', 'pareja'));
     }
 
     /**
@@ -106,4 +107,37 @@ class ProfileController extends Controller
         //     return response()->json(compact('modules', 'module'));
         // }
     // }
+
+    public function pareja(Request $request)
+    {
+        $request->validate([
+            'p_email' => 'required|email',
+            'p_febd_num' => 'required|numeric',
+            'p_last_name' => 'required|string|min:3|max:40',
+            'p_name' => 'required|string|min:3|max:40'
+        ],[],[
+            'p_email' => 'email',
+            'p_febd_num' => 'número FEBD',
+            'p_last_name' => 'apellido',
+            'p_name' => 'nombre',
+        ]);
+        if ($request->id) {
+            Pareja::where('user_id', '=', \Auth::user()->id)
+            ->findOrFail($request->id)
+            ->update([
+                'name' => $request->p_name,
+                'last_name' => $request->p_last_name,
+                'email' => $request->p_email,
+                'febd_num' => $request->p_febd_num,
+            ]);
+        } else {
+            Pareja::create([
+                'name' => $request->p_name,
+                'last_name' => $request->p_last_name,
+                'email' => $request->p_email,
+                'febd_num' => $request->p_febd_num,
+                'user_id' => \Auth::user()->id
+            ]);
+        }
+    }
 }

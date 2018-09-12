@@ -12,11 +12,11 @@ moment.locale('es');
  * code may be modified to fit the specific needs of your application.
  */
 
-try {
-    window.$ = window.jQuery = require('jquery');
+ try {
+ 	window.$ = window.jQuery = require('jquery');
 
-    require('bootstrap-sass/assets/javascripts/bootstrap.js');
-} catch (e) {}
+ 	require('bootstrap-sass/assets/javascripts/bootstrap.js');
+ } catch (e) {}
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -24,9 +24,9 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = require('axios');
+ window.axios = require('axios');
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
@@ -34,22 +34,22 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * a simple convenience so we don't have to attach every token manually.
  */
 
-window.token = document.head.querySelector('meta[name="csrf-token"]');
+ window.token = document.head.querySelector('meta[name="csrf-token"]');
 
-if (token) {
-    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+ if (token) {
+ 	window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 
-	$.ajaxSetup({
-		headers: {
-			'X-CSRF-TOKEN': token.content,
-			'X-Auth-Token' : token.content
-		}
-	});
+ 	$.ajaxSetup({
+ 		headers: {
+ 			'X-CSRF-TOKEN': token.content,
+ 			'X-Auth-Token' : token.content
+ 		}
+ 	});
 
-	window.Laravel = {"csrfToken": token.content};
-} else {
-    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
-}
+ 	window.Laravel = {"csrfToken": token.content};
+ } else {
+ 	console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+ }
 
 // Agregar un interceptor de solicitud
 axios.interceptors.request.use(function (config) {
@@ -88,10 +88,13 @@ axios.interceptors.response.use(function (response) {
 		$('button, input').removeAttr('disabled')
 		errors = errors.data.errors;
 		for(let e in errors) {
-			$('small#' + e + 'Help').addClass('text-danger').text(errors[e][0]);
+			$('small#' + e + 'Help').addClass('text-danger').html(errors[e][0]);
 		}
-		toastr.warning('Error al realizar operación');
-		if (errors.msg) toastr.warning(errors.msg);
+		if (errors.msg) {
+			toastr.warning(errors.msg);
+		} else {
+			toastr.warning('Error al realizar operación');
+		}
 		setTimeout(function () {console.clear();},100);
 	}
 	return Promise.reject(error);

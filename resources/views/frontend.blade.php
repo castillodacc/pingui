@@ -73,12 +73,18 @@
 						</div>
 					</li>
 					@foreach($tournament2 as $t)
-					<li class="bg-dark-30 bg-dark flex-active-slide" style="background-image: url('/storage/{{ $t->image }}'); width: 100%; float: left; margin-right: -100%; position: relative; opacity: 1; display: block; z-index: 2;" data-thumb-alt="">
+					<li class="bg-dark-30 bg-dark flex-active-slide" style="background-image: url('{{ asset('storage/' . $t->image) }}'); width: 100%; float: left; margin-right: -100%; position: relative; opacity: 1; display: block; z-index: 2;" data-thumb-alt="">
 						<div class="hs-caption" style="top: 0px; display: table;">
 							<div class="caption-content" style="opacity: 1;">
 								<div class="hs-title-size-4 font-alt mb-30"><b>{{ $t->name }}</b></div>
-								<div class="hs-title-size-1 font-alt mb-40">{{ $t->description }}</div>
-								<a href="#" class="section-scroll btn btn-border-w btn-round">Ver Detalles</a>
+								<div class="container">
+									@if(strlen($t->description) > 120)
+									<div class="hs-title-size-1 font-alt mb-40">{{ substr($t->description, 0, 120) . '...' }}</div>
+									@else
+									<div class="hs-title-size-1 font-alt mb-40">{{ $t->description }}</div>
+									@endif
+								</div>
+								<a href="{{ route('publication.show', $t->slug) }}" class="section-scroll btn btn-border-w btn-round">Ver Detalles</a>
 							</div>
 						</div>
 					</li>
@@ -104,19 +110,23 @@
 						<div class="col-sm-6 col-md-3 col-lg-3">
 							<a href="#">
 								<div class="shop-item">
-									<div class="shop-item-image">
-										<img width="262" height="328" src="#" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="" srcset="/storage/{{ $t->image }}" sizes="(max-width: 262px) 100vw, 262px" style="min-height: 330px;">	
+									<div class="shop-item-image">aca
+										<img width="262" height="328" src="#" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="" srcset="{{ asset('storage/' . $t->image) }}" sizes="(max-width: 262px) 100vw, 262px" style="min-height: 330px;">	
 										<div class="shop-item-detail">
-											<p class="product woocommerce add_to_cart_inline " style="border:4px solid #ccc; padding: 12px;"><b style="font-size: 1.5em">Ver Detalles</b></p>
-											<div class="product-button-wrap">
+											<p class="product woocommerce add_to_cart_inline " style="border:4px solid #ccc; padding: 12px;">
+												<a href="{{ route('publication.show', $t->slug) }}">
+													<b style="font-size: 1.5em">Ver Detalles</b>
+												</a>
+											</p>
+											{{-- <div class="product-button-wrap">
 												<div class="add-to-cart-button-wrap">
-													<a href="#" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="73" data-product_sku="" aria-label="#">Ver Detalles</a>
+													<a href="{{ route('publication.show', $t->slug) }}" class="button product_type_simple add_to_cart_button ajax_add_to_cart">Ver Detalles</a>
 												</div>
-											</div>
+											</div> --}}
 										</div>
 									</div>
 									<h4 class="shop-item-title font-alt">
-										<a href="#">{{ $t->name }}</a>
+										<a href="{{ route('publication.show', $t->slug) }}">{{ $t->name }}</a>
 									</h4>
 									<div class="product-rating-home">
 										<div class="star-rating">Desde: {{ \Carbon::parse($t->start)->format('d/m/Y') }} - Hasta: {{ \Carbon::parse($t->end)->format('d/m/Y') }}.

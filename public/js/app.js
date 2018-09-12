@@ -48347,7 +48347,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.mixin({
 
 		restoreMsg: function restoreMsg(msg) {
 			for (var i in msg) {
-				$('small#' + i + 'Help').text(msg[i]);
+				$('small#' + i + 'Help').html(msg[i]);
 			}
 		},
 		deleted: function deleted(url, updateTable) {
@@ -48498,10 +48498,13 @@ axios.interceptors.response.use(function (response) {
 		$('button, input').removeAttr('disabled');
 		errors = errors.data.errors;
 		for (var e in errors) {
-			$('small#' + e + 'Help').addClass('text-danger').text(errors[e][0]);
+			$('small#' + e + 'Help').addClass('text-danger').html(errors[e][0]);
 		}
-		toastr.warning('Error al realizar operación');
-		if (errors.msg) toastr.warning(errors.msg);
+		if (errors.msg) {
+			toastr.warning(errors.msg);
+		} else {
+			toastr.warning('Error al realizar operación');
+		}
 		setTimeout(function () {
 			console.clear();
 		}, 100);
@@ -63955,6 +63958,15 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -64188,25 +64200,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
-        return {
-            club: [],
+        var _ref;
+
+        return _ref = {
             pareja: {},
-            user: {
-                fullName: '',
-                module: '',
-                image: ''
-            },
-            pass: {
-                passwordOld: '',
-                password: '',
-                password_confirmation: ''
-            }
-        };
+            club: []
+        }, _defineProperty(_ref, 'pareja', {}), _defineProperty(_ref, 'user', {
+            fullName: '',
+            module: '',
+            image: ''
+        }), _defineProperty(_ref, 'pass', {
+            passwordOld: '',
+            password: '',
+            password_confirmation: ''
+        }), _ref;
     },
     created: function created() {
         var _this = this;
 
         axios.get('profile').then(function (response) {
+            if (response.data.pareja) {
+                _this.pareja.p_email = response.data.pareja.email;
+                _this.pareja.p_febd_num = response.data.pareja.febd_num;
+                _this.pareja.id = response.data.pareja.id;
+                _this.pareja.p_last_name = response.data.pareja.last_name;
+                _this.pareja.p_name = response.data.pareja.name;
+            }
             _this.user = response.data.user;
             _this.club = response.data.club;
         });
@@ -64226,7 +64245,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 toastr.success('Contraseña Actualizada');
             });
         },
-        pare: function pare() {},
+        pare: function pare() {
+            axios.post('/update-pareja', this.pareja).then(function (response) {
+                toastr.success('Datos Actualizados');
+            });
+        },
         data_baile: function data_baile() {
             var data = {
                 club_id: this.user.club_id,
@@ -65247,19 +65270,19 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.pareja.name,
-                          expression: "pareja.name"
+                          value: _vm.pareja.p_name,
+                          expression: "pareja.p_name"
                         }
                       ],
                       staticClass: "form-control",
                       attrs: { type: "text", id: "p_name" },
-                      domProps: { value: _vm.pareja.name },
+                      domProps: { value: _vm.pareja.p_name },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.pareja, "name", $event.target.value)
+                          _vm.$set(_vm.pareja, "p_name", $event.target.value)
                         }
                       }
                     }),
@@ -65287,26 +65310,70 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.pareja.last_name,
-                          expression: "pareja.last_name"
+                          value: _vm.pareja.p_last_name,
+                          expression: "pareja.p_last_name"
                         }
                       ],
                       staticClass: "form-control",
                       attrs: { type: "text", id: "p_last_name" },
-                      domProps: { value: _vm.pareja.last_name },
+                      domProps: { value: _vm.pareja.p_last_name },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.pareja, "last_name", $event.target.value)
+                          _vm.$set(
+                            _vm.pareja,
+                            "p_last_name",
+                            $event.target.value
+                          )
                         }
                       }
                     }),
                     _vm._v(" "),
                     _c("small", {
                       staticClass: "form-text",
-                      attrs: { id: "p_nameHelp" }
+                      attrs: { id: "p_last_nameHelp" }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-sm-3 control-label",
+                      attrs: { for: "p_email" }
+                    },
+                    [_vm._v("Email:")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-9" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.pareja.p_email,
+                          expression: "pareja.p_email"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", id: "p_email" },
+                      domProps: { value: _vm.pareja.p_email },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.pareja, "p_email", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("small", {
+                      staticClass: "form-text",
+                      attrs: { id: "p_emailHelp" }
                     })
                   ])
                 ]),
@@ -65327,19 +65394,23 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.pareja.febd_num,
-                          expression: "pareja.febd_num"
+                          value: _vm.pareja.p_febd_num,
+                          expression: "pareja.p_febd_num"
                         }
                       ],
                       staticClass: "form-control",
                       attrs: { type: "text", id: "p_febd_num" },
-                      domProps: { value: _vm.pareja.febd_num },
+                      domProps: { value: _vm.pareja.p_febd_num },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.pareja, "febd_num", $event.target.value)
+                          _vm.$set(
+                            _vm.pareja,
+                            "p_febd_num",
+                            $event.target.value
+                          )
                         }
                       }
                     }),
@@ -74819,9 +74890,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		return {
 			tabla: {
 				columns: [{ title: 'Titulo', field: 'name', sortable: true }, { title: 'Descripción', field: 'description', sortable: true }, { title: 'Inscripciones', field: 'inscription', sortable: true, class: 'text-center' }, { title: 'Fecha inicio', field: 'start', sortable: true, class: 'text-center' }, { title: 'Fecha final', field: 'end', sortable: true, class: 'text-center' }],
-				options: [{ ico: 'fa fa-edit', class: 'btn-info', title: 'Editar Competencia', func: function func(id) {
+				options: [{ ico: 'fa fa-edit', class: 'btn-info', title: 'Editar', func: function func(id) {
 						_this.$router.push({ name: 'tournament.update', params: { id: id } });
-					}, action: 'tournament.update' }, { ico: 'fa fa-close', class: 'btn-danger', title: 'Eliminar Competencia', func: function func(id) {
+					}, action: 'tournament.update' }, { ico: 'fa fa-close', class: 'btn-danger', title: 'Eliminar', func: function func(id) {
 						_this.deleted('/tournament/' + id, _this.$children[1].get, 'name');
 					}, action: 'tournament.destroy' }]
 			}
@@ -75110,8 +75181,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 
@@ -75124,7 +75193,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     'rs-input': __WEBPACK_IMPORTED_MODULE_0__partials_input_vue___default.a,
     'rs-multiselect': __WEBPACK_IMPORTED_MODULE_1_vue_multiselect___default.a,
     DatePicker: __WEBPACK_IMPORTED_MODULE_2_vue_bootstrap_datetimepicker___default.a
-
   },
   props: ['formData'],
   data: function data() {
@@ -75180,6 +75248,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.get('/tournament/' + this.$route.params.id).then(function (response) {
         _this.title = 'Editar Competencia:';
         _this.ico = 'edit';
+        var sub_standar = response.data.subcategory_standar_tournament;
+        var sub_latino = response.data.subcategory_latino_tournament;
         _this.data = response.data;
         var h = response.data.hotels;
         for (var i in h) {
@@ -75189,14 +75259,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             id: h[i].id
           });
         }
+
+        _this.data.subcategory_latino_tournament = [];
+        for (var _i in sub_latino) {
+          _this.data.subcategory_latino_tournament.push(sub_latino[_i].name);
+        }
+        _this.data.subcategory_standar_tournament = [];
+        for (var _i2 in sub_standar) {
+          _this.data.subcategory_standar_tournament.push(sub_standar[_i2].name);
+        }
+
         if (response.data.image) {
           _this.msg.image = '<a href="/storage/' + response.data.image + '" target="_blank">' + response.data.image + '<a>';
         }
         if (response.data.hours) {
-          _this.msg.hours = '<a href="/storage/' + response.data.hours + '" target="_blank">' + response.data.hours + '<a>';
+          _this.msg.hours = '<a href="/storage/hours/' + response.data.hours + '" target="_blank">' + response.data.hours + '<a>';
         }
         if (response.data.info) {
-          _this.msg.info = '<a href="/storage/' + response.data.info + '" target="_blank">' + response.data.info + '<a>';
+          _this.msg.info = '<a href="/storage/info/' + response.data.info + '" target="_blank">' + response.data.info + '<a>';
         }
       });
     } else {
@@ -75206,27 +75286,51 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
-    handleFileUpload: function handleFileUpload(e) {
+    get: function get() {
+      var _this2 = this;
+
+      axios.post('/get-tournament').then(function (response) {
+        _this2.referees = response.data.referees;
+        _this2.referees_options = [];
+        for (var i in _this2.referees) {
+          _this2.referees_options.push(_this2.referees[i].name);
+        }
+        _this2.category_opens = response.data.category_opens;
+        _this2.category_opens_options = [];
+        for (var _i3 in _this2.category_opens) {
+          _this2.category_opens_options.push(_this2.category_opens[_i3].name);
+        }
+        _this2.category_latinos = response.data.category_latinos;
+        _this2.category_latinos_options = [];
+        for (var _i4 in _this2.category_latinos) {
+          _this2.category_latinos_options.push(_this2.category_latinos[_i4].name);
+        }
+        _this2.category_standars = response.data.category_standars;
+        _this2.category_standars_options = [];
+        for (var _i5 in _this2.category_standars) {
+          _this2.category_standars_options.push(_this2.category_standars[_i5].name);
+        }
+      });
+    },
+    onSelected: function onSelected(e) {
+      var _this3 = this;
+
       var files = e.target.files || e.dataTransfer.files;
-      if (!files.length) return;
-      this.data[e.target.id] = files[0];
-      // console.log(this.data[e.target.id])
-      // let reader = new FileReader();
-      // reader.onload = (e) => {
-      // this.file = e.target.result;
-      // this.file = this.$refs.file.files[0];
-      // };
-      // reader.readAsDataURL(files[0]);
-      // this.$refs.files.files
+      var data = new FormData();
+      data.append(e.target.id, files[0]);
+      axios.post('/upload/' + e.target.id, data).then(function (response) {
+        _this3.data[e.target.id] = response.data;
+        _this3.msg[e.target.id] = '<a href="/storage/hours/' + response.data + '" target="_blank">' + response.data + '<a>';
+      });
     },
     getImage: function getImage(e) {
-      var _this2 = this;
+      var _this4 = this;
 
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
       var reader = new FileReader();
       reader.onload = function (e) {
-        _this2.data.image = e.target.result;
+        _this4.data.image = e.target.result;
       };
       reader.readAsDataURL(files[0]);
     },
@@ -75244,34 +75348,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     remove: function remove(i) {
       this.hoteles.splice(i, 1);
     },
-    get: function get() {
-      var _this3 = this;
-
-      axios.post('/get-tournament').then(function (response) {
-        _this3.referees = response.data.referees;
-        _this3.referees_options = [];
-        for (var i in _this3.referees) {
-          _this3.referees_options.push(_this3.referees[i].name);
-        }
-        _this3.category_opens = response.data.category_opens;
-        _this3.category_opens_options = [];
-        for (var _i in _this3.category_opens) {
-          _this3.category_opens_options.push(_this3.category_opens[_i].name);
-        }
-        _this3.category_latinos = response.data.category_latinos;
-        _this3.category_latinos_options = [];
-        for (var _i2 in _this3.category_latinos) {
-          _this3.category_latinos_options.push(_this3.category_latinos[_i2].name);
-        }
-        _this3.category_standars = response.data.category_standars;
-        _this3.category_standars_options = [];
-        for (var _i3 in _this3.category_standars) {
-          _this3.category_standars_options.push(_this3.category_standars[_i3].name);
-        }
-      });
-    },
     registrar: function registrar() {
-      var _this4 = this;
+      var _this5 = this;
 
       this.restoreMsg(this.msg);
       var referees = [];
@@ -75285,54 +75363,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.data.referee = referees;
 
       var category_opens = [];
-      for (var _i4 in this.category_opens) {
+      for (var _i6 in this.category_opens) {
         for (var _r in this.data.category_open_tournament) {
-          if (this.category_opens[_i4].name == this.data.category_open_tournament[_r]) {
-            category_opens.push(this.category_opens[_i4].id);
+          if (this.category_opens[_i6].name == this.data.category_open_tournament[_r]) {
+            category_opens.push(this.category_opens[_i6].id);
           }
         }
       }
       this.data.category_open = category_opens;
 
       var category_latinos = [];
-      for (var _i5 in this.category_latinos) {
+      for (var _i7 in this.category_latinos) {
         for (var _r2 in this.data.subcategory_latino_tournament) {
-          if (this.category_latinos[_i5].name == this.data.subcategory_latino_tournament[_r2]) {
-            category_latinos.push(this.category_latinos[_i5].id);
+          if (this.category_latinos[_i7].name == this.data.subcategory_latino_tournament[_r2]) {
+            category_latinos.push(this.category_latinos[_i7].id);
           }
         }
       }
       this.data.subcategory_latino = category_latinos;
 
       var category_standars = [];
-      for (var _i6 in this.category_standars) {
-        for (var _r3 in this.data.subcategory_standar_tournament) {
-          if (this.category_standars[_i6].name == this.data.subcategory_standar_tournament[_r3]) {
-            category_standars.push(this.category_standars[_i6].id);
+      for (var _r3 in this.data.subcategory_standar_tournament) {
+        for (var _i8 in this.category_standars) {
+          if (this.category_standars[_i8].name == this.data.subcategory_standar_tournament[_r3]) {
+            category_standars.push(this.category_standars[_i8].id);
           }
         }
       }
       this.data.subcategory_standar = category_standars;
+
       this.data.hoteles = this.hoteles;
-      // cache: false,
-      // contentType: false,
-      // processData: false
+
       if (this.$route.params.id) {
-        axios.put('/tournament/' + this.data.id, this.data, {
-          headers: {
-            // 'Content-Type': 'multipart/form-data',
-          }
-        }).then(function (response) {
+        axios.put('/tournament/' + this.data.id, this.data).then(function (response) {
           toastr.success('Competencia Actualizada');
-          _this4.$router.push({ name: 'tournament.index' });
+          _this5.$router.push({ name: 'tournament.index' });
         });
       } else {
-        axios.post('/tournament', this.data, {
-          headers: {
-            // 'Content-Type': 'multipart/form-data'
-          } }).then(function (response) {
+        axios.post('/tournament', this.data).then(function (response) {
           toastr.success('Competencia Registrada');
-          _this4.$router.push({ name: 'tournament.index' });
+          _this5.$router.push({ name: 'tournament.index' });
         });
       }
     }
@@ -75361,7 +75431,7 @@ var render = function() {
           _c(
             "form",
             {
-              attrs: { enctype: "multipart/form-data" },
+              attrs: { id: "tournament", enctype: "multipart/form-data" },
               on: {
                 submit: function($event) {
                   $event.preventDefault()
@@ -75576,13 +75646,12 @@ var render = function() {
                   _vm._m(3),
                   _vm._v(" "),
                   _c("input", {
-                    staticClass: "form-control",
                     attrs: {
                       id: "hours",
                       type: "file",
                       accept: "application/pdf"
                     },
-                    on: { change: _vm.handleFileUpload }
+                    on: { change: _vm.onSelected }
                   }),
                   _vm._v(" "),
                   _c("small", {
@@ -75593,10 +75662,6 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("pre", [_vm._v(_vm._s(_vm.data.hours))])
-              ]),
-              _vm._v(" "),
               _c("div", { staticClass: "col-md-6" }, [
                 _c("div", { staticClass: "form-group" }, [
                   _vm._m(4),
@@ -75605,8 +75670,9 @@ var render = function() {
                     attrs: {
                       id: "info",
                       type: "file",
-                      accept: "application/.pdf"
-                    }
+                      accept: "application/pdf"
+                    },
+                    on: { change: _vm.onSelected }
                   }),
                   _vm._v(" "),
                   _c("small", {
@@ -75763,7 +75829,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "col-md-12" }, [
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-5" }, [
+                  _c("div", { staticClass: "col-md-6" }, [
                     _c("div", { staticClass: "form-group" }, [
                       _vm._m(9),
                       _vm._v(" "),
@@ -75831,7 +75897,7 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-1" }, [
                     _c(
                       "button",
                       {

@@ -11,15 +11,9 @@
 |
 */
 
-// Route::group(['middleware' => 'guest'], function () {
-    Route::get('/', 'RouteController@front');
-    // Route::get('/publicacion', function () {
-    //     return 'front end';
-    // });
-    // Route::get('/publicacion/{slug}', function ($slug) {
-    //     return $slug;
-    // });
-// });
+Route::get('/', 'RouteController@front');
+
+Route::get('/publicacion/{slug}', 'RouteController@publication')->name('publication.show');
 
 /**
  * Rutas típicas de autentificación de la app.
@@ -68,6 +62,7 @@ Route::group(['middleware' => ['auth', 'onlyAjax']], function () {
 
     Route::resource('tournament', 'TournamentController')->except(['create', 'edit']);
     Route::post('get-tournament', 'TournamentController@dataForRegister');
+    Route::post('upload/{name}', 'TournamentController@upload');
 
     Route::resource('clubs', 'ClubsController')->except(['create', 'edit']);
 
@@ -87,6 +82,7 @@ Route::group(['middleware' => ['auth', 'onlyAjax']], function () {
         Route::post('change-pass', 'ProfileController@editPassword');
         Route::post('update-user', 'ProfileController@editUser');
         Route::post('update-bailarin/{id}', 'ProfileController@bailarin');
+        Route::post('update-pareja', 'ProfileController@pareja');
     });
 
     Route::post('admin/app', 'RouteController@canPermission');

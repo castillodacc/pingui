@@ -14,6 +14,11 @@
     vertical-align: middle;
 }
 */
+.btn-black {
+    color: #fff;
+    background-color: #444444;
+    border-color: #444444;
+}
 /* FONTS */
 @font-face {
 	font-family: "ElegantIcons";
