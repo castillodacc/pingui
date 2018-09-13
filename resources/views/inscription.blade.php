@@ -69,83 +69,34 @@
 							<div class="pull-left col-md-4 col-xs-12 thumb-contenido">
 								<img class="center-block img-responsive" src="{{ asset('storage/' . $tournament->image) }}" />
 							</div>
-							<div class="" style="font-size: 1.2em">
+							<div class="">
 								<h1  class="hidden-xs hidden-sm">{{ $tournament->name }}</h1>
 								<hr>
 								<small>Publicado: {{ $tournament->created_at->format('d/m/Y') }}.</small><br>
 								<small>Se realizará desde: {{ $tournament->start }} - Hasta: {{ $tournament->end }}.</small><br>
-								<small><strong>Organizador: {{ $tournament->organizer->name }}.</strong></small><br>
-								<small><strong>Inscripción: {{ ($tournament->inscription) ? 'Abierta' : 'Cerrada' }}.</strong></small><br>
-								<div>
-									<ul>
-										@foreach($tournament->prices as $p)
-										<li>{{ $p->name }}: <b><em>{{ $p->price }} €</em></b></li>
-										@endforeach
-									</ul>
-								</div>
-								@if(\Auth::guest())
-								<div class="alert alert-info" role="alert">
-									<span class="text-warning">
-										<b><a href="/login">Iniciar Sesión</a></b> para inscribirte
-									</span>
-								</div>
-								@endif
-								@if(\Auth::user()->febd_num == 0)
+								<small><strong>Organizador: {{ $tournament->organizador }}.</strong></small><br>
+								<small><strong>Inscripción: {{ ($tournament->inscription) ? 'Abierta' : 'Cerrada' }}.</strong></small>
+								<small><strong>Precio de entradas: {{ $tournament->entrance_price }}.</strong></small><br>
+								<small><strong>Precio de Participación: {{ $tournament->price }}.</strong></small><br>
+							</div>
+							<div class="">
+								@if(!\Auth::user()->febd_num)
 								<div class="alert alert-info" role="alert">
 									<span class="text-warning">
 										Actualiza tu <b><a href="/perfil">perfil</a></b> para inscribirte.
 									</span>
 								</div>
 								@endif
-								<div class="btn-group" role="group" aria-label="...">
-									@if($tournament->info)
-									<a href="{{ asset('storage/info/' . $tournament->info) }}" class="btn btn-info" target="_blank">Hoja informativa</a>
-									@endif
-									@if($tournament->maps)
-									<a href="{{ $tournament->maps }}" class="btn btn-black" target="_blank">Mapa</a>
-									@endif
-									@if($tournament->hours)
-									<a href="{{ asset('storage/hours/' . $tournament->hours) }}" class="btn btn-success" target="_blank">Horarios</a>
-									@endif
-									@if($tournament->inscription && \Auth::check() && strlen(\Auth::user()->febd_num) > 0)
-									<a href="{{ route('publication.inscription', $tournament->slug) }}" class="btn btn-warning">Inscribrete</a>
-									@elseif($tournament->results)
-									<a href="{{ $tournament->results }}" class="btn btn-danger" target="_blank">Resultados</a>
-									@endif
+								@if(!\Auth::user()->parejas->count())
+								<div class="alert alert-info" role="alert">
+									<span class="text-warning">
+										Registra a tu <b><a href="/perfil">Pareja</a></b> para inscribirte.
+									</span>
 								</div>
-								<hr>
-								<p class="text-justify">{{ $tournament->description }}</p>
-							</div>
-							<hr>
-							<div class="row">
-								<h4>Referees:</h4>
-								@foreach($tournament->referees as $r)
-								<span class="label label-primary">{{ $r->name }}</span>
-								@endforeach
-							</div>
-							<hr>
-							<div class="row">
-								<h4>Categorias Participantes:</h4>
-								<div class="row">
-									<h5 style="display: inline;">Categorias Opens:</h5>
-									@foreach($tournament->category_opens as $c)
-									<span class="label label-success">{{ $c->name }}</span>
-									@endforeach
-								</div>
-								<hr>
-								<div class="row">
-									<h5 style="display: inline;">Categorias Latinos:</h5>
-									@foreach($tournament->subcategory_latinos as $c)
-									<span class="label label-success">{{ $c->category_latino->name }} - {{ $c->name }}</span>
-									@endforeach
-								</div>
-								<hr>
-								<div class="row">
-									<h5 style="display: inline;">Categorias Standar:</h5>
-									@foreach($tournament->subcategory_standars as $c)
-									<span class="label label-success">{{ $c->category_standar->name }} - {{ $c->name }}</span>
-									@endforeach
-								</div>
+								@endif
+								<pre>
+									{{ \Auth::user()->febd_num }}
+								</pre>
 							</div>
 						</div>
 					</div>

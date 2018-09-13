@@ -27,12 +27,12 @@ class CreateUsersTable extends Migration
             $table->string('web', 100)->nullable();
             $table->unsignedInteger('club_id')->nullable();
             $table->unsignedInteger('febd_num')->nullable()->unique();
-            $table->unsignedInteger('category_l')->nullable();
+            $table->string('category_l')->nullable();
             $table->string('trainer_l', 50)->nullable();
-            $table->unsignedInteger('category_s')->nullable();
+            $table->string('category_s')->nullable();
             $table->string('trainer_s', 50)->nullable();
-            $table->unsignedInteger('group_l')->nullable();
-            $table->unsignedInteger('group_s')->nullable();
+            $table->string('group_l')->nullable();
+            $table->string('group_s')->nullable();
 
             // $table->unsignedInteger('approval_state')->nullable();
             $table->rememberToken();

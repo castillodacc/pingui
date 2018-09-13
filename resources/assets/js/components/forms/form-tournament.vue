@@ -16,6 +16,20 @@
               @input="data[input.id] = arguments[0]"></rs-input>
             </div>
 
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="organizer_id" class="control-label">
+                  <span class="edit"></span> Organizador:
+                </label>
+                <select id="organizer_id" class="form-control" v-model="data.organizer_id">
+                  <option value="">Seleccione un organizador</option>
+                  <option :value="o.id" v-for="o in organizers" v-text="o.name"></option>
+                </select>
+                <small id="organizer_idHelp" class="form-text text-muted" v-text="msg.organizer_id"></small>
+              </div>
+            </div>
+
             <div class="col-md-6" style="height: 100px;">
               <div class="checkbox" style="padding-top: 25px;">
                 <label for="inscription" class="control-label" style="font-weight: 600;">
@@ -23,6 +37,40 @@
                   <span class="edit"></span> Inscripción: <b>{{ (data.inscription) ? 'Abierta' : 'Cerrada' }}</b>
                 </label><br>
                 <small id="inscriptionHelp" class="form-text text-muted" v-text="msg.inscription"></small>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="p_name" class="control-label">
+                      <span class="edit"></span> Motivo del Precio:
+                    </label>
+                    <input type="text" class="form-control" v-model="p_name">
+                    <small id="p_nameHelp" class="form-text text-muted" v-text="msg.p_name"></small>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label for="price" class="control-label">
+                      <span class="edit"></span> Precio:
+                    </label>
+                    <input type="text" class="form-control" v-model="price">
+                    <small id="priceHelp" class="form-text text-muted" v-text="msg.price"></small>
+                  </div>
+                </div>
+                <div class="col-md-1">
+                  <button type="button" class="btn btn-primary" style="margin-top: 27px;" @click="addP"><span class="fa fa-plus"></span></button>
+                </div>
+                <div class="col-md-12">
+                  <ul>
+                    <li v-for="(p, i) in prices">
+                      <span>{{ p.name }} <small><b>{{ p.price }} €</b></small></span>
+                      <button type="button" class="btn btn-danger btn-xs" @click="remove(i)"><span class="fa fa-remove"></span></button>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
 
@@ -177,6 +225,10 @@
     props: ['formData'],
     data () {
       return {
+        organizers: [],
+        p_name: '',
+        price: '',
+        prices: [],
         link: '',
         hotel: '',
         hoteles: [],
@@ -192,15 +244,16 @@
         title: '',
         ico: '',
         data: {
-          inscription: false
+          inscription: false,
+          organizer_id: ''
         },
         entries: {
           0: [
           {label: 'Titulo', id: 'name', icon: 'edit'},
           {label: 'Detalles', id: 'description', icon: 'edit'},
-          {label: 'Precio', id: 'price', icon: 'edit', type: 'number'},
-          {label: 'Precio de entradas', id: 'entrance_price', icon: 'edit', type: 'number'},
-          {label: 'Organizador', id: 'organizador', icon: 'edit'},
+          // {label: 'Precio', id: 'price', icon: 'edit', type: 'number'},
+          // {label: 'Precio de entradas', id: 'entrance_price', icon: 'edit', type: 'number'},
+          // {label: 'Organizador', id: 'organizador', icon: 'edit'},
           {label: 'Resultados', id: 'results', icon: 'edit'},
           {label: 'Ruta al Mapa', id: 'maps', icon: 'edit'},
           ]
@@ -247,6 +300,15 @@
             });
           }
 
+          let p = response.data.prices;
+          for(let i in p) {
+            this.prices.push({
+              price: p[i].price,
+              name: p[i].name,
+              id: p[i].id,
+            });
+          }
+
           this.data.subcategory_latino_tournament = [];
           for(let i in sub_latino) {
             this.data.subcategory_latino_tournament.push(sub_latino[i].name);
@@ -269,6 +331,7 @@
       get: function () {
         axios.post('/get-tournament')
         .then(response => {
+          this.organizers = response.data.organizers;
           this.referees = response.data.referees;
           this.referees_options = [];
           for(let i in this.referees) {
@@ -310,6 +373,28 @@
         };
         reader.readAsDataURL(files[0]);
       },
+      addP: function () {
+        if (this.p_name && this.price) {
+          if (isNaN(this.price)) {
+            return toastr.info('El campo precio solo admite valore numéricos.');
+          }
+          if (this.price > 200) {
+            return toastr.info('El campo precio no puede ser tan algo.');
+          }
+          if (!isNaN(this.p_name)) {
+            return toastr.info('El campo motivo del precio es para ingregar caracteres alfabéticos.');
+          }
+          this.prices.push({
+            name: this.p_name,
+            price: this.price,
+          });
+          this.p_name = '';
+          this.price = '';
+        }
+      },
+      // removeP: function (i) {
+        // this.hoteles.splice(i, 1);
+      // },
       add: function () {
         if (this.link && this.hotel) {
           this.hoteles.push({
@@ -366,6 +451,7 @@
         this.data.subcategory_standar = category_standars;
 
         this.data.hoteles = this.hoteles;
+        this.data.prices = this.prices;
 
         if (this.$route.params.id) {
           axios.put('/tournament/' + this.data.id, this.data)

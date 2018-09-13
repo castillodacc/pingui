@@ -22,7 +22,7 @@ class Tournament extends Model
         'start',
         'end',
         'inscription',
-        'organizador',
+        'organizer_id',
         'image',
         'results',
         'hours',
@@ -45,6 +45,16 @@ class Tournament extends Model
     public function hotels()
     {
         return $this->hasMany(Hotel::class);
+    }
+
+    public function prices()
+    {
+        return $this->hasMany(Price::class);
+    }
+
+    public function organizer()
+    {
+        return $this->belongsTo(Organizer::class);
     }
 
     public function referees()

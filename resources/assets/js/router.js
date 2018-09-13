@@ -9,6 +9,7 @@ import Categories_l from './components/views/Categories_lComponent.vue';
 import Categories_s from './components/views/Categories_sComponent.vue';
 import Categories_o from './components/views/Categories_oComponent.vue';
 import Referee from './components/views/RefereeComponent.vue';
+import Organizer from './components/views/OrganizerComponent.vue';
 import Tournament from './components/views/TournamentComponent';
 import TournamentF from './components/forms/form-tournament.vue';
 import NotFound from './components/views/NotFoundComponent.vue';
@@ -36,6 +37,11 @@ const router = new VueRouter({
 		path: '/referee',
 		name: 'referee.index',
 		component: Referee
+	},
+	{
+		path: '/organizador',
+		name: 'organizer.index',
+		component: Organizer
 	},
 	{
 		path: '/torneos',

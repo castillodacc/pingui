@@ -110,7 +110,7 @@
 						<div class="col-sm-6 col-md-3 col-lg-3">
 							<a href="#">
 								<div class="shop-item">
-									<div class="shop-item-image">aca
+									<div class="shop-item-image">
 										<img width="262" height="328" src="#" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="" srcset="{{ asset('storage/' . $t->image) }}" sizes="(max-width: 262px) 100vw, 262px" style="min-height: 330px;">	
 										<div class="shop-item-detail">
 											<p class="product woocommerce add_to_cart_inline " style="border:4px solid #ccc; padding: 12px;">
@@ -134,8 +134,8 @@
 											{{-- <span style="width:20%">{{ $t->description }}</span> --}}
 										</div>
 									</div>
-									<span class="onsale">Inscripción: {{ ($t->inscription) ? 'Abierta' : 'Cerrada' }}.</span><br>
-									<span class="amount">Precio de Entradas: {{ number_format($t->entrance_price, 2) }}<span> €</span></span>
+									<span class="onsale">Inscripción: <b>{{ ($t->inscription) ? 'Abierta' : 'Cerrada' }}</b>.</span><br>
+									{{-- <span class="amount">Precio de Entradas: {{ number_format($t->entrance_price, 2) }}<span> €</span></span> --}}
 									{{-- <ins>
 										<span class="woocommerce-Price-amount amount">12.00<span class="woocommerce-Price-currencySymbol">£</span></span>
 									</ins> --}}

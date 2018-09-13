@@ -8,7 +8,7 @@
             title="Registrar Usuario"
             @click="openform('create')"
             v-if="can('user.store')"><span class="glyphicon glyphicon-plus"></span></button>
-            <rs-modal-form :formData="formData" @input="$children[0].get('this')" v-if="can(['user.store','user.update'])"></rs-modal-form>
+            <rs-modal-form :formData="formData" @input="$children[1].get('this')" v-if="can(['user.store','user.update'])"></rs-modal-form>
         </div>
         <div class="box-body">
             <rs-table id="users" :tabla="tabla" uri="/admin/users"></rs-table>

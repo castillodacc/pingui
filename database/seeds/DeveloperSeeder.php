@@ -11,12 +11,6 @@ class DeveloperSeeder extends Seeder
      */
     public function run()
     {
-        // $now = \Carbon\Carbon::now();
-
-        // factory(App\User::class, 99)->create();
-
-        // factory(App\Models\Permisologia\Role::class, 19)->create();
-
         $clubs = [
             [
                 "id" => "4",

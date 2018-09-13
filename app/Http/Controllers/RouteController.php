@@ -93,6 +93,14 @@ class RouteController extends Controller
     public function publication($slug)
     {
         $tournament = \App\Models\Tournament::where('slug', '=', $slug)->first();
-        return view('publicacion', compact('tournament', 'tournament'));
+        if ($tournament == null) return redirect('/');
+        return view('publicacion', compact('tournament'));
+    }
+
+    public function inscription($slug)
+    {
+        $tournament = \App\Models\Tournament::where('slug', '=', $slug)->first();
+        if ($tournament == null) return redirect('/');
+        return view('inscription', compact('tournament', ''));
     }
 }

@@ -47,7 +47,7 @@ class UsersController extends Controller
     public function store(UserStoreRequest $request)
     {
         $data = $request->validated();
-        $data['roles'] = $this->idsOfRol($data['roles']);
+        $data['roles'] = $this->idsOfRol($request->roles);
         $user = new User($data);
         $user->password = bcrypt($data['password']);
         $user->save();

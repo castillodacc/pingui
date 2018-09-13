@@ -68,6 +68,11 @@
                 <i class="fa fa-td"></i> <span>Referees</span>
             </router-link>
         </li>
+        <li v-if="can('organizer.index')">
+            <router-link :to="{ name: 'organizer.index' }">
+                <i class="fa fa-td"></i> <span>Organizadores</span>
+            </router-link>
+        </li>
         <li v-if="can('tournament.index')">
             <router-link :to="{ name: 'tournament.index' }">
                 <i class="fa fa-td"></i> <span>Torneos</span>

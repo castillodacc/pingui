@@ -46,7 +46,7 @@ return [
     |
     */
 
-    'credits' => 'Copyright © 2018. <a href="#">Pingui</a>. Todos los derechos reservados.',
+    'credits' => 'Copyright © ' . date('Y') . '. <a href="#">Pingui</a>. Todos los derechos reservados.',
 
     /*
     |--------------------------------------------------------------------------

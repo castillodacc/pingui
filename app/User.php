@@ -40,13 +40,6 @@ class User extends Authenticatable
     ];
 
     /**
-     * Los atruburos que seran instancia de carbon por ser tipo fecha.
-     *
-     * @var array
-     */
-    // protected $dates = ['deleted_at'];
-
-    /**
      * Los atributos que deberían estar ocultos para las matrices.
      *
      * @var array

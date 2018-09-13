@@ -145,7 +145,16 @@
                             <div class="form-group">
                                 <label for="category_l" class="col-sm-3 control-label">Categoría Latino:</label>
                                 <div class="col-sm-9">
-                                    <input type="text" id="category_l" class="form-control" v-model="user.category_l">
+                                    <select for="category_l" id="category_lat" class="form-control" v-model="user.category_l">
+                                        <option value="T1">T1</option>
+                                        <option value="T2">T2</option>
+                                        <option value="AI">AI</option>
+                                        <option value="AN">AN</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="F">F</option>
+                                        <option value="No bailo">No bailo</option>
+                                    </select>
                                     <small id="category_lHelp" class="form-text"></small>
                                 </div>
                             </div>
@@ -159,7 +168,20 @@
                             <div class="form-group">
                                 <label for="group_l" class="col-sm-3 control-label">Grupo Latino:</label>
                                 <div class="col-sm-9">
-                                    <input type="text" id="group_l" class="form-control" v-model="user.group_l">
+                                    <select id="group_l" class="form-control" v-model="user.group_l">
+                                        <option value="Adulto 1">Adulto 1</option>
+                                        <option value="Adulto 2">Adulto 2</option>
+                                        <option value="Junior 1">Junior 1</option>
+                                        <option value="Junior 2">Junior 2</option>
+                                        <option value="JUVENIL 1, con las parejas hasta 9 años">JUVENIL 1, con las parejas hasta 9 años</option>
+                                        <option value="JUVENIL 2, con las parejas que cumplen 10 y 11 años a lo largo de 2018">JUVENIL 2, con las parejas que cumplen 10 y 11 años a lo largo de 2018</option>
+                                        <option value="Senior 1">Senior 1</option>
+                                        <option value="Senior 2">Senior 2</option>
+                                        <option value="Senior 3">Senior 3</option>
+                                        <option value="Senior 4">Senior 4</option>
+                                        <option value="Top Senior">Top Senior</option>
+                                        <option value="Youth">Youth</option>
+                                    </select>
                                     <small id="group_lHelp" class="form-text"></small>
                                 </div>
                             </div>
@@ -167,7 +189,17 @@
                             <div class="form-group">
                                 <label for="category_s" class="col-sm-3 control-label">Categoría Standar:</label>
                                 <div class="col-sm-9">
-                                    <input type="text" id="category_s" class="form-control" v-model="user.category_s">
+                                    <select id="category_s" class="form-control" v-model="user.category_s">
+                                        <option value="T1">T1</option>
+                                        <option value="T2">T2</option>
+                                        <option value="AI">AI</option>
+                                        <option value="AN">AN</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="F">F</option>
+                                        <option value="Girls std">Girls std</option>
+                                        <option value="No_bailo">No_bailo</option>
+                                    </select>
                                     <small id="category_sHelp" class="form-text"></small>
                                 </div>
                             </div>
@@ -181,7 +213,20 @@
                             <div class="form-group">
                                 <label for="group_s" class="col-sm-3 control-label">Grupo Standar:</label>
                                 <div class="col-sm-9">
-                                    <input type="text" id="group_s" class="form-control" v-model="user.group_s">
+                                    <select id="group_s" class="form-control" v-model="user.group_s">
+                                        <option value="Adulto 1">Adulto 1</option>
+                                        <option value="Adulto 2">Adulto 2</option>
+                                        <option value="Junior 1">Junior 1</option>
+                                        <option value="Junior 2">Junior 2</option>
+                                        <option value="JUVENIL 1, con las parejas hasta 9 años">JUVENIL 1, con las parejas hasta 9 años</option>
+                                        <option value="JUVENIL 2, con las parejas que cumplen 10 y 11 años a lo largo de 2018.">JUVENIL 2, con las parejas que cumplen 10 y 11 años a lo largo de 2018.</option>
+                                        <option value="Senior 1">Senior 1</option>
+                                        <option value="Senior 2">Senior 2</option>
+                                        <option value="Senior 3">Senior 3</option>
+                                        <option value="Senior 4">Senior 4</option>
+                                        <option value="Top Senior">Top Senior</option>
+                                        <option value="Youth">Youth</option>
+                                    </select>
                                     <small id="group_sHelp" class="form-text"></small>
                                 </div>
                             </div>
@@ -243,6 +288,7 @@
                 club: [],
                 pareja: {},
                 user: {
+                    club_id: '',
                     fullName: '',
                     module: '',
                     image: '',

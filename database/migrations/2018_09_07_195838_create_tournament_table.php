@@ -21,19 +21,40 @@ class CreateTournamentTable extends Migration
             $table->date('start');
             $table->date('end');
             $table->boolean('inscription')->default(0);
-            $table->string('organizador');
             $table->string('image', 100)->nullable()->unique(); // ruta a imagen
             $table->string('results', 100)->nullable()->unique(); // ruta a resultados https://results.pingui.es/events.php?pod_id=%aca%
             $table->text('hours')->nullable(); // ruta a pdf
             $table->text('maps')->nullable(); // ruta a google maps
             $table->text('info')->nullable(); // ruta al pdf de la hoja informativa
-            $table->unsignedInteger('price');
-            $table->unsignedInteger('entrance_price');
+            // $table->unsignedInteger('price');
+            // $table->unsignedInteger('entrance_price');
+            $table->unsignedInteger('organizer_id');
             $table->unsignedInteger('record_id');
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('record_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('organizer_id')->references('id')->on('organizers')->onDelete('cascade');
+        });
+
+        Schema::create('inscriptions', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('tournament_id');
+            $table->unsignedInteger('febd_num_1');
+            $table->unsignedInteger('name_1');
+            $table->unsignedInteger('last_name_1');
+            $table->unsignedInteger('febd_num_2');
+            $table->unsignedInteger('name_2');
+            $table->unsignedInteger('last_name_2');
+            $table->unsignedInteger('type_pay');
+            $table->unsignedInteger('state_pay');
+            $table->unsignedInteger('state');
+            $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('tournament_id')->references('id')->on('tournaments')->onDelete('cascade');
         });
 
         Schema::create('referee_tournament', function (Blueprint $table) {
@@ -79,6 +100,17 @@ class CreateTournamentTable extends Migration
             $table->foreign('tournament_id')->references('id')->on('tournaments')->onDelete('cascade');
         });
 
+        Schema::create('prices', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name', 100);
+            $table->string('price', 100);
+            $table->unsignedInteger('tournament_id');
+            $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('tournament_id')->references('id')->on('tournaments')->onDelete('cascade');
+        });
+
     }
 
     /**
@@ -88,16 +120,13 @@ class CreateTournamentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hoteles');
+        Schema::dropIfExists('inscriptions');
         Schema::dropIfExists('referee_tournament');
         Schema::dropIfExists('category_open_tournament');
         Schema::dropIfExists('subcategory_latino_tournament');
         Schema::dropIfExists('subcategory_standar_tournament');
+        Schema::dropIfExists('hotels');
+        Schema::dropIfExists('prices');
         Schema::dropIfExists('tournaments');
     }
 }
-
-
-
-
-

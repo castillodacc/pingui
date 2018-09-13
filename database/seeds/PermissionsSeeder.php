@@ -345,5 +345,43 @@ class PermissionsSeeder extends Seeder
             'action' => 'destroy',
             'description' => 'Permiso para Eliminar Torneo'
         ]);
+
+        /**
+         * Permisos de Organizadores
+         */
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Ver Organizadores',
+            'module' => 'organizer',
+            'action' => 'index',
+            'description' => 'Permiso para ver Organizadores'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Crear Organizador',
+            'module' => 'organizer',
+            'action' => 'store',
+            'description' => 'Permiso para registrar Organizador'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Ver Organizador',
+            'module' => 'organizer',
+            'action' => 'show',
+            'description' => 'Permiso para ver un Organizador'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Actualizar Organizador',
+            'module' => 'organizer',
+            'action' => 'update',
+            'description' => 'Permiso para actualizar Organizador'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Eliminar Organizador',
+            'module' => 'organizer',
+            'action' => 'destroy',
+            'description' => 'Permiso para Eliminar Organizador'
+        ]);
     }
 }
