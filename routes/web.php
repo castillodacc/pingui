@@ -12,9 +12,10 @@
 */
 
 Route::get('/', 'RouteController@front');
-
-Route::get('/publicacion/{slug}', 'RouteController@publication')->name('publication.show');
-Route::get('/publicacion/{slug}/inscribir', 'RouteController@inscription')->name('publication.inscription');
+Route::get('publicacion/{slug}', 'RouteController@publication')->name('publication.show');
+Route::get('publicacion/{slug}/inscribir', 'RouteController@inscription')->name('publication.inscription');
+Route::get('confirm/{slug}', 'RouteController@confirm');
+Route::post('get-data', 'RouteController@data');
 
 /**
  * Rutas típicas de autentificación de la app.

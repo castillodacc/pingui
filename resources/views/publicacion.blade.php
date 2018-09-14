@@ -86,11 +86,11 @@
 								@if(\Auth::guest())
 								<div class="alert alert-info" role="alert">
 									<span class="text-warning">
-										<b><a href="/login">Iniciar Sesión</a></b> para inscribirte
+										<b><a href="/login">Inicia Sesión</a></b> o <b><a href="/registro">Registrate</a></b> para inscribirte
 									</span>
 								</div>
 								@endif
-								@if(\Auth::user()->febd_num == 0)
+								@if(\Auth::check() && strlen(\Auth::user()->febd_num) == 0)
 								<div class="alert alert-info" role="alert">
 									<span class="text-warning">
 										Actualiza tu <b><a href="/perfil">perfil</a></b> para inscribirte.
@@ -107,10 +107,10 @@
 									@if($tournament->hours)
 									<a href="{{ asset('storage/hours/' . $tournament->hours) }}" class="btn btn-success" target="_blank">Horarios</a>
 									@endif
-									@if($tournament->inscription && \Auth::check() && strlen(\Auth::user()->febd_num) > 0)
+									@if($tournament->inscription)
 									<a href="{{ route('publication.inscription', $tournament->slug) }}" class="btn btn-warning">Inscribrete</a>
 									@elseif($tournament->results)
-									<a href="{{ $tournament->results }}" class="btn btn-danger" target="_blank">Resultados</a>
+									<a href="http://results.pingui.es/events.php?pod_id={{ $tournament->results }}" class="btn btn-danger" target="_blank">Resultados</a>
 									@endif
 								</div>
 								<hr>

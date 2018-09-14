@@ -59,7 +59,7 @@
 			</div>
 		</nav>
 	</header>
-	<div class="main">
+	<div id="app" class="main">
 		<div class="main front-page-main" style="background-color: #FFF; min-height: 97vh; padding-top: 100px;">
 			<div class="container">
 				<div class="well"> 
@@ -74,30 +74,34 @@
 								<hr>
 								<small>Publicado: {{ $tournament->created_at->format('d/m/Y') }}.</small><br>
 								<small>Se realizará desde: {{ $tournament->start }} - Hasta: {{ $tournament->end }}.</small><br>
-								<small><strong>Organizador: {{ $tournament->organizador }}.</strong></small><br>
-								<small><strong>Inscripción: {{ ($tournament->inscription) ? 'Abierta' : 'Cerrada' }}.</strong></small>
-								<small><strong>Precio de entradas: {{ $tournament->entrance_price }}.</strong></small><br>
-								<small><strong>Precio de Participación: {{ $tournament->price }}.</strong></small><br>
 							</div>
+							@if(\Auth::check())
 							<div class="">
 								@if(!\Auth::user()->febd_num)
 								<div class="alert alert-info" role="alert">
 									<span class="text-warning">
-										Actualiza tu <b><a href="/perfil">perfil</a></b> para inscribirte.
+										Actualiza tu <b><a href="/perfil" class="label label-primary">perfil</a></b> para inscribirte.
 									</span>
 								</div>
 								@endif
 								@if(!\Auth::user()->parejas->count())
 								<div class="alert alert-info" role="alert">
 									<span class="text-warning">
-										Registra a tu <b><a href="/perfil">Pareja</a></b> para inscribirte.
+										Registra a tu <b><a href="/perfil" class="label label-primary">Pareja</a></b>
 									</span>
 								</div>
 								@endif
-								<pre>
-									{{ \Auth::user()->febd_num }}
-								</pre>
+								<inscription></inscription>
 							</div>
+							@else
+							<div class="">
+								<div class="alert alert-info" role="alert">
+									<span class="text-warning">
+										<b><a href="/login" class="btn btn-danger">Inicia Sesion Para Registrarte</a></b>
+									</span>
+								</div>
+							</div>
+							@endif
 						</div>
 					</div>
 				</div>
@@ -121,5 +125,6 @@
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/jquery.flexslider.min.js"></script>
 	<script type="text/javascript" src="/js/custom.js"></script>
+	<script type="text/javascript" src="/js/app.js"></script>
 </body>
 </html>

@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('phone')->nullable()->unique();
             $table->string('email', 50)->unique();
             $table->string('password')->nullable();
+            $table->string('confirm')->nullable();
 
             $table->string('international_id', 100)->nullable();
             $table->string('web', 100)->nullable();

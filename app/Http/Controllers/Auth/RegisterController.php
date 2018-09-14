@@ -95,7 +95,9 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $data['password'] = Hash::make($data['password']);
+        $data['confirm'] = str_replace('/', '', Hash::make(Hash::make(env('APP_KEY')) . $data['password'] . '-rs'));
         $user = User::create($data);
+        \Mail::to($user->email)->send(new \App\Mail\Welcome($user));
         $user->roles()->attach($data['rol']);
         $user->assignPermissionsOneUser($data['rol']);
         return $user;

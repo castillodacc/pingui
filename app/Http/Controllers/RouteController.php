@@ -10,7 +10,7 @@ class RouteController extends Controller
 {
 
     public function __construct() {
-        $this->middleware('auth')->except(['front', 'publication']);
+        $this->middleware('auth')->except(['front', 'publication', 'confirm']);
     }
 
     /**
@@ -102,5 +102,29 @@ class RouteController extends Controller
         $tournament = \App\Models\Tournament::where('slug', '=', $slug)->first();
         if ($tournament == null) return redirect('/');
         return view('inscription', compact('tournament', ''));
+    }
+
+    public function confirm($slug)
+    {
+        try {
+            $user = User::where('confirm', '=', $slug)->first();
+            if ($user) {
+                $user->update(['confirm' => 1]);
+                \Auth::loginUsingId($user->id);
+                return redirect('/');
+            } else {
+                return view('errors.404', ['msg' => 'Ups! al parecer te has perdido...']);
+            }
+        } catch(QueryException $e) {
+            return redirect('/');
+        }
+    }
+
+    public function data()
+    {
+        if (\Auth::guest()) return;
+        $user = \App\User::findOrFail(\Auth::user()->id);
+        $user->parejas;
+        return response()->json(compact('user'));
     }
 }

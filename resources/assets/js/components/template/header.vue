@@ -28,7 +28,7 @@
                                 <p>
                                     {{ all.user.fullName }}.
                                     <div class="row">
-                                        <p class="small">Miembro desde {{ all.user.from }}.</p>
+                                        <p class="small" style="color: white">Miembro desde {{ all.user.from }}.</p>
                                     </div>
                                 </p>
                             </li>

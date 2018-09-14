@@ -49,7 +49,7 @@ class TournamentController extends Controller
             'inscription' => 'required|boolean',
             'organizer_id' => 'required|numeric',
             'image' => 'required|image64:jpeg,jpg,png',
-            'results' => 'nullable|string|unique:tournaments',
+            'results' => 'nullable|numeric|min:1|max:99|unique:tournaments',
             'hours' => 'nullable|string|unique:tournaments',
             'info' => 'nullable|string|unique:tournaments',
             'maps' => 'nullable|string',
@@ -101,7 +101,7 @@ class TournamentController extends Controller
         if ($request->image) {
             $imageData = $request->image;
             $data['image'] = 'tournament-' . \Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
-            (new ImageManager)->make($request->image)->save(public_path('storage\\') . $data['image']);
+            (new ImageManager)->make($request->image)->save(public_path('storage/') . $data['image']);
         }
 
         $tournament = Tournament::create($data);
@@ -176,7 +176,7 @@ class TournamentController extends Controller
             'inscription' => 'required|boolean',
             'organizer_id' => 'required|numeric',
             'image' => 'required|image64:jpeg,jpg,png',
-            'results' => 'nullable|string',
+            'results' => 'nullable|numeric|min:1|max:99|unique1:tournaments',
             'hours' => 'nullable|string',
             'info' => 'nullable|string',
             'maps' => 'nullable|string',
@@ -225,12 +225,12 @@ class TournamentController extends Controller
         }
         $data['record_id'] = \Auth::user()->id;
 
-        if (is_readable(public_path("storage\$request->image"))) {
+        if (is_readable(public_path("storage/$request->image"))) {
         } else {
             if (strlen($request->image) > 50) {
                 $imageData = $request->image;
                 $data['image'] = 'tournament-' . \Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
-                (new ImageManager)->make($request->image)->save(public_path('storage\\') . $data['image']);
+                (new ImageManager)->make($request->image)->save(public_path('storage/') . $data['image']);
             }
         }
 

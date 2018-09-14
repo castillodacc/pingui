@@ -55,25 +55,28 @@ moment.locale('es');
 axios.interceptors.request.use(function (config) {
 	// Hace algo antes de enviar la solicitud
 
+	$('button, a').attr('disabled', 'disabled');
 	if (location.href.indexOf('/perfil') > 0) $('small').removeClass('text-danger').addClass('text-muted').text('');
 	if (location.href.indexOf('/perfil') == -1) {
 		// $('input, select').parent().removeClass('has-error');
 		$('small').removeClass('text-danger').addClass('text-muted');
 	}
-	$('button').removeAttr('disabled')
 	// $('small').parent().find('input, select').removeClass('is-invalid');
 	// $('.modal small').removeClass('text-danger').addClass('text-muted');
 	return config;
 }, function (error) {
+	$('button, a').removeAttr('disabled')
 	// Hacer algo con un error de solicitud
 	return Promise.reject(error);
 });
 
 // Añadir un interceptor de respuesta
 axios.interceptors.response.use(function (response) {
+	$('button, a').removeAttr('disabled')
 	// Hacer algo con los datos de respuesta
 	return response;
 }, function (error) {
+	$('button, a').removeAttr('disabled')
 	// Hacer algo con un error de respuesta
 	errors = error.response;
 	if (errors.status >= 500) {
@@ -85,7 +88,6 @@ axios.interceptors.response.use(function (response) {
 		setTimeout(function () {console.clear();},100);
 	}
 	if (errors.status == 422) {
-		$('button, input').removeAttr('disabled')
 		errors = errors.data.errors;
 		for(let e in errors) {
 			$('small#' + e + 'Help').addClass('text-danger').html(errors[e][0]);
