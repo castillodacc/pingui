@@ -48,8 +48,8 @@ class CreateTournamentTable extends Migration
             $table->string('name_2', 100);
             $table->string('last_name_2', 100);
             $table->unsignedInteger('type_pay'); // 1-transferencia 2-paypal
-            $table->unsignedInteger('state_pay'); // aprovado - no aprovado 
-            $table->unsignedInteger('state'); // estado de la inscripción
+            $table->unsignedInteger('state_pay')->nullable(); // aprovado - no aprovado 
+            $table->unsignedInteger('state')->nullable(); // estado de la inscripción
             $table->timestamps();
             $table->softDeletes();
 

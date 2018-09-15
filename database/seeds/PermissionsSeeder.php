@@ -346,6 +346,13 @@ class PermissionsSeeder extends Seeder
             'description' => 'Permiso para Eliminar Torneo'
         ]);
 
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Ver Torneos Inscrito',
+            'module' => 'tournament',
+            'action' => 'user',
+            'description' => 'Permiso para los torneos en los que se ha inscrito'
+        ]);
+
         /**
          * Permisos de Organizadores
          */
@@ -382,6 +389,44 @@ class PermissionsSeeder extends Seeder
             'module' => 'organizer',
             'action' => 'destroy',
             'description' => 'Permiso para Eliminar Organizador'
+        ]);
+
+        /**
+         * Permisos de Inscripciones
+         */
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Ver Inscritos',
+            'module' => 'inscription',
+            'action' => 'index',
+            'description' => 'Permiso para ver Inscritos'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Crear Inscrito',
+            'module' => 'inscription',
+            'action' => 'store',
+            'description' => 'Permiso para registrar Inscrito'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Ver Inscrito',
+            'module' => 'inscription',
+            'action' => 'show',
+            'description' => 'Permiso para ver un Inscrito'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Actualizar Inscrito',
+            'module' => 'inscription',
+            'action' => 'update',
+            'description' => 'Permiso para actualizar Inscrito'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Eliminar Inscrito',
+            'module' => 'inscription',
+            'action' => 'destroy',
+            'description' => 'Permiso para Eliminar Inscrito'
         ]);
     }
 }

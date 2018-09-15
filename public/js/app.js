@@ -48286,7 +48286,7 @@ if(false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(146);
-module.exports = __webpack_require__(272);
+module.exports = __webpack_require__(275);
 
 
 /***/ }),
@@ -48383,7 +48383,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.mixin({
 // });
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('spinner', __webpack_require__(269));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('inscription', __webpack_require__(293));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('inscription', __webpack_require__(298));
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 	router: __WEBPACK_IMPORTED_MODULE_2__router__["a" /* default */],
@@ -63679,11 +63679,17 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_views_OrganizerComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_views_OrganizerComponent_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_views_TournamentComponent__ = __webpack_require__(245);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_views_TournamentComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_views_TournamentComponent__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_forms_form_tournament_vue__ = __webpack_require__(248);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_forms_form_tournament_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_forms_form_tournament_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_views_NotFoundComponent_vue__ = __webpack_require__(251);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_views_NotFoundComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_views_NotFoundComponent_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_views_MyTournamentComponent__ = __webpack_require__(306);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_views_MyTournamentComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_views_MyTournamentComponent__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_forms_form_tournament_vue__ = __webpack_require__(248);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_forms_form_tournament_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_forms_form_tournament_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_views_InscriptionComponent_vue__ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_views_InscriptionComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__components_views_InscriptionComponent_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_views_NotFoundComponent_vue__ = __webpack_require__(251);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_views_NotFoundComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16__components_views_NotFoundComponent_vue__);
 var _this = this;
+
+
 
 
 
@@ -63717,6 +63723,14 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
 		name: 'club.index',
 		component: __WEBPACK_IMPORTED_MODULE_6__components_views_ClubComponent_vue___default.a
 	}, {
+		path: '/mis-competencias',
+		name: 'tournament.user',
+		component: __WEBPACK_IMPORTED_MODULE_13__components_views_MyTournamentComponent___default.a
+	}, {
+		path: '/inscritos/:id',
+		name: 'inscription.index',
+		component: __WEBPACK_IMPORTED_MODULE_15__components_views_InscriptionComponent_vue___default.a
+	}, {
 		path: '/referee',
 		name: 'referee.index',
 		component: __WEBPACK_IMPORTED_MODULE_10__components_views_RefereeComponent_vue___default.a
@@ -63731,11 +63745,11 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
 	}, {
 		path: '/torneos/form',
 		name: 'tournament.store',
-		component: __WEBPACK_IMPORTED_MODULE_13__components_forms_form_tournament_vue___default.a
+		component: __WEBPACK_IMPORTED_MODULE_14__components_forms_form_tournament_vue___default.a
 	}, {
 		path: '/torneos/:id/edit',
 		name: 'tournament.update',
-		component: __WEBPACK_IMPORTED_MODULE_13__components_forms_form_tournament_vue___default.a
+		component: __WEBPACK_IMPORTED_MODULE_14__components_forms_form_tournament_vue___default.a
 	}, {
 		path: '/administracion/',
 		component: { template: '<router-view></router-view>' },
@@ -63753,7 +63767,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
 			component: __WEBPACK_IMPORTED_MODULE_5__components_views_PermissionsComponent_vue___default.a
 		}, {
 			path: '*',
-			component: __WEBPACK_IMPORTED_MODULE_14__components_views_NotFoundComponent_vue___default.a
+			component: __WEBPACK_IMPORTED_MODULE_16__components_views_NotFoundComponent_vue___default.a
 		}]
 	}, {
 		path: '/categorias/',
@@ -63772,12 +63786,12 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
 			component: __WEBPACK_IMPORTED_MODULE_8__components_views_Categories_sComponent_vue___default.a
 		}, {
 			path: '*',
-			component: __WEBPACK_IMPORTED_MODULE_14__components_views_NotFoundComponent_vue___default.a
+			component: __WEBPACK_IMPORTED_MODULE_16__components_views_NotFoundComponent_vue___default.a
 		}]
 	}, {
 		path: '*',
 		name: 'error',
-		component: __WEBPACK_IMPORTED_MODULE_14__components_views_NotFoundComponent_vue___default.a
+		component: __WEBPACK_IMPORTED_MODULE_16__components_views_NotFoundComponent_vue___default.a
 	}]
 });
 
@@ -66097,6 +66111,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pagination_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__pagination_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__header_table_vue__ = __webpack_require__(192);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__header_table_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__header_table_vue__);
+var _props;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -66148,7 +66166,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		'pagination': __WEBPACK_IMPORTED_MODULE_0__pagination_vue___default.a,
 		'header-table': __WEBPACK_IMPORTED_MODULE_1__header_table_vue___default.a
 	},
-	props: {
+	props: (_props = {
 		uri: {},
 		options: {
 			default: false
@@ -66159,21 +66177,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			}
 		},
 		id: {},
+		d: {
+			default: false
+		},
 		o: {
 			default: ''
-		},
-		d: {
-			default: ''
-		},
-		n: {
-			default: function _default() {
-				return [10, 20, 30];
-			}
-		},
-		nc: {
-			default: 10
 		}
-	},
+	}, _defineProperty(_props, 'd', {
+		default: ''
+	}), _defineProperty(_props, 'n', {
+		default: function _default() {
+			return [10, 20, 30];
+		}
+	}), _defineProperty(_props, 'nc', {
+		default: 10
+	}), _props),
 	computed: {
 		is_possible: function is_possible() {
 			var o = this.tabla.options;
@@ -66254,6 +66272,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			if (this.search) url += '&search=' + this.search;
 			if (this.dir) url += '&dir=' + this.dir;
 			if (this.order) url += '&order=' + this.order;
+			if (this.d) url += '&d=' + this.d;
 			$('tbody tr').removeClass('active');
 			this.$emit('output', false);
 			axios.get(url).then(function (response) {
@@ -75554,7 +75573,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		return {
 			tabla: {
 				columns: [{ title: 'Titulo', field: 'name', sortable: true }, { title: 'Descripción', field: 'description', sortable: true }, { title: 'Inscripciones', field: 'inscription', sortable: true, class: 'text-center' }, { title: 'Fecha inicio', field: 'start', sortable: true, class: 'text-center' }, { title: 'Fecha final', field: 'end', sortable: true, class: 'text-center' }],
-				options: [{ ico: 'fa fa-edit', class: 'btn-info', title: 'Editar', func: function func(id) {
+				options: [{ ico: 'fa fa-list', class: 'btn-success', title: 'Lista Inscritos', func: function func(id) {
+						_this.$router.push({ name: 'inscription.index', params: { id: id } });
+					}, action: 'tournament.destroy' }, { ico: 'fa fa-edit', class: 'btn-info', title: 'Editar', func: function func(id) {
 						_this.$router.push({ name: 'tournament.update', params: { id: id } });
 					}, action: 'tournament.update' }, { ico: 'fa fa-close', class: 'btn-danger', title: 'Eliminar', func: function func(id) {
 						_this.deleted('/tournament/' + id, _this.$children[1].get, 'name');
@@ -76098,8 +76119,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.hotel = '';
       }
     },
-    remove: function remove(i) {
-      this.hoteles.splice(i, 1);
+    remove: function remove(i, array) {
+      this[array].splice(i, 1);
     },
     registrar: function registrar() {
       var _this5 = this;
@@ -76467,7 +76488,7 @@ var render = function() {
                               attrs: { type: "button" },
                               on: {
                                 click: function($event) {
-                                  _vm.remove(i)
+                                  _vm.remove(i, "prices")
                                 }
                               }
                             },
@@ -76855,7 +76876,7 @@ var render = function() {
                               attrs: { type: "button" },
                               on: {
                                 click: function($event) {
-                                  _vm.remove(i)
+                                  _vm.remove(i, "hoteles")
                                 }
                               }
                             },
@@ -77850,6 +77871,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
@@ -78047,7 +78073,25 @@ var render = function() {
                 [
                   _c("i", { staticClass: "fa fa-td" }),
                   _vm._v(" "),
-                  _c("span", [_vm._v("Torneos")])
+                  _c("span", [_vm._v("Competencias")])
+                ]
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.can("tournament.user")
+        ? _c(
+            "li",
+            [
+              _c(
+                "router-link",
+                { attrs: { to: { name: "tournament.user" } } },
+                [
+                  _c("i", { staticClass: "fa fa-td" }),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("Mis Competencias")])
                 ]
               )
             ],
@@ -78407,40 +78451,14 @@ if (false) {
 
 /***/ }),
 /* 272 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 273 */,
-/* 274 */,
-/* 275 */,
-/* 276 */,
-/* 277 */,
-/* 278 */,
-/* 279 */,
-/* 280 */,
-/* 281 */,
-/* 282 */,
-/* 283 */,
-/* 284 */,
-/* 285 */,
-/* 286 */,
-/* 287 */,
-/* 288 */,
-/* 289 */,
-/* 290 */,
-/* 291 */,
-/* 292 */,
-/* 293 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(294)
+var __vue_script__ = __webpack_require__(273)
 /* template */
-var __vue_template__ = __webpack_require__(295)
+var __vue_template__ = __webpack_require__(274)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -78479,7 +78497,261 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 294 */
+/* 273 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_table_vue__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_table_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__partials_table_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__forms_modal_form_inscription_vue__ = __webpack_require__(303);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__forms_modal_form_inscription_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__forms_modal_form_inscription_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	name: 'Inscription',
+	components: {
+		'rs-table': __WEBPACK_IMPORTED_MODULE_0__partials_table_vue___default.a,
+		'rs-modal-form': __WEBPACK_IMPORTED_MODULE_1__forms_modal_form_inscription_vue___default.a
+	},
+	data: function data() {
+		var _this = this;
+
+		return {
+			form: {
+				cond: '',
+				ready: '',
+				url: '',
+				data: {}
+			},
+			tabla: {
+				columns: [{ title: 'Participante', field: 'user', sort: 'name', sortable: true }, { title: 'Pareja', field: 'pareja', sort: 'name_2', sortable: true }, { title: 'Tipo de pago', field: 'type_pay', sort: 'name_2', sortable: true }, { title: 'Estado del pago', field: 'state_pay', sortable: true, class: 'text-center' }, { title: 'Estado de Participación', field: 'state', sortable: true, class: 'text-center' }],
+				options: [{ ico: 'fa fa-edit', class: 'btn-info', title: 'Editar', func: function func(id) {
+						_this.openForm('edit', id);
+					}, action: 'tournament.update' }, { ico: 'fa fa-close', class: 'btn-danger', title: 'Eliminar', func: function func(id) {
+						_this.deleted('/inscription/' + id, _this.$children[0].get, 'pareja');
+					}, action: 'inscription.destroy' }]
+			}
+		};
+	},
+
+	methods: {
+		openForm: function openForm(cond) {
+			var _this2 = this;
+
+			var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+			this.form.cond = cond;
+			this.form.ready = false;
+			this.form.url = '/inscription/' + id;
+			axios.get(this.form.url).then(function (response) {
+				_this2.form.title = 'Editar Participación de Pareja';
+				_this2.form.data = response.data;
+				_this2.form.ready = true;
+				$('#inscription-form').modal('show');
+			});
+		}
+	}
+});
+
+/***/ }),
+/* 274 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "box" },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "box-body" },
+        [
+          _c("rs-table", {
+            attrs: {
+              id: "inscription",
+              tabla: _vm.tabla,
+              uri: "/inscription",
+              d: _vm.$route.params.id
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _vm.can(["inscription.store", "inscription.update"])
+        ? _c("rs-modal-form", {
+            attrs: { formData: _vm.form },
+            on: {
+              input: function($event) {
+                _vm.$children[0].get("this")
+              }
+            }
+          })
+        : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box-header" }, [
+      _c("h3", { staticClass: "box-title" }, [_vm._v("Tabla de Inscritos: ")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-57b7902c", module.exports)
+  }
+}
+
+/***/ }),
+/* 275 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 276 */,
+/* 277 */,
+/* 278 */,
+/* 279 */,
+/* 280 */,
+/* 281 */,
+/* 282 */,
+/* 283 */,
+/* 284 */,
+/* 285 */,
+/* 286 */,
+/* 287 */,
+/* 288 */,
+/* 289 */,
+/* 290 */,
+/* 291 */,
+/* 292 */,
+/* 293 */,
+/* 294 */,
+/* 295 */,
+/* 296 */,
+/* 297 */,
+/* 298 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(299)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(301)
+/* template */
+var __vue_template__ = __webpack_require__(302)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\forms\\form-inscription.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e516c31a", Component.options)
+  } else {
+    hotAPI.reload("data-v-e516c31a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 299 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(300);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(7)("8fdc7388", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-e516c31a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./form-inscription.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-e516c31a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./form-inscription.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 300 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.borde {\r\n\tborder: 1px solid;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 301 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78555,45 +78827,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	name: 'Inscription',
+	props: ['id'],
 	data: function data() {
 		return {
+			r: true,
 			data: {},
 			msg: {
-				febd_num: 'Número del usuario.',
-				febd_num_p: '.',
-				type_pay: '.'
+				febd_num_1: 'Número del usuario.',
+				febd_num_2: 'Seleccione la pareja con la que participará.',
+				type_pay: 'Señale el tipo de pago.'
 			},
 			inscription: {
-				febd_num: '',
-				febd_num_p: '',
+				user_id: '',
+				tournament_id: '',
+				febd_num_1: '',
+				name_1: '',
+				last_name_1: '',
+				name_2: '',
+				last_name_2: '',
 				type_pay: ''
-
-				// category_l : null
-				// category_s : null
-				// club_id : null
-				// confirm : "123"
-				// email : "root@pingui.es"
-				// febd_num : null
-				// group_l : null
-				// group_s : null
-				// id : 1
-				// international_id : null
-				// last_name : "Root"
-				// name : "Root"
-				// num_id : 99999999
-				// phone : null
-				// trainer_l : null
-				// trainer_s : null
-				// user : "Root"
-				// web : null
-
-			} };
+			}
+		};
 	},
 	mounted: function mounted() {
+		this.inscription.tournament_id = this.id;
 		this.get();
 	},
 
@@ -78601,182 +78861,289 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		get: function get() {
 			var _this = this;
 
-			axios.post('/get-data').then(function (response) {
+			axios.post('/get-data', { id: this.id }).then(function (response) {
+				if (response.data.state) {
+					_this.r = response.data.state;
+				}
 				_this.data = response.data.user;
-				_this.inscription.febd_num = response.data.user.febd_num;
-				// inscription.febd_num_p = response.data.user.febd_num;
+				_this.inscription.user_id = _this.data.id;
+				_this.inscription.febd_num_1 = _this.data.febd_num;
+				_this.inscription.name_1 = _this.data.name;
+				_this.inscription.last_name_1 = _this.data.last_name;
+				if (_this.data.parejas.length > 0) {
+					_this.inscription.febd_num_2 = _this.data.parejas[0].febd_num;
+					_this.inscription.name_2 = _this.data.parejas[0].name;
+					_this.inscription.last_name_2 = _this.data.parejas[0].last_name;
+				}
 			});
 		},
 		changeType: function changeType(num) {
-			console.log('asd');
 			this.inscription.type_pay = num;
+		},
+		register: function register() {
+			axios.post('/inscription', this.inscription).then(function (response) {
+				toastr.success('Registro exitoso');
+				setTimeout(function () {
+					return window.location.refresh();
+				}, 1000);
+			});
 		}
 	}
 });
 
 /***/ }),
-/* 295 */
+/* 302 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "box" }, [
-    _c("form", { attrs: { action: "" } }, [
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.inscription.febd_num,
-                expression: "inscription.febd_num"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { id: "febd_num", type: "text", disabled: "" },
-            domProps: { value: _vm.inscription.febd_num },
+  return _c("div", [
+    _vm.r === true
+      ? _c(
+          "form",
+          {
             on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.inscription, "febd_num", $event.target.value)
+              submit: function($event) {
+                $event.preventDefault()
+                _vm.register($event)
               }
             }
-          }),
-          _vm._v(" "),
-          _c("small", {
-            staticClass: "form-text text-muted",
-            attrs: { id: "febd_numHelp" },
-            domProps: { textContent: _vm._s(_vm.msg.febd_num) }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _vm._m(1),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.inscription.febd_num_p,
-                  expression: "inscription.febd_num_p"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { id: "febd_num_p" },
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.inscription,
-                    "febd_num_p",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                }
-              }
-            },
-            [
-              _c("option", { attrs: { value: "" } }, [
-                _vm._v("Seleccione su pareja")
-              ]),
-              _vm._v(" "),
-              _vm._l(_vm.data.parejas, function(p) {
-                return _c("option", {
-                  domProps: { value: p.id, textContent: _vm._s(p.name) }
+          },
+          [
+            _c("div", { staticClass: "col-md-4" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "control-label",
+                    attrs: { for: "febd_num_1" }
+                  },
+                  [
+                    _c("span", { staticClass: "fa fa-febd_num_1" }),
+                    _vm._v(" Número de FEBD: " + _vm._s(_vm.id) + "\n\t\t\t\t")
+                  ]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.inscription.febd_num_1,
+                      expression: "inscription.febd_num_1"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "febd_num_1", type: "text", disabled: "" },
+                  domProps: { value: _vm.inscription.febd_num_1 },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.inscription,
+                        "febd_num_1",
+                        $event.target.value
+                      )
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("small", {
+                  staticClass: "form-text text-muted",
+                  attrs: { id: "febd_num_1Help" },
+                  domProps: { textContent: _vm._s(_vm.msg.febd_num_1) }
                 })
-              })
-            ],
-            2
-          ),
-          _vm._v(" "),
-          _c("small", {
-            staticClass: "form-text text-muted",
-            attrs: { id: "febd_num_pHelp" },
-            domProps: { textContent: _vm._s(_vm.msg.febd_num_p) }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-md-8", staticStyle: { "font-size": "1.5em" } },
-        [
-          _c("div", { staticClass: "row" }, [
-            _c("p", [_vm._v("Seleccione el tipo de pago")]),
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.inscription.febd_num_2,
+                        expression: "inscription.febd_num_2"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "febd_num_2", disabled: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.inscription,
+                          "febd_num_2",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "" } }, [
+                      _vm._v("Seleccione su pareja")
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.data.parejas, function(p) {
+                      return _c("option", { domProps: { value: p.febd_num } }, [
+                        _vm._v(
+                          _vm._s(p.febd_num) +
+                            " - " +
+                            _vm._s(p.name) +
+                            " " +
+                            _vm._s(p.last_name)
+                        )
+                      ])
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c("small", {
+                  staticClass: "form-text text-muted",
+                  attrs: { id: "febd_num_2Help" },
+                  domProps: { textContent: _vm._s(_vm.msg.febd_num_2) }
+                })
+              ])
+            ]),
             _vm._v(" "),
             _c(
               "div",
               {
-                staticClass: "col-md-6 btn",
-                class: { "btn-primary": _vm.inscription.type_pay == 1 },
-                on: {
-                  click: function($event) {
-                    _vm.changeType(1)
-                  }
-                }
-              },
-              [_vm._v("\n\t\t\t\t\t\tTransferencia\n\t\t\t\t\t")]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "col-md-6 btn",
-                class: { "btn-primary": _vm.inscription.type_pay == 2 },
-                on: {
-                  click: function($event) {
-                    _vm.changeType(2)
-                  }
-                }
+                staticClass: "col-md-8",
+                staticStyle: { "font-size": "1.5em" }
               },
               [
-                _vm._v("\n\t\t\t\t\t\tPaypal"),
-                _c("i", {
-                  staticClass: "glypicon glypicon-ravelry",
-                  attrs: { "aria-hidden": "true" }
-                })
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _vm.inscription.type_pay == 1
-            ? _c("div", { staticClass: "col-md-12" }, [
-                _c("hr"),
-                _vm._v(" "),
-                _c("p", { staticStyle: { "font-size": "14px" } }, [
-                  _vm._v(
-                    "Guarde los datos bancarios y haga un deposito dependiendo de la categoria del baile que participará."
-                  )
+                _c("div", { staticClass: "row" }, [
+                  _c("p", [_vm._v("Seleccione el tipo de pago")]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "col-md-6 btn borde",
+                      class: { "btn-primary": _vm.inscription.type_pay == 1 },
+                      on: {
+                        click: function($event) {
+                          _vm.changeType(1)
+                        }
+                      }
+                    },
+                    [_vm._v("\n\t\t\t\t\tTransferencia\n\t\t\t\t")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "col-md-6 btn borde",
+                      class: { "btn-primary": _vm.inscription.type_pay == 2 },
+                      on: {
+                        click: function($event) {
+                          _vm.changeType(2)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v("\n\t\t\t\t\tPaypal"),
+                      _c("i", {
+                        staticClass: "glypicon glypicon-ravelry",
+                        attrs: { "aria-hidden": "true" }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("small", {
+                    staticClass: "form-text text-muted",
+                    attrs: { id: "type_payHelp" },
+                    domProps: { textContent: _vm._s(_vm.msg.type_pay) }
+                  })
                 ]),
                 _vm._v(" "),
-                _vm._m(2),
-                _vm._v(" "),
-                _vm._m(3),
-                _vm._v(" "),
-                _vm._m(4)
-              ])
-            : _vm._e()
-        ]
-      )
-    ])
+                _vm.inscription.type_pay == 1
+                  ? _c("div", { staticClass: "col-md-12" }, [
+                      _c("hr"),
+                      _vm._v(" "),
+                      _c("p", { staticStyle: { "font-size": "14px" } }, [
+                        _vm._v(
+                          "Guarde los datos bancarios y haga un deposito dependiendo de la categoria del baile que participará."
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _vm._m(3)
+                    ])
+                  : _vm._e()
+              ]
+            ),
+            _vm._v(" "),
+            _vm._m(4)
+          ]
+        )
+      : _c("div", { staticClass: "col-md-8" }, [
+          _c("div", { staticClass: "alert alert-success" }, [
+            _c("h3", { staticClass: "text-center" }, [
+              _vm._v("Ya te haz Registrado.")
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "Hola " +
+                  _vm._s(_vm.data.name) +
+                  " " +
+                  _vm._s(_vm.data.last_name) +
+                  ", haz sido registrado de forma exitosa en esta competencia."
+              )
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _c("b", [_vm._v("Estado de Participación: ")]),
+              _vm._v(" "),
+              _vm.r.state == 1
+                ? _c("span", [
+                    _vm._v(
+                      "Ya fué aprovada su participación en la competencia..."
+                    )
+                  ])
+                : _c("span", [_vm._v("En espera de aprovación...")])
+            ]),
+            _vm._v(" "),
+            _vm.r.type_pay == 1 && !_vm.r.state
+              ? _c("div", [
+                  _c("p", { staticStyle: { "font-size": "14px" } }, [
+                    _vm._v(
+                      "No te olvides de llevar a cabo la forma de pago seleccionada."
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(5),
+                  _vm._v(" "),
+                  _vm._m(6),
+                  _vm._v(" "),
+                  _vm._m(7)
+                ])
+              : _vm._e()
+          ])
+        ])
   ])
 }
 var staticRenderFns = [
@@ -78786,10 +79153,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "label",
-      { staticClass: "control-label", attrs: { for: "febd_num" } },
+      { staticClass: "control-label", attrs: { for: "febd_num_2" } },
       [
-        _c("span", { staticClass: "fa fa-febd_num" }),
-        _vm._v(" Número de FEBD:\n\t\t\t\t\t")
+        _c("span", { staticClass: "fa fa-febd_num_2" }),
+        _vm._v(" Número FEBD de la pareja:\n\t\t\t\t")
       ]
     )
   },
@@ -78797,13 +79164,37 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("p", { staticStyle: { margin: "0" } }, [
+      _vm._v("Banco: "),
+      _c("b", [_vm._v("Banco Sabadell")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticStyle: { margin: "0" } }, [
+      _vm._v("Cuenta: "),
+      _c("b", [_vm._v("IBAN : ES65 0081 0400 1100 0131 0241")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticStyle: { margin: "0" } }, [
+      _vm._v("Titular: "),
+      _c("b", [_vm._v("Kavarna")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c(
-      "label",
-      { staticClass: "control-label", attrs: { for: "febd_num_p" } },
-      [
-        _c("span", { staticClass: "fa fa-febd_num_p" }),
-        _vm._v(" Número FEBD de la pareja:\n\t\t\t\t\t")
-      ]
+      "div",
+      { staticClass: "span pull-right", staticStyle: { padding: "15px" } },
+      [_c("button", { attrs: { type: "submit" } }, [_vm._v("Registrar")])]
     )
   },
   function() {
@@ -78839,7 +79230,745 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-57b7902c", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-e516c31a", module.exports)
+  }
+}
+
+/***/ }),
+/* 303 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(304)
+/* template */
+var __vue_template__ = __webpack_require__(305)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\forms\\modal-form-inscription.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-c3be9eda", Component.options)
+  } else {
+    hotAPI.reload("data-v-c3be9eda", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 304 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_modal_vue__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_modal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__partials_modal_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__partials_input_vue__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__partials_input_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__partials_input_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'modal-form-permission',
+  components: {
+    'rs-modal': __WEBPACK_IMPORTED_MODULE_0__partials_modal_vue___default.a,
+    'rs-input': __WEBPACK_IMPORTED_MODULE_1__partials_input_vue___default.a
+  },
+  props: ['formData'],
+  data: function data() {
+    return {
+      msg: {
+        name: 'Nombre del Permiso.',
+        description: 'Descripción a realizar.',
+        deleted_at: 'Activar o Inactivar permiso.'
+      },
+      entries: [[{ label: 'Nombre Usuario', id: 'usuario', icon: 'user', readonly: true }, { label: 'Nombre pareja', id: 'pareja', icon: 'user', readonly: true }], [{ label: 'FEBD usuario', id: 'febd_num_1', icon: 'user', readonly: true }, { label: 'FEBD pareja', id: 'febd_num_2', icon: 'user', readonly: true }]]
+    };
+  },
+
+  methods: {
+    registrar: function registrar() {
+      var _this = this;
+
+      this.restoreMsg(this.msg);
+      if (this.formData.cond === 'edit') {
+        axios.put(this.formData.url, this.formData.data).then(function (response) {
+          toastr.success('Registro Editado');
+          $('#inscription-form').modal('hide');
+          _this.$emit('input');
+        });
+      }
+    }
+  }
+});
+
+/***/ }),
+/* 305 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "rs-modal",
+        { attrs: { id: "inscription-form" } },
+        [
+          _c(
+            "h4",
+            {
+              staticClass: "card-title",
+              attrs: { slot: "modal-title" },
+              slot: "modal-title"
+            },
+            [
+              _c("span", { staticClass: "glyphicon glyphicon-edit" }),
+              _vm._v("\n      " + _vm._s(_vm.formData.title) + "\n    ")
+            ]
+          ),
+          _vm._v(" "),
+          _c("template", { slot: "modal-body" }, [
+            _c("div", { staticClass: "row justify-content-center" }, [
+              _c("div", { staticClass: "col-md-10 col-md-offset-1" }, [
+                _c(
+                  "form",
+                  {
+                    on: {
+                      keyup: function($event) {
+                        if (
+                          !("button" in $event) &&
+                          _vm._k($event.keyCode, "enter", 13, $event.key)
+                        ) {
+                          return null
+                        }
+                        _vm.registrar($event)
+                      }
+                    }
+                  },
+                  [
+                    !_vm.formData.ready
+                      ? _c("spinner")
+                      : _c(
+                          "div",
+                          [
+                            _vm._l(_vm.entries[0], function(input) {
+                              return _c(
+                                "div",
+                                { staticClass: "col-md-12" },
+                                [
+                                  _c("rs-input", {
+                                    attrs: {
+                                      name: input,
+                                      required: "true",
+                                      readonly: input.readonly,
+                                      msg: _vm.msg[input.id]
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        _vm.formData.data[input.id] =
+                                          arguments[0]
+                                      }
+                                    },
+                                    model: {
+                                      value: _vm.formData.data[input.id],
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.formData.data,
+                                          input.id,
+                                          $$v
+                                        )
+                                      },
+                                      expression: "formData.data[input.id]"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            }),
+                            _vm._v(" "),
+                            _vm._l(_vm.entries[1], function(input) {
+                              return _c(
+                                "div",
+                                { staticClass: "col-md-6" },
+                                [
+                                  _c("rs-input", {
+                                    attrs: {
+                                      name: input,
+                                      required: "true",
+                                      readonly: input.readonly,
+                                      msg: _vm.msg[input.id]
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        _vm.formData.data[input.id] =
+                                          arguments[0]
+                                      }
+                                    },
+                                    model: {
+                                      value: _vm.formData.data[input.id],
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.formData.data,
+                                          input.id,
+                                          $$v
+                                        )
+                                      },
+                                      expression: "formData.data[input.id]"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-12" }, [
+                              _c("div", { staticClass: "form-group" }, [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "control-label",
+                                    attrs: { for: "type_pay" }
+                                  },
+                                  [
+                                    _c("span", {
+                                      staticClass: "glyphicon glyphicon-inbox"
+                                    }),
+                                    _vm._v(" Tipo de pago:\n                  ")
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.formData.data.type_pay,
+                                        expression: "formData.data.type_pay"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      id: "type_pay",
+                                      required: "true",
+                                      disabled: ""
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          _vm.formData.data,
+                                          "type_pay",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("option", { attrs: { value: "1" } }, [
+                                      _vm._v("Transferencia")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("option", { attrs: { value: "2" } }, [
+                                      _vm._v("Paypal")
+                                    ])
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "small",
+                                  {
+                                    staticClass: "form-text text-muted",
+                                    attrs: { id: "type_payHelp" }
+                                  },
+                                  [
+                                    _c("span", {
+                                      domProps: {
+                                        textContent: _vm._s(_vm.msg.type_pay)
+                                      }
+                                    })
+                                  ]
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-6" }, [
+                              _c("div", { staticClass: "form-group" }, [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "control-label",
+                                    attrs: { for: "state_pay" }
+                                  },
+                                  [
+                                    _c("span", {
+                                      staticClass: "glyphicon glyphicon-inbox"
+                                    }),
+                                    _vm._v(
+                                      " Estado del pago:\n                  "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.formData.data.state_pay,
+                                        expression: "formData.data.state_pay"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      id: "state_pay",
+                                      required: "true"
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          _vm.formData.data,
+                                          "state_pay",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("option", { attrs: { value: "1" } }, [
+                                      _vm._v("Pagado")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "option",
+                                      { domProps: { value: null } },
+                                      [_vm._v("No Aprovado")]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "small",
+                                  {
+                                    staticClass: "form-text text-muted",
+                                    attrs: { id: "state_payHelp" }
+                                  },
+                                  [
+                                    _c("span", {
+                                      domProps: {
+                                        textContent: _vm._s(_vm.msg.state_pay)
+                                      }
+                                    })
+                                  ]
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-6" }, [
+                              _c("div", { staticClass: "form-group" }, [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "control-label",
+                                    attrs: { for: "state" }
+                                  },
+                                  [
+                                    _c("span", {
+                                      staticClass: "glyphicon glyphicon-inbox"
+                                    }),
+                                    _vm._v(
+                                      " Aprovar Participación:\n                  "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.formData.data.state,
+                                        expression: "formData.data.state"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: { id: "state", required: "true" },
+                                    on: {
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          _vm.formData.data,
+                                          "state",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("option", { attrs: { value: "1" } }, [
+                                      _vm._v("Aprovado")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "option",
+                                      { domProps: { value: null } },
+                                      [_vm._v("No Aprovado")]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "small",
+                                  {
+                                    staticClass: "form-text text-muted",
+                                    attrs: { id: "stateHelp" }
+                                  },
+                                  [
+                                    _c("span", {
+                                      domProps: {
+                                        textContent: _vm._s(_vm.msg.state)
+                                      }
+                                    })
+                                  ]
+                                )
+                              ])
+                            ])
+                          ],
+                          2
+                        )
+                  ],
+                  1
+                )
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("template", { slot: "modal-btn" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-default",
+                attrs: { type: "button", "data-dismiss": "modal" }
+              },
+              [_c("span", { staticClass: "fa fa-close" }), _vm._v(" Cerrar")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                attrs: { type: "button" },
+                on: { click: _vm.registrar }
+              },
+              [
+                _c("span", { staticClass: "glyphicon glyphicon-saved" }),
+                _vm._v(" Guardar")
+              ]
+            )
+          ])
+        ],
+        2
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-c3be9eda", module.exports)
+  }
+}
+
+/***/ }),
+/* 306 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(307)
+/* template */
+var __vue_template__ = __webpack_require__(308)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\views\\MyTournamentComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4d40a833", Component.options)
+  } else {
+    hotAPI.reload("data-v-4d40a833", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 307 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_table_vue__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_table_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__partials_table_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	name: 'MyTournament',
+	components: {
+		'rs-table': __WEBPACK_IMPORTED_MODULE_0__partials_table_vue___default.a
+	},
+	data: function data() {
+		return {
+			tabla: {
+				columns: [{ title: 'Competencia', field: 'tournament', sort: 'name' }, { title: 'Participante', field: 'user', sort: 'name', sortable: true }, { title: 'Pareja', field: 'pareja', sort: 'name_2', sortable: true }, { title: 'Tipo de pago', field: 'type_pay', sort: 'name_2', sortable: true }, { title: 'Estado del pago', field: 'state_pay', sortable: true, class: 'text-center' }, { title: 'Estado de Participación', field: 'state', sortable: true, class: 'text-center' }]
+			}
+		};
+	}
+});
+
+/***/ }),
+/* 308 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "box" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "box-body" },
+      [
+        _c("rs-table", {
+          attrs: { id: "tournament", tabla: _vm.tabla, uri: "/tournament/user" }
+        })
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box-header" }, [
+      _c("h3", { staticClass: "box-title" }, [_vm._v("Mis Competencias: ")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4d40a833", module.exports)
   }
 }
 

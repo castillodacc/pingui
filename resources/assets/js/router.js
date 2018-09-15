@@ -11,7 +11,9 @@ import Categories_o from './components/views/Categories_oComponent.vue';
 import Referee from './components/views/RefereeComponent.vue';
 import Organizer from './components/views/OrganizerComponent.vue';
 import Tournament from './components/views/TournamentComponent';
+import MyTournament from './components/views/MyTournamentComponent';
 import TournamentF from './components/forms/form-tournament.vue';
+import Inscription from './components/views/InscriptionComponent.vue';
 import NotFound from './components/views/NotFoundComponent.vue';
 
 const router = new VueRouter({
@@ -32,6 +34,16 @@ const router = new VueRouter({
 		path: '/club',
 		name: 'club.index',
 		component: Club
+	},
+	{
+		path: '/mis-competencias',
+		name: 'tournament.user',
+		component: MyTournament
+	},
+	{
+		path: '/inscritos/:id',
+		name: 'inscription.index',
+		component: Inscription
 	},
 	{
 		path: '/referee',

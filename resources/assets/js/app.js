@@ -78,7 +78,7 @@ Vue.mixin({
 // });
 
 Vue.component('spinner', require('./components/partials/spinner.vue'));
-Vue.component('inscription', require('./components/views/InscriptionComponent.vue'));
+Vue.component('inscription', require('./components/forms/form-inscription.vue'));
 
 const app = new Vue({
     router,

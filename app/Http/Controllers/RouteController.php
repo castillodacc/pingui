@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Permisologia\Permission;
 use App\User;
+use App\Models\ { Inscription, Tournament };
 
 class RouteController extends Controller
 {
@@ -85,21 +86,21 @@ class RouteController extends Controller
 
     public function front()
     {
-        $tournament2 = \App\Models\Tournament::take(10)->get();
-        $tournament = \App\Models\Tournament::paginate(10);
+        $tournament2 = \App\Models\Tournament::take(10)->orderBy('id', 'desc')->get();
+        $tournament = Tournament::paginate(10);
         return view('frontend', compact('tournament', 'tournament2'));
     }
 
     public function publication($slug)
     {
-        $tournament = \App\Models\Tournament::where('slug', '=', $slug)->first();
+        $tournament = Tournament::where('slug', '=', $slug)->first();
         if ($tournament == null) return redirect('/');
         return view('publicacion', compact('tournament'));
     }
 
     public function inscription($slug)
     {
-        $tournament = \App\Models\Tournament::where('slug', '=', $slug)->first();
+        $tournament = Tournament::where('slug', '=', $slug)->first();
         if ($tournament == null) return redirect('/');
         return view('inscription', compact('tournament', ''));
     }
@@ -120,11 +121,16 @@ class RouteController extends Controller
         }
     }
 
-    public function data()
+    public function data(Request $request)
     {
+        $inscription = Inscription::where('tournament_id', '=', $request->id)
+        ->where('user_id', '=', \Auth::user()->id)
+        ->first();
+        $state = false;
+        if ($inscription) {$state = $inscription; }
         if (\Auth::guest()) return;
         $user = \App\User::findOrFail(\Auth::user()->id);
         $user->parejas;
-        return response()->json(compact('user'));
+        return response()->json(compact('user', 'state'));
     }
 }

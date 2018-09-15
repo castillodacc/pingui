@@ -62,6 +62,7 @@ Route::group(['middleware' => ['auth', 'onlyAjax']], function () {
 
     });
 
+    Route::get('tournament/user', 'TournamentController@user');
     Route::resource('tournament', 'TournamentController')->except(['create', 'edit']);
     Route::post('get-tournament', 'TournamentController@dataForRegister');
     Route::post('upload/{name}', 'TournamentController@upload');
@@ -81,7 +82,7 @@ Route::group(['middleware' => ['auth', 'onlyAjax']], function () {
     Route::resource('category-l', 'CategoryLController')->except(['create', 'edit']);
     Route::post('categories-l', 'CategoryLController@dataForRegister');
 
-    // Route::resource('inscriptions', 'InscriptionController')->except(['create', 'edit']);
+    Route::resource('inscription', 'InscriptionController')->except(['create', 'edit']);
 
     Route::group(['prefix' => '/', 'namespace' => 'Dashboard', 'as' => 'Dashboard::'], function () {
         Route::get('profile', 'ProfileController@show');

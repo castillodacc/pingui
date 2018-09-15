@@ -67,7 +67,7 @@
                   <ul>
                     <li v-for="(p, i) in prices">
                       <span>{{ p.name }} <small><b>{{ p.price }} €</b></small></span>
-                      <button type="button" class="btn btn-danger btn-xs" @click="remove(i)"><span class="fa fa-remove"></span></button>
+                      <button type="button" class="btn btn-danger btn-xs" @click="remove(i, 'prices')"><span class="fa fa-remove"></span></button>
                     </li>
                   </ul>
                 </div>
@@ -191,7 +191,7 @@
                   <ul>
                     <li v-for="(h, i) in hoteles">
                       <a :href="h.link" v-text="h.hotel" target="_blank"></a> 
-                      <button type="button" class="btn btn-danger btn-xs" @click="remove(i)"><span class="fa fa-remove"></span></button>
+                      <button type="button" class="btn btn-danger btn-xs" @click="remove(i, 'hoteles')"><span class="fa fa-remove"></span></button>
                     </li>
                   </ul>
                 </div>
@@ -405,8 +405,8 @@
           this.hotel = '';
         }
       },
-      remove: function (i) {
-        this.hoteles.splice(i, 1);
+      remove: function (i, array) {
+        this[array].splice(i, 1);
       },
       registrar: function () {
         this.restoreMsg(this.msg);

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ { Tournament, Referee, Category_open, Subcategory_latino, Subcategory_standar, Hotel, Price, Organizer };
+use App\Models\ { Tournament, Referee, Category_open, Subcategory_latino, Subcategory_standar, Hotel, Price, Organizer, Inscription };
 use Intervention\Image\ImageManager;
 
 class TournamentController extends Controller
@@ -316,5 +316,25 @@ class TournamentController extends Controller
         $nombre = str_replace(' ', '-', $file->getClientOriginalName());
         \Storage::disk('local')->put("/$name/$nombre", \File::get($file));
         return response()->json($nombre);
+    }
+
+    public function user()
+    {
+        $select = ['id', 'febd_num_1', 'name_1', 'last_name_1', 'febd_num_2', 'name_2', 'last_name_2', 'state_pay', 'type_pay', 'state', 'tournament_id'];
+        $data = Inscription::orderBy(request()->order?:'id', request()->dir?:'ASC')
+        ->search(request()->search)
+        ->select($select)
+        ->paginate(request()->num?:10);
+        $data->each(function ($d) {
+            $d->state = ($d->state == 1) ? 'Aprovado' : 'No Aprovado';
+            $d->type_pay = ($d->type_pay == 1) ? 'Transferencia' : 'Paypal';
+            $d->state_pay = ($d->state_pay) ? '<i class="glyphicon glyphicon-check text-center"></i>' : '<i class="glyphicon glyphicon-unchecked text-center"></i>';
+            $t = $d->tournament->name;
+            $d->user = $d->febd_num_1 . ' - ' . $d->name_1 . ' ' . $d->last_name_1;
+            $d->pareja = $d->febd_num_2 . ' - ' . $d->name_2 . ' ' . $d->last_name_2;
+            unset($d->tournament);
+            $d->tournament = $t;
+        });
+        return $this->dataWithPagination($data);
     }
 }

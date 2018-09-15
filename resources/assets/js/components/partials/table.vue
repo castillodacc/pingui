@@ -60,6 +60,9 @@ th span, tbody tr {cursor: pointer;}
 				}
 			},
 			id: {},
+			d: {
+				default: false
+			},
 			o: {
 				default: ''
 			},
@@ -145,6 +148,7 @@ th span, tbody tr {cursor: pointer;}
 				if (this.search) url += '&search=' + this.search;
 				if (this.dir) url += '&dir=' + this.dir;
 				if (this.order) url += '&order=' + this.order;
+				if (this.d) url += '&d=' + this.d;
 				$('tbody tr').removeClass('active');
 				this.$emit('output', false);
 				axios.get(url)
