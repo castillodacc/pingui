@@ -10,7 +10,6 @@
 	<link rel="stylesheet" href="/css/css-style.css" type="text/css" media="all">
 	<link rel="stylesheet" href="/css/shop-isle-style.css" type="text/css" media="all">
 	<link type="text/css" href="/css/optanon.css" rel="stylesheet">
-	<script type="text/javascript" src="/js/jquery.min.1.11.2.js"></script>
 	<script type="text/javascript" src="/js/jquery.min.1.12.4.js"></script>
 	<script type="text/javascript" src="/js/jquery-migrate.min.js"></script>
 </head>
@@ -76,7 +75,8 @@
 								<small>Se realizará desde: {{ $tournament->start }} - Hasta: {{ $tournament->end }}.</small><br>
 								<small><strong>Organizador: {{ $tournament->organizer->name }}.</strong></small><br>
 								<small><strong>Inscripción: {{ ($tournament->inscription) ? 'Abierta' : 'Cerrada' }}.</strong></small><br>
-								<div>
+								<div class="col-md-8">
+									<h4>Precios:</h4>
 									<ul>
 										@foreach($tournament->prices as $p)
 										<li>{{ $p->name }}: <b><em>{{ $p->price }} €</em></b></li>
@@ -121,22 +121,28 @@
 								<div class="col-md-8">
 									<h4><b>Categorias Participantes:</b></h4>
 									<div class="row">
-										<h5 style="display: inline;">Categorias Opens:</h5>
-										@foreach($tournament->category_opens as $c)
-										<span class="label label-success">{{ $c->name }}</span>
-										@endforeach
+										<div class="col-md-12">
+											<h5 style="display: inline;">Categorias Opens:</h5>
+											@foreach($tournament->category_opens as $c)
+											<span class="label label-success">{{ $c->name }}</span>
+											@endforeach
+										</div>
 									</div>
 									<div class="row">
-										<h5 style="display: inline;">Categorias Latinos:</h5>
-										@foreach($tournament->subcategory_latinos as $c)
-										<span class="label label-success">{{ $c->category_latino->name }} - {{ $c->name }}</span>
-										@endforeach
+										<div class="col-md-12">
+											<h5 style="display: inline;">Categorias Latinos:</h5>
+											@foreach($tournament->subcategory_latinos as $c)
+											<span class="label label-success">{{ $c->category_latino->name }} - {{ $c->name }}</span>
+											@endforeach
+										</div>
 									</div>
 									<div class="row">
-										<h5 style="display: inline;">Categorias Standar:</h5>
-										@foreach($tournament->subcategory_standars as $c)
-										<span class="label label-success">{{ $c->category_standar->name }} - {{ $c->name }}</span>
-										@endforeach
+										<div class="col-md-12">
+											<h5 style="display: inline;">Categorias Standar:</h5>
+											@foreach($tournament->subcategory_standars as $c)
+											<span class="label label-success">{{ $c->category_standar->name }} - {{ $c->name }}</span>
+											@endforeach
+										</div>
 									</div>
 								</div>
 								<div class="col-md-4">

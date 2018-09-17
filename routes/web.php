@@ -17,6 +17,9 @@ Route::get('publicacion/{slug}/inscribir', 'RouteController@inscription')->name(
 Route::get('confirm/{slug}', 'RouteController@confirm');
 Route::post('get-data', 'RouteController@data');
 
+Route::get('payment/cancel/{id}', 'InscriptionController@paymentCancel')->name('payment.cancel');
+Route::get('payment/store/{id}', 'InscriptionController@paymentStore')->name('payment.store');
+
 /**
  * Rutas típicas de autentificación de la app.
  * reemplazando: Auth::routes();

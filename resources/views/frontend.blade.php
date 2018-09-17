@@ -10,7 +10,6 @@
 	<link rel="stylesheet" href="/css/css-style.css" type="text/css" media="all">
 	<link rel="stylesheet" href="/css/shop-isle-style.css" type="text/css" media="all">
 	<link type="text/css" href="/css/optanon.css" rel="stylesheet">
-	<script type="text/javascript" src="/js/jquery.min.1.11.2.js"></script>
 	<script type="text/javascript" src="/js/jquery.min.1.12.4.js"></script>
 	<script type="text/javascript" src="/js/jquery-migrate.min.js"></script>
 </head>

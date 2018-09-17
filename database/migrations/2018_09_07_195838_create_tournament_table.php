@@ -37,26 +37,6 @@ class CreateTournamentTable extends Migration
             $table->foreign('organizer_id')->references('id')->on('organizers')->onDelete('cascade');
         });
 
-        Schema::create('inscriptions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('tournament_id');
-            $table->unsignedInteger('febd_num_1');
-            $table->string('name_1', 100);
-            $table->string('last_name_1', 100);
-            $table->unsignedInteger('febd_num_2');
-            $table->string('name_2', 100);
-            $table->string('last_name_2', 100);
-            $table->unsignedInteger('type_pay'); // 1-transferencia 2-paypal
-            $table->unsignedInteger('state_pay')->nullable(); // aprovado - no aprovado 
-            $table->unsignedInteger('state')->nullable(); // estado de la inscripción
-            $table->timestamps();
-            $table->softDeletes();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('tournament_id')->references('id')->on('tournaments')->onDelete('cascade');
-        });
-
         Schema::create('referee_tournament', function (Blueprint $table) {
             $table->unsignedInteger('referee_id');
             $table->unsignedInteger('tournament_id');
@@ -102,12 +82,35 @@ class CreateTournamentTable extends Migration
 
         Schema::create('prices', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 100);
-            $table->string('price', 100);
+            $table->string('name', 150);
+            $table->unsignedInteger('price');
             $table->unsignedInteger('tournament_id');
             $table->timestamps();
             $table->softDeletes();
 
+            $table->foreign('tournament_id')->references('id')->on('tournaments')->onDelete('cascade');
+        });
+
+        Schema::create('inscriptions', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('tournament_id');
+            $table->unsignedInteger('febd_num_1');
+            $table->string('name_1', 150);
+            $table->string('last_name_1', 150);
+            $table->unsignedInteger('febd_num_2');
+            $table->string('name_2', 150);
+            $table->string('last_name_2', 150);
+            $table->unsignedInteger('price');
+            $table->unsignedInteger('price_id');
+            $table->unsignedInteger('type_pay'); // 1-transferencia 2-paypal
+            $table->unsignedInteger('state_pay')->nullable(); // aprovado - no aprovado 
+            $table->unsignedInteger('state')->nullable(); // estado de la inscripción
+            $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('price_id')->references('id')->on('prices')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('tournament_id')->references('id')->on('tournaments')->onDelete('cascade');
         });
 

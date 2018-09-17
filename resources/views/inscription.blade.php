@@ -10,9 +10,7 @@
 	<link rel="stylesheet" href="/css/css-style.css" type="text/css" media="all">
 	<link rel="stylesheet" href="/css/shop-isle-style.css" type="text/css" media="all">
 	<link type="text/css" href="/css/optanon.css" rel="stylesheet">
-	<script type="text/javascript" src="/js/jquery.min.1.11.2.js"></script>
 	<script type="text/javascript" src="/js/jquery.min.1.12.4.js"></script>
-	<script type="text/javascript" src="/js/jquery-migrate.min.js"></script>
 </head>
 <body class="home blog">
 	<header class="header">
@@ -69,7 +67,7 @@
 							<img class="center-block img-responsive" src="{{ asset('storage/' . $tournament->image) }}" />
 						</div>
 						<div class="">
-							<h1  class="hidden-xs hidden-sm">{{ $tournament->name }}</h1>
+							<h1 class="hidden-xs hidden-sm">{{ $tournament->name }}</h1>
 							<hr>
 						</div>
 						@if(\Auth::check())
@@ -88,6 +86,15 @@
 								<div class="alert alert-info" role="alert">
 									<span class="text-warning">
 										Registra a tu <b><a href="/perfil" class="label label-primary">Pareja</a></b>
+									</span>
+								</div>
+							</div>
+							@endif
+							@if(isset($cancel))
+							<div class="col-md-8">
+								<div class="alert alert-danger" role="alert">
+									<span class="text-warning">
+										<h4>{{ $cancel }} <a href="/">Ir a inicio</a></h4>
 									</span>
 								</div>
 							</div>

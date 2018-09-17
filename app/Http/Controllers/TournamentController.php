@@ -326,7 +326,7 @@ class TournamentController extends Controller
         ->select($select)
         ->paginate(request()->num?:10);
         $data->each(function ($d) {
-            $d->state = ($d->state == 1) ? 'Aprovado' : 'No Aprovado';
+            $d->state = ($d->state == 1) ? 'Aprovado' : 'Por Aprovar';
             $d->type_pay = ($d->type_pay == 1) ? 'Transferencia' : 'Paypal';
             $d->state_pay = ($d->state_pay) ? '<i class="glyphicon glyphicon-check text-center"></i>' : '<i class="glyphicon glyphicon-unchecked text-center"></i>';
             $t = $d->tournament->name;

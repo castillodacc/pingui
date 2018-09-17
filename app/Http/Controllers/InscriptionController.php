@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Inscription;
+use App\Models\{ Inscription, Tournament, Price };
+use App\Payment\Paypal;
 
 class InscriptionController extends Controller
 {
@@ -58,15 +59,27 @@ class InscriptionController extends Controller
             'tournament_id' => 'required|numeric',
             'type_pay' => 'required|numeric',
             'user_id' => 'required|numeric',
+            'price_id' => 'required|numeric',
+            'price' => 'required|numeric',
         ],[
             'febd_num_1.required' => 'Registre en su perfil su número FEBD',
             'febd_num_2.required' => 'Registre en su perfil el número FEBD de su pareja',
         ],[
+            'price_id' => 'precio',
             'febd_num_1' => 'número FEBD',
             'febd_num_2' => 'número FEBD de su pareja',
             'type_pay' => 'tipo de pago',
         ]);
-        Inscription::create($data);
+
+        $inscription = Inscription::create($data);
+
+        if ($inscription->type_pay == 2) {
+            $inscription->delete();
+            $paypal = new Paypal($inscription);
+            $payment = $paypal->generate();
+            return $payment->getApprovalLink();
+        }
+
     }
 
     /**
@@ -112,5 +125,31 @@ class InscriptionController extends Controller
     public function destroy($id)
     {
         Inscription::findOrFail($id)->delete();
+    }
+
+    public function paymentStore($id, Request $request)
+    {
+        $inscription = Inscription::withTrashed()->findOrFail($id);
+        $paypal = new Paypal($inscription);
+        $execute = $paypal->execute($request->paymentId, $request->PayerID);
+        dd($execute['_propMap']);
+
+        $inscription->update([
+            'state_pay' => true,
+            'state' => true,
+        ]);
+        $inscription->restore();
+        $tournament = Tournament::findOrFail($inscription->tournament_id);
+        return view('inscription', compact('tournament'));
+    }
+
+    public function paymentCancel($id, Request $request)
+    {
+        if (!isset($request->token)) redirect('/');
+        $inscription = Inscription::withTrashed()->findOrFail($id);
+        $tournament = Tournament::findOrFail($inscription->tournament_id);
+        // $inscription->delete();
+        $cancel = 'Transacción cancelada o fallida.';
+        return view('inscription', compact('tournament', 'cancel'));
     }
 }

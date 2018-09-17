@@ -152,6 +152,7 @@ return [
          */
         Barryvdh\Debugbar\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Anouar\Paypalpayment\PaypalpaymentServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -214,6 +215,7 @@ return [
         'Carbon' => Carbon\Carbon::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'PaypalPayment' => Anouar\Paypalpayment\Facades\PaypalPayment::class,
     ],
 
 ];

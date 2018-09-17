@@ -27,6 +27,8 @@ class Inscription extends Model
     	'type_pay',
     	'state_pay',
     	'state',
+        'price_id',
+        'price'
     ];
 
     /**
@@ -41,5 +43,10 @@ class Inscription extends Model
     public function tournament()
     {
         return $this->belongsTo(Tournament::class);
+    }
+
+    public function price_()
+    {
+        return $this->belongsTo(Price::class, 'price_id');
     }
 }

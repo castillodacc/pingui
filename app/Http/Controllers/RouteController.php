@@ -123,6 +123,8 @@ class RouteController extends Controller
 
     public function data(Request $request)
     {
+        $tournament = Tournament::select(['id', 'name'])->findOrFail($request->id);
+        $tournament->prices;
         $inscription = Inscription::where('tournament_id', '=', $request->id)
         ->where('user_id', '=', \Auth::user()->id)
         ->first();
@@ -131,6 +133,6 @@ class RouteController extends Controller
         if (\Auth::guest()) return;
         $user = \App\User::findOrFail(\Auth::user()->id);
         $user->parejas;
-        return response()->json(compact('user', 'state'));
+        return response()->json(compact('user', 'state', 'tournament'));
     }
 }
