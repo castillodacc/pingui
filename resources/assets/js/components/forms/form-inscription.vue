@@ -34,26 +34,30 @@
 					</select>
 					<small id="price_idHelp" class="form-text text-muted" v-text="msg.price_id"></small>
 				</div>
+				<div class="col-md-12" v-show="inscription.price_id">
+					<p>Seleccione el tipo de pago:</p>
+					<div class="col-md-6 btn borde" :class="{'btn-black': inscription.type_pay == 1}" @click="changeType(1)">
+						Transferencia
+					</div>
+					<div class="col-md-6 btn borde" :class="{'btn-black': inscription.type_pay == 2}" @click="changeType(2)">
+						Paypal<i class="glypicon glypicon-ravelry" aria-hidden="true"></i>
+					</div>
+					<small id="type_payHelp" class="form-text text-muted" v-text="msg.type_pay"></small>
+					<h4>Total a Pagar: <b>{{ inscription.price }} €</b></h4>
+					<div class="col-md-12" v-if="inscription.type_pay == 1">
+						<p style="font-size: 14px;">Guarde los datos bancarios y haga un deposito dependiendo de la categoria del baile que participará.</p>
+						<p style="margin: 0">Banco: <b>Banco Sabadell</b></p>
+						<p style="margin: 0">Cuenta: <b>IBAN : ES65 0081 0400 1100 0131 0241</b></p>
+						<p style="margin: 0">Titular: <b>Kavarna</b></p>
+						<p style="margin: 0">Monto: <b>{{ inscription.price }} €</b></p>
+					</div>
+				</div>
 			</div>
-			<div class="col-md-8" v-show="inscription.price_id">
-				<p>Seleccione el tipo de pago:</p>
-				<div class="col-md-6 btn borde" :class="{'btn-black': inscription.type_pay == 1}" @click="changeType(1)">
-					Transferencia
-				</div>
-				<div class="col-md-6 btn borde" :class="{'btn-black': inscription.type_pay == 2}" @click="changeType(2)">
-					Paypal<i class="glypicon glypicon-ravelry" aria-hidden="true"></i>
-				</div>
-				<small id="type_payHelp" class="form-text text-muted" v-text="msg.type_pay"></small>
-				<h4>Total a Pagar: <b>{{ inscription.price }} €</b></h4>
-				<div class="col-md-12" v-if="inscription.type_pay == 1">
-					<p style="font-size: 14px;">Guarde los datos bancarios y haga un deposito dependiendo de la categoria del baile que participará.</p>
-					<p style="margin: 0">Banco: <b>Banco Sabadell</b></p>
-					<p style="margin: 0">Cuenta: <b>IBAN : ES65 0081 0400 1100 0131 0241</b></p>
-					<p style="margin: 0">Titular: <b>Kavarna</b></p>
-					<p style="margin: 0">Monto: <b>{{ inscription.price }} €</b></p>
+			<div class="col-md-12">
+				<div class="span pull-right" style="padding: 15px">
+					<button type="submit" class="btn-black">Registrar</button>
 				</div>
 			</div>
-			<div class="span pull-right" style="padding: 15px"><button type="submit" class="btn-black">Registrar</button></div>
 		</form>
 		<div class="col-md-8" v-else>
 			<div class="alert alert-success">

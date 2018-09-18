@@ -79554,6 +79554,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	name: 'Inscription',
@@ -79841,91 +79845,93 @@ var render = function() {
                     attrs: { id: "price_idHelp" },
                     domProps: { textContent: _vm._s(_vm.msg.price_id) }
                   })
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.inscription.price_id,
-                    expression: "inscription.price_id"
-                  }
-                ],
-                staticClass: "col-md-8"
-              },
-              [
-                _c("p", [_vm._v("Seleccione el tipo de pago:")]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "col-md-6 btn borde",
-                    class: { "btn-black": _vm.inscription.type_pay == 1 },
-                    on: {
-                      click: function($event) {
-                        _vm.changeType(1)
-                      }
-                    }
-                  },
-                  [_vm._v("\n\t\t\t\tTransferencia\n\t\t\t")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "col-md-6 btn borde",
-                    class: { "btn-black": _vm.inscription.type_pay == 2 },
-                    on: {
-                      click: function($event) {
-                        _vm.changeType(2)
-                      }
-                    }
-                  },
-                  [
-                    _vm._v("\n\t\t\t\tPaypal"),
-                    _c("i", {
-                      staticClass: "glypicon glypicon-ravelry",
-                      attrs: { "aria-hidden": "true" }
-                    })
-                  ]
-                ),
-                _vm._v(" "),
-                _c("small", {
-                  staticClass: "form-text text-muted",
-                  attrs: { id: "type_payHelp" },
-                  domProps: { textContent: _vm._s(_vm.msg.type_pay) }
-                }),
-                _vm._v(" "),
-                _c("h4", [
-                  _vm._v("Total a Pagar: "),
-                  _c("b", [_vm._v(_vm._s(_vm.inscription.price) + " €")])
                 ]),
                 _vm._v(" "),
-                _vm.inscription.type_pay == 1
-                  ? _c("div", { staticClass: "col-md-12" }, [
-                      _c("p", { staticStyle: { "font-size": "14px" } }, [
-                        _vm._v(
-                          "Guarde los datos bancarios y haga un deposito dependiendo de la categoria del baile que participará."
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(3),
-                      _vm._v(" "),
-                      _vm._m(4),
-                      _vm._v(" "),
-                      _vm._m(5),
-                      _vm._v(" "),
-                      _c("p", { staticStyle: { margin: "0" } }, [
-                        _vm._v("Monto: "),
-                        _c("b", [_vm._v(_vm._s(_vm.inscription.price) + " €")])
-                      ])
-                    ])
-                  : _vm._e()
+                _c(
+                  "div",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.inscription.price_id,
+                        expression: "inscription.price_id"
+                      }
+                    ],
+                    staticClass: "col-md-12"
+                  },
+                  [
+                    _c("p", [_vm._v("Seleccione el tipo de pago:")]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "col-md-6 btn borde",
+                        class: { "btn-black": _vm.inscription.type_pay == 1 },
+                        on: {
+                          click: function($event) {
+                            _vm.changeType(1)
+                          }
+                        }
+                      },
+                      [_vm._v("\n\t\t\t\t\tTransferencia\n\t\t\t\t")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "col-md-6 btn borde",
+                        class: { "btn-black": _vm.inscription.type_pay == 2 },
+                        on: {
+                          click: function($event) {
+                            _vm.changeType(2)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v("\n\t\t\t\t\tPaypal"),
+                        _c("i", {
+                          staticClass: "glypicon glypicon-ravelry",
+                          attrs: { "aria-hidden": "true" }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("small", {
+                      staticClass: "form-text text-muted",
+                      attrs: { id: "type_payHelp" },
+                      domProps: { textContent: _vm._s(_vm.msg.type_pay) }
+                    }),
+                    _vm._v(" "),
+                    _c("h4", [
+                      _vm._v("Total a Pagar: "),
+                      _c("b", [_vm._v(_vm._s(_vm.inscription.price) + " €")])
+                    ]),
+                    _vm._v(" "),
+                    _vm.inscription.type_pay == 1
+                      ? _c("div", { staticClass: "col-md-12" }, [
+                          _c("p", { staticStyle: { "font-size": "14px" } }, [
+                            _vm._v(
+                              "Guarde los datos bancarios y haga un deposito dependiendo de la categoria del baile que participará."
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(3),
+                          _vm._v(" "),
+                          _vm._m(4),
+                          _vm._v(" "),
+                          _vm._m(5),
+                          _vm._v(" "),
+                          _c("p", { staticStyle: { margin: "0" } }, [
+                            _vm._v("Monto: "),
+                            _c("b", [
+                              _vm._v(_vm._s(_vm.inscription.price) + " €")
+                            ])
+                          ])
+                        ])
+                      : _vm._e()
+                  ]
+                )
               ]
             ),
             _vm._v(" "),
@@ -80063,15 +80069,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "span pull-right", staticStyle: { padding: "15px" } },
-      [
-        _c("button", { staticClass: "btn-black", attrs: { type: "submit" } }, [
-          _vm._v("Registrar")
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "col-md-12" }, [
+      _c(
+        "div",
+        { staticClass: "span pull-right", staticStyle: { padding: "15px" } },
+        [
+          _c(
+            "button",
+            { staticClass: "btn-black", attrs: { type: "submit" } },
+            [_vm._v("Registrar")]
+          )
+        ]
+      )
+    ])
   },
   function() {
     var _vm = this

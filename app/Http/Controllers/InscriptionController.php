@@ -131,14 +131,13 @@ class InscriptionController extends Controller
     {
         $inscription = Inscription::withTrashed()->findOrFail($id);
         $paypal = new Paypal($inscription);
-        $execute = $paypal->execute($request->paymentId, $request->PayerID);
-        dd($execute['_propMap']);
+        $execution = $paypal->execute($request->paymentId, $request->PayerID);
 
+        $inscription->restore();
         $inscription->update([
             'state_pay' => true,
             'state' => true,
         ]);
-        $inscription->restore();
         $tournament = Tournament::findOrFail($inscription->tournament_id);
         return view('inscription', compact('tournament'));
     }
@@ -148,7 +147,6 @@ class InscriptionController extends Controller
         if (!isset($request->token)) redirect('/');
         $inscription = Inscription::withTrashed()->findOrFail($id);
         $tournament = Tournament::findOrFail($inscription->tournament_id);
-        // $inscription->delete();
         $cancel = 'Transacción cancelada o fallida.';
         return view('inscription', compact('tournament', 'cancel'));
     }
