@@ -23,6 +23,11 @@
     background-color: #444444;
     border-color: #444444;
 }
+.btn-black:hover {
+    color: #fff;
+    background-color: #555;
+    border-color: #555;
+}
 /* FONTS */
 @font-face {
 	font-family: "ElegantIcons";

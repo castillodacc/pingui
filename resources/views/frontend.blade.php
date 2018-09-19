@@ -35,7 +35,7 @@
 						<div class="collapse navbar-collapse" id="custom-collapse">
 							<ul id="menu-menu-1" class="nav navbar-nav navbar-right">
 								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753"><a href="#home" class="section-scroll">Home</a></li>
-								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753"><a href="#competitions" class="section-scroll">Competencias</a></li>
+								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753"><a href="#competitions" class="section-scroll">Competiciones</a></li>
 								@if(\Auth::check())
 								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753"><a href="/perfil">Perfil</a></li>
 								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753">
@@ -66,7 +66,6 @@
 						<div class="hs-caption" style="top: 0px; display: table;">
 							<div class="caption-content" style="opacity: 1;">
 								<h1 class="hs-title-size-4 font-alt mb-30">Bienvenido a <br><b>P I N G U I</b></h1>
-								{{-- <div class="hs-title-size-1 font-alt mb-40">Paris Street Style</div> --}}
 								<a href="#competitions" class="section-scroll btn btn-border-w btn-round">Competiciones</a>
 							</div>
 						</div>
@@ -109,7 +108,7 @@
 						<div class="col-sm-6 col-md-3 col-lg-3">
 							<a href="#">
 								<div class="shop-item">
-									<div class="shop-item-image">
+									<div class="shop-item-image" style="cursor: pointer;    max-height: 321px;" onclick="location.href= '{{ route('publication.show', $t->slug) }}'">
 										<img width="262" height="328" src="#" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="" srcset="{{ asset('storage/' . $t->image) }}" sizes="(max-width: 262px) 100vw, 262px" style="min-height: 330px;">	
 										<div class="shop-item-detail">
 											<p class="product woocommerce add_to_cart_inline " style="border:4px solid #ccc; padding: 12px;">
@@ -117,11 +116,6 @@
 													<b style="font-size: 1.5em">Ver Detalles</b>
 												</a>
 											</p>
-											{{-- <div class="product-button-wrap">
-												<div class="add-to-cart-button-wrap">
-													<a href="{{ route('publication.show', $t->slug) }}" class="button product_type_simple add_to_cart_button ajax_add_to_cart">Ver Detalles</a>
-												</div>
-											</div> --}}
 										</div>
 									</div>
 									<h4 class="shop-item-title font-alt">
@@ -129,15 +123,9 @@
 									</h4>
 									<div class="product-rating-home">
 										<div class="star-rating">Desde: {{ \Carbon::parse($t->start)->format('d/m/Y') }} - Hasta: {{ \Carbon::parse($t->end)->format('d/m/Y') }}.
-											{{-- <div class="hs-title-size-1 font-alt mb-40">desde: {{ $t->start }} - hasta: {{ $t->end }}</div> --}}
-											{{-- <span style="width:20%">{{ $t->description }}</span> --}}
 										</div>
 									</div>
 									<span class="onsale">Inscripción: <b>{{ ($t->inscription) ? 'Abierta' : 'Cerrada' }}</b>.</span><br>
-									{{-- <span class="amount">Precio de Entradas: {{ number_format($t->entrance_price, 2) }}<span> €</span></span> --}}
-									{{-- <ins>
-										<span class="woocommerce-Price-amount amount">12.00<span class="woocommerce-Price-currencySymbol">£</span></span>
-									</ins> --}}
 								</div>
 							</a>
 						</div>

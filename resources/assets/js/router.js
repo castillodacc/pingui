@@ -26,7 +26,7 @@ const router = new VueRouter({
 		component: Dashboard,
 	},
 	{
-		path: '/perfil',
+		path: '/perfil/:num?',
 		name: 'profile',
 		component: Profile,
 	},

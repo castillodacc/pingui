@@ -428,5 +428,12 @@ class PermissionsSeeder extends Seeder
             'action' => 'destroy',
             'description' => 'Permiso para Eliminar Inscrito'
         ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Registrar Parejas',
+            'module' => 'inscription',
+            'action' => 'store2',
+            'description' => 'Permiso para Parejas'
+        ]);
     }
 }

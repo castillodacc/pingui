@@ -34,7 +34,7 @@
 						<div class="collapse navbar-collapse" id="custom-collapse">
 							<ul id="menu-menu-1" class="nav navbar-nav navbar-right">
 								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753"><a href="/" class="section-scroll">Home</a></li>
-								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753"><a href="/#competitions" class="section-scroll">Competencias</a></li>
+								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753"><a href="/#competitions" class="section-scroll">Competiciones</a></li>
 								@if(\Auth::check())
 								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753"><a href="/perfil">Perfil</a></li>
 								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753">
@@ -72,24 +72,13 @@
 						</div>
 						@if(\Auth::check())
 						<div class="">
-							@if(!\Auth::user()->febd_num)
 							<div class="col-md-8">
 								<div class="alert alert-info" role="alert">
 									<span class="text-warning">
-										Actualiza tu <b><a href="/perfil" class="label label-primary">perfil</a></b> para inscribirte.
+										<a href="/perfil">Los datos aqui provistos no concuerdan con los actuales?. Actualiza tu perfil.</a>
 									</span>
 								</div>
 							</div>
-							@endif
-							@if(!\Auth::user()->parejas->count())
-							<div class="col-md-8">
-								<div class="alert alert-info" role="alert">
-									<span class="text-warning">
-										Registra a tu <b><a href="/perfil" class="label label-primary">Pareja</a></b>
-									</span>
-								</div>
-							</div>
-							@endif
 							@if(isset($cancel))
 							<div class="col-md-8">
 								<div class="alert alert-danger" role="alert">

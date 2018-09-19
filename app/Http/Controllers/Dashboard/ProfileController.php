@@ -22,10 +22,11 @@ class ProfileController extends Controller
         $user->fullName = $user->fullName();
         $user->logoPath = $user->getLogoPath();
         $user->roles;
-        $pareja = $user->parejas->first();
+        $pareja = optional($user->parejas)[0];
+        $pareja2 = optional($user->parejas)[1];
         $user->module;
         $club = Club::get(['id', 'name']);
-        return response()->json(compact('user', 'club', 'pareja'));
+        return response()->json(compact('user', 'club', 'pareja', 'pareja2'));
     }
 
     /**
@@ -65,7 +66,7 @@ class ProfileController extends Controller
             'category_l' => 'nullable',
             'category_s' => 'nullable',
             'club_id' => 'required|numeric',
-            'febd_num' => 'required|numeric|digits_between:2,6',
+            'febd_num' => 'nullable|numeric|digits_between:2,6',
             'group_l' => 'nullable',
             'group_s' => 'nullable',
             'trainer_l' => 'nullable',
@@ -88,13 +89,15 @@ class ProfileController extends Controller
     public function pareja(Request $request)
     {
         $request->validate([
-            'p_email' => 'required|email',
-            'p_febd_num' => 'required|numeric',
+            'p_email' => 'nullable|email',
+            'p_febd_num' => 'nullable|numeric',
+            'birthdate' => 'nullable|date',
             'p_last_name' => 'required|string|min:3|max:40',
             'p_name' => 'required|string|min:3|max:40'
         ],[],[
             'p_email' => 'email',
             'p_febd_num' => 'número FEBD',
+            'birthdate' => 'fecha de nacimiento',
             'p_last_name' => 'apellido',
             'p_name' => 'nombre',
         ]);
@@ -116,5 +119,16 @@ class ProfileController extends Controller
                 'user_id' => \Auth::user()->id
             ]);
         }
+    }
+
+    public function autoDeleting(Request $request)
+    {
+        if(\Auth::user()->id == 1) return response(['error' => 'Error al modificar usuario'], 421);
+        \Auth::user()->fill([
+            'email' => \Auth::user()->email . ' - ' . 'D',
+            'num_id' => \Auth::user()->num_id . ' - ' . 'D',
+            'password' => '',
+        ])->save();
+        $user = \Auth::user()->delete();
     }
 }

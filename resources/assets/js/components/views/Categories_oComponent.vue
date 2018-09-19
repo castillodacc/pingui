@@ -1,7 +1,7 @@
 <template>
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title"><i class="fa fa-users"></i> Tabla de Categorias Opens:</h3>
+            <h3 class="box-title">Tabla de Categorias Opens:</h3>
             <button type="button"
             class="btn btn-default btn-xs"
             data-tooltip="tooltip"

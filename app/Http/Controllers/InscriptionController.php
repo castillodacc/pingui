@@ -50,8 +50,8 @@ class InscriptionController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request, [
-            'febd_num_1' => 'required|numeric',
-            'febd_num_2' => 'required|numeric',
+            'febd_num_1' => 'nullable|numeric',
+            'febd_num_2' => 'nullable|numeric',
             'last_name_1' => 'required|string',
             'last_name_2' => 'required|string',
             'name_1' => 'required|string',

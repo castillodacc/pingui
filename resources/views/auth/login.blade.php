@@ -9,7 +9,6 @@
             <div class="login-logo">
                 {!! config('frontend.logo_lg') !!}
             </div>
-            {{-- /.login-logo --}}
             <div class="login-box-body">
                 <p class="login-box-msg">Ingresa para comenzar tu sesión.</p>
 
@@ -53,18 +52,6 @@
                         </div>
                     </div>
                 </form>
-
-{{--                 <div class="social-auth-links text-center">
-                    <p>- OR -</p>
-                    <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
-                    Facebook</a>
-                    <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
-                    Google+</a>
-                </div>
-                <!-- /.social-auth-links --> --}}
-
-                {{-- <a class="btn btn-link" href="{{ route('password.request') }}"> Forgot Your Password? </a> --}}
-                {{-- <a href="#">Olvidé mi contraseña.</a><br> --}}
                 @if(config('frontend.registration_open'))
                 <a href="{{ route('register') }}">Registra nueva membresía.</a>
                 @endif
@@ -72,9 +59,7 @@
                 <a href="/">Ir a los torneos.</a>
 
             </div>
-            <!-- /.login-box-body -->
         </div>
-        <!-- /.login-box -->
     </div>
 </body>
 @endsection

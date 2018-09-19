@@ -91,10 +91,19 @@ class CreateTournamentTable extends Migration
             $table->foreign('tournament_id')->references('id')->on('tournaments')->onDelete('cascade');
         });
 
+        // Schema::create('inscription_price', function (Blueprint $table) {
+        //     $table->unsignedInteger('price_id');
+        //     $table->unsignedInteger('inscription_id');
+
+        //     $table->foreign('price_id')->references('id')->on('prices')->onDelete('cascade');
+        //     $table->foreign('inscription_id')->references('id')->on('inscriptions')->onDelete('cascade');
+        // });
+
         Schema::create('inscriptions', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('tournament_id');
+
             $table->unsignedInteger('febd_num_1');
             $table->string('name_1', 150);
             $table->string('last_name_1', 150);

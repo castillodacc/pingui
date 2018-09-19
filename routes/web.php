@@ -87,12 +87,15 @@ Route::group(['middleware' => ['auth', 'onlyAjax']], function () {
 
     Route::resource('inscription', 'InscriptionController')->except(['create', 'edit']);
 
+
     Route::group(['prefix' => '/', 'namespace' => 'Dashboard', 'as' => 'Dashboard::'], function () {
+        Route::post('auto-deleted', 'ProfileController@autoDeleting');
         Route::get('profile', 'ProfileController@show');
         Route::post('change-pass', 'ProfileController@editPassword');
         Route::post('update-user', 'ProfileController@editUser');
         Route::post('update-bailarin/{id}', 'ProfileController@bailarin');
         Route::post('update-pareja', 'ProfileController@pareja');
+        // Route::post('pareja', 'ProfileController@pareja');
     });
 
     Route::post('admin/app', 'RouteController@canPermission');

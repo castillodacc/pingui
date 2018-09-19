@@ -35,7 +35,7 @@
 						<div class="collapse navbar-collapse" id="custom-collapse">
 							<ul id="menu-menu-1" class="nav navbar-nav navbar-right">
 								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753"><a href="/" class="section-scroll">Home</a></li>
-								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753"><a href="/#competitions" class="section-scroll">Competencias</a></li>
+								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753"><a href="/#competitions" class="section-scroll">Competiciones</a></li>
 								@if(\Auth::check())
 								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753"><a href="/perfil">Perfil</a></li>
 								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753">
@@ -68,50 +68,102 @@
 							<div class="pull-left col-md-4 col-xs-12 thumb-contenido">
 								<img class="center-block img-responsive" src="{{ asset('storage/' . $tournament->image) }}" />
 							</div>
-							<div class="" style="font-size: 1.2em">
-								<h1  class="hidden-xs hidden-sm">{{ $tournament->name }}</h1>
-								<hr>
-								<small>Publicado: {{ $tournament->created_at->format('d/m/Y') }}.</small><br>
-								<small>Se realizará desde: {{ $tournament->start }} - Hasta: {{ $tournament->end }}.</small><br>
-								<small><strong>Organizador: {{ $tournament->organizer->name }}.</strong></small><br>
-								<small><strong>Inscripción: {{ ($tournament->inscription) ? 'Abierta' : 'Cerrada' }}.</strong></small><br>
-								<div class="col-md-8">
-									<h4>Precios:</h4>
-									<ul>
-										@foreach($tournament->prices as $p)
-										<li>{{ $p->name }}: <b><em>{{ $p->price }} €</em></b></li>
-										@endforeach
-									</ul>
+							<div class="pull-right col-md-8 col-xs-12">
+								<div class="row">
+									<h1  class="hidden-xs hidden-sm">{{ $tournament->name }}</h1>
 								</div>
-								@if(\Auth::guest())
-								<div class="alert alert-info" role="alert">
-									<span class="text-warning">
-										<b><a href="/login">Inicia Sesión</a></b> o <b><a href="/registro">Registrate</a></b> para inscribirte
-									</span>
+								<div class="row">
+									<div class="pull-left col-md-4 col-xs-12">
+										<small>Se realizará: {{ $tournament->start }}.</small><br>
+										<small><strong>Organizador: {{ $tournament->organizer->name }}.</strong></small><br>
+										<small><strong>Inscripción: {{ ($tournament->inscription) ? 'Abierta' : 'Cerrada' }}.</strong></small><br>
+										<h4>Precios:</h4>
+										<ul>
+											@foreach($tournament->prices as $p)
+											<li>{{ $p->name }}: <b><em>{{ $p->price }} €</em></b></li>
+											@endforeach
+										</ul>
+									</div>
+									@if(\Auth::guest())
+									<div class="pull-right col-md-4 col-xs-12 hidden-xs hidden-sm" style="border: 1px solid; border-radius: 10px">
+										<div class="card card-container ">
+											<span id="profile-name" class="profile-name-card"><b class="text-center">Inicia Sesión</b></span>
+											<form class="form-signin" action="/login" method="post">
+												@csrf
+												<div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
+													<label for="email" class="control-label">Correo:</label>
+													<input id="email" type="email" class="form-control" name="email"  placeholder="Email" value="{{ old('email') }}" required autofocus>
+													<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+													@if ($errors->has('email'))
+													<span class="help-block">
+														<strong>{{ $errors->first('email') }}</strong>
+													</span>
+													@endif
+												</div>
+												<div class="form-group {{ $errors->has('password') ? 'has-error' : '' }} has-feedback">
+													<label for="password" class="control-label">Contraseña:</label>
+													<input id="password" type="password" class="form-control" name="password"  placeholder="Contraseña" value="" required>
+													<span class="glyphicon glyphicon-cog form-control-feedback"></span>
+													@if ($errors->has('password'))
+													<span class="help-block">
+														<strong>{{ $errors->first('password') }}</strong>
+													</span>
+													@endif
+												</div>
+												<button type="submit" class="btn btn-primary btn-block">Ingresar</button>
+												<a href="/registro">No tienes cuenta?</a>
+											</form>
+										</div>
+									</div>
+									@endif
 								</div>
-								@endif
-								@if(\Auth::check() && strlen(\Auth::user()->febd_num) == 0)
-								<div class="alert alert-info" role="alert">
-									<span class="text-warning">
-										Actualiza tu <b><a href="/perfil">perfil</a></b> para inscribirte.
-									</span>
-								</div>
-								@endif
-								<div class="btn-group" role="group" aria-label="...">
-									@if($tournament->info)
-									<a href="{{ asset('storage/info/' . $tournament->info) }}" class="btn btn-info" target="_blank">Hoja informativa</a>
+								<div class="row">
+									@if(\Auth::guest())
+									<div class="col-md-12">
+										<div class="alert alert-info" role="alert">
+											<span class="text-warning">
+												<b><a href="/login">Inicia Sesión</a></b> o <b><a href="/registro">Registrate</a></b> para inscribirte
+											</span>
+										</div>
+									</div>
 									@endif
-									@if($tournament->maps)
-									<a href="{{ $tournament->maps }}" class="btn btn-black" target="_blank">Mapa</a>
+									@if(\Auth::check() && \Auth::user()->febd_num == '')
+									<div class="col-md-12">
+										<div class="alert alert-info" role="alert">
+											<span class="text-warning">
+												Actualiza tu <b><a href="/perfil/3">perfil</a></b> para inscribirte.
+											</span>
+										</div>
+									</div>
 									@endif
-									@if($tournament->hours)
-									<a href="{{ asset('storage/hours/' . $tournament->hours) }}" class="btn btn-success" target="_blank">Horarios</a>
-									@endif
-									@if($tournament->inscription)
-									<a href="{{ route('publication.inscription', $tournament->slug) }}" class="btn btn-warning">Inscribrete</a>
-									@elseif($tournament->results)
-									<a href="http://results.pingui.es/events.php?pod_id={{ $tournament->results }}" class="btn btn-danger" target="_blank">Resultados</a>
-									@endif
+									<div class="col-md-12">
+										<div class="row">
+											@if($tournament->info)
+											<div class="col-md-4">
+												<a href="{{ asset('storage/info/' . $tournament->info) }}" class="btn btn-info btn-block" target="_blank">Hoja informativa</a>
+											</div>
+											@endif
+											@if($tournament->maps)
+											<div class="col-md-2">
+												<a href="{{ $tournament->maps }}" class="btn btn-black btn-block" target="_blank">Mapa</a>
+											</div>
+											@endif
+											@if($tournament->hours)
+											<div class="col-md-3">
+												<a href="{{ asset('storage/hours/' . $tournament->hours) }}" class="btn btn-success btn-block" target="_blank">Horarios</a>
+											</div>
+											@endif
+											@if($tournament->inscription)
+											<div class="col-md-3">
+												<a href="{{ route('publication.inscription', $tournament->slug) }}" class="btn btn-warning btn-block">Inscribrete</a>
+											</div>
+											@elseif($tournament->results)
+											<div class="col-md-4">
+												<a href="http://results.pingui.es/events.php?pod_id={{ $tournament->results }}" class="btn btn-danger btn-block" target="_blank">Resultados</a>
+											</div>
+											@endif
+										</div>
+									</div>
 								</div>
 								<hr>
 								<p class="text-justify">{{ $tournament->description }}</p>
@@ -153,7 +205,7 @@
 									<h4><b>Hoteles:</b></h4>
 									<div class="row">
 										@foreach($tournament->hotels as $c)
-										<a href="{{ $c->link }}" class="btn btn-link">{{ $c->name }}</a>
+										<a href="{{ $c->link }}" class="btn btn-link" target="_blank">{{ $c->name }}</a>
 										@endforeach
 									</div>
 								</div>
