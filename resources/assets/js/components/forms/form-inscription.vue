@@ -1,30 +1,27 @@
 <template>
-	<div>
+	<div v-if="can('inscription.store')">
 		<form @submit.prevent="register" v-if="r === true">
 			<p>Datos de pareja:	</p>
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="febd_num_1" class="control-label">
-						<span class="fa fa-febd_num_1"></span> Número de FEBD:
+						<span class="fa fa-febd_num_1"></span> Pareja 1:
 					</label>
-					<input id="febd_num_1" type="text" class="form-control" v-model="inscription.febd_num_1" disabled="">
+					<input id="febd_num_1" type="text" class="form-control" v-model="pareja1" disabled="">
 					<small id="febd_num_1Help" class="form-text text-muted" v-text="msg.febd_num_1"></small>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="febd_num_2" class="control-label">
-						<span class="fa fa-febd_num_2"></span> Número FEBD de la pareja:
+						<span class="fa fa-febd_num_2"></span> Pareja 2:
 					</label>
-					<select id="febd_num_2" class="form-control" v-model="inscription.febd_num_2" disabled="">
-						<option value="">Seleccione su pareja</option>
-						<option v-for="p in data.parejas" :value="p.febd_num">{{ p.febd_num }} - {{ p.name }} {{ p.last_name }}</option>
-					</select>
+					<input id="febd_num_1" type="text" class="form-control" v-model="pareja2" disabled="">
 					<small id="febd_num_2Help" class="form-text text-muted" v-text="msg.febd_num_2"></small>
 				</div>
 			</div>
 			<div class="col-md-8" v-show="!!inscription.febd_num_2 && !!inscription.febd_num_1">
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<label for="price_id" class="control-label">
 						<span class="fa fa-price_id"></span> Categoría en la que participará:
 					</label>
@@ -33,8 +30,8 @@
 						<option v-for="p in tournament.prices" :value="p.id">{{ p.name }} - {{ p.price }}€</option>
 					</select>
 					<small id="price_idHelp" class="form-text text-muted" v-text="msg.price_id"></small>
-				</div>
-				<div class="col-md-12" v-show="inscription.price_id">
+				</div> -->
+				<!-- <div class="col-md-12" v-show="inscription.price_id">
 					<p>Seleccione el tipo de pago:</p>
 					<div class="col-md-6 btn borde" :class="{'btn-black': inscription.type_pay == 1}" @click="changeType(1)">
 						Transferencia
@@ -51,12 +48,15 @@
 						<p style="margin: 0">Titular: <b>Kavarna</b></p>
 						<p style="margin: 0">Monto: <b>{{ inscription.price }} €</b></p>
 					</div>
-				</div>
+				</div> -->
 			</div>
 			<div class="col-md-12">
 				<div class="span pull-right" style="padding: 15px">
 					<button type="submit" class="btn-black">Registrar</button>
 				</div>
+			</div>
+			<div class="col-md-12">
+				<pre>{{  }}</pre>
 			</div>
 		</form>
 		<div class="col-md-8" v-else>
@@ -96,25 +96,27 @@ p {font-size: 1.3em;}
 		props: ['id'],
 		data() {
 			return {
+				pareja1: '',
+				pareja2: '',
 				r: true,
 				data: {},
 				tournament: {},
 				msg: {
-					febd_num_1: 'Número del usuario.',
-					febd_num_2: 'Seleccione la pareja con la que participará.',
+					febd_num_1: 'Pareja seleccionada.',
+					febd_num_2: 'Pareja seleccionada.',
 					type_pay: 'Señale el tipo de pago.',
 				},
 				inscription: {
-					user_id: '',
-					tournament_id: '',
-					febd_num_1: '',
-					name_1: '',
-					price_id: '',
-					price: '',
-					last_name_1: '',
-					name_2: '',
-					last_name_2: '',
-					type_pay: '',
+					// user_id: '',
+					// tournament_id: '',
+					// febd_num_1: '',
+					// name_1: '',
+					// price_id: '',
+					// price: '',
+					// last_name_1: '',
+					// name_2: '',
+					// last_name_2: '',
+					// type_pay: '',
 				}
 			};
 		},
@@ -138,15 +140,19 @@ p {font-size: 1.3em;}
 						this.r = response.data.state;
 					}
 					this.tournament = response.data.tournament;
-					this.data = response.data.user;
-					this.inscription.user_id = this.data.id;
-					this.inscription.febd_num_1 = this.data.febd_num;
-					this.inscription.name_1 = this.data.name;
-					this.inscription.last_name_1 = this.data.last_name;
-					if (this.data.parejas.length > 0) {
-						this.inscription.febd_num_2 = this.data.parejas[0].febd_num;
-						this.inscription.name_2 = this.data.parejas[0].name;
-						this.inscription.last_name_2 = this.data.parejas[0].last_name;
+					if (this.can('inscription.store2')) {
+
+					} else {
+						this.data = response.data.user;
+						this.inscription.user_id = this.data.id;
+						this.inscription.febd_num_1 = this.data.febd_num;
+						this.inscription.name_1 = this.data.name;
+						this.inscription.last_name_1 = this.data.last_name;
+						if (this.data.parejas.length > 0) {
+							this.inscription.febd_num_2 = this.data.parejas[0].febd_num;
+							this.inscription.name_2 = this.data.parejas[0].name;
+							this.inscription.last_name_2 = this.data.parejas[0].last_name;
+						}
 					}
 				});
 			},

@@ -12,7 +12,7 @@ class InscriptionController extends Controller
     public function __construct()
     {
         $this->middleware('can:inscription,index')->only(['index']);
-        // $this->middleware('can:inscription,store')->only(['store']);
+        $this->middleware('can:inscription,store')->only(['store']);
         $this->middleware('can:inscription,show')->only(['show']);
         $this->middleware('can:inscription,update')->only(['update']);
         $this->middleware('can:inscription,destroy')->only(['destroy']);

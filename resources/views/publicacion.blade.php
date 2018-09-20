@@ -169,6 +169,7 @@
 								<p class="text-justify">{{ $tournament->description }}</p>
 							</div>
 							<hr>
+							<div class="clearfix"></div>
 							<div class="row">
 								<div class="col-md-8">
 									<h4><b>Categorias Participantes:</b></h4>

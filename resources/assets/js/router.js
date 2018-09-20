@@ -136,6 +136,7 @@ router.beforeEach((to, from, next) => {
 	if (to.path.indexOf('.jpg') > 0 ||
 		to.path.indexOf('.jpeg') > 0 ||
 		to.path.indexOf('.png') > 0 ||
+		to.path.indexOf('.ttf') > 0 ||
 		to.path.indexOf('.min') > 0) {
 		next('/perfil');
 		return;

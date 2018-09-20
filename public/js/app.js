@@ -63802,7 +63802,7 @@ router.beforeEach(function (to, from, next) {
 	}
 	if (location.href.indexOf('/login') > 0) return;
 	if (location.href.indexOf('/registro') > 0) return;
-	if (to.path.indexOf('.jpg') > 0 || to.path.indexOf('.jpeg') > 0 || to.path.indexOf('.png') > 0 || to.path.indexOf('.min') > 0) {
+	if (to.path.indexOf('.jpg') > 0 || to.path.indexOf('.jpeg') > 0 || to.path.indexOf('.png') > 0 || to.path.indexOf('.ttf') > 0 || to.path.indexOf('.min') > 0) {
 		next('/perfil');
 		return;
 	}
@@ -76636,6 +76636,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -76654,6 +76667,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       organizers: [],
       p_name: '',
+      p_category: '',
       price: '',
       prices: [],
       link: '',
@@ -76675,11 +76689,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         organizer_id: ''
       },
       entries: {
-        0: [{ label: 'Titulo', id: 'name', icon: 'edit' }, { label: 'Detalles', id: 'description', icon: 'edit' },
-        // {label: 'Precio', id: 'price', icon: 'edit', type: 'number'},
-        // {label: 'Precio de entradas', id: 'entrance_price', icon: 'edit', type: 'number'},
-        // {label: 'Organizador', id: 'organizador', icon: 'edit'},
-        { label: 'Resultados', id: 'results', icon: 'edit' }, { label: 'Ruta al Mapa', id: 'maps', icon: 'edit' }]
+        0: [{ label: 'Titulo', id: 'name', icon: 'edit' }, { label: 'Detalles', id: 'description', icon: 'edit' }, { label: 'Resultados', id: 'results', icon: 'edit' }, { label: 'Ruta al Mapa', id: 'maps', icon: 'edit' }]
       },
       msg: {
         name: 'Nombre de la competición.',
@@ -76688,11 +76698,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         end: 'Fecha a terminar el evento.',
         organizador: 'Organizador de la competición.',
         price: 'precio para bailarines.',
+        p_category: 'Categorias de baile.',
         entrance_price: 'precios de entradas.',
         results: 'Resultados finales de la competición.',
         maps: 'Enlace a google maps de la competición.',
         inscription: 'Inscripción Abierta o Cerrada.',
         image: 'Imagen Destacada',
+        p_name: 'Motivo del cobro.',
         hours: 'Horario de la competencia',
         info: 'Hoja informativa',
         referee: 'Referees de la competencia',
@@ -76751,6 +76763,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         if (response.data.info) {
           _this.msg.info = '<a href="/storage/info/' + response.data.info + '" target="_blank">' + response.data.info + '<a>';
         }
+      }).catch(function (error) {
+        _this.$router.push({ name: 'tournament.index' });
       });
     } else {
       this.title = 'Registrar Competencia:';
@@ -76759,6 +76773,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
+    cate: function cate(n) {
+      if (n == 1) {
+        return 'Open';
+      } else if (n == 2) {
+        return 'Latino';
+      } else {
+        return 'Standard';
+      }
+    },
     get: function get() {
       var _this2 = this;
 
@@ -76810,7 +76833,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     addP: function addP() {
-      if (this.p_name && this.price) {
+      if (this.p_name && this.price && this.p_category) {
         if (isNaN(this.price)) {
           return toastr.info('El campo precio solo admite valore numéricos.');
         }
@@ -76822,15 +76845,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
         this.prices.push({
           name: this.p_name,
-          price: this.price
+          price: this.price,
+          category_id: this.p_category
         });
         this.p_name = '';
         this.price = '';
+        this.p_category = '';
+      } else {
+        return toastr.info('Debe llenar todos los campos.');
       }
     },
-    // removeP: function (i) {
-    // this.hoteles.splice(i, 1);
-    // },
     add: function add() {
       if (this.link && this.hotel) {
         this.hoteles.push({
@@ -77110,7 +77134,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "col-md-12" }, [
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "col-md-5" }, [
                     _c("div", { staticClass: "form-group" }, [
                       _vm._m(1),
                       _vm._v(" "),
@@ -77144,9 +77168,65 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-5" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("div", { staticClass: "form-group" }, [
                       _vm._m(2),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.p_category,
+                              expression: "p_category"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { id: "p_category" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.p_category = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        [
+                          _c("option", { attrs: { value: "1" } }, [
+                            _vm._v("Open")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "2" } }, [
+                            _vm._v("Latino")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "3" } }, [
+                            _vm._v("Standard")
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("small", {
+                        staticClass: "form-text text-muted",
+                        attrs: { id: "p_categoryHelp" },
+                        domProps: { textContent: _vm._s(_vm.msg.p_category) }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _vm._m(3),
                       _vm._v(" "),
                       _c("input", {
                         directives: [
@@ -77197,7 +77277,12 @@ var render = function() {
                       _vm._l(_vm.prices, function(p, i) {
                         return _c("li", [
                           _c("span", [
-                            _vm._v(_vm._s(p.name) + " "),
+                            _vm._v(
+                              _vm._s(_vm.cate(p.category_id)) +
+                                " - " +
+                                _vm._s(p.name) +
+                                " "
+                            ),
                             _c("small", [
                               _c("b", [_vm._v(_vm._s(p.price) + " €")])
                             ])
@@ -77228,7 +77313,7 @@ var render = function() {
                   "div",
                   { staticClass: "form-group" },
                   [
-                    _vm._m(3),
+                    _vm._m(4),
                     _vm._v(" "),
                     _c("date-picker", {
                       attrs: {
@@ -77264,7 +77349,7 @@ var render = function() {
                   "div",
                   { staticClass: "form-group" },
                   [
-                    _vm._m(4),
+                    _vm._m(5),
                     _vm._v(" "),
                     _c("date-picker", {
                       attrs: {
@@ -77297,7 +77382,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "col-md-6" }, [
                 _c("div", { staticClass: "form-group" }, [
-                  _vm._m(5),
+                  _vm._m(6),
                   _vm._v(" "),
                   _c("input", {
                     attrs: { id: "image", type: "file", accept: "image/*" },
@@ -77314,7 +77399,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "col-md-6" }, [
                 _c("div", { staticClass: "form-group" }, [
-                  _vm._m(6),
+                  _vm._m(7),
                   _vm._v(" "),
                   _c("input", {
                     attrs: {
@@ -77335,7 +77420,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "col-md-6" }, [
                 _c("div", { staticClass: "form-group" }, [
-                  _vm._m(7),
+                  _vm._m(8),
                   _vm._v(" "),
                   _c("input", {
                     attrs: {
@@ -77359,7 +77444,7 @@ var render = function() {
                   "div",
                   { staticClass: "form-group" },
                   [
-                    _vm._m(8),
+                    _vm._m(9),
                     _vm._v(" "),
                     _c("rs-multiselect", {
                       attrs: {
@@ -77392,7 +77477,7 @@ var render = function() {
                   "div",
                   { staticClass: "form-group" },
                   [
-                    _vm._m(9),
+                    _vm._m(10),
                     _vm._v(" "),
                     _c("rs-multiselect", {
                       attrs: {
@@ -77425,7 +77510,7 @@ var render = function() {
                   "div",
                   { staticClass: "form-group" },
                   [
-                    _vm._m(10),
+                    _vm._m(11),
                     _vm._v(" "),
                     _c("rs-multiselect", {
                       attrs: {
@@ -77464,7 +77549,7 @@ var render = function() {
                   "div",
                   { staticClass: "form-group" },
                   [
-                    _vm._m(11),
+                    _vm._m(12),
                     _vm._v(" "),
                     _c("rs-multiselect", {
                       attrs: {
@@ -77502,7 +77587,7 @@ var render = function() {
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col-md-6" }, [
                     _c("div", { staticClass: "form-group" }, [
-                      _vm._m(12),
+                      _vm._m(13),
                       _vm._v(" "),
                       _c("input", {
                         directives: [
@@ -77536,7 +77621,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-5" }, [
                     _c("div", { staticClass: "form-group" }, [
-                      _vm._m(13),
+                      _vm._m(14),
                       _vm._v(" "),
                       _c("input", {
                         directives: [
@@ -77611,7 +77696,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(14)
+              _vm._m(15)
             ],
             2
           )
@@ -77644,6 +77729,19 @@ var staticRenderFns = [
       [
         _c("span", { staticClass: "edit" }),
         _vm._v(" Motivo del Precio:\n                  ")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "p_category" } },
+      [
+        _c("span", { staticClass: "edit" }),
+        _vm._v(" Categoría:\n                  ")
       ]
     )
   },
@@ -80161,25 +80259,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	props: ['id'],
 	data: function data() {
 		return {
+			pareja1: '',
+			pareja2: '',
 			r: true,
 			data: {},
 			tournament: {},
 			msg: {
-				febd_num_1: 'Número del usuario.',
-				febd_num_2: 'Seleccione la pareja con la que participará.',
+				febd_num_1: 'Pareja seleccionada.',
+				febd_num_2: 'Pareja seleccionada.',
 				type_pay: 'Señale el tipo de pago.'
 			},
 			inscription: {
-				user_id: '',
-				tournament_id: '',
-				febd_num_1: '',
-				name_1: '',
-				price_id: '',
-				price: '',
-				last_name_1: '',
-				name_2: '',
-				last_name_2: '',
-				type_pay: ''
+				// user_id: '',
+				// tournament_id: '',
+				// febd_num_1: '',
+				// name_1: '',
+				// price_id: '',
+				// price: '',
+				// last_name_1: '',
+				// name_2: '',
+				// last_name_2: '',
+				// type_pay: '',
 			}
 		};
 	},
@@ -80205,15 +80305,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 					_this.r = response.data.state;
 				}
 				_this.tournament = response.data.tournament;
-				_this.data = response.data.user;
-				_this.inscription.user_id = _this.data.id;
-				_this.inscription.febd_num_1 = _this.data.febd_num;
-				_this.inscription.name_1 = _this.data.name;
-				_this.inscription.last_name_1 = _this.data.last_name;
-				if (_this.data.parejas.length > 0) {
-					_this.inscription.febd_num_2 = _this.data.parejas[0].febd_num;
-					_this.inscription.name_2 = _this.data.parejas[0].name;
-					_this.inscription.last_name_2 = _this.data.parejas[0].last_name;
+				if (_this.can('inscription.store2')) {} else {
+					_this.data = response.data.user;
+					_this.inscription.user_id = _this.data.id;
+					_this.inscription.febd_num_1 = _this.data.febd_num;
+					_this.inscription.name_1 = _this.data.name;
+					_this.inscription.last_name_1 = _this.data.last_name;
+					if (_this.data.parejas.length > 0) {
+						_this.inscription.febd_num_2 = _this.data.parejas[0].febd_num;
+						_this.inscription.name_2 = _this.data.parejas[0].name;
+						_this.inscription.last_name_2 = _this.data.parejas[0].last_name;
+					}
 				}
 			});
 		},
@@ -80249,351 +80351,172 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.r === true
-      ? _c(
-          "form",
-          {
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                _vm.register($event)
-              }
-            }
-          },
-          [
-            _c("p", [_vm._v("Datos de pareja:\t")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _vm._m(0),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.inscription.febd_num_1,
-                      expression: "inscription.febd_num_1"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "febd_num_1", type: "text", disabled: "" },
-                  domProps: { value: _vm.inscription.febd_num_1 },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.inscription,
-                        "febd_num_1",
-                        $event.target.value
-                      )
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("small", {
-                  staticClass: "form-text text-muted",
-                  attrs: { id: "febd_num_1Help" },
-                  domProps: { textContent: _vm._s(_vm.msg.febd_num_1) }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _vm._m(1),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.inscription.febd_num_2,
-                        expression: "inscription.febd_num_2"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { id: "febd_num_2", disabled: "" },
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.inscription,
-                          "febd_num_2",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
-                    }
-                  },
-                  [
-                    _c("option", { attrs: { value: "" } }, [
-                      _vm._v("Seleccione su pareja")
-                    ]),
-                    _vm._v(" "),
-                    _vm._l(_vm.data.parejas, function(p) {
-                      return _c("option", { domProps: { value: p.febd_num } }, [
-                        _vm._v(
-                          _vm._s(p.febd_num) +
-                            " - " +
-                            _vm._s(p.name) +
-                            " " +
-                            _vm._s(p.last_name)
-                        )
-                      ])
-                    })
-                  ],
-                  2
-                ),
-                _vm._v(" "),
-                _c("small", {
-                  staticClass: "form-text text-muted",
-                  attrs: { id: "febd_num_2Help" },
-                  domProps: { textContent: _vm._s(_vm.msg.febd_num_2) }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
+  return _vm.can("inscription.store")
+    ? _c("div", [
+        _vm.r === true
+          ? _c(
+              "form",
               {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value:
-                      !!_vm.inscription.febd_num_2 &&
-                      !!_vm.inscription.febd_num_1,
-                    expression:
-                      "!!inscription.febd_num_2 && !!inscription.febd_num_1"
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    _vm.register($event)
                   }
-                ],
-                staticClass: "col-md-8"
+                }
               },
               [
-                _c("div", { staticClass: "form-group" }, [
-                  _vm._m(2),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
+                _c("p", [_vm._v("Datos de pareja:\t")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c("input", {
                       directives: [
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.inscription.price_id,
-                          expression: "inscription.price_id"
+                          value: _vm.pareja1,
+                          expression: "pareja1"
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { id: "price_id" },
+                      attrs: { id: "febd_num_1", type: "text", disabled: "" },
+                      domProps: { value: _vm.pareja1 },
                       on: {
-                        change: [
-                          function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.inscription,
-                              "price_id",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          },
-                          _vm.pay
-                        ]
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { value: "" } }, [
-                        _vm._v("Seleccione una categoría")
-                      ]),
-                      _vm._v(" "),
-                      _vm._l(_vm.tournament.prices, function(p) {
-                        return _c("option", { domProps: { value: p.id } }, [
-                          _vm._v(_vm._s(p.name) + " - " + _vm._s(p.price) + "€")
-                        ])
-                      })
-                    ],
-                    2
-                  ),
-                  _vm._v(" "),
-                  _c("small", {
-                    staticClass: "form-text text-muted",
-                    attrs: { id: "price_idHelp" },
-                    domProps: { textContent: _vm._s(_vm.msg.price_id) }
-                  })
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.inscription.price_id,
-                        expression: "inscription.price_id"
-                      }
-                    ],
-                    staticClass: "col-md-12"
-                  },
-                  [
-                    _c("p", [_vm._v("Seleccione el tipo de pago:")]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "col-md-6 btn borde",
-                        class: { "btn-black": _vm.inscription.type_pay == 1 },
-                        on: {
-                          click: function($event) {
-                            _vm.changeType(1)
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
                           }
+                          _vm.pareja1 = $event.target.value
                         }
-                      },
-                      [_vm._v("\n\t\t\t\t\tTransferencia\n\t\t\t\t")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "col-md-6 btn borde",
-                        class: { "btn-black": _vm.inscription.type_pay == 2 },
-                        on: {
-                          click: function($event) {
-                            _vm.changeType(2)
-                          }
-                        }
-                      },
-                      [
-                        _vm._v("\n\t\t\t\t\tPaypal"),
-                        _c("i", {
-                          staticClass: "glypicon glypicon-ravelry",
-                          attrs: { "aria-hidden": "true" }
-                        })
-                      ]
-                    ),
+                      }
+                    }),
                     _vm._v(" "),
                     _c("small", {
                       staticClass: "form-text text-muted",
-                      attrs: { id: "type_payHelp" },
-                      domProps: { textContent: _vm._s(_vm.msg.type_pay) }
+                      attrs: { id: "febd_num_1Help" },
+                      domProps: { textContent: _vm._s(_vm.msg.febd_num_1) }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.pareja2,
+                          expression: "pareja2"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "febd_num_1", type: "text", disabled: "" },
+                      domProps: { value: _vm.pareja2 },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.pareja2 = $event.target.value
+                        }
+                      }
                     }),
                     _vm._v(" "),
-                    _c("h4", [
-                      _vm._v("Total a Pagar: "),
-                      _c("b", [_vm._v(_vm._s(_vm.inscription.price) + " €")])
-                    ]),
-                    _vm._v(" "),
-                    _vm.inscription.type_pay == 1
-                      ? _c("div", { staticClass: "col-md-12" }, [
-                          _c("p", { staticStyle: { "font-size": "14px" } }, [
-                            _vm._v(
-                              "Guarde los datos bancarios y haga un deposito dependiendo de la categoria del baile que participará."
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _vm._m(3),
-                          _vm._v(" "),
-                          _vm._m(4),
-                          _vm._v(" "),
-                          _vm._m(5),
-                          _vm._v(" "),
-                          _c("p", { staticStyle: { margin: "0" } }, [
-                            _vm._v("Monto: "),
-                            _c("b", [
-                              _vm._v(_vm._s(_vm.inscription.price) + " €")
-                            ])
-                          ])
-                        ])
-                      : _vm._e()
-                  ]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _vm._m(6)
-          ]
-        )
-      : _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "alert alert-success" }, [
-            _c("h3", { staticClass: "text-center" }, [
-              _vm._v("Ya te haz Registrado.")
-            ]),
-            _vm._v(" "),
-            _c("p", [
-              _vm._v(
-                "Hola " +
-                  _vm._s(_vm.data.name) +
-                  " " +
-                  _vm._s(_vm.data.last_name) +
-                  ", haz sido registrado de forma exitosa en esta competencia."
-              )
-            ]),
-            _vm._v(" "),
-            _c("p", [
-              _c("b", [_vm._v("Estado del pago: ")]),
-              _vm._v(" "),
-              _vm.r.state_pay == 1
-                ? _c("span", [_vm._v("Ya fué aprovado su pago...")])
-                : _c("span", [_vm._v("En espera de aprovación...")])
-            ]),
-            _vm._v(" "),
-            _c("p", [
-              _c("b", [_vm._v("Estado de Participación: ")]),
-              _vm._v(" "),
-              _vm.r.state == 1
-                ? _c("span", [
-                    _vm._v(
-                      "Ya fué aprovada su participación en la competencia..."
-                    )
+                    _c("small", {
+                      staticClass: "form-text text-muted",
+                      attrs: { id: "febd_num_2Help" },
+                      domProps: { textContent: _vm._s(_vm.msg.febd_num_2) }
+                    })
                   ])
-                : _c("span", [_vm._v("En espera de aprovación...")])
-            ]),
-            _vm._v(" "),
-            _vm.r.type_pay == 1 && !_vm.r.state
-              ? _c("div", [
-                  _c("p", { staticStyle: { "font-size": "14px" } }, [
-                    _vm._v(
-                      "No te olvides de llevar a cabo la forma de pago seleccionada."
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(7),
-                  _vm._v(" "),
-                  _vm._m(8),
-                  _vm._v(" "),
-                  _vm._m(9),
-                  _vm._v(" "),
-                  _c("p", { staticStyle: { margin: "0" } }, [
-                    _vm._v("Monto: "),
-                    _c("b", [_vm._v(_vm._s(_vm.r.price) + " €")])
-                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value:
+                        !!_vm.inscription.febd_num_2 &&
+                        !!_vm.inscription.febd_num_1,
+                      expression:
+                        "!!inscription.febd_num_2 && !!inscription.febd_num_1"
+                    }
+                  ],
+                  staticClass: "col-md-8"
+                }),
+                _vm._v(" "),
+                _vm._m(2),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("pre", [_vm._v(_vm._s())])
                 ])
-              : _vm._e()
-          ])
-        ])
-  ])
+              ]
+            )
+          : _c("div", { staticClass: "col-md-8" }, [
+              _c("div", { staticClass: "alert alert-success" }, [
+                _c("h3", { staticClass: "text-center" }, [
+                  _vm._v("Ya te haz Registrado.")
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    "Hola " +
+                      _vm._s(_vm.data.name) +
+                      " " +
+                      _vm._s(_vm.data.last_name) +
+                      ", haz sido registrado de forma exitosa en esta competencia."
+                  )
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _c("b", [_vm._v("Estado del pago: ")]),
+                  _vm._v(" "),
+                  _vm.r.state_pay == 1
+                    ? _c("span", [_vm._v("Ya fué aprovado su pago...")])
+                    : _c("span", [_vm._v("En espera de aprovación...")])
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _c("b", [_vm._v("Estado de Participación: ")]),
+                  _vm._v(" "),
+                  _vm.r.state == 1
+                    ? _c("span", [
+                        _vm._v(
+                          "Ya fué aprovada su participación en la competencia..."
+                        )
+                      ])
+                    : _c("span", [_vm._v("En espera de aprovación...")])
+                ]),
+                _vm._v(" "),
+                _vm.r.type_pay == 1 && !_vm.r.state
+                  ? _c("div", [
+                      _c("p", { staticStyle: { "font-size": "14px" } }, [
+                        _vm._v(
+                          "No te olvides de llevar a cabo la forma de pago seleccionada."
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _vm._m(4),
+                      _vm._v(" "),
+                      _vm._m(5),
+                      _vm._v(" "),
+                      _c("p", { staticStyle: { margin: "0" } }, [
+                        _vm._v("Monto: "),
+                        _c("b", [_vm._v(_vm._s(_vm.r.price) + " €")])
+                      ])
+                    ])
+                  : _vm._e()
+              ])
+            ])
+      ])
+    : _vm._e()
 }
 var staticRenderFns = [
   function() {
@@ -80605,7 +80528,7 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "febd_num_1" } },
       [
         _c("span", { staticClass: "fa fa-febd_num_1" }),
-        _vm._v(" Número de FEBD:\n\t\t\t\t")
+        _vm._v(" Pareja 1:\n\t\t\t\t")
       ]
     )
   },
@@ -80618,49 +80541,9 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "febd_num_2" } },
       [
         _c("span", { staticClass: "fa fa-febd_num_2" }),
-        _vm._v(" Número FEBD de la pareja:\n\t\t\t\t")
+        _vm._v(" Pareja 2:\n\t\t\t\t")
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "control-label", attrs: { for: "price_id" } },
-      [
-        _c("span", { staticClass: "fa fa-price_id" }),
-        _vm._v(" Categoría en la que participará:\n\t\t\t\t")
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticStyle: { margin: "0" } }, [
-      _vm._v("Banco: "),
-      _c("b", [_vm._v("Banco Sabadell")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticStyle: { margin: "0" } }, [
-      _vm._v("Cuenta: "),
-      _c("b", [_vm._v("IBAN : ES65 0081 0400 1100 0131 0241")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticStyle: { margin: "0" } }, [
-      _vm._v("Titular: "),
-      _c("b", [_vm._v("Kavarna")])
-    ])
   },
   function() {
     var _vm = this

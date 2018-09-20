@@ -42,7 +42,7 @@
 
             <div class="col-md-12">
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-5">
                   <div class="form-group">
                     <label for="p_name" class="control-label">
                       <span class="edit"></span> Motivo del Precio:
@@ -51,7 +51,20 @@
                     <small id="p_nameHelp" class="form-text text-muted" v-text="msg.p_name"></small>
                   </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="p_category" class="control-label">
+                      <span class="edit"></span> Categoría:
+                    </label>
+                    <select id="p_category" class="form-control" v-model="p_category">
+                      <option value="1">Open</option>
+                      <option value="2">Latino</option>
+                      <option value="3">Standard</option>
+                    </select>
+                    <small id="p_categoryHelp" class="form-text text-muted" v-text="msg.p_category"></small>
+                  </div>
+                </div>
+                <div class="col-md-3">
                   <div class="form-group">
                     <label for="price" class="control-label">
                       <span class="edit"></span> Precio:
@@ -66,7 +79,7 @@
                 <div class="col-md-12">
                   <ul>
                     <li v-for="(p, i) in prices">
-                      <span>{{ p.name }} <small><b>{{ p.price }} €</b></small></span>
+                      <span>{{ cate(p.category_id) }} - {{ p.name }} <small><b>{{ p.price }} €</b></small></span>
                       <button type="button" class="btn btn-danger btn-xs" @click="remove(i, 'prices')"><span class="fa fa-remove"></span></button>
                     </li>
                   </ul>
@@ -227,6 +240,7 @@
       return {
         organizers: [],
         p_name: '',
+        p_category: '',
         price: '',
         prices: [],
         link: '',
@@ -251,9 +265,6 @@
           0: [
           {label: 'Titulo', id: 'name', icon: 'edit'},
           {label: 'Detalles', id: 'description', icon: 'edit'},
-          // {label: 'Precio', id: 'price', icon: 'edit', type: 'number'},
-          // {label: 'Precio de entradas', id: 'entrance_price', icon: 'edit', type: 'number'},
-          // {label: 'Organizador', id: 'organizador', icon: 'edit'},
           {label: 'Resultados', id: 'results', icon: 'edit'},
           {label: 'Ruta al Mapa', id: 'maps', icon: 'edit'},
           ]
@@ -265,11 +276,13 @@
           end: 'Fecha a terminar el evento.',
           organizador: 'Organizador de la competición.',
           price: 'precio para bailarines.',
+          p_category: 'Categorias de baile.',
           entrance_price: 'precios de entradas.',
           results: 'Resultados finales de la competición.',
           maps: 'Enlace a google maps de la competición.',
           inscription: 'Inscripción Abierta o Cerrada.',
           image: 'Imagen Destacada',
+          p_name: 'Motivo del cobro.',
           hours: 'Horario de la competencia',
           info: 'Hoja informativa',
           referee: 'Referees de la competencia',
@@ -321,6 +334,9 @@
           if (response.data.image) {this.msg.image = '<a href="/storage/' + response.data.image + '" target="_blank">' + response.data.image + '<a>';}
           if (response.data.hours) {this.msg.hours = '<a href="/storage/hours/' + response.data.hours + '" target="_blank">' + response.data.hours + '<a>';}
           if (response.data.info) {this.msg.info = '<a href="/storage/info/' + response.data.info + '" target="_blank">' + response.data.info + '<a>';}
+        })
+        .catch(error => {
+          this.$router.push({ name: 'tournament.index' });
         });
       } else {
         this.title = 'Registrar Competencia:';
@@ -328,6 +344,15 @@
       }
     },
     methods: {
+      cate: function (n) {
+        if (n == 1) {
+          return 'Open';
+        } else if (n == 2) {
+          return 'Latino';
+        } else {
+          return 'Standard';
+        }
+      },
       get: function () {
         axios.post('/get-tournament')
         .then(response => {
@@ -374,7 +399,7 @@
         reader.readAsDataURL(files[0]);
       },
       addP: function () {
-        if (this.p_name && this.price) {
+        if (this.p_name && this.price && this.p_category) {
           if (isNaN(this.price)) {
             return toastr.info('El campo precio solo admite valore numéricos.');
           }
@@ -387,14 +412,15 @@
           this.prices.push({
             name: this.p_name,
             price: this.price,
+            category_id: this.p_category,
           });
           this.p_name = '';
           this.price = '';
+          this.p_category = '';
+        } else {
+          return toastr.info('Debe llenar todos los campos.');
         }
       },
-      // removeP: function (i) {
-        // this.hoteles.splice(i, 1);
-      // },
       add: function () {
         if (this.link && this.hotel) {
           this.hoteles.push({
