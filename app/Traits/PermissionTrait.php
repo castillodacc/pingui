@@ -40,6 +40,7 @@ trait PermissionTrait
     {
         $now = Carbon::now();
         foreach (Auth::user()->roles as $rol) {
+            if ($rol->from_at == null && $rol->to_at == null) return true;
             $t_init = Carbon::parse($rol->from_at);
             $t_stop = Carbon::parse($rol->to_at);
             if ($now >= $t_init && $now <= $t_stop) return true;

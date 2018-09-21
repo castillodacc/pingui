@@ -10,7 +10,6 @@
                     <p class="text-muted text-center" v-for="rol in user.roles">{{ rol.name }}<br></p>
                     <p class="text-center">
                         <button type="button" class="btn btn-danger" @click="baja(1)">Darse de Baja</button>
-                        <!-- auto-deleted -->
                     </p>
                     <div id="auto_deleted" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
                         <div class="modal-dialog" role="document">
@@ -460,6 +459,7 @@
             axios.post('/update-pareja', {
                 p_name: this.pareja2.p_name2,
                 p_last_name: this.pareja2.p_last_name2,
+                id: this.pareja2.id,
                 p_email: this.pareja2.p_email2,
                 p_febd_num: this.pareja2.p_febd_num2,
             })

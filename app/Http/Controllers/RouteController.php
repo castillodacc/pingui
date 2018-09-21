@@ -127,11 +127,17 @@ class RouteController extends Controller
         $tournament->prices;
         $inscription = Inscription::where('tournament_id', '=', $request->id)
         ->where('user_id', '=', \Auth::user()->id)
+        ->select(['id', 'last_name_1', 'last_name_2', 'method_pay', 'name_1', 'name_2', 'pay', 'state', 'state_pay'])
         ->first();
         $state = false;
-        if ($inscription) {$state = $inscription; }
+        if ($inscription) {
+            $state = $inscription;
+            $state->prices->each(function ($p) {
+                unset($p->pivot, $p->tournament_id);
+            });
+        }
         if (\Auth::guest()) return;
-        $user = \App\User::findOrFail(\Auth::user()->id);
+        $user = \Auth::user();
         $user->parejas;
         return response()->json(compact('user', 'state', 'tournament'));
     }

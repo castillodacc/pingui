@@ -92,36 +92,37 @@ class CreateTournamentTable extends Migration
             $table->foreign('tournament_id')->references('id')->on('tournaments')->onDelete('cascade');
         });
 
-        // Schema::create('inscription_price', function (Blueprint $table) {
-        //     $table->unsignedInteger('price_id');
-        //     $table->unsignedInteger('inscription_id');
-
-        //     $table->foreign('price_id')->references('id')->on('prices')->onDelete('cascade');
-        //     $table->foreign('inscription_id')->references('id')->on('inscriptions')->onDelete('cascade');
-        // });
-
         Schema::create('inscriptions', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('tournament_id');
 
-            $table->unsignedInteger('febd_num_1');
+            $table->unsignedInteger('febd_num_1')->nullable();
             $table->string('name_1', 150);
             $table->string('last_name_1', 150);
-            $table->unsignedInteger('febd_num_2');
+            $table->unsignedInteger('febd_num_2')->nullable();
             $table->string('name_2', 150);
             $table->string('last_name_2', 150);
-            $table->unsignedInteger('price');
-            $table->unsignedInteger('price_id');
-            $table->unsignedInteger('type_pay'); // 1-transferencia 2-paypal
-            $table->unsignedInteger('state_pay')->nullable(); // aprovado - no aprovado 
-            $table->unsignedInteger('state')->nullable(); // estado de la inscripción
+
+            $table->unsignedInteger('pay');
+            // $table->unsignedInteger('price');
+            $table->unsignedInteger('method_pay'); // 1-transferencia 2-paypal
+
+            $table->unsignedInteger('state_pay')->nullable(); // 1 aprovado - null no aprovado
+            $table->unsignedInteger('state')->nullable(); // 1 aprovado - null no aprovado
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('price_id')->references('id')->on('prices')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('tournament_id')->references('id')->on('tournaments')->onDelete('cascade');
+        });
+
+        Schema::create('inscription_price', function (Blueprint $table) {
+            $table->unsignedInteger('price_id');
+            $table->unsignedInteger('inscription_id');
+
+            $table->foreign('price_id')->references('id')->on('prices')->onDelete('cascade');
+            $table->foreign('inscription_id')->references('id')->on('inscriptions')->onDelete('cascade');
         });
 
     }

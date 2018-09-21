@@ -25,7 +25,7 @@ class InscriptionController extends Controller
      */
     public function index()
     {
-        $select = ['id', 'febd_num_1', 'name_1', 'last_name_1', 'febd_num_2', 'name_2', 'last_name_2', 'state_pay', 'type_pay', 'state', 'tournament_id'];
+        $select = ['id', 'febd_num_1', 'name_1', 'last_name_1', 'febd_num_2', 'name_2', 'last_name_2', 'state_pay', 'method_pay', 'state', 'tournament_id'];
         $data = Inscription::orderBy(request()->order?:'id', request()->dir?:'ASC')
         ->search(request()->search)
         ->where('tournament_id', request()->d)
@@ -33,7 +33,7 @@ class InscriptionController extends Controller
         ->paginate(request()->num?:10);
         $data->each(function ($d) {
             $d->state = ($d->state == 1) ? 'Aprovado' : 'No Aprovado';
-            $d->type_pay = ($d->type_pay == 1) ? 'Transferencia' : 'Paypal';
+            $d->type_pay = ($d->method_pay == 1) ? 'Transferencia' : 'Paypal';
             $d->state_pay = ($d->state_pay) ? '<i class="glyphicon glyphicon-check text-center"></i>' : '<i class="glyphicon glyphicon-unchecked text-center"></i>';
             $d->user = $d->febd_num_1 . ' - ' . $d->name_1 . ' ' . $d->last_name_1;
             $d->pareja = $d->febd_num_2 . ' - ' . $d->name_2 . ' ' . $d->last_name_2;
@@ -56,24 +56,25 @@ class InscriptionController extends Controller
             'last_name_2' => 'required|string',
             'name_1' => 'required|string',
             'name_2' => 'required|string',
+            'price' => 'required|array',
             'tournament_id' => 'required|numeric',
-            'type_pay' => 'required|numeric',
-            'user_id' => 'required|numeric',
-            'price_id' => 'required|numeric',
-            'price' => 'required|numeric',
-        ],[
-            'febd_num_1.required' => 'Registre en su perfil su número FEBD',
-            'febd_num_2.required' => 'Registre en su perfil el número FEBD de su pareja',
-        ],[
-            'price_id' => 'precio',
-            'febd_num_1' => 'número FEBD',
-            'febd_num_2' => 'número FEBD de su pareja',
-            'type_pay' => 'tipo de pago',
+            'method_pay' => 'required|numeric',
+            'pay' => 'required|numeric',
+        ],[],[
+            'name_1' => 'pareja',
+            'name_2' => 'pareja',
+            'price' => 'precios',
+            'method_pay' => 'metodo de pago',
+            'pay' => 'pago',
         ]);
+
+        $data['user_id'] = \Auth::user()->id;
 
         $inscription = Inscription::create($data);
 
-        if ($inscription->type_pay == 2) {
+        $inscription->prices()->attach($data['price']);
+
+        if ($inscription->method_pay == 2) {
             $inscription->delete();
             $paypal = new Paypal($inscription);
             $payment = $paypal->generate();

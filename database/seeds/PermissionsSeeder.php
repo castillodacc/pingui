@@ -402,31 +402,31 @@ class PermissionsSeeder extends Seeder
         ]);
 
         App\Models\Permisologia\Permission::create([
-            'name' => 'Crear Inscrito',
+            'name' => 'Crear Inscripción',
             'module' => 'inscription',
             'action' => 'store',
-            'description' => 'Permiso para registrar Inscrito'
+            'description' => 'Permiso para registrar Inscripción'
         ]);
 
         App\Models\Permisologia\Permission::create([
-            'name' => 'Ver Inscrito',
+            'name' => 'Ver Inscripción',
             'module' => 'inscription',
             'action' => 'show',
-            'description' => 'Permiso para ver un Inscrito'
+            'description' => 'Permiso para ver un Inscripción'
         ]);
 
         App\Models\Permisologia\Permission::create([
-            'name' => 'Actualizar Inscrito',
+            'name' => 'Actualizar Inscripción',
             'module' => 'inscription',
             'action' => 'update',
-            'description' => 'Permiso para actualizar Inscrito'
+            'description' => 'Permiso para actualizar Inscripción'
         ]);
 
         App\Models\Permisologia\Permission::create([
-            'name' => 'Eliminar Inscrito',
+            'name' => 'Eliminar Inscripción',
             'module' => 'inscription',
             'action' => 'destroy',
-            'description' => 'Permiso para Eliminar Inscrito'
+            'description' => 'Permiso para Eliminar Inscripción'
         ]);
 
         App\Models\Permisologia\Permission::create([

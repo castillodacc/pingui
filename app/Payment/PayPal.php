@@ -77,7 +77,7 @@ class Paypal
 	{
 		return \PaypalPayment::amount()
 		->setCurrency($this->currency) // en que moneda se va a pagar
-		->setTotal($this->inscription->price_->price); // total a cobrar
+		->setTotal($this->inscription->pay); // total a cobrar
 	}
 
 	public function items()
@@ -86,10 +86,10 @@ class Paypal
 
 		$item = \PaypalPayment::item()
 		->setName($this->inscription->tournament->name)
-		->setDescription($this->inscription->price_->name)
+		->setDescription('Pago de competencia: ' . $this->inscription->tournament->name)
 		->setCurrency($this->currency) // colocar en euros
 		->setQuantity(1) // cantidad que se va a pagar
-		->setPrice($this->inscription->price_->price);
+		->setPrice($this->inscription->pay);
 
 		array_push($items, $item);
 

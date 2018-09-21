@@ -16,19 +16,19 @@ class Inscription extends Model
      * @var array
      */
     protected $fillable = [
-    	'user_id',
-    	'tournament_id',
-    	'febd_num_1',
-    	'name_1',
-    	'last_name_1',
-    	'febd_num_2',
-    	'name_2',
-    	'last_name_2',
-    	'type_pay',
-    	'state_pay',
-    	'state',
-        'price_id',
-        'price'
+        'user_id',
+        'tournament_id',
+        'febd_num_1',
+        'name_1',
+        'last_name_1',
+        'febd_num_2',
+        'name_2',
+        'last_name_2',
+        // 'price',
+        'pay',
+        'method_pay',
+        'state_pay',
+        'state',
     ];
 
     /**
@@ -45,8 +45,8 @@ class Inscription extends Model
         return $this->belongsTo(Tournament::class);
     }
 
-    public function price_()
+    public function prices()
     {
-        return $this->belongsTo(Price::class, 'price_id');
+        return $this->belongsToMany(Price::class);
     }
 }

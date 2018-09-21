@@ -57,9 +57,9 @@
                       <span class="edit"></span> Categoría:
                     </label>
                     <select id="p_category" class="form-control" v-model="p_category">
-                      <option value="1">Open</option>
-                      <option value="2">Latino</option>
-                      <option value="3">Standard</option>
+                      <option :value="1">Open</option>
+                      <option :value="2">Latino</option>
+                      <option :value="3">Standard</option>
                     </select>
                     <small id="p_categoryHelp" class="form-text text-muted" v-text="msg.p_category"></small>
                   </div>
@@ -316,6 +316,7 @@
           let p = response.data.prices;
           for(let i in p) {
             this.prices.push({
+              category_id: p[i].category_id,
               price: p[i].price,
               name: p[i].name,
               id: p[i].id,
@@ -345,11 +346,11 @@
     },
     methods: {
       cate: function (n) {
-        if (n == 1) {
+        if (n === 1) {
           return 'Open';
-        } else if (n == 2) {
+        } else if (n === 2) {
           return 'Latino';
-        } else {
+        } else if (n === 3) {
           return 'Standard';
         }
       },
@@ -409,6 +410,7 @@
           if (!isNaN(this.p_name)) {
             return toastr.info('El campo motivo del precio es para ingregar caracteres alfabéticos.');
           }
+          console.log(this.p_category)
           this.prices.push({
             name: this.p_name,
             price: this.price,

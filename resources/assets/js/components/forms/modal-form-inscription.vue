@@ -32,15 +32,15 @@
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="type_pay" class="control-label">
+                    <label for="method_pay" class="control-label">
                       <span class="glyphicon glyphicon-inbox"></span> Tipo de pago:
                     </label>
-                    <select id="type_pay" required="true" class="form-control" v-model="formData.data.type_pay" disabled="">
+                    <select id="method_pay" required="true" class="form-control" v-model="formData.data.method_pay" disabled="">
                       <option value="1">Transferencia</option>
                       <option value="2">Paypal</option>
                     </select>
-                    <small id="type_payHelp" class="form-text text-muted">
-                      <span v-text="msg.type_pay"></span>
+                    <small id="method_payHelp" class="form-text text-muted">
+                      <span v-text="msg.method_pay"></span>
                     </small>
                   </div>
                 </div>
