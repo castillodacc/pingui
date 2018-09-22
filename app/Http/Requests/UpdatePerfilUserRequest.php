@@ -27,11 +27,11 @@ class UpdatePerfilUserRequest extends FormRequest
             'user' => 'required|min:3|max:10|unique1:users',
             'phone' => 'nullable',
             'web' => 'nullable|string|min:3|max:40',
-            'email' => 'required|email|DomainValid|unique1:users,email',
+            'email' => 'required|email|unique1:users,email',/*DomainValid*/
             'last_name' => 'required|alfa_space|min:3|max:25',
             'name' => 'required|alfa_space|min:3|max:25',
             'birthdate' => 'nullable',
-            'num_id' => 'required|numeric|exr_ced|unique1:users,num_id'
+            'num_id'    => 'required|string|min:6|max:12|unique1:users',/*digits_between:6,9|exr_ced*/
         ];
     }
 

@@ -27,7 +27,7 @@ class UserUpdateRequest extends FormRequest
             'email'     => 'required|email|min:8|max:35|unique1:users',/*DomainValid*/
             'last_name' => 'required|alfa_space|min:3|max:50',
             'name'      => 'required|alfa_space|min:3|max:50',
-            'num_id'    => 'required|digits_between:6,9|exr_ced|unique1:users',
+            'num_id'    => 'required|string|min:6|max:12|unique1:users',/*digits_between:6,9|exr_ced*/
             'password'  => 'nullable|string|min:6|max:20|confirmed',
             'roles'     => 'required|array|max:2'
         ];

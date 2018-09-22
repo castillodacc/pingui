@@ -28,7 +28,7 @@ class UserStoreRequest extends FormRequest
             'user'      => 'required|alfa_space|min:3|max:25',
             'last_name' => 'required|alfa_space|min:3|max:50',
             'name'      => 'required|alfa_space|min:3|max:50',
-            'num_id'    => 'required|digits_between:6,9|exr_ced|unique:users',
+            'num_id'    => 'required|string|min:6|max:12|unique:users',/*digits_between:6,9|exr_ced*/
             'password'  => 'required|string|min:6|max:20|confirmed',
             'phone'     => 'nullable|numeric',
             'name'      => 'required|alfa_space|min:3|max:50',

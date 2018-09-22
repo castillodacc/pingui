@@ -105,6 +105,7 @@
 						<span> </span>
 					</template>
 				</p>
+				<p><a :href="'/inscritos/' + id" v-if="can('inscription.generate')">Ver Lista de inscritos</a></p>
 				<div v-if="r.method_pay == 1 && !r.state">
 					<p style="font-size: 14px;">No te olvides de llevar a cabo la forma de pago seleccionada.</p>
 					<p style="margin: 0">Banco: <b>Banco Sabadell</b></p>

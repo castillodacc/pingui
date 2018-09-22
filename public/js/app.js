@@ -63803,9 +63803,10 @@ router.beforeEach(function (to, from, next) {
 	if (to.path == '/dashboard') {
 		next('/perfil/3');return;
 	}
+	if (location.href.indexOf('/competicion') > 0) return;
 	if (location.href.indexOf('/login') > 0) return;
 	if (location.href.indexOf('/registro') > 0) return;
-	if (to.path.indexOf('.jpg') > 0 || to.path.indexOf('.jpeg') > 0 || to.path.indexOf('.png') > 0 || to.path.indexOf('.ttf') > 0 || to.path.indexOf('.min') > 0) {
+	if (to.path.indexOf('.jpg') > 0 || to.path.indexOf('.jpeg') > 0 || to.path.indexOf('.png') > 0 || to.path.indexOf('.ttf') > 0 || to.path.indexOf('.min') > 0 || permission == 'error') {
 		next('/perfil/3');
 		return;
 	}
@@ -80365,6 +80366,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -80928,6 +80930,14 @@ var render = function() {
                   ],
                   2
                 ),
+                _vm._v(" "),
+                _c("p", [
+                  _vm.can("inscription.generate")
+                    ? _c("a", { attrs: { href: "/inscritos/" + _vm.id } }, [
+                        _vm._v("Ver Lista de inscritos")
+                      ])
+                    : _vm._e()
+                ]),
                 _vm._v(" "),
                 _vm.r.method_pay == 1 && !_vm.r.state
                   ? _c("div", [
