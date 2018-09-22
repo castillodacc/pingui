@@ -26,7 +26,7 @@
 						<span class="fa fa-prices"></span> Categoría en la que participará:
 					</label>
 					<rs-multiselect v-model="prices" :options="option_prices" :multiple="true" :hide-selected="true" :close-on-select="false"></rs-multiselect>
-					<small id="pricesHelp" class="form-text text-muted" v-text="msg.prices"></small>
+					<small id="priceHelp" class="form-text text-muted" v-text="msg.prices"></small>
 				</div>
 				<div class="col-md-12" v-show="inscription.price.length">
 					<p>Seleccione el tipo de pago:</p>
@@ -36,20 +36,52 @@
 					<div class="col-md-6 btn borde" :class="{'btn-black': inscription.method_pay == 2}" @click="changeType(2)">
 						Paypal<i class="glypicon glypicon-ravelry" aria-hidden="true"></i>
 					</div>
-					<small id="type_payHelp" class="form-text text-muted" v-text="msg.type_pay"></small>
+					<small id="method_payHelp" class="form-text text-muted" v-text="msg.method_pay"></small>
 					<h4>Total a Pagar: <b>{{ inscription.pay }} €</b></h4>
-					<div class="col-md-12" v-if="inscription.type_pay == 1">
+					<div class="col-md-12" v-if="inscription.method_pay == 1">
 						<p style="font-size: 14px;">Guarde los datos bancarios y haga un deposito dependiendo de la categoria del baile que participará.</p>
 						<p style="margin: 0">Banco: <b>Banco Sabadell</b></p>
 						<p style="margin: 0">Cuenta: <b>IBAN : ES65 0081 0400 1100 0131 0241</b></p>
 						<p style="margin: 0">Titular: <b>Kavarna</b></p>
-						<p style="margin: 0">Monto: <b>{{ inscription.price }} €</b></p>
+						<p style="margin: 0">Monto: <b>{{ inscription.pay }} €</b></p>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-12">
 				<div class="span pull-right" style="padding: 15px">
-					<button type="submit" class="btn-black">Registrar</button>
+					<button type="button" class="btn btn-black" @click="open">Registrar</button>
+				</div>
+			</div>
+			<div id="confirm" class="modal fade" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+				<div class="modal-dialog" role="document" style="top: 100px">
+					<div class="modal-content">
+						<div class="modal-header btn-black">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title">¿Esta Seguro de Registrar su participación en esta competencia?</h4>
+						</div>
+						<div class="modal-body">
+							<p> Pareja: {{ pareja1 }} y {{ pareja2 }}</p>
+							<small id="name_1Help" class="form-text text-muted"></small>
+							<small id="name_2Help" class="form-text text-muted"></small>
+							<p> Categorias: 
+								<template v-for="p in prices">
+									<span class="label label-info">{{ p }}</span>
+									<span> </span>
+								</template>
+							</p>
+							<small id="priceHelp" class="form-text text-muted"></small>
+							<p> Método de Pago:
+								<span v-if="inscription.method_pay == 1">Transferencia</span>
+								<span v-if="inscription.method_pay == 2">PayPal</span>
+							</p>
+							<small id="method_payHelp" class="form-text text-muted"></small>
+							<p> Total a Pagar: {{ inscription.pay }} € </p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+							<button type="submit" class="btn btn-success">Confirmar</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</form>
@@ -59,13 +91,13 @@
 				<p>Hola {{ data.name }} {{ data.last_name }}, Se ha registrado de forma exitosa la inscripción en esta competencia.</p>
 				<p>
 					<b>Estado del pago: </b>
-					<span v-if="r.state_pay == 1">Ya fué aprovado su pago...</span>
-					<span v-else>En espera de aprovación...</span>
+					<span v-if="r.state_pay == 1">Ya fué aprobado su pago...</span>
+					<span v-else>En espera de aprobación...</span>
 				</p>
 				<p>
 					<b>Estado de Participación: </b>
-					<span v-if="r.state == 1">Ya fué aprovada su participación en la competencia...</span>
-					<span v-else>En espera de aprovación...</span>
+					<span v-if="r.state == 1">Ya fué aprobada su participación en la competencia...</span>
+					<span v-else>En espera de aprobación...</span>
 				</p>
 				<p>
 					<template v-for="p in r.prices">
@@ -110,7 +142,7 @@ p {font-size: 1.3em;}
 				msg: {
 					febd_num_1: 'Pareja seleccionada.',
 					febd_num_2: 'Pareja seleccionada.',
-					type_pay: 'Señale el tipo de pago.',
+					method_pay: 'Señale el tipo de pago.',
 				},
 				inscription: {
 					user_id: '',
@@ -219,11 +251,18 @@ p {font-size: 1.3em;}
 				}
 			},
 			changeType: function (num) {this.inscription.method_pay = num;},
+			open: function () {
+				$('#confirm').modal('show');
+				setTimeout(function () {
+					$('#confirm, body').css({'padding-right': '0px'});
+				}, 200);
+				$('.modal-backdrop').hide();
+			},
 			register: function () {
 				toastr.info('Procesando Información, ¡por favor espere!');
 				axios.post('/inscription', this.inscription)
 				.then(response => {
-					if (this.inscription.type_pay == 2) {
+					if (this.inscription.method_pay == 2) {
 						toastr.success('Registro exitoso, espere respuesta de PayPal');
 						setTimeout(() => window.location.href = response.data, 1000);
 					} else {

@@ -49,8 +49,8 @@
                   </label>
                   <select id="approval_state" class="form-control" v-model="formData.user.approval_state" :disabled="formData.cond == 'create'">
                     <option :value="null">Seleccione un estado</option>
-                    <option value="1">Aprovado</option>
-                    <option value="0">No Aprovado</option>
+                    <option value="1">Aprobado</option>
+                    <option value="0">No Aprobado</option>
                   </select>
                   <small id="approval_stateHelp" class="form-text text-muted">
                     <span v-text="msg.approval_state"></span>

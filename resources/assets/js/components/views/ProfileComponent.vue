@@ -83,6 +83,13 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="birthdate" class="col-sm-2 control-label">Fecha de Nacimiento:</label>
+                                <div class="col-sm-10">
+                                    <date-picker id="birthdate" v-model="user.birthdate" :config="{format: 'DD/MM/YYYY', useCurrent: false, locale: 'es'}"></date-picker>
+                                    <small id="birthdateHelp" class="form-text"></small>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="phone" class="col-sm-2 control-label">Teléfono:</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="phone" placeholder="Teléfono" v-model="user.phone">
@@ -496,6 +503,7 @@
             data.append('user', this.user.user);
             data.append('phone', this.user.phone);
             data.append('web', this.user.web);
+            data.append('birthdate', this.user.birthdate);
             axios.post('/update-user', data)
             .then(response => {
                 toastr.success('Datos Actualizados');

@@ -25,6 +25,7 @@ class Inscription extends Model
         'name_2',
         'last_name_2',
         // 'price',
+        'dorsal',
         'pay',
         'method_pay',
         'state_pay',

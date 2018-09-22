@@ -28,6 +28,7 @@ class User extends Authenticatable
         'confirm',
         'international_id',
 
+        'birthdate',
         'febd_num',
         'category_l',
         'trainer_l',

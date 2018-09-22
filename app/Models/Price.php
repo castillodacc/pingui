@@ -30,4 +30,9 @@ class Price extends Model
     protected $hidden = [
     	'created_at', 'updated_at', 'deleted_at'
     ];
+
+    public function inscriptions()
+    {
+        return $this->belongsToMany(Inscription::class);
+    }
 }

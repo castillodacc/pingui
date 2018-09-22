@@ -30,6 +30,7 @@ class UpdatePerfilUserRequest extends FormRequest
             'email' => 'required|email|DomainValid|unique1:users,email',
             'last_name' => 'required|alfa_space|min:3|max:25',
             'name' => 'required|alfa_space|min:3|max:25',
+            'birthdate' => 'nullable',
             'num_id' => 'required|numeric|exr_ced|unique1:users,num_id'
         ];
     }
@@ -46,6 +47,7 @@ class UpdatePerfilUserRequest extends FormRequest
             'phone' => 'teléfono',
             'club_id' => 'club',
             'email' => 'correo',
+            'birthdate' => 'fecha de nacimiento',
             'last_name' => 'apellido',
             'name' => 'nombre',
             'num_id' => 'cédula'

@@ -86,7 +86,7 @@ Route::group(['middleware' => ['auth', 'onlyAjax']], function () {
     Route::post('categories-l', 'CategoryLController@dataForRegister');
 
     Route::resource('inscription', 'InscriptionController')->except(['create', 'edit']);
-
+    Route::post('generate/{tournament}', 'InscriptionController@generateDorsales');
 
     Route::group(['prefix' => '/', 'namespace' => 'Dashboard', 'as' => 'Dashboard::'], function () {
         Route::post('auto-deleted', 'ProfileController@autoDeleting');
@@ -95,7 +95,6 @@ Route::group(['middleware' => ['auth', 'onlyAjax']], function () {
         Route::post('update-user', 'ProfileController@editUser');
         Route::post('update-bailarin/{id}', 'ProfileController@bailarin');
         Route::post('update-pareja', 'ProfileController@pareja');
-        // Route::post('pareja', 'ProfileController@pareja');
     });
 
     Route::post('admin/app', 'RouteController@canPermission');

@@ -130,8 +130,8 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
 	let permission = to.name;
-	if (to.path == '/') {next('/perfil'); return;}
-	if (to.path == '/dashboard') {next('/perfil'); return;}
+	if (to.path == '/') {next('/perfil/3'); return;}
+	if (to.path == '/dashboard') {next('/perfil/3'); return;}
 	if (location.href.indexOf('/login') > 0) return;
 	if (location.href.indexOf('/registro') > 0) return;
 	if (to.path.indexOf('.jpg') > 0 ||
@@ -139,7 +139,7 @@ router.beforeEach((to, from, next) => {
 		to.path.indexOf('.png') > 0 ||
 		to.path.indexOf('.ttf') > 0 ||
 		to.path.indexOf('.min') > 0) {
-		next('/perfil');
+		next('/perfil/3');
 		return;
 	}
 	if (permission == undefined) {next('error'); return;}

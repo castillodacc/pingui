@@ -25,14 +25,15 @@ class InscriptionController extends Controller
      */
     public function index()
     {
-        $select = ['id', 'febd_num_1', 'name_1', 'last_name_1', 'febd_num_2', 'name_2', 'last_name_2', 'state_pay', 'method_pay', 'state', 'tournament_id'];
+        $select = ['id', 'febd_num_1', 'name_1', 'last_name_1', 'febd_num_2', 'name_2', 'last_name_2', 'state_pay', 'method_pay', 'state', 'tournament_id', 'dorsal'];
         $data = Inscription::orderBy(request()->order?:'id', request()->dir?:'ASC')
         ->search(request()->search)
         ->where('tournament_id', request()->d)
         ->select($select)
         ->paginate(request()->num?:10);
         $data->each(function ($d) {
-            $d->state = ($d->state == 1) ? 'Aprovado' : 'No Aprovado';
+            $d->dorsal = ($d->dorsal) ?: '------------';
+            $d->state = ($d->state == 1) ? 'Aprobado' : 'No Aprobado';
             $d->type_pay = ($d->method_pay == 1) ? 'Transferencia' : 'Paypal';
             $d->state_pay = ($d->state_pay) ? '<i class="glyphicon glyphicon-check text-center"></i>' : '<i class="glyphicon glyphicon-unchecked text-center"></i>';
             $d->user = $d->febd_num_1 . ' - ' . $d->name_1 . ' ' . $d->last_name_1;
@@ -150,5 +151,19 @@ class InscriptionController extends Controller
         $tournament = Tournament::findOrFail($inscription->tournament_id);
         $cancel = 'Transacción cancelada o fallida.';
         return view('inscription', compact('tournament', 'cancel'));
+    }
+
+    public function generateDorsales($tournament)
+    {
+        $prices = Price::where('tournament_id', '=', $tournament)->get();
+        $count = 1;
+        foreach ($prices as $p) {
+            foreach ($p->inscriptions as $i) {
+                if($i->state_pay == 1 && $i->state == 1 && $i->dorsal == null) {
+                    $i->update(['dorsal' => $count]);
+                    $count++;
+                }
+            }
+        }
     }
 }

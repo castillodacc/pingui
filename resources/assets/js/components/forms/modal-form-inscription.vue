@@ -52,7 +52,7 @@
                     </label>
                     <select id="state_pay" required="true" class="form-control" v-model="formData.data.state_pay">
                       <option value="1">Pagado</option>
-                      <option :value="null">No Aprovado</option>
+                      <option :value="null">No Aprobado</option>
                     </select>
                     <small id="state_payHelp" class="form-text text-muted">
                       <span v-text="msg.state_pay"></span>
@@ -63,11 +63,11 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="state" class="control-label">
-                      <span class="glyphicon glyphicon-inbox"></span> Aprovar Participación:
+                      <span class="glyphicon glyphicon-inbox"></span> Aprobar Participación:
                     </label>
                     <select id="state" required="true" class="form-control" v-model="formData.data.state">
-                      <option value="1">Aprovado</option>
-                      <option :value="null">No Aprovado</option>
+                      <option value="1">Aprobado</option>
+                      <option :value="null">No Aprobado</option>
                     </select>
                     <small id="stateHelp" class="form-text text-muted">
                       <span v-text="msg.state"></span>

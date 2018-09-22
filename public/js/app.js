@@ -63798,15 +63798,15 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
 router.beforeEach(function (to, from, next) {
 	var permission = to.name;
 	if (to.path == '/') {
-		next('/perfil');return;
+		next('/perfil/3');return;
 	}
 	if (to.path == '/dashboard') {
-		next('/perfil');return;
+		next('/perfil/3');return;
 	}
 	if (location.href.indexOf('/login') > 0) return;
 	if (location.href.indexOf('/registro') > 0) return;
 	if (to.path.indexOf('.jpg') > 0 || to.path.indexOf('.jpeg') > 0 || to.path.indexOf('.png') > 0 || to.path.indexOf('.ttf') > 0 || to.path.indexOf('.min') > 0) {
-		next('/perfil');
+		next('/perfil/3');
 		return;
 	}
 	if (permission == undefined) {
@@ -64349,6 +64349,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -64494,6 +64501,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             data.append('user', this.user.user);
             data.append('phone', this.user.phone);
             data.append('web', this.user.web);
+            data.append('birthdate', this.user.birthdate);
             axios.post('/update-user', data).then(function (response) {
                 toastr.success('Datos Actualizados');
                 window.location.href = '/perfil/3';
@@ -68085,6 +68093,47 @@ var render = function() {
                       "label",
                       {
                         staticClass: "col-sm-2 control-label",
+                        attrs: { for: "birthdate" }
+                      },
+                      [_vm._v("Fecha de Nacimiento:")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-sm-10" },
+                      [
+                        _c("date-picker", {
+                          attrs: {
+                            id: "birthdate",
+                            config: {
+                              format: "DD/MM/YYYY",
+                              useCurrent: false,
+                              locale: "es"
+                            }
+                          },
+                          model: {
+                            value: _vm.user.birthdate,
+                            callback: function($$v) {
+                              _vm.$set(_vm.user, "birthdate", $$v)
+                            },
+                            expression: "user.birthdate"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("small", {
+                          staticClass: "form-text",
+                          attrs: { id: "birthdateHelp" }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-2 control-label",
                         attrs: { for: "phone" }
                       },
                       [_vm._v("Teléfono:")]
@@ -71554,11 +71603,11 @@ var render = function() {
                                 ]),
                                 _vm._v(" "),
                                 _c("option", { attrs: { value: "1" } }, [
-                                  _vm._v("Aprovado")
+                                  _vm._v("Aprobado")
                                 ]),
                                 _vm._v(" "),
                                 _c("option", { attrs: { value: "0" } }, [
-                                  _vm._v("No Aprovado")
+                                  _vm._v("No Aprobado")
                                 ])
                               ]
                             ),
@@ -76175,7 +76224,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				columns: [{ title: 'Titulo', field: 'name', sortable: true }, { title: 'Descripción', field: 'description', sortable: true }, { title: 'Inscripciones', field: 'inscription', sortable: true, class: 'text-center' }, { title: 'Fecha inicio', field: 'start', sortable: true, class: 'text-center' }, { title: 'Fecha final', field: 'end', sortable: true, class: 'text-center' }],
 				options: [{ ico: 'fa fa-list', class: 'btn-success', title: 'Lista Inscritos', func: function func(id) {
 						_this.$router.push({ name: 'inscription.index', params: { id: id } });
-					}, action: 'tournament.destroy' }, { ico: 'fa fa-edit', class: 'btn-info', title: 'Editar', func: function func(id) {
+					}, action: 'tournament.inscription' }, { ico: 'fa fa-edit', class: 'btn-info', title: 'Editar', func: function func(id) {
 						_this.$router.push({ name: 'tournament.update', params: { id: id } });
 					}, action: 'tournament.update' }, { ico: 'fa fa-close', class: 'btn-danger', title: 'Eliminar', func: function func(id) {
 						_this.deleted('/tournament/' + id, _this.$children[1].get, 'name');
@@ -76317,9 +76366,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		'rs-table': __WEBPACK_IMPORTED_MODULE_0__partials_table_vue___default.a
 	},
 	data: function data() {
+		var _this = this;
+
 		return {
 			tabla: {
-				columns: [{ title: 'Competencia', field: 'tournament', sort: 'name' }, { title: 'Participante', field: 'user', sort: 'name', sortable: true }, { title: 'Pareja', field: 'pareja', sort: 'name_2', sortable: true }, { title: 'Tipo de pago', field: 'type_pay', sort: 'name_2', sortable: true }, { title: 'Estado del pago', field: 'state_pay', sortable: true, class: 'text-center' }, { title: 'Estado de Participación', field: 'state', sortable: true, class: 'text-center' }]
+				columns: [{ title: 'Competencia', field: 'tournament', sort: 'name' }, { title: 'Participante', field: 'user', sort: 'name', sortable: true }, { title: 'Pareja', field: 'pareja', sort: 'name_2', sortable: true }, { title: 'Tipo de pago', field: 'type_pay', sort: 'name_2', sortable: true }, { title: 'Estado del pago', field: 'state_pay', sortable: true, class: 'text-center' }, { title: 'Estado de Participación', field: 'state', sortable: true, class: 'text-center' }],
+				options: [{ ico: 'fa fa-list', class: 'btn-success', title: 'Lista Participantes', func: function func(id) {
+						_this.$router.push({ name: 'inscription.index', params: { id: id } });
+					}, action: 'tournament.inscription' }]
 			}
 		};
 	}
@@ -77994,6 +78048,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -78015,7 +78074,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				data: {}
 			},
 			tabla: {
-				columns: [{ title: 'Participante', field: 'user', sort: 'name', sortable: true }, { title: 'Pareja', field: 'pareja', sort: 'name_2', sortable: true }, { title: 'Tipo de pago', field: 'type_pay', sort: 'name_2', sortable: true }, { title: 'Estado del pago', field: 'state_pay', sortable: true, class: 'text-center' }, { title: 'Estado de Participación', field: 'state', sortable: true, class: 'text-center' }],
+				columns: [{ title: 'Dorsales', field: 'dorsal', sort: 'id', sortable: true }, { title: 'Participante', field: 'user', sort: 'name', sortable: true }, { title: 'Pareja', field: 'pareja', sort: 'name_2', sortable: true }, { title: 'Tipo de pago', field: 'type_pay', sort: 'method_pay', sortable: true }, { title: 'Estado del pago', field: 'state_pay', sortable: true, class: 'text-center' }, { title: 'Estado de Participación', field: 'state', sortable: true, class: 'text-center' }],
 				options: [{ ico: 'fa fa-edit', class: 'btn-info', title: 'Editar', func: function func(id) {
 						_this.openForm('edit', id);
 					}, action: 'tournament.update' }, { ico: 'fa fa-close', class: 'btn-danger', title: 'Eliminar', func: function func(id) {
@@ -78039,6 +78098,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				_this2.form.data = response.data;
 				_this2.form.ready = true;
 				$('#inscription-form').modal('show');
+			});
+		},
+		generate: function generate() {
+			var _this3 = this;
+
+			axios.post('/generate/' + this.$route.params.id).then(function (response) {
+				_this3.$children[0].get();
 			});
 		}
 	}
@@ -78502,7 +78568,7 @@ var render = function() {
                                     _c(
                                       "option",
                                       { domProps: { value: null } },
-                                      [_vm._v("No Aprovado")]
+                                      [_vm._v("No Aprobado")]
                                     )
                                   ]
                                 ),
@@ -78537,7 +78603,7 @@ var render = function() {
                                       staticClass: "glyphicon glyphicon-inbox"
                                     }),
                                     _vm._v(
-                                      " Aprovar Participación:\n                  "
+                                      " Aprobar Participación:\n                  "
                                     )
                                   ]
                                 ),
@@ -78580,13 +78646,13 @@ var render = function() {
                                   },
                                   [
                                     _c("option", { attrs: { value: "1" } }, [
-                                      _vm._v("Aprovado")
+                                      _vm._v("Aprobado")
                                     ]),
                                     _vm._v(" "),
                                     _c(
                                       "option",
                                       { domProps: { value: null } },
-                                      [_vm._v("No Aprovado")]
+                                      [_vm._v("No Aprobado")]
                                     )
                                   ]
                                 ),
@@ -78669,7 +78735,23 @@ var render = function() {
     "div",
     { staticClass: "box" },
     [
-      _vm._m(0),
+      _c("div", { staticClass: "box-header" }, [
+        _c("h3", { staticClass: "box-title" }, [
+          _vm._v("Tabla de Inscritos: ")
+        ]),
+        _vm._v(" "),
+        _vm.can("inscription.generate")
+          ? _c(
+              "button",
+              {
+                staticClass: "btn btn-primary btn-xs",
+                attrs: { title: "Generar Dorsales", "data-tooltip": "tooltip" },
+                on: { click: _vm.generate }
+              },
+              [_c("i", { staticClass: "fa fa-refresh" })]
+            )
+          : _vm._e()
+      ]),
       _vm._v(" "),
       _c(
         "div",
@@ -78701,16 +78783,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box-header" }, [
-      _c("h3", { staticClass: "box-title" }, [_vm._v("Tabla de Inscritos: ")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -80260,6 +80333,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -80280,7 +80385,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			msg: {
 				febd_num_1: 'Pareja seleccionada.',
 				febd_num_2: 'Pareja seleccionada.',
-				type_pay: 'Señale el tipo de pago.'
+				method_pay: 'Señale el tipo de pago.'
 			},
 			inscription: {
 				user_id: '',
@@ -80403,12 +80508,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		changeType: function changeType(num) {
 			this.inscription.method_pay = num;
 		},
+		open: function open() {
+			$('#confirm').modal('show');
+			setTimeout(function () {
+				$('#confirm, body').css({ 'padding-right': '0px' });
+			}, 200);
+			$('.modal-backdrop').hide();
+		},
 		register: function register() {
 			var _this3 = this;
 
 			toastr.info('Procesando Información, ¡por favor espere!');
 			axios.post('/inscription', this.inscription).then(function (response) {
-				if (_this3.inscription.type_pay == 2) {
+				if (_this3.inscription.method_pay == 2) {
 					toastr.success('Registro exitoso, espere respuesta de PayPal');
 					setTimeout(function () {
 						return window.location.href = response.data;
@@ -80541,7 +80653,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("small", {
                         staticClass: "form-text text-muted",
-                        attrs: { id: "pricesHelp" },
+                        attrs: { id: "priceHelp" },
                         domProps: { textContent: _vm._s(_vm.msg.prices) }
                       })
                     ],
@@ -80604,8 +80716,8 @@ var render = function() {
                       _vm._v(" "),
                       _c("small", {
                         staticClass: "form-text text-muted",
-                        attrs: { id: "type_payHelp" },
-                        domProps: { textContent: _vm._s(_vm.msg.type_pay) }
+                        attrs: { id: "method_payHelp" },
+                        domProps: { textContent: _vm._s(_vm.msg.method_pay) }
                       }),
                       _vm._v(" "),
                       _c("h4", [
@@ -80613,7 +80725,7 @@ var render = function() {
                         _c("b", [_vm._v(_vm._s(_vm.inscription.pay) + " €")])
                       ]),
                       _vm._v(" "),
-                      _vm.inscription.type_pay == 1
+                      _vm.inscription.method_pay == 1
                         ? _c("div", { staticClass: "col-md-12" }, [
                             _c("p", { staticStyle: { "font-size": "14px" } }, [
                               _vm._v(
@@ -80630,7 +80742,7 @@ var render = function() {
                             _c("p", { staticStyle: { margin: "0" } }, [
                               _vm._v("Monto: "),
                               _c("b", [
-                                _vm._v(_vm._s(_vm.inscription.price) + " €")
+                                _vm._v(_vm._s(_vm.inscription.pay) + " €")
                               ])
                             ])
                           ])
@@ -80639,7 +80751,126 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _vm._m(6)
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "span pull-right",
+                      staticStyle: { padding: "15px" }
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-black",
+                          attrs: { type: "button" },
+                          on: { click: _vm.open }
+                        },
+                        [_vm._v("Registrar")]
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "modal fade",
+                    attrs: {
+                      id: "confirm",
+                      role: "dialog",
+                      "aria-hidden": "true",
+                      "data-backdrop": "static",
+                      "data-keyboard": "false"
+                    }
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "modal-dialog",
+                        staticStyle: { top: "100px" },
+                        attrs: { role: "document" }
+                      },
+                      [
+                        _c("div", { staticClass: "modal-content" }, [
+                          _vm._m(6),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "modal-body" }, [
+                            _c("p", [
+                              _vm._v(
+                                " Pareja: " +
+                                  _vm._s(_vm.pareja1) +
+                                  " y " +
+                                  _vm._s(_vm.pareja2)
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("small", {
+                              staticClass: "form-text text-muted",
+                              attrs: { id: "name_1Help" }
+                            }),
+                            _vm._v(" "),
+                            _c("small", {
+                              staticClass: "form-text text-muted",
+                              attrs: { id: "name_2Help" }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "p",
+                              [
+                                _vm._v(" Categorias: \n\t\t\t\t\t\t\t"),
+                                _vm._l(_vm.prices, function(p) {
+                                  return [
+                                    _c(
+                                      "span",
+                                      { staticClass: "label label-info" },
+                                      [_vm._v(_vm._s(p))]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("span")
+                                  ]
+                                })
+                              ],
+                              2
+                            ),
+                            _vm._v(" "),
+                            _c("small", {
+                              staticClass: "form-text text-muted",
+                              attrs: { id: "priceHelp" }
+                            }),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v(" Método de Pago:\n\t\t\t\t\t\t\t"),
+                              _vm.inscription.method_pay == 1
+                                ? _c("span", [_vm._v("Transferencia")])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.inscription.method_pay == 2
+                                ? _c("span", [_vm._v("PayPal")])
+                                : _vm._e()
+                            ]),
+                            _vm._v(" "),
+                            _c("small", {
+                              staticClass: "form-text text-muted",
+                              attrs: { id: "method_payHelp" }
+                            }),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v(
+                                " Total a Pagar: " +
+                                  _vm._s(_vm.inscription.pay) +
+                                  " € "
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(7)
+                        ])
+                      ]
+                    )
+                  ]
+                )
               ]
             )
           : _c("div", { staticClass: "col-md-8" }, [
@@ -80662,8 +80893,8 @@ var render = function() {
                   _c("b", [_vm._v("Estado del pago: ")]),
                   _vm._v(" "),
                   _vm.r.state_pay == 1
-                    ? _c("span", [_vm._v("Ya fué aprovado su pago...")])
-                    : _c("span", [_vm._v("En espera de aprovación...")])
+                    ? _c("span", [_vm._v("Ya fué aprobado su pago...")])
+                    : _c("span", [_vm._v("En espera de aprobación...")])
                 ]),
                 _vm._v(" "),
                 _c("p", [
@@ -80672,10 +80903,10 @@ var render = function() {
                   _vm.r.state == 1
                     ? _c("span", [
                         _vm._v(
-                          "Ya fué aprovada su participación en la competencia..."
+                          "Ya fué aprobada su participación en la competencia..."
                         )
                       ])
-                    : _c("span", [_vm._v("En espera de aprovación...")])
+                    : _c("span", [_vm._v("En espera de aprobación...")])
                 ]),
                 _vm._v(" "),
                 _c(
@@ -80706,11 +80937,11 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _vm._m(7),
-                      _vm._v(" "),
                       _vm._m(8),
                       _vm._v(" "),
                       _vm._m(9),
+                      _vm._v(" "),
+                      _vm._m(10),
                       _vm._v(" "),
                       _c("p", { staticStyle: { margin: "0" } }, [
                         _vm._v("Monto: "),
@@ -80794,17 +81025,45 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12" }, [
+    return _c("div", { staticClass: "modal-header btn-black" }, [
       _c(
-        "div",
-        { staticClass: "span pull-right", staticStyle: { padding: "15px" } },
-        [
-          _c(
-            "button",
-            { staticClass: "btn-black", attrs: { type: "submit" } },
-            [_vm._v("Registrar")]
-          )
-        ]
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      ),
+      _vm._v(" "),
+      _c("h4", { staticClass: "modal-title" }, [
+        _vm._v(
+          "¿Esta Seguro de Registrar su participación en esta competencia?"
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Cancelar")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-success", attrs: { type: "submit" } },
+        [_vm._v("Confirmar")]
       )
     ])
   },

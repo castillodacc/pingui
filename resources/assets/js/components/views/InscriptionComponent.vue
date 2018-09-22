@@ -2,6 +2,11 @@
 	<div class="box">
 		<div class="box-header">
 			<h3 class="box-title">Tabla de Inscritos: </h3>
+			<button class="btn btn-primary btn-xs"
+			title="Generar Dorsales"
+			data-tooltip="tooltip"
+			v-if="can('inscription.generate')"
+			@click="generate"><i class="fa fa-refresh"></i></button>
 		</div>
 		<div class="box-body">
 			<rs-table id="inscription" :tabla="tabla" uri="/inscription" :d="$route.params.id"></rs-table>
@@ -30,9 +35,10 @@
 				},
 				tabla: {
 					columns: [
+					{ title: 'Dorsales', field: 'dorsal', sort: 'id', sortable: true },
 					{ title: 'Participante', field: 'user', sort: 'name', sortable: true },
 					{ title: 'Pareja', field: 'pareja', sort: 'name_2', sortable: true },
-					{ title: 'Tipo de pago', field: 'type_pay', sort: 'name_2', sortable: true },
+					{ title: 'Tipo de pago', field: 'type_pay', sort: 'method_pay', sortable: true },
 					{ title: 'Estado del pago', field: 'state_pay', sortable: true, class: 'text-center' },
 					{ title: 'Estado de Participación', field: 'state', sortable: true, class: 'text-center' },
 					],
@@ -54,6 +60,12 @@
 					this.form.data = response.data;
 					this.form.ready = true;
 					$('#inscription-form').modal('show');
+				});
+			},
+			generate: function () {
+				axios.post('/generate/' + this.$route.params.id)
+				.then(response => {
+					this.$children[0].get();
 				});
 			}
 		}

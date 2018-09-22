@@ -27,6 +27,9 @@
 					{ title: 'Tipo de pago', field: 'type_pay', sort: 'name_2', sortable: true },
 					{ title: 'Estado del pago', field: 'state_pay', sortable: true, class: 'text-center' },
 					{ title: 'Estado de Participación', field: 'state', sortable: true, class: 'text-center' },
+					],
+					options: [
+					{ ico: 'fa fa-list', class: 'btn-success', title: 'Lista Participantes', func: (id) => { this.$router.push({name: 'inscription.index', params: {id: id}}) }, action: 'tournament.inscription'},
 					]
 				}
 			};

@@ -97,6 +97,8 @@ class CreateTournamentTable extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('tournament_id');
 
+            $table->unsignedInteger('dorsal')->nullable();
+
             $table->unsignedInteger('febd_num_1')->nullable();
             $table->string('name_1', 150);
             $table->string('last_name_1', 150);
@@ -108,8 +110,8 @@ class CreateTournamentTable extends Migration
             // $table->unsignedInteger('price');
             $table->unsignedInteger('method_pay'); // 1-transferencia 2-paypal
 
-            $table->unsignedInteger('state_pay')->nullable(); // 1 aprovado - null no aprovado
-            $table->unsignedInteger('state')->nullable(); // 1 aprovado - null no aprovado
+            $table->unsignedInteger('state_pay')->nullable(); // 1 aprobado - null no aprobado
+            $table->unsignedInteger('state')->nullable(); // 1 aprobado - null no aprobado
             $table->timestamps();
             $table->softDeletes();
 

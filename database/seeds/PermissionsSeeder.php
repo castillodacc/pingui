@@ -353,6 +353,13 @@ class PermissionsSeeder extends Seeder
             'description' => 'Permiso para los torneos en los que se ha inscrito'
         ]);
 
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Ver Lista de Inscritos',
+            'module' => 'tournament',
+            'action' => 'inscription',
+            'description' => 'Permiso para la Lista de Inscritos'
+        ]);
+
         /**
          * Permisos de Organizadores
          */
@@ -434,6 +441,13 @@ class PermissionsSeeder extends Seeder
             'module' => 'inscription',
             'action' => 'store2',
             'description' => 'Permiso para Parejas'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Generar Dorsales',
+            'module' => 'inscription',
+            'action' => 'generate',
+            'description' => 'Permiso para Generar Dorsales'
         ]);
     }
 }
