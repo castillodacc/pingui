@@ -87,6 +87,8 @@ Route::group(['middleware' => ['auth', 'onlyAjax']], function () {
 
     Route::resource('inscription', 'InscriptionController')->except(['create', 'edit']);
     Route::post('generate/{tournament}', 'InscriptionController@generateDorsales');
+    Route::post('get-categories', 'InscriptionController@categories');
+    Route::post('get-subcategories', 'InscriptionController@subcategories');
 
     Route::group(['prefix' => '/', 'namespace' => 'Dashboard', 'as' => 'Dashboard::'], function () {
         Route::post('auto-deleted', 'ProfileController@autoDeleting');

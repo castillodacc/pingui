@@ -16,10 +16,15 @@ class Price extends Model
      * @var array
      */
     protected $fillable = [
-    	'name',
-        'price',
+        'name',
         'category_id',
-        'tournament_id'
+        'category_text',
+        'category1_id',
+        'category1_text',
+        'subcategory_id',
+        'subcategory_text',
+        'price',
+        'tournament_id',
     ];
 
     /**

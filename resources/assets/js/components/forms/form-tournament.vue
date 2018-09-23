@@ -42,21 +42,13 @@
 
             <div class="col-md-12">
               <div class="row">
-                <div class="col-md-5">
-                  <div class="form-group">
-                    <label for="p_name" class="control-label">
-                      <span class="edit"></span> Motivo del Precio:
-                    </label>
-                    <input type="text" class="form-control" v-model="p_name">
-                    <small id="p_nameHelp" class="form-text text-muted" v-text="msg.p_name"></small>
-                  </div>
-                </div>
                 <div class="col-md-3">
                   <div class="form-group">
                     <label for="p_category" class="control-label">
                       <span class="edit"></span> Categoría:
                     </label>
                     <select id="p_category" class="form-control" v-model="p_category">
+                      <option value="">Seleccione</option>
                       <option :value="1">Open</option>
                       <option :value="2">Latino</option>
                       <option :value="3">Standard</option>
@@ -64,7 +56,31 @@
                     <small id="p_categoryHelp" class="form-text text-muted" v-text="msg.p_category"></small>
                   </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3" v-if="p_category">
+                  <div class="form-group">
+                    <label for="p_category1" class="control-label">
+                      <span class="edit"></span> Categoría 2:
+                    </label>
+                    <select id="p_category1" class="form-control" v-model="p_category1">
+                      <option value="">Seleccione</option>
+                      <option v-for="c in categories" :value="c.id">{{ c.name }}</option>
+                    </select>
+                    <small id="p_category1Help" class="form-text text-muted" v-text="msg.p_category1"></small>
+                  </div>
+                </div>
+                <div class="col-md-3" v-if="p_category1 && p_category != 1">
+                  <div class="form-group">
+                    <label for="p_subcategory" class="control-label">
+                      <span class="edit"></span> Subcategoría:
+                    </label>
+                    <select id="p_subcategory" class="form-control" v-model="p_subcategory">
+                      <option value="">Seleccione</option>
+                      <option v-for="c in subcategories" :value="c.id">{{ c.name }}</option>
+                    </select>
+                    <small id="p_subcategoryHelp" class="form-text text-muted" v-text="msg.p_subcategory"></small>
+                  </div>
+                </div>
+                <div class="col-md-2">
                   <div class="form-group">
                     <label for="price" class="control-label">
                       <span class="edit"></span> Precio:
@@ -79,7 +95,7 @@
                 <div class="col-md-12">
                   <ul>
                     <li v-for="(p, i) in prices">
-                      <span>{{ cate(p.category_id) }} - {{ p.name }} <small><b>{{ p.price }} €</b></small></span>
+                      <span><b>{{ cate(p.category_id) }}</b> {{ p.p_category1_text }} <span v-if="p.p_subcategory_text">({{ p.p_subcategory_text }})</span> - {{ p.name }} <small><b>{{ p.price }} €</b></small></span>
                       <button type="button" class="btn btn-danger btn-xs" @click="remove(i, 'prices')"><span class="fa fa-remove"></span></button>
                     </li>
                   </ul>
@@ -241,7 +257,11 @@
         organizers: [],
         p_name: '',
         p_category: '',
+        p_subcategory: '',
+        p_category1: '',
         price: '',
+        categories: [],
+        subcategories: [],
         prices: [],
         link: '',
         hotel: '',
@@ -294,6 +314,24 @@
         },
       };
     },
+    watch: {
+      p_category: function (val) {
+        axios.post('/get-categories', { id: val })
+        .then(response => {
+          this.p_category1 = '';
+          this.p_subcategory = '';
+          this.categories = response.data.categories;
+        });
+      },
+      p_category1: function (val) {
+        if (val == 1) return;
+        axios.post('/get-subcategories', { id: this.p_category, cat: val })
+        .then(response => {
+          this.p_subcategory = '';
+          this.subcategories = response.data.subcategories;
+        });
+      }
+    },
     mounted() {
       this.get();
       if (this.$route.params.id) {
@@ -318,6 +356,11 @@
             this.prices.push({
               category_id: p[i].category_id,
               price: p[i].price,
+              category1_id: p[i].category1_id,
+              subcategory_id: p[i].subcategory_id,
+              p_category1_text: p[i].category1_text,
+              p_subcategory_text: p[i].subcategory_text,
+              p_category_text: p[i].category_text,
               name: p[i].name,
               id: p[i].id,
             });
@@ -400,25 +443,40 @@
         reader.readAsDataURL(files[0]);
       },
       addP: function () {
-        if (this.p_name && this.price && this.p_category) {
+        if (this.price && this.p_category && this.p_category1) {
           if (isNaN(this.price)) {
             return toastr.info('El campo precio solo admite valore numéricos.');
           }
           if (this.price > 200) {
             return toastr.info('El campo precio no puede ser tan algo.');
           }
-          if (!isNaN(this.p_name)) {
-            return toastr.info('El campo motivo del precio es para ingregar caracteres alfabéticos.');
+          if (this.p_subcategory == '' && this.p_category != 1) {
+            return toastr.info('El campo subcategoría es requerido.');
           }
-          console.log(this.p_category)
-          this.prices.push({
-            name: this.p_name,
+          let price = {
             price: this.price,
             category_id: this.p_category,
-          });
-          this.p_name = '';
+            category1_id: this.p_category1,
+            subcategory_id: this.p_subcategory,
+          };
+          for(let i in this.categories) {
+            if (this.categories[i].id == this.p_category1) {
+              price.p_category1_text = this.categories[i].name;
+              continue;
+            }
+          }
+          for(let s in this.subcategories) {
+            if (this.subcategories[s].id == this.p_subcategory) {
+              price.p_subcategory_text = this.subcategories[s].name;
+              continue;
+            }
+          }
+          price.p_category_text = this.cate(this.p_category);
+          this.prices.push(price);
+          this.p_subcategory = '';
           this.price = '';
           this.p_category = '';
+          this.p_category1 = '';
         } else {
           return toastr.info('Debe llenar todos los campos.');
         }

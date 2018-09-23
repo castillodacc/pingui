@@ -101,8 +101,7 @@
 				</p>
 				<p>
 					<template v-for="p in r.prices">
-						<span class="label label-info">{{ cate(p.category_id) }} - {{ p.name }}</span>
-						<span> </span>
+						<span class="label label-info" style="margin-right: 10px;">{{ p.category_text }} - {{ p.category1_text }} <span v-if="p.subcategory_text">{{ p.subcategory_text }}</span></span>
 					</template>
 				</p>
 				<p><a :href="'/inscritos/' + id" v-if="can('inscription.generate')">Ver Lista de inscritos</a></p>
@@ -168,33 +167,18 @@ p {font-size: 1.3em;}
 			prices: function (val) {
 				let str = '';
 				let values = [];
-				let open = 0, latino = 0, standard = 0;
+				let price = 0;
 				for(let i in val) {
 					for(let o in this.tournament.prices) {
-						if (this.tournament.prices[o].category_id === 1) {
-							str = 'Open';
-						} else if (this.tournament.prices[o].category_id === 2) {
-							str = 'Latino';
-						} else if (this.tournament.prices[o].category_id === 3) {
-							str = 'Standard';
-						}
-						if (str + ' - ' + this.tournament.prices[o].name == val[i]) {
+						str = this.tournament.prices[o].category_text + ' - ' + this.tournament.prices[o].category1_text + ((this.tournament.prices[o].subcategory_text) ? ' (' + this.tournament.prices[o].subcategory_text + ')' : '');
+						if (str == val[i]) {
+							price += this.tournament.prices[o].price
 							values.push(this.tournament.prices[o].id);
-							if (open == 0 && str == 'Open') {
-								open = this.tournament.prices[o].price;
-							}
-							if (latino == 0 && str == 'Latino') {
-								latino = this.tournament.prices[o].price;
-							}
-							if (standard == 0 && str == 'Standard') {
-								standard = this.tournament.prices[o].price;
-							}
-							continue;
 						}
 					}
 				}
 				this.inscription.price = values;
-				this.inscription.pay = open + latino + standard;
+				this.inscription.pay = price;
 			}
 		},
 		methods: {
@@ -208,14 +192,7 @@ p {font-size: 1.3em;}
 					this.option_prices = [];
 					let str = '';
 					for(let i in price) {
-						if (price[i].category_id === 1) {
-							str = 'Open';
-						} else if (price[i].category_id === 2) {
-							str = 'Latino';
-						} else if (price[i].category_id === 3) {
-							str = 'Standard';
-						}
-						this.option_prices.push(str + ' - ' + price[i].name);
+						this.option_prices.push(price[i].category_text + ' - ' + price[i].category1_text + ((price[i].subcategory_text) ? ' (' + price[i].subcategory_text + ')' : ''));
 					}
 					if (response.data.state) {
 						this.r = response.data.state;

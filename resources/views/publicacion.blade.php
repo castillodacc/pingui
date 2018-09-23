@@ -74,14 +74,21 @@
 									<h1  class="hidden-xs hidden-sm">{{ $tournament->name }}</h1>
 								</div>
 								<div class="row">
-									<div class="pull-left col-md-4 col-xs-12">
+									<div class="pull-left col-md-7 col-xs-12">
 										<small>Se realizará: {{ $tournament->start }}.</small><br>
 										<small><strong>Organizador: {{ $tournament->organizer->name }}.</strong></small><br>
 										<small><strong>Inscripción: {{ ($tournament->inscription) ? 'Abierta' : 'Cerrada' }}.</strong></small><br>
-										<h4>Precios:</h4>
+										<h5>Precios:</h5>
 										<ul>
 											@foreach($tournament->prices as $p)
-											<li>{{ $p->name }}: <b><em>{{ $p->price }} €</em></b></li>
+											<li>
+												<b>{{ $p->category_text }}</b>:
+												{{ $p->category1_text }}
+												@if($p->subcategory_text)
+												(<small>{{ $p->subcategory_text }}</small>)
+												@endif
+												<em><b>{{ $p->price }} €</b></em>
+											</li>
 											@endforeach
 										</ul>
 									</div>

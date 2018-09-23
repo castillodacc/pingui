@@ -82,8 +82,13 @@ class CreateTournamentTable extends Migration
 
         Schema::create('prices', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 150);
+            // $table->string('name', 150);
             $table->unsignedInteger('category_id');
+            $table->string('category_text');
+            $table->unsignedInteger('category1_id');
+            $table->string('category1_text');
+            $table->unsignedInteger('subcategory_id')->nullable();
+            $table->string('subcategory_text')->nullable();
             $table->unsignedInteger('price');
             $table->unsignedInteger('tournament_id');
             $table->timestamps();

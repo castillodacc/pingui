@@ -116,6 +116,9 @@ class TournamentController extends Controller
 
         foreach ($data['prices'] as $p) {
             $p['tournament_id'] = $tournament->id;
+            $p['category_text'] = $p['p_category_text'];
+            $p['category1_text'] = $p['p_category1_text'];
+            $p['subcategory_text'] = (isset($p['p_subcategory_text'])) ? $p['p_subcategory_text'] : '';
             Price::create($p);
         }
 
@@ -267,6 +270,9 @@ class TournamentController extends Controller
                 Price::findOrFail($p['id'])->update($p);
             } else {
                 $p['tournament_id'] = $tournament->id;
+                $p['category_text'] = $p['p_category_text'];
+                $p['category1_text'] = $p['p_category1_text'];
+                $p['subcategory_text'] = (isset($p['p_subcategory_text'])) ? $p['p_subcategory_text'] : '';
                 Price::create($p);
             }
         }
