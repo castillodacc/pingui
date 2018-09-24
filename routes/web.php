@@ -36,6 +36,7 @@ Route::group(['namespace' => 'Auth'], function () {
         }
     });
     Route::post('logout', 'LoginController@logout')->name('logout');
+    Route::get('logout', 'LoginController@logout');
 });
 
 Route::post('app', 'RouteController@dataForTemplate');
