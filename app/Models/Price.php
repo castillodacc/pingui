@@ -16,13 +16,12 @@ class Price extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
         'category_id',
-        'category_text',
-        'category1_id',
-        'category1_text',
+        'level_id',
         'subcategory_id',
-        'subcategory_text',
+        // 'category_text',
+        // 'level_text',
+        // 'subcategory_text',
         'price',
         'tournament_id',
     ];
@@ -39,5 +38,20 @@ class Price extends Model
     public function inscriptions()
     {
         return $this->belongsToMany(Inscription::class);
+    }
+
+    public function subO()
+    {
+        return $this->belongsTo(Category_open::class, 'subcategory_id', 'id');
+    }
+
+    public function subL()
+    {
+        return $this->belongsTo(Subcategory_latino::class, 'subcategory_id', 'id');
+    }
+
+    public function subS()
+    {
+        return $this->belongsTo(Subcategory_standar::class, 'subcategory_id', 'id');
     }
 }

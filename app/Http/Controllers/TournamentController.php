@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ { Tournament, Referee, Category_open, Subcategory_latino, Subcategory_standar, Hotel, Price, Organizer, Inscription };
+use App\Models\ { Tournament, Referee, Category_open, Category_latino, Subcategory_latino, Category_standar, Subcategory_standar, Hotel, Price, Organizer, Inscription };
 use Intervention\Image\ImageManager;
 
 class TournamentController extends Controller
@@ -53,8 +53,6 @@ class TournamentController extends Controller
             'hours' => 'nullable|string|unique:tournaments',
             'info' => 'nullable|string|unique:tournaments',
             'maps' => 'nullable|string',
-            // 'price' => 'required|numeric|min:1|max:999',
-            // 'entrance_price' => 'required|numeric|min:1|max:999',
             'referee' => 'nullable|array',
             'category_open' => 'nullable|array',
             'hoteles' => 'nullable|array',
@@ -74,8 +72,6 @@ class TournamentController extends Controller
             'maps' => 'mapas',
             'info' => 'información',
             'prices' => 'precios',
-            // 'price' => 'precio',
-            // 'entrance_price' => 'precio de entrada',
             'referee' => 'referee',
             'category_open' => 'categoria open',
             'subcategory_latino' => 'categoria latino',
@@ -116,20 +112,11 @@ class TournamentController extends Controller
 
         foreach ($data['prices'] as $p) {
             $p['tournament_id'] = $tournament->id;
-            $p['category_text'] = $p['p_category_text'];
-            $p['category1_text'] = $p['p_category1_text'];
-            $p['subcategory_text'] = (isset($p['p_subcategory_text'])) ? $p['p_subcategory_text'] : '';
             Price::create($p);
         }
 
-        $tournament->referees()
-        ->attach($data['referee']);
-        $tournament->category_opens()
-        ->attach($data['category_open']);
-        $tournament->subcategory_latinos()
-        ->attach($data['subcategory_latino']);
-        $tournament->subcategory_standars()
-        ->attach($data['subcategory_standar']);
+        $tournament->referees()->attach($data['referee']);
+
     }
 
     /**
@@ -144,20 +131,18 @@ class TournamentController extends Controller
         $tournament->start = \Carbon::parse($tournament->start)->format('d/m/Y');
         $tournament->end = \Carbon::parse($tournament->end)->format('d/m/Y');
         $tournament->referee_tournament = $tournament->referees->pluck('name');
-        $tournament->category_open_tournament = $tournament->category_opens->pluck('name');
-        $tournament->subcategory_latino_tournament = $tournament->subcategory_latinos->pluck('name', 'category_latino_id');
-        $tournament->subcategory_latino_tournament = $tournament->subcategory_latinos;
-        $tournament->subcategory_latino_tournament->each(function ($s) {
-            $s->name = $s->category_latino->name . ' - ' . $s->name;
-            unset($s->category_latino,$s->category_latino_id,$s->description,$s->id,$s->pivot);
-        });
-        $tournament->subcategory_standar_tournament = $tournament->subcategory_standars;
-        $tournament->subcategory_standar_tournament->each(function ($s) {
-            $s->name = $s->category_standar->name . ' - ' . $s->name;
-            unset($s->category_standar,$s->category_standar_id,$s->description,$s->id,$s->pivot);
-        });
         $tournament->hotels;
-        $tournament->prices;
+        $tournament->prices->each(function ($p) {
+            if ($p->category_id == 1) {
+                $p->level_text = Category_open::findOrFail($p->subcategory_id)->name;
+            } elseif ($p->category_id == 2) {
+                $p->level_text = Category_latino::findOrFail($p->level_id)->name;
+                $p->subcategory_text = Subcategory_latino::findOrFail($p->subcategory_id)->name;
+            } elseif ($p->category_id == 3) {
+                $p->level_text = Category_standar::findOrFail($p->level_id)->name;
+                $p->subcategory_text = Subcategory_standar::findOrFail($p->subcategory_id)->name;
+            }
+        });
         unset($tournament->referees, $tournament->category_opens, $tournament->subcategory_latinos, $tournament->subcategory_standars);
         return response()->json($tournament);
     }
@@ -183,8 +168,6 @@ class TournamentController extends Controller
             'hours' => 'nullable|string',
             'info' => 'nullable|string',
             'maps' => 'nullable|string',
-            // 'price' => 'required|numeric|min:1|max:999',
-            // 'entrance_price' => 'required|numeric|min:1|max:999',
             'referee' => 'nullable|array',
             'prices' => 'nullable|array',
             'category_open' => 'nullable|array',
@@ -204,8 +187,6 @@ class TournamentController extends Controller
             'hours' => 'horarios',
             'maps' => 'mapas',
             'info' => 'información',
-            // 'price' => 'precio',
-            // 'entrance_price' => 'precio de entrada',
             'referee' => 'referee',
             'category_open' => 'categoria open',
             'subcategory_latino' => 'categoria latino',
@@ -261,7 +242,7 @@ class TournamentController extends Controller
         foreach ($delete as $d) {
             Hotel::findOrFail($d)->delete();
         }
-        
+
         $id_prices = $tournament->prices->pluck('id')->toArray();
         $id_prices_new = [];
         foreach ($data['prices'] as $p) {
@@ -270,9 +251,6 @@ class TournamentController extends Controller
                 Price::findOrFail($p['id'])->update($p);
             } else {
                 $p['tournament_id'] = $tournament->id;
-                $p['category_text'] = $p['p_category_text'];
-                $p['category1_text'] = $p['p_category1_text'];
-                $p['subcategory_text'] = (isset($p['p_subcategory_text'])) ? $p['p_subcategory_text'] : '';
                 Price::create($p);
             }
         }
@@ -282,9 +260,6 @@ class TournamentController extends Controller
         }
 
         $tournament->update_pivot($data['referee'], 'referees');
-        $tournament->update_pivot($data['category_open'], 'category_opens');
-        $tournament->update_pivot($data['subcategory_latino'], 'subcategory_latinos');
-        $tournament->update_pivot($data['subcategory_standar'], 'subcategory_standars');
     }
 
     /**
@@ -306,11 +281,13 @@ class TournamentController extends Controller
         $category_latinos = Subcategory_latino::get(['id', 'name', 'category_latino_id']);
         $category_latinos->each(function ($c) {
             $c->name = $c->category_latino->name . ' - ' . $c->name;
+            $c->category_id = $c->category_latino->id;
             unset($c->category_latino, $c->category_latino_id);
         });
         $category_standars = Subcategory_standar::get(['id', 'name', 'category_standar_id']);
         $category_standars->each(function ($c) {
             $c->name = $c->category_standar->name . ' - ' . $c->name;
+            $c->category_id = $c->category_standar->id;
             unset($c->category_standar, $c->category_standar_id);
         });
         return response()->json(compact('referees', 'category_opens', 'category_latinos', 'category_standars', 'organizers'));

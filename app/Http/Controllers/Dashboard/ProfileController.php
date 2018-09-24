@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Http\Requests\ { ChangePasswordRequest, UpdatePerfilUserRequest };
-use App\Models\ { Club, Pareja };
+use App\Models\ { Club, Pareja, Category_latino, Category_standar, Subcategory_latino, Subcategory_standar };
 
 class ProfileController extends Controller
 {
@@ -26,7 +26,9 @@ class ProfileController extends Controller
         $pareja2 = optional($user->parejas)[1];
         $user->module;
         $club = Club::get(['id', 'name']);
-        return response()->json(compact('user', 'club', 'pareja', 'pareja2'));
+        $category_latino = Category_latino::get();
+        $category_standar = Category_standar::get();
+        return response()->json(compact('user', 'club', 'pareja', 'pareja2', 'category_latino', 'category_standar'));
     }
 
     /**
@@ -130,5 +132,15 @@ class ProfileController extends Controller
             'password' => '',
         ])->save();
         $user = \Auth::user()->delete();
+    }
+
+    public function subcategories()
+    {
+        if (request()->id == 1) {
+            $subcategories = Subcategory_latino::where('category_latino_id', '=', request()->cat)->get();
+        } elseif (request()->id == 2) {
+            $subcategories = Subcategory_standar::where('category_standar_id', '=', request()->cat)->get();
+        }
+        return response()->json(compact('subcategories'));
     }
 }

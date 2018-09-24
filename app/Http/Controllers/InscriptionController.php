@@ -166,27 +166,4 @@ class InscriptionController extends Controller
             }
         }
     }
-
-    public function categories()
-    {
-        if (request()->id == 1) {
-            $categories = Category_open::all();
-        } elseif (request()->id == 2) {
-            $categories = Category_latino::all();
-        } elseif (request()->id == 3) {
-            $categories = Category_standar::all();
-        }
-        return response()->json(compact('categories'));
-    }
-
-    public function subcategories()
-    {
-        if (request()->id == 1) {
-        } elseif (request()->id == 2) {
-            $subcategories = Subcategory_latino::where('category_latino_id', '=', request()->cat)->get();
-        } elseif (request()->id == 3) {
-            $subcategories = Subcategory_standar::where('category_standar_id', '=', request()->cat)->get();
-        }
-        return response()->json(compact('subcategories'));
-    }
 }

@@ -1,7 +1,7 @@
 <template>
 	<div v-if="can('inscription.store')">
 		<form @submit.prevent="register" v-if="r === true">
-			<p>Datos de pareja</p>
+			<h4>Datos de pareja</h4>
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="name_1" class="control-label">
@@ -21,12 +21,35 @@
 				</div>
 			</div>
 			<div class="col-md-8">
-				<div class="form-group">
-					<label for="prices" class="control-label">
-						<span class="fa fa-prices"></span> Categoría en la que participará:
-					</label>
-					<rs-multiselect v-model="prices" :options="option_prices" :multiple="true" :hide-selected="true" :close-on-select="false"></rs-multiselect>
-					<small id="priceHelp" class="form-text text-muted" v-text="msg.prices"></small>
+				<div class="row">
+					<h4>Seleccione la modalidad que desea bailar:</h4>
+					<div class="col-md-4">
+						<p>Standard:</p>
+						<div class="form-inline" v-for="p in tournament.prices" v-if="p.category_id == 3 && data.category_s == p.level_id && data.group_s == p.subcategory_id">
+							<label :for="p.id">
+								<input type="checkbox" :id="p.id" class="" :value="p.id" v-model="prices">
+								{{ p.level_text }} - {{ p.subcategory_text }}
+							</label>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<p>Latino:</p>
+						<div class="form-inline" v-for="p in tournament.prices" v-if="p.category_id == 2 && data.category_l == p.level_id && data.group_l == p.subcategory_id">
+							<label :for="p.id">
+								<input type="checkbox" :id="p.id" class="" :value="p.id" v-model="prices">
+								{{ p.level_text }} - {{ p.subcategory_text }}
+							</label>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<p>Open:</p>
+						<div class="form-inline" v-for="p in tournament.prices" v-if="p.category_id == 1">
+							<label :for="p.id">
+								<input type="checkbox" :id="p.id" class="" :value="p.id" v-model="prices">
+								{{ p.level_text }}
+							</label>
+						</div>
+					</div>
 				</div>
 				<div class="col-md-12" v-show="inscription.price.length">
 					<p>Seleccione el tipo de pago:</p>
@@ -34,7 +57,7 @@
 						Transferencia
 					</div>
 					<div class="col-md-6 btn borde" :class="{'btn-black': inscription.method_pay == 2}" @click="changeType(2)">
-						Paypal<i class="glypicon glypicon-ravelry" aria-hidden="true"></i>
+						Paypal
 					</div>
 					<small id="method_payHelp" class="form-text text-muted" v-text="msg.method_pay"></small>
 					<h4>Total a Pagar: <b>{{ inscription.pay }} €</b></h4>
@@ -65,7 +88,7 @@
 							<small id="name_2Help" class="form-text text-muted"></small>
 							<p> Categorias: 
 								<template v-for="p in prices">
-									<span class="label label-info">{{ p }}</span>
+									<span class="label label-info">{{ namePrice(p) }}</span>
 									<span> </span>
 								</template>
 							</p>
@@ -99,12 +122,18 @@
 					<span v-if="r.state == 1">Ya fué aprobada su participación en la competencia...</span>
 					<span v-else>En espera de aprobación...</span>
 				</p>
-				<p>
-					<template v-for="p in r.prices">
-						<span class="label label-info" style="margin-right: 10px;">{{ p.category_text }} - {{ p.category1_text }} <span v-if="p.subcategory_text">{{ p.subcategory_text }}</span></span>
-					</template>
-				</p>
-				<p><a :href="'/inscritos/' + id" v-if="can('inscription.generate')">Ver Lista de inscritos</a></p>
+				<div class="row">
+					<div class="col-md-12">
+						<template v-for="p in r.prices">
+							<span class="label label-info" style="display: inline; font-size: 1em; margin-right: 10px;">
+								{{ cate(p.category_id) }} - {{ namePrice(p.id) }}
+							</span>
+							<wbr></wbr>
+						</template>
+					</div>
+				</div>
+				<hr>
+				<p><a :href="'/inscritos/' + id" v-if="can('inscription.generate')" class="btn btn-black">Ver Lista de inscritos</a></p>
 				<div v-if="r.method_pay == 1 && !r.state">
 					<p style="font-size: 14px;">No te olvides de llevar a cabo la forma de pago seleccionada.</p>
 					<p style="margin: 0">Banco: <b>Banco Sabadell</b></p>
@@ -132,7 +161,7 @@ p {font-size: 1.3em;}
 		props: ['id'],
 		data() {
 			return {
-				option_prices: [],
+				// option_prices: [],
 				prices: [],
 				pareja1: '',
 				pareja2: '',
@@ -159,29 +188,33 @@ p {font-size: 1.3em;}
 				}
 			};
 		},
+		watch: {
+			prices: function (val) {
+				let price = 0;
+				for(let i in val) {
+					for(let o in this.tournament.prices) {
+						if (this.tournament.prices[o].id == val[i]) {
+							price += this.tournament.prices[o].price
+							continue;
+						}
+					}
+				}
+				this.inscription.price = val;
+				this.inscription.pay = price;
+			}
+		},
 		mounted() {
 			this.inscription.tournament_id = this.id;
 			setTimeout(() => {this.get();},300);
 		},
-		watch: {
-			prices: function (val) {
-				let str = '';
-				let values = [];
-				let price = 0;
-				for(let i in val) {
-					for(let o in this.tournament.prices) {
-						str = this.tournament.prices[o].category_text + ' - ' + this.tournament.prices[o].category1_text + ((this.tournament.prices[o].subcategory_text) ? ' (' + this.tournament.prices[o].subcategory_text + ')' : '');
-						if (str == val[i]) {
-							price += this.tournament.prices[o].price
-							values.push(this.tournament.prices[o].id);
-						}
+		methods: {
+			namePrice: function (id) {
+				for(let o in this.tournament.prices) {
+					if (this.tournament.prices[o].id == id) {
+						return this.tournament.prices[o].level_text + ((this.tournament.prices[o].subcategory_text) ? ' - ' + this.tournament.prices[o].subcategory_text: '');
 					}
 				}
-				this.inscription.price = values;
-				this.inscription.pay = price;
-			}
-		},
-		methods: {
+			},
 			get: function () {
 				axios.post('/get-data', {id: this.id})
 				.then(response => {
@@ -189,11 +222,6 @@ p {font-size: 1.3em;}
 					this.inscription.user_id = response.data.user.id;
 					let price = response.data.tournament.prices;
 					this.data = response.data.user;
-					this.option_prices = [];
-					let str = '';
-					for(let i in price) {
-						this.option_prices.push(price[i].category_text + ' - ' + price[i].category1_text + ((price[i].subcategory_text) ? ' (' + price[i].subcategory_text + ')' : ''));
-					}
 					if (response.data.state) {
 						this.r = response.data.state;
 					}

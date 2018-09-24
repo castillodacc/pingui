@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Permisologia\Permission;
 use App\User;
-use App\Models\ { Inscription, Tournament };
+use App\Models\ { Inscription, Tournament, Category_open, Category_latino, Subcategory_latino, Category_standar, Subcategory_standar };
 
 class RouteController extends Controller
 {
@@ -124,7 +124,18 @@ class RouteController extends Controller
     public function data(Request $request)
     {
         $tournament = Tournament::select(['id', 'name'])->findOrFail($request->id);
-        $tournament->prices;
+        // $tournament->prices;
+        $tournament->prices->each(function ($p) {
+            if ($p->category_id == 1) {
+                $p->level_text = Category_open::findOrFail($p->subcategory_id)->name;
+            } elseif ($p->category_id == 2) {
+                $p->level_text = Category_latino::findOrFail($p->level_id)->name;
+                $p->subcategory_text = Subcategory_latino::findOrFail($p->subcategory_id)->name;
+            } elseif ($p->category_id == 3) {
+                $p->level_text = Category_standar::findOrFail($p->level_id)->name;
+                $p->subcategory_text = Subcategory_standar::findOrFail($p->subcategory_id)->name;
+            }
+        });
         $inscription = Inscription::where('tournament_id', '=', $request->id)
         ->where('user_id', '=', \Auth::user()->id)
         ->select(['id', 'last_name_1', 'last_name_2', 'method_pay', 'name_1', 'name_2', 'pay', 'state', 'state_pay'])

@@ -14,7 +14,7 @@ class UserRootSeeder extends Seeder
     public function run()
     {
         $now = \Carbon\Carbon::now();
-        
+
         $user = App\User::create([
             'user'      => 'Root',
             'name'      => 'Root',

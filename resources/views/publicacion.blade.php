@@ -78,15 +78,11 @@
 										<small>Se realizará: {{ $tournament->start }}.</small><br>
 										<small><strong>Organizador: {{ $tournament->organizer->name }}.</strong></small><br>
 										<small><strong>Inscripción: {{ ($tournament->inscription) ? 'Abierta' : 'Cerrada' }}.</strong></small><br>
-										<h5>Precios:</h5>
+										<h5>Precios Categoria Open:</h5>
 										<ul>
-											@foreach($tournament->prices as $p)
+											@foreach($tournament->prices->where('category_id', 1) as $p)
 											<li>
-												<b>{{ $p->category_text }}</b>:
-												{{ $p->category1_text }}
-												@if($p->subcategory_text)
-												(<small>{{ $p->subcategory_text }}</small>)
-												@endif
+												<b>{{ $p->subO->name }}</b>:
 												<em><b>{{ $p->price }} €</b></em>
 											</li>
 											@endforeach
@@ -184,24 +180,24 @@
 									<div class="row">
 										<div class="col-md-12">
 											<h5 style="display: inline;">Categorias Opens:</h5>
-											@foreach($tournament->category_opens as $c)
-											<span class="label label-success">{{ $c->name }}</span>
+											@foreach($tournament->prices->where('category_id', 1) as $c)
+											<span class="label label-success">{{ $c->subO->name }}</span>
 											@endforeach
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-md-12">
 											<h5 style="display: inline;">Categorias Latinos:</h5>
-											@foreach($tournament->subcategory_latinos as $c)
-											<span class="label label-success">{{ $c->category_latino->name }} - {{ $c->name }}</span>
+											@foreach($tournament->prices->where('category_id', 2) as $c)
+											<span class="label label-success">{{ $c->subL->category_latino->name }} - {{ $c->subL->name }}</span>
 											@endforeach
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-md-12">
 											<h5 style="display: inline;">Categorias Standar:</h5>
-											@foreach($tournament->subcategory_standars as $c)
-											<span class="label label-success">{{ $c->category_standar->name }} - {{ $c->name }}</span>
+											@foreach($tournament->prices->where('category_id', 3) as $c)
+											<span class="label label-success">{{ $c->subS->category_standar->name }} - {{ $c->subS->name }}</span>
 											@endforeach
 										</div>
 									</div>

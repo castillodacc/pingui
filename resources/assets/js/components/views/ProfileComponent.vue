@@ -85,7 +85,7 @@
                             <div class="form-group">
                                 <label for="birthdate" class="col-sm-2 control-label">Fecha de Nacimiento:</label>
                                 <div class="col-sm-10">
-                                    <date-picker id="birthdate" v-model="user.birthdate" :config="{format: 'DD/MM/YYYY', useCurrent: false, locale: 'es'}"></date-picker>
+                                    <date-picker id="birthdate4" v-model="user.birthdate" :config="{format: 'DD/MM/YYYY', useCurrent: false, locale: 'es'}"></date-picker>
                                     <small id="birthdateHelp" class="form-text"></small>
                                 </div>
                             </div>
@@ -176,15 +176,8 @@
                             <div class="form-group">
                                 <label for="category_l" class="col-sm-3 control-label">Categoría Latino:</label>
                                 <div class="col-sm-9">
-                                    <select for="category_l" id="category_lat" class="form-control" v-model="user.category_l">
-                                        <option value="T1">T1</option>
-                                        <option value="T2">T2</option>
-                                        <option value="AI">AI</option>
-                                        <option value="AN">AN</option>
-                                        <option value="B">B</option>
-                                        <option value="C">C</option>
-                                        <option value="F">F</option>
-                                        <option value="No bailo">No bailo</option>
+                                    <select for="category_l" id="category_lat" class="form-control" v-model="user.category_l" @change="charge(1)">
+                                        <option :value="c.id" v-for="c in categories_latino" v-text="c.name"></option>
                                     </select>
                                     <small id="category_lHelp" class="form-text"></small>
                                 </div>
@@ -200,18 +193,7 @@
                                 <label for="group_l" class="col-sm-3 control-label">Grupo Latino:</label>
                                 <div class="col-sm-9">
                                     <select id="group_l" class="form-control" v-model="user.group_l">
-                                        <option value="Adulto 1">Adulto 1</option>
-                                        <option value="Adulto 2">Adulto 2</option>
-                                        <option value="Junior 1">Junior 1</option>
-                                        <option value="Junior 2">Junior 2</option>
-                                        <option value="JUVENIL 1, con las parejas hasta 9 años">JUVENIL 1, con las parejas hasta 9 años</option>
-                                        <option value="JUVENIL 2, con las parejas que cumplen 10 y 11 años a lo largo de 2018">JUVENIL 2, con las parejas que cumplen 10 y 11 años a lo largo de 2018</option>
-                                        <option value="Senior 1">Senior 1</option>
-                                        <option value="Senior 2">Senior 2</option>
-                                        <option value="Senior 3">Senior 3</option>
-                                        <option value="Senior 4">Senior 4</option>
-                                        <option value="Top Senior">Top Senior</option>
-                                        <option value="Youth">Youth</option>
+                                        <option :value="s.id" v-for="s in subcategories_latino" v-text="s.name"></option>
                                     </select>
                                     <small id="group_lHelp" class="form-text"></small>
                                 </div>
@@ -220,16 +202,8 @@
                             <div class="form-group">
                                 <label for="category_s" class="col-sm-3 control-label">Categoría Standar:</label>
                                 <div class="col-sm-9">
-                                    <select id="category_s" class="form-control" v-model="user.category_s">
-                                        <option value="T1">T1</option>
-                                        <option value="T2">T2</option>
-                                        <option value="AI">AI</option>
-                                        <option value="AN">AN</option>
-                                        <option value="B">B</option>
-                                        <option value="C">C</option>
-                                        <option value="F">F</option>
-                                        <option value="Girls std">Girls std</option>
-                                        <option value="No_bailo">No_bailo</option>
+                                    <select id="category_s" class="form-control" v-model="user.category_s" @change="charge(2)">
+                                        <option :value="c.id" v-for="c in categories_standar" v-text="c.name"></option>
                                     </select>
                                     <small id="category_sHelp" class="form-text"></small>
                                 </div>
@@ -245,18 +219,7 @@
                                 <label for="group_s" class="col-sm-3 control-label">Grupo Standar:</label>
                                 <div class="col-sm-9">
                                     <select id="group_s" class="form-control" v-model="user.group_s">
-                                        <option value="Adulto 1">Adulto 1</option>
-                                        <option value="Adulto 2">Adulto 2</option>
-                                        <option value="Junior 1">Junior 1</option>
-                                        <option value="Junior 2">Junior 2</option>
-                                        <option value="JUVENIL 1, con las parejas hasta 9 años">JUVENIL 1, con las parejas hasta 9 años</option>
-                                        <option value="JUVENIL 2, con las parejas que cumplen 10 y 11 años a lo largo de 2018.">JUVENIL 2, con las parejas que cumplen 10 y 11 años a lo largo de 2018.</option>
-                                        <option value="Senior 1">Senior 1</option>
-                                        <option value="Senior 2">Senior 2</option>
-                                        <option value="Senior 3">Senior 3</option>
-                                        <option value="Senior 4">Senior 4</option>
-                                        <option value="Top Senior">Top Senior</option>
-                                        <option value="Youth">Youth</option>
+                                        <option :value="s.id" v-for="s in subcategories_standar" v-text="s.name"></option>
                                     </select>
                                     <small id="group_sHelp" class="form-text"></small>
                                 </div>
@@ -287,7 +250,7 @@
                             <div class="form-group">
                                 <label for="birthdate" class="col-sm-3 control-label">Fecha de Nacimiento:</label>
                                 <div class="col-sm-9">
-                                    <date-picker id="birthdate" v-model="pareja.birthdate" :config="{format: 'DD/MM/YYYY', useCurrent: false, locale: 'es'}"></date-picker>
+                                    <date-picker id="birthdate3" v-model="pareja.birthdate" :config="{format: 'DD/MM/YYYY', useCurrent: false, locale: 'es'}"></date-picker>
                                     <small id="birthdateHelp" class="form-text"></small>
                                 </div>
                             </div>
@@ -378,6 +341,10 @@
             show: 1,
             pareja: {},
             club: [],
+            categories_latino: [],
+            subcategories_latino: [],
+            categories_standar: [],
+            subcategories_standar: [],
             pareja: {},
             pareja2: {},
             user: {
@@ -405,6 +372,8 @@
         }
         axios.get('/profile')
         .then(response => {
+            this.categories_latino = response.data.category_latino;
+            this.categories_standar = response.data.category_standar;
             if (response.data.pareja) {
                 this.pareja.p_email = response.data.pareja.email;
                 this.pareja.p_febd_num = response.data.pareja.febd_num;
@@ -421,9 +390,26 @@
             }
             this.user = response.data.user;
             this.club = response.data.club;
+            this.charge(1);
+            this.charge(2);
+            setTimeout(() => {
+                this.user = response.data.user;
+            },300);
         });
     },
     methods: {
+        charge(select) {
+            axios.post('/subcategories', {id: select, cat: this.user.category_l})
+            .then(response => {
+                if (select == 1) {
+                    // this.user.group_l = [];
+                    this.subcategories_latino = response.data.subcategories;
+                } else {
+                    // this.user.group_s = [];
+                    this.subcategories_standar = response.data.subcategories;
+                }
+            });
+        },
         baja(n) {
             if (n == 1) {
                 $('#auto_deleted').modal('show');

@@ -87,12 +87,11 @@ Route::group(['middleware' => ['auth', 'onlyAjax']], function () {
 
     Route::resource('inscription', 'InscriptionController')->except(['create', 'edit']);
     Route::post('generate/{tournament}', 'InscriptionController@generateDorsales');
-    Route::post('get-categories', 'InscriptionController@categories');
-    Route::post('get-subcategories', 'InscriptionController@subcategories');
 
     Route::group(['prefix' => '/', 'namespace' => 'Dashboard', 'as' => 'Dashboard::'], function () {
         Route::post('auto-deleted', 'ProfileController@autoDeleting');
         Route::get('profile', 'ProfileController@show');
+        Route::post('subcategories', 'ProfileController@subcategories');
         Route::post('change-pass', 'ProfileController@editPassword');
         Route::post('update-user', 'ProfileController@editUser');
         Route::post('update-bailarin/{id}', 'ProfileController@bailarin');

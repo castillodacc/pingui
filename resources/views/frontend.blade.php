@@ -66,7 +66,7 @@
 					<li class="bg-dark-30 bg-dark" style="background-image: url('/images/bailando.jpg'); width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; z-index: 1;" data-thumb-alt="">
 						<div class="hs-caption" style="top: 0px; display: table;">
 							<div class="caption-content" style="opacity: 1;">
-								<h1 class="hs-title-size-4 font-alt mb-30">Bienvenido a <br><b>P I N G U I</b></h1>
+								<h1 class="hs-title-size-4 font-alt mb-30" style="background-color: rgba(0,0,0,.6);">Bienvenido a <br><b>P I N G U I</b></h1>
 								<a href="#competitions" class="section-scroll btn btn-border-w btn-round">Competiciones</a>
 							</div>
 						</div>
@@ -75,7 +75,7 @@
 					<li class="bg-dark-30 bg-dark flex-active-slide" style="background-image: url('{{ asset('storage/' . $t->image) }}'); width: 100%; float: left; margin-right: -100%; position: relative; opacity: 1; display: block; z-index: 2;" data-thumb-alt="">
 						<div class="hs-caption" style="top: 0px; display: table;">
 							<div class="caption-content" style="opacity: 1;">
-								<div class="hs-title-size-4 font-alt mb-30"><b>{{ $t->name }}</b></div>
+								<div class="hs-title-size-4 font-alt mb-30" style="background-color: rgba(0,0,0,.6);"><b>{{ $t->name }}</b></div>
 								<div class="container">
 									@if(strlen($t->description) > 120)
 									<div class="hs-title-size-1 font-alt mb-40">{{ substr($t->description, 0, 120) . '...' }}</div>
