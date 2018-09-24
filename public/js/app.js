@@ -80477,6 +80477,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -80521,13 +80523,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			for (var i in val) {
 				for (var o in this.tournament.prices) {
 					if (this.tournament.prices[o].id == val[i]) {
-						price += this.tournament.prices[o].price;
+						price += Number(this.tournament.prices[o].price);
 						continue;
 					}
 				}
 			}
 			this.inscription.price = val;
-			this.inscription.pay = price;
+			// console.log(Number(price));
+			this.inscription.pay = Number(price);
 		}
 	},
 	mounted: function mounted() {

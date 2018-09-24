@@ -26,6 +26,8 @@
 					<div class="col-md-4">
 						<p>Standard:</p>
 						<div class="form-inline" v-for="p in tournament.prices" v-if="p.category_id == 3 && data.category_s == p.level_id && data.group_s == p.subcategory_id">
+							<!-- {{data.category_s}} -  -->
+							<!-- {{data.group_s}} -->
 							<label :for="p.id">
 								<input type="checkbox" :id="p.id" class="" :value="p.id" v-model="prices">
 								{{ p.level_text }} - {{ p.subcategory_text }}
@@ -194,13 +196,14 @@ p {font-size: 1.3em;}
 				for(let i in val) {
 					for(let o in this.tournament.prices) {
 						if (this.tournament.prices[o].id == val[i]) {
-							price += this.tournament.prices[o].price
+							price += Number(this.tournament.prices[o].price);
 							continue;
 						}
 					}
 				}
 				this.inscription.price = val;
-				this.inscription.pay = price;
+				// console.log(Number(price));
+				this.inscription.pay = Number(price);
 			}
 		},
 		mounted() {
