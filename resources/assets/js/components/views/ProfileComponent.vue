@@ -41,8 +41,10 @@
                     <li :class="{'active': show == 1}"><a href="#settings" @click.prevent="change(1)">Configuraciones</a></li>
                     <li :class="{'active': show == 2}"><a href="#changePass" @click.prevent="change(2)">Cambio de Contraseña</a></li>
                     <li :class="{'active': show == 3}"><a href="#bailarin" @click.prevent="change(3)">Datos de Baile</a></li>
-                    <li :class="{'active': show == 4}"><a href="#pareja" @click.prevent="change(4)">Datos Pareja</a></li>
-                    <li :class="{'active': show == 5}" v-if="can('inscription.store2')"><a href="#pareja2" @click.prevent="change(5)">Datos Pareja 2</a></li>
+
+                    <li :class="{'active': show == 4}" v-if="!can('inscription.store2')"><a href="#pareja" @click.prevent="change(4)">Datos de Pareja</a></li>
+                    <li :class="{'active': show == 4}" v-if="can('inscription.store2')"><a href="#pareja" @click.prevent="change(4)">Datos de bailarín</a></li>
+                    <li :class="{'active': show == 5}" v-if="can('inscription.store2')"><a href="#pareja2" @click.prevent="change(5)">Datos de bailarina</a></li>
                 </ul>
                 <div class="tab-content">
                     <div id="settings" class="tab-pane" :class="{'active': show == 1}">
@@ -399,13 +401,17 @@
     },
     methods: {
         charge(select) {
-            axios.post('/subcategories', {id: select, cat: this.user.category_l})
+            let cat = '';
+            if (select == 1) {
+                cat = this.user.category_l;
+            } else {
+                cat = this.user.category_s;
+            }
+            axios.post('/subcategories', {id: select, cat: cat})
             .then(response => {
                 if (select == 1) {
-                    // this.user.group_l = [];
                     this.subcategories_latino = response.data.subcategories;
                 } else {
-                    // this.user.group_s = [];
                     this.subcategories_standar = response.data.subcategories;
                 }
             });

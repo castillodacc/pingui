@@ -25,12 +25,11 @@
 					<h4>Seleccione la modalidad que desea bailar:</h4>
 					<div class="col-md-4">
 						<p>Standard:</p>
-						<div class="form-inline" v-for="p in tournament.prices" v-if="p.category_id == 3 && data.category_s == p.level_id && data.group_s == p.subcategory_id">
-							<!-- {{data.category_s}} -  -->
-							<!-- {{data.group_s}} -->
+						<div class="form-inline" v-for="p in tournament.prices" 
+						v-if="p.category_id == 3 && data.category_s == p.level_id && data.group_s == p.subcategory_id">
 							<label :for="p.id">
 								<input type="checkbox" :id="p.id" class="" :value="p.id" v-model="prices">
-								{{ p.level_text }} - {{ p.subcategory_text }}
+								{{ p.level_text }} - {{ p.subcategory_text }} - {{ p.price }} €
 							</label>
 						</div>
 					</div>
@@ -39,7 +38,7 @@
 						<div class="form-inline" v-for="p in tournament.prices" v-if="p.category_id == 2 && data.category_l == p.level_id && data.group_l == p.subcategory_id">
 							<label :for="p.id">
 								<input type="checkbox" :id="p.id" class="" :value="p.id" v-model="prices">
-								{{ p.level_text }} - {{ p.subcategory_text }}
+								{{ p.level_text }} - {{ p.subcategory_text }} - {{ p.price }} €
 							</label>
 						</div>
 					</div>
@@ -48,7 +47,7 @@
 						<div class="form-inline" v-for="p in tournament.prices" v-if="p.category_id == 1">
 							<label :for="p.id">
 								<input type="checkbox" :id="p.id" class="" :value="p.id" v-model="prices">
-								{{ p.level_text }}
+								{{ p.level_text }} - {{ p.price }} €
 							</label>
 						</div>
 					</div>
