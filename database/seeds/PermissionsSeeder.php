@@ -50,10 +50,17 @@ class PermissionsSeeder extends Seeder
         ]);
 
         App\Models\Permisologia\Permission::create([
-        	'name' => 'Cambiar usuario',
+            'name' => 'Cambiar usuario',
+            'module' => 'user',
+            'action' => 'initWithOneUser',
+            'description' => 'Permiso para Iniciar sesion con otro usuario'
+        ]);
+
+        App\Models\Permisologia\Permission::create([
+        	'name' => 'Editar Perfil',
         	'module' => 'user',
-        	'action' => 'initWithOneUser',
-        	'description' => 'Permiso para Iniciar sesion con otro usuario'
+        	'action' => 'editProfile',
+        	'description' => 'Permiso para Editar perfil de otros usuarios'
         ]);
 
         /**

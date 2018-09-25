@@ -63715,6 +63715,10 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
 		name: 'dashboard',
 		component: __WEBPACK_IMPORTED_MODULE_1__components_views_DashboardComponent_vue___default.a
 	}, {
+		path: '/perfil/:num?/:num2?',
+		name: 'profile',
+		component: __WEBPACK_IMPORTED_MODULE_2__components_views_profileComponent_vue___default.a
+	}, {
 		path: '/perfil/:num?',
 		name: 'profile',
 		component: __WEBPACK_IMPORTED_MODULE_2__components_views_profileComponent_vue___default.a
@@ -63990,8 +63994,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_bootstrap_datetimepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_bootstrap_datetimepicker__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_eonasdan_bootstrap_datetimepicker_build_css_bootstrap_datetimepicker_css__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_eonasdan_bootstrap_datetimepicker_build_css_bootstrap_datetimepicker_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_eonasdan_bootstrap_datetimepicker_build_css_bootstrap_datetimepicker_css__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -64332,27 +64334,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         DatePicker: __WEBPACK_IMPORTED_MODULE_0_vue_bootstrap_datetimepicker___default.a
     },
     data: function data() {
-        var _ref;
-
-        return _ref = {
+        return {
             del: false,
             show: 1,
-            pareja: {},
             club: [],
             categories_latino: [],
             subcategories_latino: [],
             categories_standar: [],
-            subcategories_standar: []
-        }, _defineProperty(_ref, 'pareja', {}), _defineProperty(_ref, 'pareja2', {}), _defineProperty(_ref, 'user', {
-            club_id: '',
-            fullName: '',
-            module: '',
-            image: ''
-        }), _defineProperty(_ref, 'pass', {
-            passwordOld: '',
-            password: '',
-            password_confirmation: ''
-        }), _ref;
+            subcategories_standar: [],
+            pareja: {},
+            pareja2: {},
+            user: {
+                club_id: '',
+                fullName: '',
+                module: '',
+                image: ''
+            },
+            pass: {
+                passwordOld: '',
+                password: '',
+                password_confirmation: ''
+            }
+        };
     },
     created: function created() {
         var _this = this;
@@ -64366,9 +64369,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 this.show = this.$route.params.num;
             }
         }
-        axios.get('/profile').then(function (response) {
+        axios.get('/profile?id=' + (this.$route.params.num2 ? this.$route.params.num2 : '')).then(function (response) {
             _this.categories_latino = response.data.category_latino;
             _this.categories_standar = response.data.category_standar;
+            _this.user = response.data.user;
+            _this.pass.id = _this.user.id;
+            _this.club = response.data.club;
             if (response.data.pareja) {
                 _this.pareja.p_email = response.data.pareja.email;
                 _this.pareja.p_febd_num = response.data.pareja.febd_num;
@@ -64383,13 +64389,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _this.pareja2.p_last_name2 = response.data.pareja2.last_name;
                 _this.pareja2.p_name2 = response.data.pareja2.name;
             }
-            _this.user = response.data.user;
-            _this.club = response.data.club;
+            _this.pareja2.user_id = _this.user.id;
+            _this.pareja.user_id = _this.user.id;
             _this.charge(1);
             _this.charge(2);
-            setTimeout(function () {
-                _this.user = response.data.user;
-            }, 300);
         });
     },
 
@@ -64456,6 +64459,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             var _this6 = this;
 
             axios.post('/update-pareja', {
+                user_id: this.pareja2.user_id,
                 p_name: this.pareja2.p_name2,
                 p_last_name: this.pareja2.p_last_name2,
                 id: this.pareja2.id,
@@ -64486,6 +64490,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             });
         },
         updateUser: function updateUser() {
+            var _this8 = this;
+
             var data = new FormData();
             data.append('image', this.user.image);
             data.append('name', this.user.name);
@@ -64495,10 +64501,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             data.append('user', this.user.user);
             data.append('phone', this.user.phone);
             data.append('web', this.user.web);
+            data.append('id', this.user.id);
             data.append('birthdate', this.user.birthdate);
             axios.post('/update-user', data).then(function (response) {
                 toastr.success('Datos Actualizados');
-                window.location.href = '/perfil/3';
+                if (_this8.$route.params.num2) {
+                    _this8.show = 3;
+                } else {
+                    window.location.href = '/perfil/3';
+                }
             });
         }
     }
@@ -69626,7 +69637,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             },
             tabla: {
                 columns: [{ title: 'Usuario', field: 'user', sortable: true }, { title: 'Nombre y Apellido', field: 'fullName', sort: 'name', sortable: true }, { title: 'DNI', field: 'num_id', sortable: true }, { title: 'Correo', field: 'email', sortable: true }, { title: 'Rol', field: 'rol' }],
-                options: [{ ico: 'fa fa-edit', class: 'btn-info', title: 'Editar Usuario', func: function func(id) {
+                options: [{ ico: 'fa fa-user', class: 'btn-warning', title: 'Editar Perfil', func: function func(id) {
+                        _this.$router.push({ name: 'profile', params: { num: 1, num2: id } });
+                    }, action: 'user.editProfile' }, { ico: 'fa fa-edit', class: 'btn-info', title: 'Editar Usuario', func: function func(id) {
                         _this.openform('edit', id);
                     }, action: 'user.update' }, { ico: 'fa fa-close', class: 'btn-danger', title: 'Borrar Usuario', func: function func(id) {
                         _this.deleted('/admin/users/' + id, _this.$children[0].get, 'fullName');

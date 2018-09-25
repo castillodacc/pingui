@@ -341,7 +341,6 @@
         return {
             del: false,
             show: 1,
-            pareja: {},
             club: [],
             categories_latino: [],
             subcategories_latino: [],
@@ -372,10 +371,13 @@
                 this.show = this.$route.params.num
             }
         }
-        axios.get('/profile')
+        axios.get('/profile?id=' + ((this.$route.params.num2) ? this.$route.params.num2 : ''))
         .then(response => {
             this.categories_latino = response.data.category_latino;
             this.categories_standar = response.data.category_standar;
+            this.user = response.data.user;
+            this.pass.id = this.user.id;
+            this.club = response.data.club;
             if (response.data.pareja) {
                 this.pareja.p_email = response.data.pareja.email;
                 this.pareja.p_febd_num = response.data.pareja.febd_num;
@@ -390,13 +392,10 @@
                 this.pareja2.p_last_name2 = response.data.pareja2.last_name;
                 this.pareja2.p_name2 = response.data.pareja2.name;
             }
-            this.user = response.data.user;
-            this.club = response.data.club;
+            this.pareja2.user_id = this.user.id;
+            this.pareja.user_id = this.user.id;
             this.charge(1);
             this.charge(2);
-            setTimeout(() => {
-                this.user = response.data.user;
-            },300);
         });
     },
     methods: {
@@ -456,6 +455,7 @@
         },
         pare2() {
             axios.post('/update-pareja', {
+                user_id: this.pareja2.user_id,
                 p_name: this.pareja2.p_name2,
                 p_last_name: this.pareja2.p_last_name2,
                 id: this.pareja2.id,
@@ -495,11 +495,16 @@
             data.append('user', this.user.user);
             data.append('phone', this.user.phone);
             data.append('web', this.user.web);
+            data.append('id', this.user.id);
             data.append('birthdate', this.user.birthdate);
             axios.post('/update-user', data)
             .then(response => {
                 toastr.success('Datos Actualizados');
-                window.location.href = '/perfil/3';
+                if (this.$route.params.num2) {
+                    this.show = 3;
+                } else {
+                    window.location.href = '/perfil/3';
+                }
             });
         }
     }

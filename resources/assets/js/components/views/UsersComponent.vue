@@ -45,6 +45,7 @@
                     { title: 'Rol', field: 'rol' },
                     ],
                     options: [
+                    { ico: 'fa fa-user', class: 'btn-warning', title: 'Editar Perfil', func: (id) => { this.$router.push({name: 'profile', params: {num: 1, num2: id}}) }, action: 'user.editProfile'},
                     { ico: 'fa fa-edit', class: 'btn-info', title: 'Editar Usuario', func: (id) => {this.openform('edit', id); }, action: 'user.update'},
                     { ico: 'fa fa-close', class: 'btn-danger', title: 'Borrar Usuario', func: (id) => {this.deleted('/admin/users/'+id, this.$children[0].get, 'fullName'); }, action: 'user.destroy'},
                     ]

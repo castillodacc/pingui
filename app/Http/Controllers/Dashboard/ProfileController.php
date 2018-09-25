@@ -16,9 +16,13 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Request $request)
     {
-        $user = \Auth::user();
+        if ($request->id) {
+            $user = User::findOrFail($request->id);
+        } else {
+            $user = \Auth::user();
+        }
         $user->fullName = $user->fullName();
         $user->logoPath = $user->getLogoPath();
         $user->roles;
@@ -41,7 +45,7 @@ class ProfileController extends Controller
         $data = $request->validated();
         $data['phone'] = ($data['phone'] == 'null') ? null : $data['phone'];
         $data['web'] = ($data['web'] == 'null') ? null : $data['web'];
-        $user = \Auth::user()->update($data);
+        $user = User::findOrFail($request->id)->update($data);
         if ($request->hasFile('image')) {
             $extension = $request->image->getClientOriginalExtension();
             $url = $request->image->storeAs('users/image', \Auth::user()->id.'.'.$extension);
@@ -56,10 +60,7 @@ class ProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function editPassword(ChangePasswordRequest $request){
-        $user = \Auth::user()->fill([
-            'password' => bcrypt($request->password)
-        ])->save();
-        return response()->json($user);
+        User::findOrFail($request->id)->update(['password' => bcrypt($request->password)]);
     }
 
     public function bailarin(Request $request, $id)
@@ -85,12 +86,13 @@ class ProfileController extends Controller
             'trainer_s' => 'entrenador standar',
             'international_id' => 'internacional ID'
         ]);
-        \Auth::user()->fill($data)->save();
+        User::findOrFail($id)->update($data);
     }
 
     public function pareja(Request $request)
     {
         $request->validate([
+            'user_id' => 'required',
             'p_email' => 'nullable|email',
             'p_febd_num' => 'nullable|numeric',
             'birthdate' => 'nullable|date',
@@ -104,7 +106,7 @@ class ProfileController extends Controller
             'p_name' => 'nombre',
         ]);
         if ($request->id) {
-            Pareja::where('user_id', '=', \Auth::user()->id)
+            Pareja::where('user_id', '=', $request->user_id)
             ->findOrFail($request->id)
             ->update([
                 'name' => $request->p_name,
@@ -118,7 +120,7 @@ class ProfileController extends Controller
                 'last_name' => $request->p_last_name,
                 'email' => $request->p_email,
                 'febd_num' => $request->p_febd_num,
-                'user_id' => \Auth::user()->id
+                'user_id' => $request->user_id
             ]);
         }
     }

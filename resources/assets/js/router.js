@@ -26,6 +26,11 @@ const router = new VueRouter({
 		component: Dashboard,
 	},
 	{
+		path: '/perfil/:num?/:num2?',
+		name: 'profile',
+		component: Profile,
+	},
+	{
 		path: '/perfil/:num?',
 		name: 'profile',
 		component: Profile,
