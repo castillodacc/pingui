@@ -24,7 +24,16 @@ class OrganizerController extends Controller
      */
     public function index()
     {
-        $data = Organizer::dataForPaginate(['id', 'name']);
+        $data = Organizer::dataForPaginate(['*'], function ($o) {
+            $o->t = '<i class="glyphicon glyphicon-unchecked"></i>';
+            if ($o->bank && $o->account && $o->headline) {
+                $o->t = '<i class="glyphicon glyphicon-check"></i>';
+            }
+            $o->p = '<i class="glyphicon glyphicon-unchecked"></i>';
+            if ($o->paypal_client_id && $o->paypal_client_secret) {
+                $o->p = '<i class="glyphicon glyphicon-check"></i>';
+            }
+        });
         return $this->dataWithPagination($data);
     }
 
@@ -38,6 +47,11 @@ class OrganizerController extends Controller
     {
         $data = $this->validate($request, [
             'name' => 'required|string|min:3|max:70|unique:referees',
+            'bank' => 'nullable|string',
+            'account' => 'nullable|string',
+            'headline' => 'nullable|string',
+            'paypal_client_id' => 'nullable|string',
+            'paypal_client_secret' => 'nullable|string',
         ],[],['name' => 'nombre']);
         $data['name'] = ucfirst(mb_strtolower($data['name']));
         Organizer::create($data);
@@ -67,6 +81,11 @@ class OrganizerController extends Controller
         $data = $this->validate($request, [
             'id' => 'required|numeric',
             'name' => 'required|string|min:3|max:70|unique1:referees',
+            'bank' => 'nullable|string',
+            'account' => 'nullable|string',
+            'headline' => 'nullable|string',
+            'paypal_client_id' => 'nullable|string',
+            'paypal_client_secret' => 'nullable|string',
         ],[],['name' => 'nombre']);
         $data['name'] = ucfirst(mb_strtolower($data['name']));
         Organizer::findOrFail($id)->update($data);

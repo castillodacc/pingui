@@ -16,7 +16,13 @@ class Organizer extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description'
+        'name',
+        'description',
+        'bank',
+        'account',
+        'headline',
+        'paypal_client_id',
+        'paypal_client_secret',
     ];
 
     /**

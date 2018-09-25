@@ -75732,6 +75732,61 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -75749,10 +75804,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 data: {}
             },
             msg: {
-                name: 'Nombre del Organizador.'
+                name: 'Nombre del Organizador.',
+                bank: 'Nombre del banco.',
+                account: 'Número de Cuenta Bancaria',
+                headline: 'Titular de la Cuenta',
+                client_id: 'Código CLIENT ID proporcionado por paypal',
+                client_secret: 'Código CLIENT ID SECRET proporcionado por paypal'
             },
             tabla: {
-                columns: [{ title: 'N°', field: 'id', sortable: true }, { title: 'Nombre', field: 'name', sortable: true }],
+                columns: [{ title: 'N°', field: 'id', sortable: true }, { title: 'Nombre', field: 'name', sortable: true }, { title: 'Pagos Paypal', field: 'p', class: 'text-center' }, { title: 'Pagos Transferencias', field: 't', class: 'text-center' }],
                 options: [{ ico: 'fa fa-edit', class: 'btn-info', title: 'Editar', func: function func(id) {
                         _this.openform('edit', id);
                     }, action: 'organizer.update' }, { ico: 'fa fa-close', class: 'btn-danger', title: 'Borrar', func: function func(id) {
@@ -75761,16 +75821,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         };
     },
-    mounted: function mounted() {
-        $('#form-organizer').addClass('hide');
-    },
 
     methods: {
         openform: function openform(cond, id) {
             var _this2 = this;
 
-            $('#form-organizer').removeClass('hide');
-            this.form.ready = false;
             this.form.cond = cond;
             if (cond == 'plus') {
                 this.form.title = 'Registrar Organizador.';
@@ -75785,7 +75840,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     _this2.form.ready = true;
                 });
             } else {
-                $('#form-organizer').addClass('hide');
+                this.form.ready = false;
             }
         },
         register: function register() {
@@ -75796,13 +75851,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 axios.post(this.form.url, this.form.data).then(function (response) {
                     toastr.success('Registro Exitoso');
                     _this3.$children[0].get();
-                    $('#form-organizer').addClass('hide');
+                    _this3.form.ready = false;
                 });
             } else if (this.form.cond == 'edit') {
                 axios.put(this.form.url, this.form.data).then(function (response) {
                     toastr.success('Actualización Exitosa');
                     _this3.$children[0].get('this');
-                    $('#form-organizer').addClass('hide');
+                    _this3.form.ready = false;
                 });
             }
         }
@@ -75852,114 +75907,331 @@ var render = function() {
           ? _c(
               "div",
               {
-                staticClass: "col-md-8 col-md-offset-2",
-                attrs: { id: "form-organizer" }
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.form.ready,
+                    expression: "form.ready"
+                  }
+                ],
+                staticClass: "row"
               },
               [
-                _c(
-                  "div",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.form.ready,
-                        expression: "form.ready"
-                      }
-                    ],
-                    staticClass: "row"
-                  },
-                  [
-                    _c("h4", {
-                      domProps: { textContent: _vm._s(_vm.form.title) }
-                    }),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-10" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _vm._m(0),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.data.name,
-                              expression: "form.data.name"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { id: "name", type: "text" },
-                          domProps: { value: _vm.form.data.name },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.form.data,
-                                "name",
-                                $event.target.value
-                              )
-                            }
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("h4", { staticClass: "text-center" }, [
+                    _vm._v(_vm._s(_vm.form.title))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-8 col-md-offset-2" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.data.name,
+                            expression: "form.data.name"
                           }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "small",
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "name", type: "text" },
+                        domProps: { value: _vm.form.data.name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form.data, "name", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "small",
+                        {
+                          staticClass: "form-text text-muted",
+                          attrs: { id: "nameHelp" }
+                        },
+                        [
+                          _c("span", {
+                            domProps: { textContent: _vm._s(_vm.msg.name) }
+                          })
+                        ]
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("div", { staticClass: "col-sm-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
                           {
-                            staticClass: "form-text text-muted",
-                            attrs: { id: "nameHelp" }
-                          },
-                          [
-                            _c("span", {
-                              domProps: { textContent: _vm._s(_vm.msg.name) }
-                            })
-                          ]
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "col-sm-2 text-center",
-                        staticStyle: { "padding-top": "32px" }
-                      },
-                      [
-                        _c(
-                          "button",
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.data.bank,
+                            expression: "form.data.bank"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "bank", type: "text" },
+                        domProps: { value: _vm.form.data.bank },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form.data, "bank", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "small",
+                        {
+                          staticClass: "form-text text-muted",
+                          attrs: { id: "bankHelp" }
+                        },
+                        [
+                          _c("span", {
+                            domProps: { textContent: _vm._s(_vm.msg.bank) }
+                          })
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
                           {
-                            staticClass: "btn btn-success btn-xs",
-                            attrs: {
-                              title: "Guardar",
-                              "data-tooltip": "tooltip"
-                            },
-                            on: { click: _vm.register }
-                          },
-                          [_c("span", { staticClass: "fa fa-plus" })]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.data.account,
+                            expression: "form.data.account"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "account", type: "text" },
+                        domProps: { value: _vm.form.data.account },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form.data,
+                              "account",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "small",
+                        {
+                          staticClass: "form-text text-muted",
+                          attrs: { id: "accountHelp" }
+                        },
+                        [
+                          _c("span", {
+                            domProps: { textContent: _vm._s(_vm.msg.account) }
+                          })
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
                           {
-                            staticClass: "btn btn-danger btn-xs",
-                            attrs: {
-                              title: "Cancelar",
-                              "data-tooltip": "tooltip"
-                            },
-                            on: { click: _vm.openform }
-                          },
-                          [_c("span", { staticClass: "fa fa-close" })]
-                        )
-                      ]
-                    )
-                  ]
-                )
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.data.headline,
+                            expression: "form.data.headline"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "headline", type: "text" },
+                        domProps: { value: _vm.form.data.headline },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form.data,
+                              "headline",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "small",
+                        {
+                          staticClass: "form-text text-muted",
+                          attrs: { id: "headlineHelp" }
+                        },
+                        [
+                          _c("span", {
+                            domProps: { textContent: _vm._s(_vm.msg.headline) }
+                          })
+                        ]
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("div", { staticClass: "col-sm-4 col-sm-offset-2" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _vm._m(4),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.data.paypal_client_id,
+                            expression: "form.data.paypal_client_id"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "paypal_client_id", type: "text" },
+                        domProps: { value: _vm.form.data.paypal_client_id },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form.data,
+                              "paypal_client_id",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "small",
+                        {
+                          staticClass: "form-text text-muted",
+                          attrs: { id: "paypal_client_idHelp" }
+                        },
+                        [
+                          _c("span", {
+                            domProps: {
+                              textContent: _vm._s(_vm.msg.paypal_client_id)
+                            }
+                          })
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _vm._m(5),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.data.paypal_client_secret,
+                            expression: "form.data.paypal_client_secret"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "paypal_client_secret", type: "text" },
+                        domProps: { value: _vm.form.data.paypal_client_secret },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form.data,
+                              "paypal_client_secret",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "small",
+                        {
+                          staticClass: "form-text text-muted",
+                          attrs: { id: "paypal_client_secretHelp" }
+                        },
+                        [
+                          _c("span", {
+                            domProps: {
+                              textContent: _vm._s(_vm.msg.paypal_client_secret)
+                            }
+                          })
+                        ]
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-12 text-center" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      on: { click: _vm.openform }
+                    },
+                    [
+                      _c("span", { staticClass: "fa fa-close" }),
+                      _vm._v(" Cancelar")
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      on: { click: _vm.register }
+                    },
+                    [
+                      _c("span", { staticClass: "fa fa-plus" }),
+                      _vm._v(" Guardar")
+                    ]
+                  )
+                ])
               ]
             )
           : _vm._e(),
         _vm._v(" "),
         _c("rs-table", {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: !_vm.form.ready,
+              expression: "!form.ready"
+            }
+          ],
           attrs: { id: "organizer", tabla: _vm.tabla, uri: "/organizer" }
         })
       ],
@@ -75978,6 +76250,71 @@ var staticRenderFns = [
       [
         _c("span", { staticClass: "fa fa-name" }),
         _vm._v(" Nombre:\n                        ")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "bank" } },
+      [
+        _c("span", { staticClass: "fa fa-banko" }),
+        _vm._v(" Banco:\n                        ")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "account" } },
+      [
+        _c("span", { staticClass: "fa fa-account" }),
+        _vm._v(" Cuenta:\n                        ")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "headline" } },
+      [
+        _c("span", { staticClass: "fa fa-headline" }),
+        _vm._v(" Titular:\n                        ")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "paypal_client_id" } },
+      [
+        _c("span", { staticClass: "fa fa-paypal_client_id" }),
+        _vm._v(" ID Client:\n                        ")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "paypal_client_secret" } },
+      [
+        _c("span", { staticClass: "fa fa-paypal_client_secret" }),
+        _vm._v(" ID Client Secret:\n                        ")
       ]
     )
   }
@@ -80504,6 +80841,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -80967,37 +81306,46 @@ var render = function() {
                     [
                       _c("p", [_vm._v("Seleccione el tipo de pago:")]),
                       _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "col-md-6 btn borde",
-                          class: {
-                            "btn-black": _vm.inscription.method_pay == 1
-                          },
-                          on: {
-                            click: function($event) {
-                              _vm.changeType(1)
-                            }
-                          }
-                        },
-                        [_vm._v("\n\t\t\t\t\tTransferencia\n\t\t\t\t")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "col-md-6 btn borde",
-                          class: {
-                            "btn-black": _vm.inscription.method_pay == 2
-                          },
-                          on: {
-                            click: function($event) {
-                              _vm.changeType(2)
-                            }
-                          }
-                        },
-                        [_vm._v("\n\t\t\t\t\tPaypal\n\t\t\t\t")]
-                      ),
+                      _c("div", { staticClass: "col-md-12" }, [
+                        _vm.tournament.organizer.bank &&
+                        _vm.tournament.organizer.headline &&
+                        _vm.tournament.organizer.account
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "col-md-6 btn borde",
+                                class: {
+                                  "btn-black": _vm.inscription.method_pay == 1
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.changeType(1)
+                                  }
+                                }
+                              },
+                              [_vm._v("\n\t\t\t\t\tTransferencia\n\t\t\t\t")]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.tournament.organizer.paypal_client_id &&
+                        _vm.tournament.organizer.paypal_client_secret
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "col-md-6 btn borde",
+                                class: {
+                                  "btn-black": _vm.inscription.method_pay == 2
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.changeType(2)
+                                  }
+                                }
+                              },
+                              [_vm._v("\n\t\t\t\t\tPaypal\n\t\t\t\t")]
+                            )
+                          : _vm._e()
+                      ]),
                       _vm._v(" "),
                       _c("small", {
                         staticClass: "form-text text-muted",
@@ -81014,15 +81362,32 @@ var render = function() {
                         ? _c("div", { staticClass: "col-md-12" }, [
                             _c("p", { staticStyle: { "font-size": "14px" } }, [
                               _vm._v(
-                                "Guarde los datos bancarios y haga un deposito dependiendo de la categoria del baile que participará."
+                                "Guarde los datos bancarios y deposite la cantidad acordada."
                               )
                             ]),
                             _vm._v(" "),
-                            _vm._m(2),
+                            _c("p", { staticStyle: { margin: "0" } }, [
+                              _vm._v("Banco: "),
+                              _c("b", [
+                                _vm._v(_vm._s(_vm.tournament.organizer.bank))
+                              ])
+                            ]),
                             _vm._v(" "),
-                            _vm._m(3),
+                            _c("p", { staticStyle: { margin: "0" } }, [
+                              _vm._v("Cuenta: "),
+                              _c("b", [
+                                _vm._v(_vm._s(_vm.tournament.organizer.account))
+                              ])
+                            ]),
                             _vm._v(" "),
-                            _vm._m(4),
+                            _c("p", { staticStyle: { margin: "0" } }, [
+                              _vm._v("Titular: "),
+                              _c("b", [
+                                _vm._v(
+                                  _vm._s(_vm.tournament.organizer.headline)
+                                )
+                              ])
+                            ]),
                             _vm._v(" "),
                             _c("p", { staticStyle: { margin: "0" } }, [
                               _vm._v("Monto: "),
@@ -81079,7 +81444,7 @@ var render = function() {
                       },
                       [
                         _c("div", { staticClass: "modal-content" }, [
-                          _vm._m(5),
+                          _vm._m(2),
                           _vm._v(" "),
                           _c("div", { staticClass: "modal-body" }, [
                             _c("p", [
@@ -81150,7 +81515,7 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _vm._m(6)
+                          _vm._m(3)
                         ])
                       ]
                     )
@@ -81253,11 +81618,24 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _vm._m(7),
+                      _c("p", { staticStyle: { margin: "0" } }, [
+                        _vm._v("Banco: "),
+                        _c("b", [_vm._v(_vm._s(_vm.tournament.organizer.bank))])
+                      ]),
                       _vm._v(" "),
-                      _vm._m(8),
+                      _c("p", { staticStyle: { margin: "0" } }, [
+                        _vm._v("Cuenta: "),
+                        _c("b", [
+                          _vm._v(_vm._s(_vm.tournament.organizer.account))
+                        ])
+                      ]),
                       _vm._v(" "),
-                      _vm._m(9),
+                      _c("p", { staticStyle: { margin: "0" } }, [
+                        _vm._v("Titular: "),
+                        _c("b", [
+                          _vm._v(_vm._s(_vm.tournament.organizer.headline))
+                        ])
+                      ]),
                       _vm._v(" "),
                       _c("p", { staticStyle: { margin: "0" } }, [
                         _vm._v("Monto: "),
@@ -81296,33 +81674,6 @@ var staticRenderFns = [
         _vm._v(" Pareja 2:\n\t\t\t\t")
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticStyle: { margin: "0" } }, [
-      _vm._v("Banco: "),
-      _c("b", [_vm._v("Banco Sabadell")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticStyle: { margin: "0" } }, [
-      _vm._v("Cuenta: "),
-      _c("b", [_vm._v("IBAN : ES65 0081 0400 1100 0131 0241")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticStyle: { margin: "0" } }, [
-      _vm._v("Titular: "),
-      _c("b", [_vm._v("Kavarna")])
-    ])
   },
   function() {
     var _vm = this
@@ -81368,33 +81719,6 @@ var staticRenderFns = [
         { staticClass: "btn btn-success", attrs: { type: "submit" } },
         [_vm._v("Confirmar")]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticStyle: { margin: "0" } }, [
-      _vm._v("Banco: "),
-      _c("b", [_vm._v("Banco Sabadell")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticStyle: { margin: "0" } }, [
-      _vm._v("Cuenta: "),
-      _c("b", [_vm._v("IBAN : ES65 0081 0400 1100 0131 0241")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticStyle: { margin: "0" } }, [
-      _vm._v("Titular: "),
-      _c("b", [_vm._v("Kavarna")])
     ])
   }
 ]

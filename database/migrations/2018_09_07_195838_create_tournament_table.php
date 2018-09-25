@@ -146,6 +146,7 @@ class CreateTournamentTable extends Migration
         Schema::dropIfExists('subcategory_latino_tournament');
         Schema::dropIfExists('subcategory_standar_tournament');
         Schema::dropIfExists('hotels');
+        Schema::dropIfExists('inscription_price');
         Schema::dropIfExists('prices');
         Schema::dropIfExists('tournaments');
     }

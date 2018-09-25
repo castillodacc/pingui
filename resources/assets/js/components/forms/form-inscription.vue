@@ -54,19 +54,21 @@
 				</div>
 				<div class="col-md-12" v-show="inscription.price.length">
 					<p>Seleccione el tipo de pago:</p>
-					<div class="col-md-6 btn borde" :class="{'btn-black': inscription.method_pay == 1}" @click="changeType(1)">
+					<div class="col-md-12">
+						<div class="col-md-6 btn borde" :class="{'btn-black': inscription.method_pay == 1}" @click="changeType(1)" v-if="tournament.organizer.bank && tournament.organizer.headline && tournament.organizer.account">
 						Transferencia
 					</div>
-					<div class="col-md-6 btn borde" :class="{'btn-black': inscription.method_pay == 2}" @click="changeType(2)">
+					<div class="col-md-6 btn borde" :class="{'btn-black': inscription.method_pay == 2}" @click="changeType(2)" v-if="tournament.organizer.paypal_client_id && tournament.organizer.paypal_client_secret">
 						Paypal
+					</div>
 					</div>
 					<small id="method_payHelp" class="form-text text-muted" v-text="msg.method_pay"></small>
 					<h4>Total a Pagar: <b>{{ inscription.pay }} €</b></h4>
 					<div class="col-md-12" v-if="inscription.method_pay == 1">
-						<p style="font-size: 14px;">Guarde los datos bancarios y haga un deposito dependiendo de la categoria del baile que participará.</p>
-						<p style="margin: 0">Banco: <b>Banco Sabadell</b></p>
-						<p style="margin: 0">Cuenta: <b>IBAN : ES65 0081 0400 1100 0131 0241</b></p>
-						<p style="margin: 0">Titular: <b>Kavarna</b></p>
+						<p style="font-size: 14px;">Guarde los datos bancarios y deposite la cantidad acordada.</p>
+						<p style="margin: 0">Banco: <b>{{ tournament.organizer.bank }}</b></p>
+						<p style="margin: 0">Cuenta: <b>{{ tournament.organizer.account }}</b></p>
+						<p style="margin: 0">Titular: <b>{{ tournament.organizer.headline }}</b></p>
 						<p style="margin: 0">Monto: <b>{{ inscription.pay }} €</b></p>
 					</div>
 				</div>
@@ -137,9 +139,9 @@
 				<p><a :href="'/inscritos/' + id" v-if="can('inscription.generate')" class="btn btn-black">Ver Lista de inscritos</a></p>
 				<div v-if="r.method_pay == 1 && !r.state">
 					<p style="font-size: 14px;">No te olvides de llevar a cabo la forma de pago seleccionada.</p>
-					<p style="margin: 0">Banco: <b>Banco Sabadell</b></p>
-					<p style="margin: 0">Cuenta: <b>IBAN : ES65 0081 0400 1100 0131 0241</b></p>
-					<p style="margin: 0">Titular: <b>Kavarna</b></p>
+					<p style="margin: 0">Banco: <b>{{ tournament.organizer.bank }}</b></p>
+					<p style="margin: 0">Cuenta: <b>{{ tournament.organizer.account }}</b></p>
+					<p style="margin: 0">Titular: <b>{{ tournament.organizer.headline }}</b></p>
 					<p style="margin: 0">Monto: <b>{{ r.pay }} €</b></p>
 				</div>
 			</div>
