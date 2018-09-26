@@ -32,6 +32,7 @@ class UpdatePerfilUserRequest extends FormRequest
             'name' => 'required|alfa_space|min:3|max:25',
             'birthdate' => 'nullable',
             'num_id'    => 'required|string|min:6|max:12|unique1:users',/*digits_between:6,9|exr_ced*/
+            'sex'     => 'required|numeric',
         ];
     }
 
@@ -44,6 +45,7 @@ class UpdatePerfilUserRequest extends FormRequest
     {
         return [
             'user' => 'usuario',
+            'sex'    => 'sexo',
             'phone' => 'teléfono',
             'club_id' => 'club',
             'email' => 'correo',

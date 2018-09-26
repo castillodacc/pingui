@@ -35,22 +35,23 @@
 					<div class="header-menu-wrap">
 						<div class="collapse navbar-collapse" id="custom-collapse">
 							<ul id="menu-menu-1" class="nav navbar-nav navbar-right">
-								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753"><a href="/" class="section-scroll">Home</a></li>
-								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753"><a href="/#competitions" class="section-scroll">Competiciones</a></li>
+								<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home"><a href="/" class="section-scroll">Home</a></li>
+								<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home"><a href="/#competitions" class="section-scroll">Competiciones</a></li>
+								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753"><a href="/contacto">Contacto</a></li>
 								@if(\Auth::check())
-								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753"><a href="/perfil">Perfil</a></li>
-								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753">
+								<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home"><a href="/perfil">Perfil</a></li>
+								<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home">
 									<a href="#" data-toggle="tooltip" title="Salir" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
 										<span class="fa fa-lock"></span> Salir
 									</a>
 								</li>
 								<form id="logout-form" action="/logout" method="POST" style="display:none;">
-									<input type="hidden" name="_token" value="">
+									{{ csrf_field() }}
 									<input type="hidden" name="_method" value="POST">
 								</form>
 								@else
-								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753"><a href="/login">Iniciar Sesión</a></li>
-								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753"><a href="/registro">Registrate</a></li>
+								<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home"><a href="/login">Iniciar Sesión</a></li>
+								<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home"><a href="/registro">Registrate</a></li>
 								@endif
 							</ul>
 						</div>
@@ -78,12 +79,22 @@
 										<small>Se realizará: {{ $tournament->start }}.</small><br>
 										<small><strong>Organizador: {{ $tournament->organizer->name }}.</strong></small><br>
 										<small><strong>Inscripción: {{ ($tournament->inscription) ? 'Abierta' : 'Cerrada' }}.</strong></small><br>
-										<h5>Precios Categoria Open:</h5>
+										<h5><b>Precios Categoria Open:</b></h5>
 										<ul>
 											@foreach($tournament->prices->where('category_id', 1) as $p)
 											<li>
-												<b>{{ $p->subO->name }}</b>:
+												{{ optional($p->subO)->name }}:
 												<em><b>{{ $p->price }} €</b></em>
+											</li>
+											@endforeach
+										</ul>
+									</div>
+									<div class="pull-right col-md-5 col-xs-12">
+										<h5><b>Más Información:</b></h5>
+										<ul>
+											@foreach($tournament->moreInfo->where('active', 1) as $p)
+											<li>
+												<a href="{{ $p->link }}" class="btn-link" target="_blank">{{ $p->name }}</a>
 											</li>
 											@endforeach
 										</ul>
@@ -152,7 +163,7 @@
 												<a href="{{ $tournament->maps }}" class="btn btn-black btn-block" target="_blank">Mapa</a>
 											</div>
 											@endif
-											@if($tournament->hours)
+											@if($tournament->hours && $tournament->show_hour)
 											<div class="col-md-3">
 												<a href="{{ asset('storage/hours/' . $tournament->hours) }}" class="btn btn-success btn-block" target="_blank">Horarios</a>
 											</div>
@@ -203,10 +214,6 @@
 									</div>
 								</div>
 								<div class="col-md-4">
-									<h4><b>Referees:</b></h4>
-									@foreach($tournament->referees as $r)
-									<span class="label label-primary">{{ $r->name }}</span>
-									@endforeach
 									<h4><b>Hoteles:</b></h4>
 									<div class="row">
 										@foreach($tournament->hotels as $c)

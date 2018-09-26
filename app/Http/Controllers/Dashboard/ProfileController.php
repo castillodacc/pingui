@@ -96,11 +96,13 @@ class ProfileController extends Controller
             'p_email' => 'nullable|email',
             'p_febd_num' => 'nullable|numeric',
             'birthdate' => 'nullable|date',
+            'sex' => 'required|numeric',
             'p_last_name' => 'required|string|min:3|max:40',
             'p_name' => 'required|string|min:3|max:40'
         ],[],[
             'p_email' => 'email',
             'p_febd_num' => 'número FEBD',
+            'sex' => 'sexo',
             'birthdate' => 'fecha de nacimiento',
             'p_last_name' => 'apellido',
             'p_name' => 'nombre',
@@ -109,6 +111,7 @@ class ProfileController extends Controller
             Pareja::where('user_id', '=', $request->user_id)
             ->findOrFail($request->id)
             ->update([
+                'sex' => $request->sex,
                 'name' => $request->p_name,
                 'last_name' => $request->p_last_name,
                 'email' => $request->p_email,
@@ -116,6 +119,7 @@ class ProfileController extends Controller
             ]);
         } else {
             Pareja::create([
+                'sex' => $request->sex,
                 'name' => $request->p_name,
                 'last_name' => $request->p_last_name,
                 'email' => $request->p_email,

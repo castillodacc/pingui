@@ -1,4 +1,7 @@
 @extends('mail.layouts')
+@section('saludo')
+Bienvenido
+@endsection
 @section('content')
 <tr>
 	<td style="padding: 5px 0 5px 0; color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px; text-align: justify;">

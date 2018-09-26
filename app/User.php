@@ -27,6 +27,7 @@ class User extends Authenticatable
         'web',
         'confirm',
         'international_id',
+        'sex',
 
         'birthdate',
         'febd_num',

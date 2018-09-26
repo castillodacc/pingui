@@ -32,7 +32,7 @@ const router = new VueRouter({
 	},
 	{
 		path: '/perfil/:num?',
-		name: 'profile',
+		name: 'profile2',
 		component: Profile,
 	},
 	{
@@ -138,6 +138,7 @@ router.beforeEach((to, from, next) => {
 	if (to.path == '/') {next('/perfil/3'); return;}
 	if (to.path == '/dashboard') {next('/perfil/3'); return;}
 	if (location.href.indexOf('/competicion') > 0) return;
+	if (location.href.indexOf('/contacto') > 0) return;
 	if (location.href.indexOf('/login') > 0) return;
 	if (location.href.indexOf('/registro') > 0) return;
 	if (to.path.indexOf('.jpg') > 0 ||

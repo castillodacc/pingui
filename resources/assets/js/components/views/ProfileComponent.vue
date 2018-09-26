@@ -92,6 +92,17 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="sex" class="col-sm-2 control-label">Sexo:</label>
+                                <div class="col-sm-10">
+                                    <select id="sex" class="form-control" v-model="user.sex">
+                                        <option value="">Seleccione el Sexo</option>
+                                        <option value="0">Femenino</option>
+                                        <option value="1">Masculino</option>
+                                    </select>
+                                    <small id="sexHelp" class="form-text"></small>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="phone" class="col-sm-2 control-label">Teléfono:</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="phone" placeholder="Teléfono" v-model="user.phone">
@@ -250,6 +261,17 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="sexp" class="col-sm-3 control-label">Sexo:</label>
+                                <div class="col-sm-9">
+                                    <select id="sexp" class="form-control" v-model="pareja.sex" disabled="can('inscription.store2')">
+                                        <option value="">Seleccione el Sexo</option>
+                                        <option value="0">Femenino</option>
+                                        <option value="1">Masculino</option>
+                                    </select>
+                                    <small id="sexHelp" class="form-text"></small>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="birthdate" class="col-sm-3 control-label">Fecha de Nacimiento:</label>
                                 <div class="col-sm-9">
                                     <date-picker id="birthdate3" v-model="pareja.birthdate" :config="{format: 'DD/MM/YYYY', useCurrent: false, locale: 'es'}"></date-picker>
@@ -295,9 +317,20 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="sexp2" class="col-sm-3 control-label">Sexo:</label>
+                                <div class="col-sm-9">
+                                    <select id="sexp2" class="form-control" v-model="pareja2.sex" disabled="can('inscription.store2')">
+                                        <option value="">Seleccione el Sexo</option>
+                                        <option value="0">Femenino</option>
+                                        <option value="1">Masculino</option>
+                                    </select>
+                                    <small id="sexHelp" class="form-text"></small>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="birthdate2" class="col-sm-3 control-label">Fecha de Nacimiento:</label>
                                 <div class="col-sm-9">
-                                    <date-picker id="birthdate2" v-model="pareja.birthdate2" :config="{format: 'DD/MM/YYYY', useCurrent: false, locale: 'es'}"></date-picker>
+                                    <date-picker id="birthdate2" v-model="pareja2.birthdate" :config="{format: 'DD/MM/YYYY', useCurrent: false, locale: 'es'}"></date-picker>
                                     <small id="birthdateHelp" class="form-text"></small>
                                 </div>
                             </div>
@@ -349,6 +382,7 @@
             pareja: {},
             pareja2: {},
             user: {
+                sex: '',
                 club_id: '',
                 fullName: '',
                 module: '',
@@ -378,6 +412,19 @@
             this.user = response.data.user;
             this.pass.id = this.user.id;
             this.club = response.data.club;
+            this.pareja.sex = '';
+            if (this.can('inscription.store2')) {
+                this.pareja.sex = 1;
+                this.pareja2.sex = 0;
+            } else {
+                if (this.user.sex) {
+                    this.pareja.sex = 0;
+                } else {
+                    this.pareja.sex = 1;
+                }
+            }
+            this.pareja2.user_id = this.user.id;
+            this.pareja.user_id = this.user.id;
             if (response.data.pareja) {
                 this.pareja.p_email = response.data.pareja.email;
                 this.pareja.p_febd_num = response.data.pareja.febd_num;
@@ -392,8 +439,6 @@
                 this.pareja2.p_last_name2 = response.data.pareja2.last_name;
                 this.pareja2.p_name2 = response.data.pareja2.name;
             }
-            this.pareja2.user_id = this.user.id;
-            this.pareja.user_id = this.user.id;
             this.charge(1);
             this.charge(2);
         });
@@ -460,6 +505,7 @@
                 p_last_name: this.pareja2.p_last_name2,
                 id: this.pareja2.id,
                 p_email: this.pareja2.p_email2,
+                sex: this.pareja2.sex,
                 p_febd_num: this.pareja2.p_febd_num2,
             })
             .then(response => {
@@ -495,6 +541,7 @@
             data.append('user', this.user.user);
             data.append('phone', this.user.phone);
             data.append('web', this.user.web);
+            data.append('sex', this.user.sex);
             data.append('id', this.user.id);
             data.append('birthdate', this.user.birthdate);
             axios.post('/update-user', data)

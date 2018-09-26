@@ -9,7 +9,7 @@
 	<table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border: 1px solid #cccccc; border-collapse: collapse;">
 		<tr>
 			<td align="center" bgcolor="white" style="padding: 5px 0 5px 0; color: #153643; font-size: 28px; font-weight: bold; font-family: Arial, sans-serif;">
-				<h3>Bienvenido</h3>
+				<h3>PINGUI</h3>
 			</td>
 		</tr>
 		<tr>
@@ -17,7 +17,7 @@
 				<table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
 						<td style="color: #153643; font-family: Arial, sans-serif; font-size: 24px; text-align: center;">
-							<b>@yield('saludo', 'Pingui')</b>
+							<b>@yield('saludo', '')</b>
 						</td>
 					</tr>
 					<hr/>
@@ -26,23 +26,6 @@
 							<section>
 								@yield('content')
 							</section>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<table border="0" cellpadding="0" cellspacing="0" width="100%">
-								<tr>
-									<td width="260" valign="top">
-										<table border="0" cellpadding="0" cellspacing="0" width="100%">
-										</table>
-									</td>
-								</tr>
-								<tr>
-									<td style="padding: 20px 0 0px 0; color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px; text-align: justify;">
-										<p>Gracias y cualquier inquietud no dude en contactarnos.</p>
-									</td>
-								</tr>
-							</table>
 						</td>
 					</tr>
 				</table>

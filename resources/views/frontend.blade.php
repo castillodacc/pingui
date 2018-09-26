@@ -37,6 +37,7 @@
 							<ul id="menu-menu-1" class="nav navbar-nav navbar-right">
 								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753"><a href="#home" class="section-scroll">Home</a></li>
 								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753"><a href="#competitions" class="section-scroll">Competiciones</a></li>
+								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753"><a href="/contacto">Contacto</a></li>
 								@if(\Auth::check())
 								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753"><a href="/perfil">Perfil</a></li>
 								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753">
@@ -45,7 +46,7 @@
 									</a>
 								</li>
 								<form id="logout-form" action="/logout" method="POST" style="display:none;">
-									<input type="hidden" name="_token" value="">
+									{{ csrf_field() }}
 									<input type="hidden" name="_method" value="POST">
 								</form>
 								@else

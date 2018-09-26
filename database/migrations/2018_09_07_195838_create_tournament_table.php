@@ -23,11 +23,11 @@ class CreateTournamentTable extends Migration
             $table->boolean('inscription')->default(0);
             $table->string('image', 100)->nullable()->unique(); // ruta a imagen
             $table->string('results', 100)->nullable()->unique(); // ruta a resultados https://results.pingui.es/events.php?pod_id=%aca%
-            $table->text('hours')->nullable(); // ruta a pdf
-            $table->text('maps')->nullable(); // ruta a google maps
-            $table->text('info')->nullable(); // ruta al pdf de la hoja informativa
-            // $table->unsignedInteger('price');
-            // $table->unsignedInteger('entrance_price');
+            
+            $table->boolean('show_hour')->default(0);
+            $table->string('hours')->nullable(); // ruta a pdf
+            $table->string('maps')->nullable(); // ruta a google maps
+            $table->string('info')->nullable(); // ruta al pdf de la hoja informativa
             $table->unsignedInteger('organizer_id');
             $table->unsignedInteger('record_id');
             $table->timestamps();
@@ -85,10 +85,20 @@ class CreateTournamentTable extends Migration
             $table->unsignedInteger('category_id');
             $table->unsignedInteger('level_id')->nullable();
             $table->unsignedInteger('subcategory_id')->nullable();
-            // $table->string('category_text');
-            // $table->string('level_text')->nullable();
-            // $table->string('subcategory_text')->nullable();
             $table->unsignedInteger('price');
+            $table->unsignedInteger('tournament_id');
+            $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('tournament_id')->references('id')->on('tournaments')->onDelete('cascade');
+        });
+
+        Schema::create('more_infos', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name', 50);
+            $table->unsignedInteger('type_id');
+            $table->string('link', 50);
+            $table->boolean('active')->default(1);
             $table->unsignedInteger('tournament_id');
             $table->timestamps();
             $table->softDeletes();

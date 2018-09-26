@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('last_name', 50);
             $table->string('num_id', 20)->unique();
             $table->unsignedInteger('phone')->nullable()->unique();
+            $table->unsignedInteger('sex')->nullable();
             $table->string('email', 50)->unique();
             $table->string('password')->nullable();
             $table->string('confirm')->nullable();
@@ -48,6 +49,7 @@ class CreateUsersTable extends Migration
             $table->string('last_name', 70);
             $table->string('email', 70)->nullable();
             $table->string('birthdate', 15)->nullable();
+            $table->unsignedInteger('sex')->nullable();
             $table->unsignedInteger('febd_num')->nullable()->unique();
             $table->unsignedInteger('user_id');
             $table->timestamps();

@@ -6,12 +6,15 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>Pingui</title>
 	<link rel="shortcut icon" href="{{ asset('/favicon.png') }}" type="image/x-icon">
-	<link type="text/css" href="/css/app.css" rel="stylesheet">
-	{{-- <link rel="stylesheet" href="/css/jquery.flexslider.min.css" type="text/css" media="all"> --}}
+	<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" media="all">
+	<link rel="stylesheet" href="/css/jquery.flexslider.min.css" type="text/css" media="all">
+	<link rel="stylesheet" href="/css/css-style.css" type="text/css" media="all">
 	<link rel="stylesheet" href="/css/shop-isle-style.css" type="text/css" media="all">
 	<link type="text/css" href="/css/optanon.css" rel="stylesheet">
-	<link rel="stylesheet" href="/css/css-style.css" type="text/css" media="all">
+	<link type="text/css" href="/css/app.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script type="text/javascript" src="/js/jquery.min.1.12.4.js"></script>
+	<script type="text/javascript" src="/js/jquery-migrate.min.js"></script>
 </head>
 <body class="home blog">
 	<header class="header">
@@ -59,48 +62,12 @@
 			</div>
 		</nav>
 	</header>
-	<div id="app" class="main">
-		<div class="main front-page-main" style="background-color: #FFF; min-height: 97vh; padding-top: 100px;">
+	<div class="main">
+		<div class="main front-page-main">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-12">
-						<div class="row hidden-md hidden-lg"><h1 class="text-center" >{{ $tournament->name }}</h1></div>
-						<div class="pull-left col-md-4 col-xs-12 thumb-contenido">
-							<img class="center-block img-responsive" src="{{ asset('storage/' . $tournament->image) }}" />
-						</div>
-						<div class="">
-							<h1 class="hidden-xs hidden-sm">{{ $tournament->name }}</h1>
-							<hr>
-						</div>
-						@if(\Auth::check())
-						<div class="">
-							<div class="col-md-8">
-								<div class="alert alert-info" role="alert">
-									<span class="text-warning">
-										<a href="/perfil/3">Los datos aqui provistos no concuerdan con los actuales?. Actualiza tu perfil.</a>
-									</span>
-								</div>
-							</div>
-							@if(isset($cancel))
-							<div class="col-md-8">
-								<div class="alert alert-danger" role="alert">
-									<span class="text-warning">
-										<h4>{{ $cancel }} <a href="/">Ir a inicio</a></h4>
-									</span>
-								</div>
-							</div>
-							@endif
-							<inscription id="{{ $tournament->id }}"></inscription>
-						</div>
-						@else
-						<div class="">
-							<div class="alert alert-info" role="alert">
-								<span class="text-warning">
-									<b><a href="/login" class="btn btn-danger">Inicia Sesion Para Registrarte</a></b>
-								</span>
-							</div>
-						</div>
-						@endif
+					<div  id="app" class="col-md-12">
+						<contact></contact>
 					</div>
 				</div>
 			</div>
@@ -120,6 +87,7 @@
 			</footer>
 		</div>
 	</div>
+	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/jquery.flexslider.min.js"></script>
 	<script type="text/javascript" src="/js/custom.js"></script>
 	<script type="text/javascript" src="/js/app.js"></script>

@@ -128,6 +128,20 @@
                                     @endif
                                 </div>
 
+                                <div class="form-group has-feedback {{ $errors->has('sex') ? 'has-error' : '' }}">
+                                    <label for="sex" class="control-label">Sexo:</label>
+                                    <select id="sex" name="sex" class="form-control">
+                                        <option value="">Seleccione el Sexo</option>
+                                        <option value="0" @if(old('sex') == 0) selected="" @endif>Femenino</option>
+                                        <option value="1" @if(old('sex') == 1) selected="" @endif>Masculino</option>
+                                    </select>
+                                    @if ($errors->has('sex'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('sex') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+
                                 <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
                                     <label for="password" class="control-label">Contraseña:</label>
                                     <input id="password" type="password" class="form-control" name="password"  placeholder="Contraseña" required>

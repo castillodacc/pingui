@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\ModelsTrait;
 
-class Pareja extends Model
+class MoreInfo extends Model
 {
 	use SoftDeletes, ModelsTrait;
 
@@ -17,11 +17,10 @@ class Pareja extends Model
      */
     protected $fillable = [
     	'name',
-    	'last_name',
-    	'email',
-        'sex',
-        'febd_num',
-    	'user_id',
+    	'type_id',
+    	'link',
+    	'active',
+    	'tournament_id',
     ];
 
     /**

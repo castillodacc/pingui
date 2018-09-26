@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ { Tournament, Referee, Category_open, Category_latino, Subcategory_latino, Category_standar, Subcategory_standar, Hotel, Price, Organizer, Inscription };
+use App\Models\ { Tournament, Referee, Category_open, Category_latino, Subcategory_latino, Category_standar, Subcategory_standar, Hotel, Price, Organizer, Inscription, MoreInfo };
 use Intervention\Image\ImageManager;
 
 class TournamentController extends Controller
@@ -46,6 +46,7 @@ class TournamentController extends Controller
             'description' => 'required|string|min:15',
             'start' => 'required',
             'end' => 'required',
+            'show_hour' => 'nullable',
             'inscription' => 'required|boolean',
             'organizer_id' => 'required|numeric',
             'image' => 'required|image64:jpeg,jpg,png',
@@ -53,6 +54,7 @@ class TournamentController extends Controller
             'hours' => 'nullable|string|unique:tournaments',
             'info' => 'nullable|string|unique:tournaments',
             'maps' => 'nullable|string',
+            'more_info' => 'nullable|array',
             'referee' => 'nullable|array',
             'category_open' => 'nullable|array',
             'hoteles' => 'nullable|array',
@@ -115,6 +117,11 @@ class TournamentController extends Controller
             Price::create($p);
         }
 
+        foreach ($data['more_info'] as $m) {
+            $m['tournament_id'] = $tournament->id;
+            MoreInfo::create($m);
+        }
+
         $tournament->referees()->attach($data['referee']);
 
     }
@@ -132,6 +139,7 @@ class TournamentController extends Controller
         $tournament->end = \Carbon::parse($tournament->end)->format('d/m/Y');
         $tournament->referee_tournament = $tournament->referees->pluck('name');
         $tournament->hotels;
+        $tournament->moreInfo;
         $tournament->prices->each(function ($p) {
             if ($p->category_id == 1) {
                 $p->level_text = Category_open::findOrFail($p->subcategory_id)->name;
@@ -165,7 +173,9 @@ class TournamentController extends Controller
             'organizer_id' => 'required|numeric',
             'image' => 'required|image64:jpeg,jpg,png',
             'results' => 'nullable|numeric|min:1|max:99|unique1:tournaments',
+            'show_hour' => 'nullable',
             'hours' => 'nullable|string',
+            'more_info' => 'nullable|array',
             'info' => 'nullable|string',
             'maps' => 'nullable|string',
             'referee' => 'nullable|array',
@@ -259,6 +269,14 @@ class TournamentController extends Controller
             Price::findOrFail($d)->delete();
         }
 
+        foreach ($data['more_info'] as $m) {
+            if (isset($m['id'])) {
+                MoreInfo::findOrFail($m['id'])->update($m);
+            } else {
+                MoreInfo::create($m);
+            }
+        }
+
         $tournament->update_pivot($data['referee'], 'referees');
     }
 
@@ -293,21 +311,21 @@ class TournamentController extends Controller
         return response()->json(compact('referees', 'category_opens', 'category_latinos', 'category_standars', 'organizers'));
     }
 
-    public function upload($name)
+    public function upload(Request $request, $name)
     {
-        $file = request()->file($name);
+        $file = $request->file($name);
         $nombre = str_replace(' ', '-', $file->getClientOriginalName());
         \Storage::disk('local')->put("/$name/$nombre", \File::get($file));
         return response()->json($nombre);
     }
 
-    public function user()
+    public function user(Request $request)
     {
         $select = ['id', 'febd_num_1', 'name_1', 'last_name_1', 'febd_num_2', 'name_2', 'last_name_2', 'state_pay', 'method_pay', 'state', 'tournament_id'];
-        $data = Inscription::orderBy(request()->order?:'id', request()->dir?:'ASC')
-        ->search(request()->search)
+        $data = Inscription::orderBy($request->order?:'id', $request->dir?:'ASC')
+        ->search($request->search)
         ->select($select)
-        ->paginate(request()->num?:10);
+        ->paginate($request->num?:10);
         $data->each(function ($d) {
             $d->state = ($d->state == 1) ? 'Aprobado' : 'Por Aprobar';
             $d->type_pay = ($d->method_pay == 1) ? 'Transferencia' : 'Paypal';
@@ -319,5 +337,19 @@ class TournamentController extends Controller
             $d->tournament = $t;
         });
         return $this->dataWithPagination($data);
+    }
+
+    public function uploadFile(Request $request, $type_id)
+    {
+        $file = $request->file('file');
+        $nombre = str_replace(' ', '-', $file->getClientOriginalName());
+        if ($request->type_id == 2) {
+            $folder = 'csv';
+        } else {
+            $request->validate(['file' => 'required|mimes:pdf']);
+            $folder = 'pdf';
+        }
+        \Storage::disk('local')->put("/more_info/$folder/$nombre", \File::get($file));
+        return response()->json("/storage/more_info/$folder/$nombre");
     }
 }

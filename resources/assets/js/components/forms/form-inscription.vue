@@ -1,5 +1,5 @@
 <template>
-	<div v-if="can('inscription.store')">
+	<div class="col-md-8" v-if="can('inscription.store')">
 		<form @submit.prevent="register" v-if="r === true">
 			<h4>Datos de pareja</h4>
 			<div class="col-md-4">
@@ -20,7 +20,8 @@
 					<small id="name_2Help" class="form-text text-muted" v-text="msg.name_2"></small>
 				</div>
 			</div>
-			<div class="col-md-8">
+			<div class="row">
+				<div class="col-md-8">
 				<div class="row">
 					<h4>Seleccione la modalidad que desea bailar:</h4>
 					<div class="col-md-4">
@@ -72,6 +73,7 @@
 						<p style="margin: 0">Monto: <b>{{ inscription.pay }} €</b></p>
 					</div>
 				</div>
+			</div>
 			</div>
 			<div class="col-md-12">
 				<div class="span pull-right" style="padding: 15px">
@@ -164,7 +166,6 @@ p {font-size: 1.3em;}
 		props: ['id'],
 		data() {
 			return {
-				// option_prices: [],
 				prices: [],
 				pareja1: '',
 				pareja2: '',
@@ -203,7 +204,6 @@ p {font-size: 1.3em;}
 					}
 				}
 				this.inscription.price = val;
-				// console.log(Number(price));
 				this.inscription.pay = Number(price);
 			}
 		},

@@ -71,6 +71,7 @@ class RegisterController extends Controller
             'club_id'   => 'nullable|numeric',
             'phone'     => 'nullable|numeric',
             'rol'     => 'required|numeric',
+            'sex'     => 'required|numeric',
             'web'     => 'nullable|string',
             'password'  => 'required|string|min:6|max:20|confirmed',
         ],[],[
@@ -80,6 +81,7 @@ class RegisterController extends Controller
             'name'      => 'nombre',
             'num_id'    => 'DNI',
             'rol'    => 'perfil',
+            'sex'    => 'sexo',
             'phone'    => 'telefono',
             'club_id'    => 'club',
             'password'  => 'contraseña',

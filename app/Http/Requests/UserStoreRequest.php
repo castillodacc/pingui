@@ -32,6 +32,7 @@ class UserStoreRequest extends FormRequest
             'password'  => 'required|string|min:6|max:20|confirmed',
             'phone'     => 'nullable|numeric',
             'name'      => 'required|alfa_space|min:3|max:50',
+            'sex'       => 'required|numeric',
         ];
     }
 
@@ -62,6 +63,7 @@ class UserStoreRequest extends FormRequest
             'phone'    => 'telefono',
             'club_id'    => 'club',
             'password'  => 'contraseña',
+            'sex'       => 'sexo',
         ];
     }
 }

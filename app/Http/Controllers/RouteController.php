@@ -11,7 +11,7 @@ class RouteController extends Controller
 {
 
     public function __construct() {
-        $this->middleware('auth')->except(['front', 'publication', 'confirm']);
+        $this->middleware('auth')->except(['front', 'publication', 'confirm', 'contact', 'dataForTemplate']);
     }
 
     /**
@@ -151,5 +151,22 @@ class RouteController extends Controller
         $user = \Auth::user();
         $user->parejas;
         return response()->json(compact('user', 'state', 'tournament'));
+    }
+
+    public function contact()
+    {
+        return view('contact');
+    }
+
+    public function contact_save(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'last_name' => 'required|string',
+            'phone' => 'required|string',
+            'email' => 'required|email',
+            'message' => 'required|string',
+        ]);
+        \Mail::to('info@pingui.com')->send(new \App\Mail\Contact($request));
     }
 }

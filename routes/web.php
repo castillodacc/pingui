@@ -15,7 +15,8 @@ Route::get('/', 'RouteController@front');
 Route::get('competicion/{slug}', 'RouteController@publication')->name('publication.show');
 Route::get('competicion/{slug}/inscribir', 'RouteController@inscription')->name('publication.inscription');
 Route::get('confirm/{slug}', 'RouteController@confirm');
-Route::post('get-data', 'RouteController@data');
+Route::get('contacto', 'RouteController@contact');
+Route::post('contact-save', 'RouteController@contact_save');
 
 Route::get('payment/cancel/{id}', 'InscriptionController@paymentCancel')->name('payment.cancel');
 Route::get('payment/store/{id}', 'InscriptionController@paymentStore')->name('payment.store');
@@ -36,7 +37,7 @@ Route::group(['namespace' => 'Auth'], function () {
         }
     });
     Route::post('logout', 'LoginController@logout')->name('logout');
-    Route::get('logout', 'LoginController@logout');
+    // Route::get('logout', 'LoginController@logout');
 });
 
 Route::post('app', 'RouteController@dataForTemplate');
@@ -45,6 +46,8 @@ Route::post('app', 'RouteController@dataForTemplate');
  * Requieren autentificación.
  */
 Route::group(['middleware' => ['auth', 'onlyAjax']], function () {
+
+    Route::post('get-data', 'RouteController@data');
 
     /**
      * Admin, Acceso para usuarios con privilegios.
@@ -70,6 +73,7 @@ Route::group(['middleware' => ['auth', 'onlyAjax']], function () {
     Route::resource('tournament', 'TournamentController')->except(['create', 'edit']);
     Route::post('get-tournament', 'TournamentController@dataForRegister');
     Route::post('upload/{name}', 'TournamentController@upload');
+    Route::post('upload-file/{type_id}', 'TournamentController@uploadFile');
 
     Route::resource('organizer', 'OrganizerController')->except(['create', 'edit']);
 

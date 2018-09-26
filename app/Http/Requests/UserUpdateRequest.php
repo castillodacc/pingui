@@ -29,6 +29,7 @@ class UserUpdateRequest extends FormRequest
             'name'      => 'required|alfa_space|min:3|max:50',
             'num_id'    => 'required|string|min:6|max:12|unique1:users',/*digits_between:6,9|exr_ced*/
             'password'  => 'nullable|string|min:6|max:20|confirmed',
+            'sex'       => 'required|numeric',
             'roles'     => 'required|array|max:2'
         ];
     }
@@ -50,6 +51,7 @@ class UserUpdateRequest extends FormRequest
             'phone'    => 'telefono',
             'club_id'    => 'club',
             'password'  => 'contraseña',
+            'sex'       => 'sexo',
         ];
     }
 }

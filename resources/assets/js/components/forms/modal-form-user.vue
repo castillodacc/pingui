@@ -16,21 +16,29 @@
               <div class="col-sm-6">
                 <template v-for="input in entries.izq">
                   <rs-input :name="input" required="true"
-                          v-model="formData.user[input.id]"
-                          :msg="msg[input.id]"
-                          @input="formData.user[input.id] = arguments[0]">
-                  </rs-input>
+                  v-model="formData.user[input.id]"
+                  :msg="msg[input.id]"
+                  @input="formData.user[input.id] = arguments[0]"></rs-input>
                 </template>
               </div>
 
               <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="sex" class="control-label">Sexo:</label>
+                  <select id="sex" class="form-control" v-model="formData.user.sex">
+                    <option value="">Seleccione el Sexo</option>
+                    <option value="0">Femenino</option>
+                    <option value="1">Masculino</option>
+                  </select>
+                  <small id="sexHelp" class="form-text"></small>
+                </div>
+
                 <template v-for="input in entries.der">
                   <rs-input :name="input" required="true"
-                          type="password"
-                          v-model="formData.user[input.id]"
-                          :msg="msg[input.id]"
-                          @input="formData.user[input.id] = arguments[0]">
-                  </rs-input>
+                  type="password"
+                  v-model="formData.user[input.id]"
+                  :msg="msg[input.id]"
+                  @input="formData.user[input.id] = arguments[0]"></rs-input>
                 </template>
 
                 <div class="form-group">

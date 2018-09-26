@@ -24,6 +24,7 @@ class Tournament extends Model
         'inscription',
         'organizer_id',
         'image',
+        'show_hour',
         'results',
         'hours',
         'maps',
@@ -50,6 +51,11 @@ class Tournament extends Model
     public function prices()
     {
         return $this->hasMany(Price::class);
+    }
+
+    public function moreInfo()
+    {
+        return $this->hasMany(MoreInfo::class);
     }
 
     public function organizer()
