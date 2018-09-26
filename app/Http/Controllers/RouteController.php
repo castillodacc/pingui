@@ -87,7 +87,7 @@ class RouteController extends Controller
     public function front()
     {
         $tournament2 = \App\Models\Tournament::take(10)->orderBy('id', 'desc')->get();
-        $tournament = Tournament::paginate(10);
+        $tournament = Tournament::orderBy('id', 'desc')->paginate(10);
         return view('frontend', compact('tournament', 'tournament2'));
     }
 
@@ -136,6 +136,8 @@ class RouteController extends Controller
             }
         });
         $tournament->organizer;
+        $tournament->organizer->paypal_client_id = ($tournament->organizer->paypal_client_id) ? true : false;
+        $tournament->organizer->paypal_client_secret = ($tournament->organizer->paypal_client_secret) ? true : false;
         $inscription = Inscription::where('tournament_id', '=', $request->id)
         ->where('user_id', '=', \Auth::user()->id)
         ->select(['id', 'last_name_1', 'last_name_2', 'method_pay', 'name_1', 'name_2', 'pay', 'state', 'state_pay'])

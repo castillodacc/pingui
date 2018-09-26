@@ -77,9 +77,9 @@
                   <span class="edit"></span> Horario del evento:
                 </label>
                 <div class="input-group">
-                  <input id="hours" type="file" class="form-control" @change="onSelected">
+                  <input id="hours" type="file" class="form-control" accept="application/pdf" @change="onSelected">
                   <div class="input-group-addon">
-                    <input type="checkbox" id="show_hour" accept="application/pdf" v-model="data.show_hour">
+                    <input type="checkbox" id="show_hour" v-model="data.show_hour">
                     <label for="show_hour" v-if="data.show_hour">Visible</label>
                     <label for="show_hour" v-else>Oculto</label>
                   </div>
@@ -202,8 +202,8 @@
                       <span v-if="m.type_id == 1">LINK</span>
                       <span v-else-if="m.type_id == 2">CSV</span>
                       <span v-else>PDF</span>
-                      <button type="button" class="btn btn-success btn-xs" @click="m.active = 0" v-if="m.active"><i class="fa fa-check"></i></button>
-                      <button type="button" class="btn btn-danger btn-xs" @click="m.active = 1" v-else><i class="fa fa-close"></i></button>
+                      <button type="button" class="btn btn-success btn-xs" @click="m.active = 0" v-if="m.active != null && m.active == 1"><i class="fa fa-check"></i></button>
+                      <button type="button" class="btn btn-danger btn-xs" @click="m.active = 1" v-else-if="m.active != null && m.active == 0"><i class="fa fa-close"></i></button>
                     </li>
                   </ul>
                 </div>

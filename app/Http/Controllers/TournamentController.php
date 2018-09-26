@@ -273,6 +273,7 @@ class TournamentController extends Controller
             if (isset($m['id'])) {
                 MoreInfo::findOrFail($m['id'])->update($m);
             } else {
+                $m['tournament_id'] = $tournament->id;
                 MoreInfo::create($m);
             }
         }
@@ -324,6 +325,7 @@ class TournamentController extends Controller
         $select = ['id', 'febd_num_1', 'name_1', 'last_name_1', 'febd_num_2', 'name_2', 'last_name_2', 'state_pay', 'method_pay', 'state', 'tournament_id'];
         $data = Inscription::orderBy($request->order?:'id', $request->dir?:'ASC')
         ->search($request->search)
+        ->where('user_id', \Auth::user()->id)
         ->select($select)
         ->paginate($request->num?:10);
         $data->each(function ($d) {

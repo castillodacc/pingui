@@ -78006,7 +78006,11 @@ var render = function() {
                     _c("div", { staticClass: "input-group" }, [
                       _c("input", {
                         staticClass: "form-control",
-                        attrs: { id: "hours", type: "file" },
+                        attrs: {
+                          id: "hours",
+                          type: "file",
+                          accept: "application/pdf"
+                        },
                         on: { change: _vm.onSelected }
                       }),
                       _vm._v(" "),
@@ -78020,11 +78024,7 @@ var render = function() {
                               expression: "data.show_hour"
                             }
                           ],
-                          attrs: {
-                            type: "checkbox",
-                            id: "show_hour",
-                            accept: "application/pdf"
-                          },
+                          attrs: { type: "checkbox", id: "show_hour" },
                           domProps: {
                             checked: Array.isArray(_vm.data.show_hour)
                               ? _vm._i(_vm.data.show_hour, null) > -1
@@ -78465,7 +78465,7 @@ var render = function() {
                                 ? _c("span", [_vm._v("CSV")])
                                 : _c("span", [_vm._v("PDF")]),
                             _vm._v(" "),
-                            m.active
+                            m.active != null && m.active == 1
                               ? _c(
                                   "button",
                                   {
@@ -78479,19 +78479,21 @@ var render = function() {
                                   },
                                   [_c("i", { staticClass: "fa fa-check" })]
                                 )
-                              : _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-danger btn-xs",
-                                    attrs: { type: "button" },
-                                    on: {
-                                      click: function($event) {
-                                        m.active = 1
+                              : m.active != null && m.active == 0
+                                ? _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-danger btn-xs",
+                                      attrs: { type: "button" },
+                                      on: {
+                                        click: function($event) {
+                                          m.active = 1
+                                        }
                                       }
-                                    }
-                                  },
-                                  [_c("i", { staticClass: "fa fa-close" })]
-                                )
+                                    },
+                                    [_c("i", { staticClass: "fa fa-close" })]
+                                  )
+                                : _vm._e()
                           ])
                         })
                       )
@@ -81682,7 +81684,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			pareja2: '',
 			r: true,
 			data: {},
-			tournament: {},
+			tournament: {
+				organizer: {}
+			},
 			msg: {
 				febd_num_1: 'Pareja seleccionada.',
 				febd_num_2: 'Pareja seleccionada.',
@@ -81837,7 +81841,7 @@ var render = function() {
               [
                 _c("h4", [_vm._v("Datos de pareja")]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "col-md-6" }, [
                   _c("div", { staticClass: "form-group" }, [
                     _vm._m(0),
                     _vm._v(" "),
@@ -81871,7 +81875,7 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "col-md-6" }, [
                   _c("div", { staticClass: "form-group" }, [
                     _vm._m(1),
                     _vm._v(" "),
@@ -81906,7 +81910,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-8" }, [
+                  _c("div", { staticClass: "col-md-12" }, [
                     _c("div", { staticClass: "row" }, [
                       _c("h4", [
                         _vm._v("Seleccione la modalidad que desea bailar:")
@@ -82130,9 +82134,10 @@ var render = function() {
                         _c("p", [_vm._v("Seleccione el tipo de pago:")]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-12" }, [
-                          _vm.tournament.organizer.bank &&
-                          _vm.tournament.organizer.headline &&
-                          _vm.tournament.organizer.account
+                          _vm.tournament.organizer &&
+                          (_vm.tournament.organizer.headline &&
+                            _vm.tournament.organizer.account &&
+                            _vm.tournament.organizer.bank)
                             ? _c(
                                 "div",
                                 {
@@ -82181,7 +82186,10 @@ var render = function() {
                           _c("b", [_vm._v(_vm._s(_vm.inscription.pay) + " €")])
                         ]),
                         _vm._v(" "),
-                        _vm.inscription.method_pay == 1
+                        _vm.inscription.method_pay == 1 &&
+                        (_vm.tournament.organizer.bank &&
+                          _vm.tournament.organizer.headline &&
+                          _vm.tournament.organizer.account)
                           ? _c("div", { staticClass: "col-md-12" }, [
                               _c(
                                 "p",
@@ -82488,7 +82496,7 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "name_1" } },
       [
         _c("span", { staticClass: "fa fa-name_1" }),
-        _vm._v(" Pareja 1:\n\t\t\t\t")
+        _vm._v(" Bailarín:\n\t\t\t\t")
       ]
     )
   },
@@ -82501,7 +82509,7 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "name_2" } },
       [
         _c("span", { staticClass: "fa fa-name_2" }),
-        _vm._v(" Pareja 2:\n\t\t\t\t")
+        _vm._v(" Bailarina:\n\t\t\t\t")
       ]
     )
   },

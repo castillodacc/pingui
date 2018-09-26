@@ -2,26 +2,26 @@
 	<div class="col-md-8" v-if="can('inscription.store')">
 		<form @submit.prevent="register" v-if="r === true">
 			<h4>Datos de pareja</h4>
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<div class="form-group">
 					<label for="name_1" class="control-label">
-						<span class="fa fa-name_1"></span> Pareja 1:
+						<span class="fa fa-name_1"></span> Bailarín:
 					</label>
 					<input id="name_1" type="text" class="form-control" v-model="pareja1" disabled="">
 					<small id="name_1Help" class="form-text text-muted" v-text="msg.name_1"></small>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<div class="form-group">
 					<label for="name_2" class="control-label">
-						<span class="fa fa-name_2"></span> Pareja 2:
+						<span class="fa fa-name_2"></span> Bailarina:
 					</label>
 					<input id="name_2" type="text" class="form-control" v-model="pareja2" disabled="">
 					<small id="name_2Help" class="form-text text-muted" v-text="msg.name_2"></small>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-8">
+				<div class="col-md-12">
 				<div class="row">
 					<h4>Seleccione la modalidad que desea bailar:</h4>
 					<div class="col-md-4">
@@ -56,7 +56,7 @@
 				<div class="col-md-12" v-show="inscription.price.length">
 					<p>Seleccione el tipo de pago:</p>
 					<div class="col-md-12">
-						<div class="col-md-6 btn borde" :class="{'btn-black': inscription.method_pay == 1}" @click="changeType(1)" v-if="tournament.organizer.bank && tournament.organizer.headline && tournament.organizer.account">
+						<div class="col-md-6 btn borde" :class="{'btn-black': inscription.method_pay == 1}" @click="changeType(1)" v-if="tournament.organizer && (tournament.organizer.headline && tournament.organizer.account && tournament.organizer.bank)">
 						Transferencia
 					</div>
 					<div class="col-md-6 btn borde" :class="{'btn-black': inscription.method_pay == 2}" @click="changeType(2)" v-if="tournament.organizer.paypal_client_id && tournament.organizer.paypal_client_secret">
@@ -65,7 +65,7 @@
 					</div>
 					<small id="method_payHelp" class="form-text text-muted" v-text="msg.method_pay"></small>
 					<h4>Total a Pagar: <b>{{ inscription.pay }} €</b></h4>
-					<div class="col-md-12" v-if="inscription.method_pay == 1">
+					<div class="col-md-12" v-if="inscription.method_pay == 1 && (tournament.organizer.bank && tournament.organizer.headline && tournament.organizer.account)">
 						<p style="font-size: 14px;">Guarde los datos bancarios y deposite la cantidad acordada.</p>
 						<p style="margin: 0">Banco: <b>{{ tournament.organizer.bank }}</b></p>
 						<p style="margin: 0">Cuenta: <b>{{ tournament.organizer.account }}</b></p>
@@ -171,7 +171,9 @@ p {font-size: 1.3em;}
 				pareja2: '',
 				r: true,
 				data: {},
-				tournament: {},
+				tournament: {
+					organizer: {}
+				},
 				msg: {
 					febd_num_1: 'Pareja seleccionada.',
 					febd_num_2: 'Pareja seleccionada.',
