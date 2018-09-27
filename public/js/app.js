@@ -80375,6 +80375,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'v-header',
@@ -80527,7 +80532,9 @@ var render = function() {
                   ])
                 ])
               ])
-            ])
+            ]),
+            _vm._v(" "),
+            _vm._m(3)
           ])
         ])
       ])
@@ -80562,7 +80569,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "tasks-menu" }, [
-      _c("a", { attrs: { href: "/" } }, [_vm._v("Ir a la principal")])
+      _c("a", { attrs: { href: "/" } }, [_vm._v("Listado de Competiciones")])
     ])
   },
   function() {
@@ -80575,14 +80582,35 @@ var staticRenderFns = [
         staticClass: "btn btn-default btn-flat",
         attrs: {
           href: "#",
-          "data-toggle": "tooltip",
+          "data-tooltip": "tooltip",
           title: "Salir",
           onclick:
             "event.preventDefault(); document.getElementById('logout-form').submit();"
         }
       },
-      [_c("span", { staticClass: "fa fa-lock" })]
+      [_c("span", { staticClass: "glyphicon glyphicon-off" })]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "tasks-menu" }, [
+      _c(
+        "a",
+        {
+          attrs: {
+            href: "#",
+            "data-tooltip": "tooltip",
+            tooltip: "bottom",
+            title: "Salir",
+            onclick:
+              "event.preventDefault(); document.getElementById('logout-form').submit();"
+          }
+        },
+        [_c("span", { staticClass: "glyphicon glyphicon-off" })]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -81668,7 +81696,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -81710,11 +81737,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 	watch: {
 		prices: function prices(val) {
-			var price = 0;
+			var price = 0,
+			    test = 0;
 			for (var i in val) {
 				for (var o in this.tournament.prices) {
 					if (this.tournament.prices[o].id == val[i]) {
-						price += Number(this.tournament.prices[o].price);
+						if (this.tournament.prices[o].category_id == 1) {
+							price += Number(this.tournament.prices[o].price);
+						}
+						if ((this.tournament.prices[o].category_id == 2 || this.tournament.prices[o].category_id == 3) && test == 0) {
+							price += Number(this.tournament.prices[o].price);
+							test++;
+						}
 						continue;
 					}
 				}
@@ -81968,13 +82002,13 @@ var render = function() {
                                       }
                                     }),
                                     _vm._v(
-                                      "\n\t\t\t\t\t\t\t" +
+                                      "\n\t\t\t\t\t\t\t\t" +
                                         _vm._s(p.level_text) +
                                         " - " +
                                         _vm._s(p.subcategory_text) +
                                         " - " +
                                         _vm._s(p.price) +
-                                        " €\n\t\t\t\t\t\t"
+                                        " €\n\t\t\t\t\t\t\t"
                                     )
                                   ])
                                 ])
@@ -82036,13 +82070,13 @@ var render = function() {
                                       }
                                     }),
                                     _vm._v(
-                                      "\n\t\t\t\t\t\t\t" +
+                                      "\n\t\t\t\t\t\t\t\t" +
                                         _vm._s(p.level_text) +
                                         " - " +
                                         _vm._s(p.subcategory_text) +
                                         " - " +
                                         _vm._s(p.price) +
-                                        " €\n\t\t\t\t\t\t"
+                                        " €\n\t\t\t\t\t\t\t"
                                     )
                                   ])
                                 ])
@@ -82102,11 +82136,11 @@ var render = function() {
                                       }
                                     }),
                                     _vm._v(
-                                      "\n\t\t\t\t\t\t\t" +
+                                      "\n\t\t\t\t\t\t\t\t" +
                                         _vm._s(p.level_text) +
                                         " - " +
                                         _vm._s(p.price) +
-                                        " €\n\t\t\t\t\t\t"
+                                        " €\n\t\t\t\t\t\t\t"
                                     )
                                   ])
                                 ])
@@ -82114,7 +82148,12 @@ var render = function() {
                           })
                         ],
                         2
-                      )
+                      ),
+                      _vm._v(" "),
+                      _c("h4", [
+                        _vm._v("Total a Pagar: "),
+                        _c("b", [_vm._v(_vm._s(_vm.inscription.pay) + " €")])
+                      ])
                     ]),
                     _vm._v(" "),
                     _c(
@@ -82151,7 +82190,11 @@ var render = function() {
                                     }
                                   }
                                 },
-                                [_vm._v("\n\t\t\t\t\tTransferencia\n\t\t\t\t")]
+                                [
+                                  _vm._v(
+                                    "\n\t\t\t\t\t\t\tTransferencia\n\t\t\t\t\t\t"
+                                  )
+                                ]
                               )
                             : _vm._e(),
                           _vm._v(" "),
@@ -82170,7 +82213,7 @@ var render = function() {
                                     }
                                   }
                                 },
-                                [_vm._v("\n\t\t\t\t\tPaypal\n\t\t\t\t")]
+                                [_vm._v("\n\t\t\t\t\t\t\tPaypal\n\t\t\t\t\t\t")]
                               )
                             : _vm._e()
                         ]),
@@ -82180,11 +82223,6 @@ var render = function() {
                           attrs: { id: "method_payHelp" },
                           domProps: { textContent: _vm._s(_vm.msg.method_pay) }
                         }),
-                        _vm._v(" "),
-                        _c("h4", [
-                          _vm._v("Total a Pagar: "),
-                          _c("b", [_vm._v(_vm._s(_vm.inscription.pay) + " €")])
-                        ]),
                         _vm._v(" "),
                         _vm.inscription.method_pay == 1 &&
                         (_vm.tournament.organizer.bank &&
@@ -82364,7 +82402,9 @@ var render = function() {
           : _c("div", { staticClass: "col-md-8" }, [
               _c("div", { staticClass: "alert alert-success" }, [
                 _c("h3", { staticClass: "text-center" }, [
-                  _vm._v("Ya te haz Registrado.")
+                  _vm._v(
+                    "Tu registro a la competición se ha finalizado correctamente.."
+                  )
                 ]),
                 _vm._v(" "),
                 _c("p", [
@@ -82373,7 +82413,7 @@ var render = function() {
                       _vm._s(_vm.data.name) +
                       " " +
                       _vm._s(_vm.data.last_name) +
-                      ", Se ha registrado de forma exitosa la inscripción en esta competencia."
+                      ", Se ha registrado correctamente en la competición."
                   )
                 ]),
                 _vm._v(" "),

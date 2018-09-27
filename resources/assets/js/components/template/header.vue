@@ -14,9 +14,9 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li class="tasks-menu">
-                        <a href="/" class="">Ir a la principal</a>
-                  </li>
-                  <li class="dropdown user user-menu">
+                        <a href="/" class="">Listado de Competiciones</a>
+                    </li>
+                    <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img :src="all.user.logoPath" class="user-image" alt="">
                             <span class="hidden-xs" v-text="all.user.fullName"></span>
@@ -39,8 +39,8 @@
                                     </router-link>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" data-toggle="tooltip" title="Salir" class="btn btn-default btn-flat" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        <span class="fa fa-lock"></span>
+                                    <a href="#" data-tooltip="tooltip" title="Salir" class="btn btn-default btn-flat" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <span class="glyphicon glyphicon-off"></span>
                                     </a>
                                     <form id="logout-form" action="/logout" method="POST" style="display:none;">
                                         <input type="hidden" name="_token" :value="token">
@@ -49,6 +49,11 @@
                                 </div>
                             </li>
                         </ul>
+                    </li>
+                    <li class="tasks-menu">
+                        <a href="#" data-tooltip="tooltip" tooltip="bottom" title="Salir" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <span class="glyphicon glyphicon-off"></span>
+                        </a>
                     </li>
                 </ul>
             </div>

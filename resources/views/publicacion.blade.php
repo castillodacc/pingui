@@ -76,10 +76,16 @@
 								</div>
 								<div class="row">
 									<div class="pull-left col-md-7 col-xs-12">
-										<small>Se realizará: {{ $tournament->start }}.</small><br>
-										<small><strong>Organizador: {{ $tournament->organizer->name }}.</strong></small><br>
+										<small>Se realizará: {{ Carbon::parse($tournament->start)->format('d/m/Y') }}.</small><br>
+										<small><strong>Organizador:</strong> {{ $tournament->organizer->name }}.</small><br>
 										<small><strong>Inscripción: {{ ($tournament->inscription) ? 'Abierta' : 'Cerrada' }}.</strong></small><br>
-										<h5><b>Precios Categoria Open:</b></h5>
+										@if($tournament->info)
+										<small><strong>Precio de competición:</strong> <a href="{{ asset('storage/info/' . $tournament->info) }}" class="btn btn-info btn-block" target="_blank">Consultar Hoja Informativa</a></small><br>
+										<div class="col-md-4">
+
+										</div>
+										@endif
+										<h5><b>Precios de los Opens:</b></h5>
 										<ul>
 											@foreach($tournament->prices->where('category_id', 1) as $p)
 											<li>
@@ -133,15 +139,6 @@
 									@endif
 								</div>
 								<div class="row">
-									@if(\Auth::guest())
-									<div class="col-md-12">
-										<div class="alert alert-info" role="alert">
-											<span class="text-warning">
-												<b><a href="/login">Inicia Sesión</a></b> o <b><a href="/registro">Registrate</a></b> para inscribirte
-											</span>
-										</div>
-									</div>
-									@endif
 									@if(\Auth::check() && \Auth::user()->febd_num == '')
 									<div class="col-md-12">
 										<div class="alert alert-info" role="alert">
@@ -153,9 +150,9 @@
 									@endif
 									<div class="col-md-12">
 										<div class="row">
-											@if($tournament->info)
+											@if(\Auth::guest())
 											<div class="col-md-4">
-												<a href="{{ asset('storage/info/' . $tournament->info) }}" class="btn btn-info btn-block" target="_blank">Hoja informativa</a>
+												<a href="/registro" class="btn btn-primary btn-block">Registrate</a>
 											</div>
 											@endif
 											@if($tournament->maps)

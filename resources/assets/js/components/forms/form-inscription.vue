@@ -22,58 +22,57 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-				<div class="row">
-					<h4>Seleccione la modalidad que desea bailar:</h4>
-					<div class="col-md-4">
-						<p>Standard:</p>
-						<div class="form-inline" v-for="p in tournament.prices" 
-						v-if="p.category_id == 3 && data.category_s == p.level_id && data.group_s == p.subcategory_id">
-							<label :for="p.id">
-								<input type="checkbox" :id="p.id" class="" :value="p.id" v-model="prices">
-								{{ p.level_text }} - {{ p.subcategory_text }} - {{ p.price }} €
-							</label>
+					<div class="row">
+						<h4>Seleccione la modalidad que desea bailar:</h4>
+						<div class="col-md-4">
+							<p>Standard:</p>
+							<div class="form-inline" v-for="p in tournament.prices" v-if="p.category_id == 3 && data.category_s == p.level_id && data.group_s == p.subcategory_id">
+								<label :for="p.id">
+									<input type="checkbox" :id="p.id" class="" :value="p.id" v-model="prices">
+									{{ p.level_text }} - {{ p.subcategory_text }} - {{ p.price }} €
+								</label>
+							</div>
 						</div>
-					</div>
-					<div class="col-md-4">
-						<p>Latino:</p>
-						<div class="form-inline" v-for="p in tournament.prices" v-if="p.category_id == 2 && data.category_l == p.level_id && data.group_l == p.subcategory_id">
-							<label :for="p.id">
-								<input type="checkbox" :id="p.id" class="" :value="p.id" v-model="prices">
-								{{ p.level_text }} - {{ p.subcategory_text }} - {{ p.price }} €
-							</label>
+						<div class="col-md-4">
+							<p>Latino:</p>
+							<div class="form-inline" v-for="p in tournament.prices" v-if="p.category_id == 2 && data.category_l == p.level_id && data.group_l == p.subcategory_id">
+								<label :for="p.id">
+									<input type="checkbox" :id="p.id" class="" :value="p.id" v-model="prices">
+									{{ p.level_text }} - {{ p.subcategory_text }} - {{ p.price }} €
+								</label>
+							</div>
 						</div>
+						<div class="col-md-4">
+							<p>Open:</p>
+							<div class="form-inline" v-for="p in tournament.prices" v-if="p.category_id == 1">
+								<label :for="p.id">
+									<input type="checkbox" :id="p.id" class="" :value="p.id" v-model="prices">
+									{{ p.level_text }} - {{ p.price }} €
+								</label>
+							</div>
+						</div>
+						<h4>Total a Pagar: <b>{{ inscription.pay }} €</b></h4>
 					</div>
-					<div class="col-md-4">
-						<p>Open:</p>
-						<div class="form-inline" v-for="p in tournament.prices" v-if="p.category_id == 1">
-							<label :for="p.id">
-								<input type="checkbox" :id="p.id" class="" :value="p.id" v-model="prices">
-								{{ p.level_text }} - {{ p.price }} €
-							</label>
+					<div class="col-md-12" v-show="inscription.price.length">
+						<p>Seleccione el tipo de pago:</p>
+						<div class="col-md-12">
+							<div class="col-md-6 btn borde" :class="{'btn-black': inscription.method_pay == 1}" @click="changeType(1)" v-if="tournament.organizer && (tournament.organizer.headline && tournament.organizer.account && tournament.organizer.bank)">
+								Transferencia
+							</div>
+							<div class="col-md-6 btn borde" :class="{'btn-black': inscription.method_pay == 2}" @click="changeType(2)" v-if="tournament.organizer.paypal_client_id && tournament.organizer.paypal_client_secret">
+								Paypal
+							</div>
+						</div>
+						<small id="method_payHelp" class="form-text text-muted" v-text="msg.method_pay"></small>
+						<div class="col-md-12" v-if="inscription.method_pay == 1 && (tournament.organizer.bank && tournament.organizer.headline && tournament.organizer.account)">
+							<p style="font-size: 14px;">Guarde los datos bancarios y deposite la cantidad acordada.</p>
+							<p style="margin: 0">Banco: <b>{{ tournament.organizer.bank }}</b></p>
+							<p style="margin: 0">Cuenta: <b>{{ tournament.organizer.account }}</b></p>
+							<p style="margin: 0">Titular: <b>{{ tournament.organizer.headline }}</b></p>
+							<p style="margin: 0">Monto: <b>{{ inscription.pay }} €</b></p>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-12" v-show="inscription.price.length">
-					<p>Seleccione el tipo de pago:</p>
-					<div class="col-md-12">
-						<div class="col-md-6 btn borde" :class="{'btn-black': inscription.method_pay == 1}" @click="changeType(1)" v-if="tournament.organizer && (tournament.organizer.headline && tournament.organizer.account && tournament.organizer.bank)">
-						Transferencia
-					</div>
-					<div class="col-md-6 btn borde" :class="{'btn-black': inscription.method_pay == 2}" @click="changeType(2)" v-if="tournament.organizer.paypal_client_id && tournament.organizer.paypal_client_secret">
-						Paypal
-					</div>
-					</div>
-					<small id="method_payHelp" class="form-text text-muted" v-text="msg.method_pay"></small>
-					<h4>Total a Pagar: <b>{{ inscription.pay }} €</b></h4>
-					<div class="col-md-12" v-if="inscription.method_pay == 1 && (tournament.organizer.bank && tournament.organizer.headline && tournament.organizer.account)">
-						<p style="font-size: 14px;">Guarde los datos bancarios y deposite la cantidad acordada.</p>
-						<p style="margin: 0">Banco: <b>{{ tournament.organizer.bank }}</b></p>
-						<p style="margin: 0">Cuenta: <b>{{ tournament.organizer.account }}</b></p>
-						<p style="margin: 0">Titular: <b>{{ tournament.organizer.headline }}</b></p>
-						<p style="margin: 0">Monto: <b>{{ inscription.pay }} €</b></p>
-					</div>
-				</div>
-			</div>
 			</div>
 			<div class="col-md-12">
 				<div class="span pull-right" style="padding: 15px">
@@ -115,8 +114,8 @@
 		</form>
 		<div class="col-md-8" v-else>
 			<div class="alert alert-success">
-				<h3 class="text-center">Ya te haz Registrado.</h3>
-				<p>Hola {{ data.name }} {{ data.last_name }}, Se ha registrado de forma exitosa la inscripción en esta competencia.</p>
+				<h3 class="text-center">Tu registro a la competición se ha finalizado correctamente..</h3>
+				<p>Hola {{ data.name }} {{ data.last_name }}, Se ha registrado correctamente en la competición.</p>
 				<p>
 					<b>Estado del pago: </b>
 					<span v-if="r.state_pay == 1">Ya fué aprobado su pago...</span>
@@ -196,11 +195,17 @@ p {font-size: 1.3em;}
 		},
 		watch: {
 			prices: function (val) {
-				let price = 0;
+				let price = 0, test = 0;
 				for(let i in val) {
 					for(let o in this.tournament.prices) {
 						if (this.tournament.prices[o].id == val[i]) {
-							price += Number(this.tournament.prices[o].price);
+							if (this.tournament.prices[o].category_id == 1) {
+								price += Number(this.tournament.prices[o].price);
+							}
+							if ((this.tournament.prices[o].category_id == 2 || this.tournament.prices[o].category_id == 3) && test == 0) {
+								price += Number(this.tournament.prices[o].price);
+								test++;
+							}
 							continue;
 						}
 					}

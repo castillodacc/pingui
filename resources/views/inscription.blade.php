@@ -77,7 +77,7 @@
 							<div class="col-md-8">
 								<div class="alert alert-info" role="alert">
 									<span class="text-warning">
-										<a href="/perfil/3">Los datos aqui provistos no concuerdan con los actuales?. Actualiza tu perfil.</a>
+										<a href="/perfil/3">Si estos datos no son correctos actualízalos aquí.</a>
 									</span>
 								</div>
 							</div>
