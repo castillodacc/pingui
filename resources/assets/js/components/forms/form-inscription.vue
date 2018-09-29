@@ -321,17 +321,15 @@ p {font-size: 1.3em;}
 							// Inform the user if there was an error.
 				      		var errorElement = document.getElementById('card-errors');
 				      		errorElement.textContent = result.error.message;
-						  	toastr.info('fake')
+						  	toastr.info('Error En la conexión');
 				      	} else {
 							// Send the token to your server.
 				      		this.inscription.stripeToken = result.token.id;
 							// this.stripeTokenHandler(result.token);
 				  			this.send();
-						  	toastr.info('ready')
 				  		}
 				  	});
 				} else {
-					toastr.info('no')
 					this.send();
 				}
 			},
