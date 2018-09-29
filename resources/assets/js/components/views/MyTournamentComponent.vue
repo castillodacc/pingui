@@ -1,7 +1,7 @@
 <template>
 	<div class="box">
 		<div class="box-header">
-			<h3 class="box-title">Mis Competencias: </h3>
+			<h3 class="box-title">Mis Competiciones: </h3>
 		</div>
 		<div class="box-body">
 			<rs-table id="tournament" :tabla="tabla" uri="/tournament/user"></rs-table>

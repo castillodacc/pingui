@@ -36,7 +36,7 @@
 				tabla: {
 					columns: [
 					{ title: 'Dorsales', field: 'dorsal', sort: 'id', sortable: true },
-					{ title: 'Participante', field: 'user', sort: 'name', sortable: true },
+					{ title: 'Participante', field: 'last_name_1', sort: 'name', sortable: true },
 					{ title: 'Pareja', field: 'pareja', sort: 'name_2', sortable: true },
 					{ title: 'Tipo de pago', field: 'type_pay', sort: 'method_pay', sortable: true },
 					{ title: 'Estado del pago', field: 'state_pay', sortable: true, class: 'text-center' },

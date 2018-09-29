@@ -68,7 +68,7 @@ class Paypal
 		return \PaypalPayment::transaction()
 		->setAmount($this->amount()) // monto a cobrar
 		->setItemList($this->items())
-		->setDescription("Compra a PINGUI")
+		->setDescription("Pago a PINGUI")
 		->setInvoiceNumber(uniqid());
 	}
 
@@ -88,7 +88,7 @@ class Paypal
 
 		$item = \PaypalPayment::item()
 		->setName($this->inscription->tournament->name)
-		->setDescription('Pago de competencia: ' . $this->inscription->tournament->name)
+		->setDescription('Pago de competición: ' . $this->inscription->tournament->name)
 		->setCurrency($this->currency) // colocar en euros
 		->setQuantity(1) // cantidad que se va a pagar
 		->setPrice($this->inscription->pay);

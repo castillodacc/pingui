@@ -56,11 +56,14 @@
 					<div class="col-md-12" v-show="inscription.price.length">
 						<p>Seleccione el tipo de pago:</p>
 						<div class="col-md-12">
-							<div class="col-md-6 btn borde" :class="{'btn-black': inscription.method_pay == 1}" @click="changeType(1)" v-if="tournament.organizer && (tournament.organizer.headline && tournament.organizer.account && tournament.organizer.bank)">
+							<div class="col-md-4 btn borde" :class="{'btn-black': inscription.method_pay == 1}" @click="changeType(1)" v-if="tournament.organizer && (tournament.organizer.headline && tournament.organizer.account && tournament.organizer.bank)">
 								Transferencia
 							</div>
-							<div class="col-md-6 btn borde" :class="{'btn-black': inscription.method_pay == 2}" @click="changeType(2)" v-if="tournament.organizer.paypal_client_id && tournament.organizer.paypal_client_secret">
+							<div class="col-md-4 btn borde" :class="{'btn-black': inscription.method_pay == 2}" @click="changeType(2)" v-if="tournament.organizer.paypal_client_id && tournament.organizer.paypal_client_secret">
 								Paypal
+							</div>
+							<div class="col-md-4 btn borde" :class="{'btn-black': inscription.method_pay == 3}" @click="changeType(3)" v-if="1">
+								Tarjeta
 							</div>
 						</div>
 						<small id="method_payHelp" class="form-text text-muted" v-text="msg.method_pay"></small>
@@ -70,6 +73,18 @@
 							<p style="margin: 0">Cuenta: <b>{{ tournament.organizer.account }}</b></p>
 							<p style="margin: 0">Titular: <b>{{ tournament.organizer.headline }}</b></p>
 							<p style="margin: 0">Monto: <b>{{ inscription.pay }} €</b></p>
+						</div>
+						<div id="payment-form" class="form-row" v-show="inscription.method_pay == 3 && (tournament.organizer.t_publishable_key && tournament.organizer.t_secret_key)">
+							<div class="form-row">
+								<label for="card-element">
+									Tarjeta de Débito y Crédito
+								</label>
+								<div id="card-element">
+									<!-- A Stripe Element will be inserted here. -->
+								</div>
+								<!-- Used to display form errors. -->
+								<div id="card-errors" role="alert"></div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -84,7 +99,7 @@
 					<div class="modal-content">
 						<div class="modal-header btn-black">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title">¿Esta Seguro de Registrar su participación en esta competencia?</h4>
+							<h4 class="modal-title">¿Esta Seguro de Registrar su participación en esta competición?</h4>
 						</div>
 						<div class="modal-body">
 							<p> Pareja: {{ pareja1 }} y {{ pareja2 }}</p>
@@ -112,7 +127,7 @@
 				</div>
 			</div>
 		</form>
-		<div class="col-md-8" v-else>
+		<div class="col-md-12" v-else>
 			<div class="alert alert-success">
 				<h3 class="text-center">Tu registro a la competición se ha finalizado correctamente..</h3>
 				<p>Hola {{ data.name }} {{ data.last_name }}, Se ha registrado correctamente en la competición.</p>
@@ -153,6 +168,29 @@
 <style>
 .borde {border: 1px solid;}
 p {font-size: 1.3em;}
+/**
+* The CSS shown here will not be introduced in the Quickstart guide, but shows
+* how you can use CSS to style your Element's container.
+*/
+.StripeElement {
+	background-color: white;
+	height: 40px;
+	padding: 10px 12px;
+	border-radius: 4px;
+	border: 1px solid transparent;
+	box-shadow: 0 1px 3px 0 #e6ebf1;
+	-webkit-transition: box-shadow 150ms ease;
+	transition: box-shadow 150ms ease;
+}
+.StripeElement--focus {
+	box-shadow: 0 1px 3px 0 #cfd7df;
+}
+.StripeElement--invalid {
+	border-color: #fa755a;
+}
+.StripeElement--webkit-autofill {
+	background-color: #fefde5 !important;
+}
 </style>
 
 <script>
@@ -165,6 +203,8 @@ p {font-size: 1.3em;}
 		props: ['id'],
 		data() {
 			return {
+				stripe_objec: {},
+				card: {},
 				prices: [],
 				pareja1: '',
 				pareja2: '',
@@ -216,7 +256,7 @@ p {font-size: 1.3em;}
 		},
 		mounted() {
 			this.inscription.tournament_id = this.id;
-			setTimeout(() => {this.get();},300);
+			setTimeout(() => {this.get(); },300);
 		},
 		methods: {
 			namePrice: function (id) {
@@ -256,6 +296,7 @@ p {font-size: 1.3em;}
 						this.inscription.name_1 = this.data.name;
 						this.inscription.last_name_1 = this.data.last_name;
 					}
+					this.stripe(this.tournament.organizer.t_publishable_key);
 				});
 			},
 			cate: function (n) {
@@ -270,12 +311,31 @@ p {font-size: 1.3em;}
 			changeType: function (num) {this.inscription.method_pay = num;},
 			open: function () {
 				$('#confirm').modal('show');
-				setTimeout(function () {
-					$('#confirm, body').css({'padding-right': '0px'});
-				}, 200);
+				setTimeout(function () {$('#confirm, body').css({'padding-right': '0px'});}, 100);
 				$('.modal-backdrop').hide();
 			},
-			register: function () {
+			register: function (event) {
+				if (this.inscription.method_pay == 3) {
+					this.stripe_objec.createToken(this.card).then((result) => {
+						if (result.error) {
+							// Inform the user if there was an error.
+				      		var errorElement = document.getElementById('card-errors');
+				      		errorElement.textContent = result.error.message;
+						  	toastr.info('fake')
+				      	} else {
+							// Send the token to your server.
+				      		this.inscription.stripeToken = result.token.id;
+							// this.stripeTokenHandler(result.token);
+				  			this.send();
+						  	toastr.info('ready')
+				  		}
+				  	});
+				} else {
+					toastr.info('no')
+					this.send();
+				}
+			},
+			send: function () {
 				toastr.info('Procesando Información, ¡por favor espere!');
 				axios.post('/inscription', this.inscription)
 				.then(response => {
@@ -287,6 +347,46 @@ p {font-size: 1.3em;}
 						setTimeout(() => window.location.reload(), 1000);
 					}
 				});
+			},
+			stripe: function (public_key) {
+				// Create a Stripe client.
+				this.stripe_objec = Stripe(public_key);
+				// Create an instance of Elements.
+				var elements = this.stripe_objec.elements();
+				// Custom styling can be passed to options when creating an Element.
+				// (Note that this demo uses a wider set of styles than the guide below.)
+				var style = {
+					base: {
+						color: '#32325d',
+						lineHeight: '18px',
+						fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+						fontSmoothing: 'antialiased',
+						fontSize: '16px',
+						'::placeholder': {
+							color: '#aab7c4'
+						}
+					},
+					invalid: {
+						color: '#fa755a',
+						iconColor: '#fa755a'
+					}
+				};
+				// Create an instance of the card Element.
+				var card = elements.create('card', {style: style});
+
+				// Add an instance of the card Element into the `card-element` <div>.
+				card.mount('#card-element');
+
+				// Handle real-time validation errors from the card Element.
+				card.addEventListener('change', function(event) {
+					var displayError = document.getElementById('card-errors');
+					if (event.error) {
+						displayError.textContent = event.error.message;
+					} else {
+						displayError.textContent = '';
+					}
+				});
+				this.card = card;
 			}
 		}
 	}

@@ -75,12 +75,12 @@
         </li>
         <li v-if="can('tournament.index')">
             <router-link :to="{ name: 'tournament.index' }">
-                <i class="fa fa-td"></i> <span>Competencias</span>
+                <i class="fa fa-td"></i> <span>Competiciones</span>
             </router-link>
         </li>
         <li v-if="can('tournament.user')">
             <router-link :to="{ name: 'tournament.user' }">
-                <i class="fa fa-td"></i> <span>Mis Competencias</span>
+                <i class="fa fa-td"></i> <span>Mis Competiciones</span>
             </router-link>
         </li>
     </ul>

@@ -51,7 +51,7 @@
                         </ul>
                     </li>
                     <li class="tasks-menu">
-                        <a href="#" data-tooltip="tooltip" tooltip="bottom" title="Salir" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <a href="#" data-tooltip="tooltip" tooltip="bottom" title="Salir" class="btn-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <span class="glyphicon glyphicon-off"></span>
                         </a>
                     </li>

@@ -1,7 +1,7 @@
 <template>
 	<div class="box">
 		<div class="box-header">
-			<h3 class="box-title">Tabla de Competencias: </h3>
+			<h3 class="box-title">Tabla de Competiciones: </h3>
 			<router-link :to="{ name: 'tournament.store' }"
 			class="btn btn-default btn-xs"
 			data-tooltip="tooltip"

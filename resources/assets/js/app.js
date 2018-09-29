@@ -71,12 +71,6 @@ Vue.mixin({
 	}
 });
 
-// Vue.filter('capitalize', function (value) {
-// 	if (!value) return '';
-// 	value = value.toString();
-// 	return value.charAt(0).toUpperCase() + value.slice(1);
-// });
-
 Vue.component('spinner', require('./components/partials/spinner.vue'));
 Vue.component('inscription', require('./components/forms/form-inscription.vue'));
 Vue.component('contact', require('./components/forms/form-contact.vue'));

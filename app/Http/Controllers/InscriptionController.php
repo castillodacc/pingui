@@ -34,7 +34,13 @@ class InscriptionController extends Controller
         $data->each(function ($d) {
             $d->dorsal = ($d->dorsal) ?: '------------';
             $d->state = ($d->state == 1) ? 'Aprobado' : 'No Aprobado';
-            $d->type_pay = ($d->method_pay == 1) ? 'Transferencia' : 'Paypal';
+            if ($d->method_pay == 1) {
+                $d->type_pay = 'Transferencia';
+            } elseif ($d->method_pay == 2) {
+                $d->type_pay = 'Paypal';
+            } else {
+                $d->type_pay = 'Tarjeta';
+            }
             $d->state_pay = ($d->state_pay) ? '<i class="glyphicon glyphicon-check text-center"></i>' : '<i class="glyphicon glyphicon-unchecked text-center"></i>';
             $d->user = $d->febd_num_1 . ' - ' . $d->name_1 . ' ' . $d->last_name_1;
             $d->pareja = $d->febd_num_2 . ' - ' . $d->name_2 . ' ' . $d->last_name_2;
@@ -82,6 +88,23 @@ class InscriptionController extends Controller
             return $payment->getApprovalLink();
         }
 
+        if ($inscription->method_pay == 3) {
+            $inscription->delete();
+            \Stripe\Stripe::setApiKey($inscription->tournament->organizer->t_secret_key);
+            $charge = \Stripe\Charge::create([
+                'amount' => $request->pay . '00',
+                'currency' => env('CURRENCY'),
+                'description' => 'Pago de Competición a PINGUI:'  . $inscription->tournament->name,
+                'source' => $request->stripeToken
+            ]);
+            if ($charge['status'] == 'succeeded') {
+                $inscription->restore();
+                $inscription->update(['state_pay' => true]);
+                // return redirect()->to(route('payment.store', $inscription->id));
+            } else {
+                // return redirect()->to(route('payment.cancel', $inscription->id));
+            }
+        }
     }
 
     /**
@@ -136,10 +159,7 @@ class InscriptionController extends Controller
         $execution = $paypal->execute($request->paymentId, $request->PayerID);
 
         $inscription->restore();
-        $inscription->update([
-            'state_pay' => true,
-            'state' => true,
-        ]);
+        $inscription->update(['state_pay' => true]);
         $tournament = Tournament::findOrFail($inscription->tournament_id);
         return view('inscription', compact('tournament'));
     }

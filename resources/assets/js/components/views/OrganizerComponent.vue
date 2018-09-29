@@ -26,6 +26,57 @@
                     </div>
                 </div>
                 <div class="col-md-12">
+                    <h4>Paypal:</h4>
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <div class="form-group">
+                            <label for="paypal_client_id" class="control-label">
+                                <span class="fa fa-paypal_client_id"></span> ID Client:
+                            </label>
+                            <input id="paypal_client_id" type="password" class="form-control" v-model="form.data.paypal_client_id">
+                            <small id="paypal_client_idHelp" class="form-text text-muted">
+                                <span v-text="msg.paypal_client_id"></span>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="paypal_client_secret" class="control-label">
+                                <span class="fa fa-paypal_client_secret"></span> ID Client Secret:
+                            </label>
+                            <input id="paypal_client_secret" type="password" class="form-control" v-model="form.data.paypal_client_secret">
+                            <small id="paypal_client_secretHelp" class="form-text text-muted">
+                                <span v-text="msg.paypal_client_secret"></span>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <h4>Tarjetas:</h4>
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <div class="form-group">
+                            <label for="t_publishable_key" class="control-label">
+                                <span class="fa fa-t_publishable_key"></span> Publishable key:
+                            </label>
+                            <input id="t_publishable_key" type="password" class="form-control" v-model="form.data.t_publishable_key">
+                            <small id="t_publishable_key" class="form-text text-muted">
+                                <span v-text="msg.t_publishable_key"></span>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="t_secret_key" class="control-label">
+                                <span class="fa fa-t_secret_key"></span> Secret key:
+                            </label>
+                            <input id="t_secret_key" type="password" class="form-control" v-model="form.data.t_secret_key">
+                            <small id="t_secretHelp_key" class="form-text text-muted">
+                                <span v-text="msg.t_secret_key"></span>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <h4>Transferencias:</h4>
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label for="bank" class="control-label">
@@ -56,30 +107,6 @@
                             <input id="headline" type="text" class="form-control" v-model="form.data.headline">
                             <small id="headlineHelp" class="form-text text-muted">
                                 <span v-text="msg.headline"></span>
-                            </small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="col-sm-4 col-sm-offset-2">
-                        <div class="form-group">
-                            <label for="paypal_client_id" class="control-label">
-                                <span class="fa fa-paypal_client_id"></span> ID Client:
-                            </label>
-                            <input id="paypal_client_id" type="text" class="form-control" v-model="form.data.paypal_client_id">
-                            <small id="paypal_client_idHelp" class="form-text text-muted">
-                                <span v-text="msg.paypal_client_id"></span>
-                            </small>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="paypal_client_secret" class="control-label">
-                                <span class="fa fa-paypal_client_secret"></span> ID Client Secret:
-                            </label>
-                            <input id="paypal_client_secret" type="text" class="form-control" v-model="form.data.paypal_client_secret">
-                            <small id="paypal_client_secretHelp" class="form-text text-muted">
-                                <span v-text="msg.paypal_client_secret"></span>
                             </small>
                         </div>
                     </div>
@@ -119,6 +146,8 @@
                     headline: 'Titular de la Cuenta',
                     client_id: 'Código CLIENT ID proporcionado por paypal',
                     client_secret: 'Código CLIENT ID SECRET proporcionado por paypal',
+                    t_publishable_key: 'Clave Pública',
+                    t_secret_key: 'Clave Secreta.',
                 },
                 tabla: {
                     columns: [
@@ -126,6 +155,7 @@
                     { title: 'Nombre', field: 'name', sortable: true },
                     { title: 'Pagos Paypal', field: 'p', class: 'text-center' },
                     { title: 'Pagos Transferencias', field: 't', class: 'text-center' },
+                    { title: 'Pagos Tarjetas', field: 't_', class: 'text-center' },
                     ],
                     options: [
                     { ico: 'fa fa-edit', class: 'btn-info', title: 'Editar', func: (id) => {this.openform('edit', id); }, action: 'organizer.update'},

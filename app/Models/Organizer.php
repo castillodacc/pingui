@@ -23,6 +23,8 @@ class Organizer extends Model
         'headline',
         'paypal_client_id',
         'paypal_client_secret',
+        't_publishable_key',
+        't_secret_key',
     ];
 
     /**

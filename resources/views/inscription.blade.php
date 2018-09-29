@@ -120,6 +120,7 @@
 			</footer>
 		</div>
 	</div>
+	<script src="https://js.stripe.com/v3/"></script>
 	<script type="text/javascript" src="/js/jquery.flexslider.min.js"></script>
 	<script type="text/javascript" src="/js/custom.js"></script>
 	<script type="text/javascript" src="/js/app.js"></script>

@@ -25,7 +25,7 @@ class UserStoreRequest extends FormRequest
     {
         return [
             'email'     => 'required|email|min:8|max:35|unique:users',/*DomainValid*/
-            'user'      => 'required|alfa_space|min:3|max:25',
+            'user'      => 'required|alfa_space|min:3|max:25|unique:users',
             'last_name' => 'required|alfa_space|min:3|max:50',
             'name'      => 'required|alfa_space|min:3|max:50',
             'num_id'    => 'required|string|min:6|max:12|unique:users',/*digits_between:6,9|exr_ced*/

@@ -29,6 +29,10 @@ class OrganizerController extends Controller
             if ($o->bank && $o->account && $o->headline) {
                 $o->t = '<i class="glyphicon glyphicon-check"></i>';
             }
+            $o->t_ = '<i class="glyphicon glyphicon-unchecked"></i>';
+            if ($o->t_publishable_key && $o->t_secret_key) {
+                $o->t_ = '<i class="glyphicon glyphicon-check"></i>';
+            }
             $o->p = '<i class="glyphicon glyphicon-unchecked"></i>';
             if ($o->paypal_client_id && $o->paypal_client_secret) {
                 $o->p = '<i class="glyphicon glyphicon-check"></i>';
@@ -52,6 +56,8 @@ class OrganizerController extends Controller
             'headline' => 'nullable|string',
             'paypal_client_id' => 'nullable|string',
             'paypal_client_secret' => 'nullable|string',
+            't_publishable_key' => 'nullable|string',
+            't_secret_key' => 'nullable|string',
         ],[],['name' => 'nombre']);
         $data['name'] = ucfirst(mb_strtolower($data['name']));
         Organizer::create($data);
@@ -86,6 +92,8 @@ class OrganizerController extends Controller
             'headline' => 'nullable|string',
             'paypal_client_id' => 'nullable|string',
             'paypal_client_secret' => 'nullable|string',
+            't_publishable_key' => 'nullable|string',
+            't_secret_key' => 'nullable|string',
         ],[],['name' => 'nombre']);
         $data['name'] = ucfirst(mb_strtolower($data['name']));
         Organizer::findOrFail($id)->update($data);

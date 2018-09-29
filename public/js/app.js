@@ -48376,12 +48376,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.mixin({
 	}
 });
 
-// Vue.filter('capitalize', function (value) {
-// 	if (!value) return '';
-// 	value = value.toString();
-// 	return value.charAt(0).toUpperCase() + value.slice(1);
-// });
-
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('spinner', __webpack_require__(278));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('inscription', __webpack_require__(281));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('contact', __webpack_require__(286));
@@ -76127,6 +76121,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -76149,10 +76170,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 account: 'Número de Cuenta Bancaria',
                 headline: 'Titular de la Cuenta',
                 client_id: 'Código CLIENT ID proporcionado por paypal',
-                client_secret: 'Código CLIENT ID SECRET proporcionado por paypal'
+                client_secret: 'Código CLIENT ID SECRET proporcionado por paypal',
+                t_publishable_key: 'Clave Pública',
+                t_secret_key: 'Clave Secreta.'
             },
             tabla: {
-                columns: [{ title: 'N°', field: 'id', sortable: true }, { title: 'Nombre', field: 'name', sortable: true }, { title: 'Pagos Paypal', field: 'p', class: 'text-center' }, { title: 'Pagos Transferencias', field: 't', class: 'text-center' }],
+                columns: [{ title: 'N°', field: 'id', sortable: true }, { title: 'Nombre', field: 'name', sortable: true }, { title: 'Pagos Paypal', field: 'p', class: 'text-center' }, { title: 'Pagos Transferencias', field: 't', class: 'text-center' }, { title: 'Pagos Tarjetas', field: 't_', class: 'text-center' }],
                 options: [{ ico: 'fa fa-edit', class: 'btn-info', title: 'Editar', func: function func(id) {
                         _this.openform('edit', id);
                     }, action: 'organizer.update' }, { ico: 'fa fa-close', class: 'btn-danger', title: 'Borrar', func: function func(id) {
@@ -76306,9 +76329,207 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-12" }, [
-                  _c("div", { staticClass: "col-sm-4" }, [
+                  _c("h4", [_vm._v("Paypal:")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-4 col-sm-offset-2" }, [
                     _c("div", { staticClass: "form-group" }, [
                       _vm._m(1),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.data.paypal_client_id,
+                            expression: "form.data.paypal_client_id"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "paypal_client_id", type: "password" },
+                        domProps: { value: _vm.form.data.paypal_client_id },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form.data,
+                              "paypal_client_id",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "small",
+                        {
+                          staticClass: "form-text text-muted",
+                          attrs: { id: "paypal_client_idHelp" }
+                        },
+                        [
+                          _c("span", {
+                            domProps: {
+                              textContent: _vm._s(_vm.msg.paypal_client_id)
+                            }
+                          })
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.data.paypal_client_secret,
+                            expression: "form.data.paypal_client_secret"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "paypal_client_secret", type: "password" },
+                        domProps: { value: _vm.form.data.paypal_client_secret },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form.data,
+                              "paypal_client_secret",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "small",
+                        {
+                          staticClass: "form-text text-muted",
+                          attrs: { id: "paypal_client_secretHelp" }
+                        },
+                        [
+                          _c("span", {
+                            domProps: {
+                              textContent: _vm._s(_vm.msg.paypal_client_secret)
+                            }
+                          })
+                        ]
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("h4", [_vm._v("Tarjetas:")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-4 col-sm-offset-2" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.data.t_publishable_key,
+                            expression: "form.data.t_publishable_key"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "t_publishable_key", type: "password" },
+                        domProps: { value: _vm.form.data.t_publishable_key },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form.data,
+                              "t_publishable_key",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "small",
+                        {
+                          staticClass: "form-text text-muted",
+                          attrs: { id: "t_publishable_key" }
+                        },
+                        [
+                          _c("span", {
+                            domProps: {
+                              textContent: _vm._s(_vm.msg.t_publishable_key)
+                            }
+                          })
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _vm._m(4),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.data.t_secret_key,
+                            expression: "form.data.t_secret_key"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "t_secret_key", type: "password" },
+                        domProps: { value: _vm.form.data.t_secret_key },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form.data,
+                              "t_secret_key",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "small",
+                        {
+                          staticClass: "form-text text-muted",
+                          attrs: { id: "t_secretHelp_key" }
+                        },
+                        [
+                          _c("span", {
+                            domProps: {
+                              textContent: _vm._s(_vm.msg.t_secret_key)
+                            }
+                          })
+                        ]
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("h4", [_vm._v("Transferencias:")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _vm._m(5),
                       _vm._v(" "),
                       _c("input", {
                         directives: [
@@ -76349,7 +76570,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "col-sm-4" }, [
                     _c("div", { staticClass: "form-group" }, [
-                      _vm._m(2),
+                      _vm._m(6),
                       _vm._v(" "),
                       _c("input", {
                         directives: [
@@ -76394,7 +76615,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "col-sm-4" }, [
                     _c("div", { staticClass: "form-group" }, [
-                      _vm._m(3),
+                      _vm._m(7),
                       _vm._v(" "),
                       _c("input", {
                         directives: [
@@ -76431,102 +76652,6 @@ var render = function() {
                         [
                           _c("span", {
                             domProps: { textContent: _vm._s(_vm.msg.headline) }
-                          })
-                        ]
-                      )
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-12" }, [
-                  _c("div", { staticClass: "col-sm-4 col-sm-offset-2" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _vm._m(4),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.data.paypal_client_id,
-                            expression: "form.data.paypal_client_id"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { id: "paypal_client_id", type: "text" },
-                        domProps: { value: _vm.form.data.paypal_client_id },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.form.data,
-                              "paypal_client_id",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "small",
-                        {
-                          staticClass: "form-text text-muted",
-                          attrs: { id: "paypal_client_idHelp" }
-                        },
-                        [
-                          _c("span", {
-                            domProps: {
-                              textContent: _vm._s(_vm.msg.paypal_client_id)
-                            }
-                          })
-                        ]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-sm-4" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _vm._m(5),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.data.paypal_client_secret,
-                            expression: "form.data.paypal_client_secret"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { id: "paypal_client_secret", type: "text" },
-                        domProps: { value: _vm.form.data.paypal_client_secret },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.form.data,
-                              "paypal_client_secret",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "small",
-                        {
-                          staticClass: "form-text text-muted",
-                          attrs: { id: "paypal_client_secretHelp" }
-                        },
-                        [
-                          _c("span", {
-                            domProps: {
-                              textContent: _vm._s(_vm.msg.paypal_client_secret)
-                            }
                           })
                         ]
                       )
@@ -76599,6 +76724,58 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "label",
+      { staticClass: "control-label", attrs: { for: "paypal_client_id" } },
+      [
+        _c("span", { staticClass: "fa fa-paypal_client_id" }),
+        _vm._v(" ID Client:\n                        ")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "paypal_client_secret" } },
+      [
+        _c("span", { staticClass: "fa fa-paypal_client_secret" }),
+        _vm._v(" ID Client Secret:\n                        ")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "t_publishable_key" } },
+      [
+        _c("span", { staticClass: "fa fa-t_publishable_key" }),
+        _vm._v(" Publishable key:\n                        ")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "t_secret_key" } },
+      [
+        _c("span", { staticClass: "fa fa-t_secret_key" }),
+        _vm._v(" Secret key:\n                        ")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
       { staticClass: "control-label", attrs: { for: "bank" } },
       [
         _c("span", { staticClass: "fa fa-banko" }),
@@ -76629,32 +76806,6 @@ var staticRenderFns = [
       [
         _c("span", { staticClass: "fa fa-headline" }),
         _vm._v(" Titular:\n                        ")
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "control-label", attrs: { for: "paypal_client_id" } },
-      [
-        _c("span", { staticClass: "fa fa-paypal_client_id" }),
-        _vm._v(" ID Client:\n                        ")
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "control-label", attrs: { for: "paypal_client_secret" } },
-      [
-        _c("span", { staticClass: "fa fa-paypal_client_secret" }),
-        _vm._v(" ID Client Secret:\n                        ")
       ]
     )
   }
@@ -76779,7 +76930,7 @@ var render = function() {
       { staticClass: "box-header" },
       [
         _c("h3", { staticClass: "box-title" }, [
-          _vm._v("Tabla de Competencias: ")
+          _vm._v("Tabla de Competiciones: ")
         ]),
         _vm._v(" "),
         _vm.can("tournament.store")
@@ -76939,7 +77090,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "box-header" }, [
-      _c("h3", { staticClass: "box-title" }, [_vm._v("Mis Competencias: ")])
+      _c("h3", { staticClass: "box-title" }, [_vm._v("Mis Competiciones: ")])
     ])
   }
 ]
@@ -79344,7 +79495,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				data: {}
 			},
 			tabla: {
-				columns: [{ title: 'Dorsales', field: 'dorsal', sort: 'id', sortable: true }, { title: 'Participante', field: 'user', sort: 'name', sortable: true }, { title: 'Pareja', field: 'pareja', sort: 'name_2', sortable: true }, { title: 'Tipo de pago', field: 'type_pay', sort: 'method_pay', sortable: true }, { title: 'Estado del pago', field: 'state_pay', sortable: true, class: 'text-center' }, { title: 'Estado de Participación', field: 'state', sortable: true, class: 'text-center' }],
+				columns: [{ title: 'Dorsales', field: 'dorsal', sort: 'id', sortable: true }, { title: 'Participante', field: 'last_name_1', sort: 'name', sortable: true }, { title: 'Pareja', field: 'pareja', sort: 'name_2', sortable: true }, { title: 'Tipo de pago', field: 'type_pay', sort: 'method_pay', sortable: true }, { title: 'Estado del pago', field: 'state_pay', sortable: true, class: 'text-center' }, { title: 'Estado de Participación', field: 'state', sortable: true, class: 'text-center' }],
 				options: [{ ico: 'fa fa-edit', class: 'btn-info', title: 'Editar', func: function func(id) {
 						_this.openForm('edit', id);
 					}, action: 'tournament.update' }, { ico: 'fa fa-close', class: 'btn-danger', title: 'Eliminar', func: function func(id) {
@@ -80599,6 +80750,7 @@ var staticRenderFns = [
       _c(
         "a",
         {
+          staticClass: "btn-danger",
           attrs: {
             href: "#",
             "data-tooltip": "tooltip",
@@ -81064,7 +81216,7 @@ var render = function() {
                 [
                   _c("i", { staticClass: "fa fa-td" }),
                   _vm._v(" "),
-                  _c("span", [_vm._v("Competencias")])
+                  _c("span", [_vm._v("Competiciones")])
                 ]
               )
             ],
@@ -81082,7 +81234,7 @@ var render = function() {
                 [
                   _c("i", { staticClass: "fa fa-td" }),
                   _vm._v(" "),
-                  _c("span", [_vm._v("Mis Competencias")])
+                  _c("span", [_vm._v("Mis Competiciones")])
                 ]
               )
             ],
@@ -81526,7 +81678,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n.borde {border: 1px solid;\n}\np {font-size: 1.3em;\n}\r\n", ""]);
+exports.push([module.i, "\n.borde {border: 1px solid;\n}\np {font-size: 1.3em;\n}\r\n/**\r\n* The CSS shown here will not be introduced in the Quickstart guide, but shows\r\n* how you can use CSS to style your Element's container.\r\n*/\n.StripeElement {\r\n\tbackground-color: white;\r\n\theight: 40px;\r\n\tpadding: 10px 12px;\r\n\tborder-radius: 4px;\r\n\tborder: 1px solid transparent;\r\n\t-webkit-box-shadow: 0 1px 3px 0 #e6ebf1;\r\n\t        box-shadow: 0 1px 3px 0 #e6ebf1;\r\n\t-webkit-transition: box-shadow 150ms ease;\r\n\t-webkit-transition: -webkit-box-shadow 150ms ease;\r\n\ttransition: -webkit-box-shadow 150ms ease;\r\n\ttransition: box-shadow 150ms ease;\r\n\ttransition: box-shadow 150ms ease, -webkit-box-shadow 150ms ease;\n}\n.StripeElement--focus {\r\n\t-webkit-box-shadow: 0 1px 3px 0 #cfd7df;\r\n\t        box-shadow: 0 1px 3px 0 #cfd7df;\n}\n.StripeElement--invalid {\r\n\tborder-color: #fa755a;\n}\n.StripeElement--webkit-autofill {\r\n\tbackground-color: #fefde5 !important;\n}\r\n", ""]);
 
 // exports
 
@@ -81696,6 +81848,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -81706,6 +81896,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	props: ['id'],
 	data: function data() {
 		return {
+			stripe_objec: {},
+			card: {},
 			prices: [],
 			pareja1: '',
 			pareja2: '',
@@ -81809,6 +82001,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 					_this2.inscription.name_1 = _this2.data.name;
 					_this2.inscription.last_name_1 = _this2.data.last_name;
 				}
+				_this2.stripe(_this2.tournament.organizer.t_publishable_key);
 			});
 		},
 		cate: function cate(n) {
@@ -81827,15 +82020,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			$('#confirm').modal('show');
 			setTimeout(function () {
 				$('#confirm, body').css({ 'padding-right': '0px' });
-			}, 200);
+			}, 100);
 			$('.modal-backdrop').hide();
 		},
-		register: function register() {
+		register: function register(event) {
 			var _this3 = this;
+
+			if (this.inscription.method_pay == 3) {
+				this.stripe_objec.createToken(this.card).then(function (result) {
+					if (result.error) {
+						// Inform the user if there was an error.
+						var errorElement = document.getElementById('card-errors');
+						errorElement.textContent = result.error.message;
+						toastr.info('fake');
+					} else {
+						// Send the token to your server.
+						_this3.inscription.stripeToken = result.token.id;
+						// this.stripeTokenHandler(result.token);
+						_this3.send();
+						toastr.info('ready');
+					}
+				});
+			} else {
+				toastr.info('no');
+				this.send();
+			}
+		},
+		send: function send() {
+			var _this4 = this;
 
 			toastr.info('Procesando Información, ¡por favor espere!');
 			axios.post('/inscription', this.inscription).then(function (response) {
-				if (_this3.inscription.method_pay == 2) {
+				if (_this4.inscription.method_pay == 2) {
 					toastr.success('Registro exitoso, espere respuesta de PayPal');
 					setTimeout(function () {
 						return window.location.href = response.data;
@@ -81847,6 +82063,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 					}, 1000);
 				}
 			});
+		},
+		stripe: function stripe(public_key) {
+			// Create a Stripe client.
+			this.stripe_objec = Stripe(public_key);
+			// Create an instance of Elements.
+			var elements = this.stripe_objec.elements();
+			// Custom styling can be passed to options when creating an Element.
+			// (Note that this demo uses a wider set of styles than the guide below.)
+			var style = {
+				base: {
+					color: '#32325d',
+					lineHeight: '18px',
+					fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+					fontSmoothing: 'antialiased',
+					fontSize: '16px',
+					'::placeholder': {
+						color: '#aab7c4'
+					}
+				},
+				invalid: {
+					color: '#fa755a',
+					iconColor: '#fa755a'
+				}
+			};
+			// Create an instance of the card Element.
+			var card = elements.create('card', { style: style });
+
+			// Add an instance of the card Element into the `card-element` <div>.
+			card.mount('#card-element');
+
+			// Handle real-time validation errors from the card Element.
+			card.addEventListener('change', function (event) {
+				var displayError = document.getElementById('card-errors');
+				if (event.error) {
+					displayError.textContent = event.error.message;
+				} else {
+					displayError.textContent = '';
+				}
+			});
+			this.card = card;
 		}
 	}
 });
@@ -82180,7 +82436,7 @@ var render = function() {
                             ? _c(
                                 "div",
                                 {
-                                  staticClass: "col-md-6 btn borde",
+                                  staticClass: "col-md-4 btn borde",
                                   class: {
                                     "btn-black": _vm.inscription.method_pay == 1
                                   },
@@ -82203,7 +82459,7 @@ var render = function() {
                             ? _c(
                                 "div",
                                 {
-                                  staticClass: "col-md-6 btn borde",
+                                  staticClass: "col-md-4 btn borde",
                                   class: {
                                     "btn-black": _vm.inscription.method_pay == 2
                                   },
@@ -82214,6 +82470,28 @@ var render = function() {
                                   }
                                 },
                                 [_vm._v("\n\t\t\t\t\t\t\tPaypal\n\t\t\t\t\t\t")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          1
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass: "col-md-4 btn borde",
+                                  class: {
+                                    "btn-black": _vm.inscription.method_pay == 3
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.changeType(3)
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n\t\t\t\t\t\t\tTarjeta\n\t\t\t\t\t\t"
+                                  )
+                                ]
                               )
                             : _vm._e()
                         ]),
@@ -82271,7 +82549,28 @@ var render = function() {
                                 ])
                               ])
                             ])
-                          : _vm._e()
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value:
+                                  _vm.inscription.method_pay == 3 &&
+                                  (_vm.tournament.organizer.t_publishable_key &&
+                                    _vm.tournament.organizer.t_secret_key),
+                                expression:
+                                  "inscription.method_pay == 3 && (tournament.organizer.t_publishable_key && tournament.organizer.t_secret_key)"
+                              }
+                            ],
+                            staticClass: "form-row",
+                            attrs: { id: "payment-form" }
+                          },
+                          [_vm._m(2)]
+                        )
                       ]
                     )
                   ])
@@ -82320,7 +82619,7 @@ var render = function() {
                       },
                       [
                         _c("div", { staticClass: "modal-content" }, [
-                          _vm._m(2),
+                          _vm._m(3),
                           _vm._v(" "),
                           _c("div", { staticClass: "modal-body" }, [
                             _c("p", [
@@ -82391,7 +82690,7 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _vm._m(3)
+                          _vm._m(4)
                         ])
                       ]
                     )
@@ -82399,7 +82698,7 @@ var render = function() {
                 )
               ]
             )
-          : _c("div", { staticClass: "col-md-8" }, [
+          : _c("div", { staticClass: "col-md-12" }, [
               _c("div", { staticClass: "alert alert-success" }, [
                 _c("h3", { staticClass: "text-center" }, [
                   _vm._v(
@@ -82557,6 +82856,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row" }, [
+      _c("label", { attrs: { for: "card-element" } }, [
+        _vm._v("\n\t\t\t\t\t\t\t\tTarjeta de Débito y Crédito\n\t\t\t\t\t\t\t")
+      ]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "card-element" } }),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "card-errors", role: "alert" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header btn-black" }, [
       _c(
         "button",
@@ -82573,7 +82886,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("h4", { staticClass: "modal-title" }, [
         _vm._v(
-          "¿Esta Seguro de Registrar su participación en esta competencia?"
+          "¿Esta Seguro de Registrar su participación en esta competición?"
         )
       ])
     ])

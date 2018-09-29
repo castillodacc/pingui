@@ -95,7 +95,7 @@ class ProfileController extends Controller
             'user_id' => 'required',
             'p_email' => 'nullable|email',
             'p_febd_num' => 'nullable|numeric',
-            'birthdate' => 'nullable|date',
+            'birthdate' => 'nullable',
             'sex' => 'required|numeric',
             'p_last_name' => 'required|string|min:3|max:40',
             'p_name' => 'required|string|min:3|max:40'

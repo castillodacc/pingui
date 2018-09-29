@@ -95,6 +95,7 @@
 											@endforeach
 										</ul>
 									</div>
+									@if($tournament->moreInfo->where('active', 1)->count())
 									<div class="pull-right col-md-5 col-xs-12">
 										<h5><b>Más Información:</b></h5>
 										<ul>
@@ -105,6 +106,7 @@
 											@endforeach
 										</ul>
 									</div>
+									@endif
 									@if(\Auth::guest())
 									<div class="pull-right col-md-4 col-xs-12 hidden-xs hidden-sm" style="border: 1px solid; border-radius: 10px">
 										<div class="card card-container ">
@@ -167,7 +169,7 @@
 											@endif
 											@if($tournament->inscription)
 											<div class="col-md-3">
-												<a href="{{ route('publication.inscription', $tournament->slug) }}" class="btn btn-warning btn-block">Inscribrete</a>
+												<a href="{{ route('publication.inscription', $tournament->slug) }}" class="btn btn-warning btn-block">Inscribete</a>
 											</div>
 											@elseif($tournament->results)
 											<div class="col-md-4">
