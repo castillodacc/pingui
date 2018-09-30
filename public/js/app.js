@@ -70950,7 +70950,7 @@ var render = function() {
                                           },
                                           on: {
                                             click: function($event) {
-                                              o.func(r.id)
+                                              o.func(r.id, r)
                                             }
                                           }
                                         },
@@ -77053,8 +77053,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		return {
 			tabla: {
 				columns: [{ title: 'Competencia', field: 'tournament', sort: 'name' }, { title: 'Participante', field: 'user', sort: 'name', sortable: true }, { title: 'Pareja', field: 'pareja', sort: 'name_2', sortable: true }, { title: 'Tipo de pago', field: 'type_pay', sort: 'name_2', sortable: true }, { title: 'Estado del pago', field: 'state_pay', sortable: true, class: 'text-center' }, { title: 'Estado de Participación', field: 'state', sortable: true, class: 'text-center' }],
-				options: [{ ico: 'fa fa-list', class: 'btn-success', title: 'Lista Participantes', func: function func(id) {
-						_this.$router.push({ name: 'inscription.index', params: { id: id } });
+				options: [{ ico: 'fa fa-list', class: 'btn-success', title: 'Lista Participantes', func: function func(id, obj) {
+						_this.$router.push({ name: 'inscription.index', params: { id: obj.tournament_id } });
 					}, action: 'tournament.inscription' }]
 			}
 		};
@@ -79474,6 +79474,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -80170,6 +80176,21 @@ var render = function() {
                 on: { click: _vm.generate }
               },
               [_c("i", { staticClass: "fa fa-refresh" })]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.can("inscription.generatecsv")
+          ? _c(
+              "a",
+              {
+                staticClass: "btn btn-warning btn-xs",
+                attrs: {
+                  href: "/csv-competition/" + _vm.$route.params.id,
+                  title: "Generar CSV de Bailarines",
+                  "data-tooltip": "tooltip"
+                }
+              },
+              [_c("i", { staticClass: "glyphicon glyphicon-save" })]
             )
           : _vm._e()
       ]),
@@ -81886,6 +81907,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -81952,10 +81974,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	mounted: function mounted() {
 		var _this = this;
 
-		this.inscription.tournament_id = this.id;
 		setTimeout(function () {
-			_this.get();
-		}, 300);
+			if (_this.can('inscription.store')) {
+				_this.inscription.tournament_id = _this.id;
+				_this.get();
+			}
+		}, 500);
 	},
 
 	methods: {
@@ -82001,7 +82025,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 					_this2.inscription.name_1 = _this2.data.name;
 					_this2.inscription.last_name_1 = _this2.data.last_name;
 				}
-				_this2.stripe(_this2.tournament.organizer.t_publishable_key);
+				if (_this2.tournament.organizer.t_publishable_key && _this2.tournament.organizer.t_secret_key) {
+					_this2.stripe(_this2.tournament.organizer.t_publishable_key);
+				}
 			});
 		},
 		cate: function cate(n) {
@@ -82032,17 +82058,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 						// Inform the user if there was an error.
 						var errorElement = document.getElementById('card-errors');
 						errorElement.textContent = result.error.message;
-						toastr.info('fake');
+						toastr.info('Error En la conexión');
 					} else {
 						// Send the token to your server.
 						_this3.inscription.stripeToken = result.token.id;
 						// this.stripeTokenHandler(result.token);
 						_this3.send();
-						toastr.info('ready');
 					}
 				});
 			} else {
-				toastr.info('no');
 				this.send();
 			}
 		},
@@ -82473,7 +82497,8 @@ var render = function() {
                               )
                             : _vm._e(),
                           _vm._v(" "),
-                          1
+                          _vm.tournament.organizer.t_publishable_key &&
+                          _vm.tournament.organizer.t_secret_key
                             ? _c(
                                 "div",
                                 {
@@ -82673,6 +82698,10 @@ var render = function() {
                               _vm._v(" "),
                               _vm.inscription.method_pay == 2
                                 ? _c("span", [_vm._v("PayPal")])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.inscription.method_pay == 3
+                                ? _c("span", [_vm._v("Tarjeta")])
                                 : _vm._e()
                             ]),
                             _vm._v(" "),
@@ -82775,7 +82804,7 @@ var render = function() {
                 _c("hr"),
                 _vm._v(" "),
                 _c("p", [
-                  _vm.can("inscription.generate")
+                  _vm.can("inscription.index")
                     ? _c(
                         "a",
                         {

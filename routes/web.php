@@ -13,13 +13,16 @@
 
 Route::get('/', 'RouteController@front');
 Route::get('competicion/{slug}', 'RouteController@publication')->name('publication.show');
-Route::get('competicion/{slug}/inscribir', 'RouteController@inscription')->name('publication.inscription');
 Route::get('confirm/{slug}', 'RouteController@confirm');
 Route::get('contacto', 'RouteController@contact');
 Route::post('contact-save', 'RouteController@contact_save');
+Route::get('competicion/{slug}/inscribir', 'RouteController@inscription')->name('publication.inscription');
 
-Route::get('payment/cancel/{id}', 'InscriptionController@paymentCancel')->name('payment.cancel');
-Route::get('payment/store/{id}', 'InscriptionController@paymentStore')->name('payment.store');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('payment/cancel/{id}', 'InscriptionController@paymentCancel')->name('payment.cancel');
+    Route::get('payment/store/{id}', 'InscriptionController@paymentStore')->name('payment.store');
+    Route::get('csv-competition/{tournament}', 'ReportController@csvCompetition');
+});
 
 /**
  * Rutas típicas de autentificación de la app.

@@ -62,7 +62,7 @@
 							<div class="col-md-4 btn borde" :class="{'btn-black': inscription.method_pay == 2}" @click="changeType(2)" v-if="tournament.organizer.paypal_client_id && tournament.organizer.paypal_client_secret">
 								Paypal
 							</div>
-							<div class="col-md-4 btn borde" :class="{'btn-black': inscription.method_pay == 3}" @click="changeType(3)" v-if="1">
+							<div class="col-md-4 btn borde" :class="{'btn-black': inscription.method_pay == 3}" @click="changeType(3)" v-if="tournament.organizer.t_publishable_key && tournament.organizer.t_secret_key">
 								Tarjeta
 							</div>
 						</div>
@@ -115,6 +115,7 @@
 							<p> Método de Pago:
 								<span v-if="inscription.method_pay == 1">Transferencia</span>
 								<span v-if="inscription.method_pay == 2">PayPal</span>
+								<span v-if="inscription.method_pay == 3">Tarjeta</span>
 							</p>
 							<small id="method_payHelp" class="form-text text-muted"></small>
 							<p> Total a Pagar: {{ inscription.pay }} € </p>
@@ -152,7 +153,7 @@
 					</div>
 				</div>
 				<hr>
-				<p><a :href="'/inscritos/' + id" v-if="can('inscription.generate')" class="btn btn-black">Ver Lista de inscritos</a></p>
+				<p><a :href="'/inscritos/' + id" v-if="can('inscription.index')" class="btn btn-black">Ver Lista de inscritos</a></p>
 				<div v-if="r.method_pay == 1 && !r.state">
 					<p style="font-size: 14px;">No te olvides de llevar a cabo la forma de pago seleccionada.</p>
 					<p style="margin: 0">Banco: <b>{{ tournament.organizer.bank }}</b></p>
@@ -255,8 +256,12 @@ p {font-size: 1.3em;}
 			}
 		},
 		mounted() {
-			this.inscription.tournament_id = this.id;
-			setTimeout(() => {this.get(); },300);
+			setTimeout(() => {
+				if(this.can('inscription.store')) {
+					this.inscription.tournament_id = this.id;
+					this.get();
+				}
+			}, 500);
 		},
 		methods: {
 			namePrice: function (id) {
@@ -296,7 +301,9 @@ p {font-size: 1.3em;}
 						this.inscription.name_1 = this.data.name;
 						this.inscription.last_name_1 = this.data.last_name;
 					}
-					this.stripe(this.tournament.organizer.t_publishable_key);
+					if (this.tournament.organizer.t_publishable_key && this.tournament.organizer.t_secret_key) {
+						this.stripe(this.tournament.organizer.t_publishable_key);
+					}
 				});
 			},
 			cate: function (n) {
@@ -319,16 +326,16 @@ p {font-size: 1.3em;}
 					this.stripe_objec.createToken(this.card).then((result) => {
 						if (result.error) {
 							// Inform the user if there was an error.
-				      		var errorElement = document.getElementById('card-errors');
-				      		errorElement.textContent = result.error.message;
-						  	toastr.info('Error En la conexión');
-				      	} else {
+							var errorElement = document.getElementById('card-errors');
+							errorElement.textContent = result.error.message;
+							toastr.info('Error En la conexión');
+						} else {
 							// Send the token to your server.
-				      		this.inscription.stripeToken = result.token.id;
+							this.inscription.stripeToken = result.token.id;
 							// this.stripeTokenHandler(result.token);
-				  			this.send();
-				  		}
-				  	});
+							this.send();
+						}
+					});
 				} else {
 					this.send();
 				}

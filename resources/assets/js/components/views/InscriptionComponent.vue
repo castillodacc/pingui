@@ -7,6 +7,12 @@
 			data-tooltip="tooltip"
 			v-if="can('inscription.generate')"
 			@click="generate"><i class="fa fa-refresh"></i></button>
+			<a :href="'/csv-competition/' + $route.params.id"
+			class="btn btn-warning btn-xs"
+			title="Generar CSV de Bailarines"
+			data-tooltip="tooltip"
+			v-if="can('inscription.generatecsv')"
+			><i class="glyphicon glyphicon-save"></i></a>
 		</div>
 		<div class="box-body">
 			<rs-table id="inscription" :tabla="tabla" uri="/inscription" :d="$route.params.id"></rs-table>

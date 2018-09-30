@@ -48,6 +48,11 @@ class Tournament extends Model
         return $this->hasMany(Hotel::class);
     }
 
+    public function inscriptions()
+    {
+        return $this->hasMany(Inscription::class);
+    }
+
     public function prices()
     {
         return $this->hasMany(Price::class);

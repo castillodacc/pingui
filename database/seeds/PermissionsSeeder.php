@@ -456,5 +456,12 @@ class PermissionsSeeder extends Seeder
             'action' => 'generate',
             'description' => 'Permiso para Generar Dorsales'
         ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Generar reporte CSV',
+            'module' => 'inscription',
+            'action' => 'generatecsv',
+            'description' => 'Permiso para Generar reporte csv de la competición'
+        ]);
     }
 }

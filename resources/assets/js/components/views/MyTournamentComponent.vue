@@ -29,7 +29,7 @@
 					{ title: 'Estado de Participación', field: 'state', sortable: true, class: 'text-center' },
 					],
 					options: [
-					{ ico: 'fa fa-list', class: 'btn-success', title: 'Lista Participantes', func: (id) => { this.$router.push({name: 'inscription.index', params: {id: id}}) }, action: 'tournament.inscription'},
+					{ ico: 'fa fa-list', class: 'btn-success', title: 'Lista Participantes', func: (id, obj) => { this.$router.push({name: 'inscription.index', params: {id: obj.tournament_id}}) }, action: 'tournament.inscription'},
 					]
 				}
 			};

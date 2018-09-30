@@ -46,6 +46,11 @@ class Inscription extends Model
         return $this->belongsTo(Tournament::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(\App\User::class);
+    }
+
     public function prices()
     {
         return $this->belongsToMany(Price::class);

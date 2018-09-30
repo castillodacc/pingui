@@ -72,6 +72,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Models\Permisologia\Permission::class);
     }
 
+    public function club()
+    {
+        return $this->belongsTo(Models\Club::class);
+    }
+
     public function parejas()
     {
         return $this->hasMany(Models\Pareja::class);

@@ -21,7 +21,7 @@
 									:title="o.title"
 									:class="o.class"
 									v-if="can(o.action)"
-									@click="o.func(r.id)">
+									@click="o.func(r.id, r)">
 									<span :class="o.ico"></span></button>
 									<span v-if="tabla.options.length > 1"></span>
 								</template>

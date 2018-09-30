@@ -16,12 +16,12 @@ class Paypal
 
 	function __construct($inscription)
 	{
-		$this->_apiContext = \PaypalPayment::ApiContext($this->_ClientId, $this->_ClientSecret);
 		$this->currency = env('CURRENCY');
 		// $this->_ClientId = config('paypal_payment.account.client_id');
 		// $this->_ClientSecret = config('paypal_payment.account.client_secret');
 		$this->_ClientId = $inscription->tournament->organizer->paypal_client_id;
 		$this->_ClientSecret = $inscription->tournament->organizer->paypal_client_secret;
+		$this->_apiContext = \PaypalPayment::ApiContext($this->_ClientId, $this->_ClientSecret);
 
 		$config = config('paypal_payment');
 		$flatConfig = array_dot($config);
