@@ -30,8 +30,9 @@ class ValidatorServiceProvider extends ServiceProvider
          */
         Validator::extend('exr_ced', function($attribute, $value)
         {
-            if ($value[0] == '0') return false;
-            return preg_match('/^([0-9]{6,8})$/', $value);
+            return true;
+            // if ($value[0] == '0') return false;
+            // return preg_match('/^([0-9]{6,8})$/', $value);
         }, 'El campo :attribute es incorrecto');
 
         /**

@@ -417,9 +417,9 @@
                 this.pareja.sex = 1;
                 this.pareja2.sex = 0;
             } else {
-                if (response.data.user.sex === 1) {
+                if (response.data.user.sex == 1) {
                     this.pareja.sex = 0;
-                } else if (response.data.user.sex === 0) {
+                } else if (response.data.user.sex == 0) {
                     this.pareja.sex = 1;
                 }
             }
