@@ -57,7 +57,8 @@
                 @endif
                 <br>
                 <a href="/">Ir a los torneos.</a>
-
+                <br>
+                <a href="/password/reiniciar">¿Olvidó su contraseña?.</a>
             </div>
         </div>
     </div>

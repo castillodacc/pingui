@@ -55,6 +55,11 @@ class User extends Authenticatable
         'deleted_at',
     ];
 
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new \App\Notifications\ResetPasswordNotification($token));
+    }
+
     /**
      * Obtener los roles que posee el usuario.
      */

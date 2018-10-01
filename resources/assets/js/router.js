@@ -137,6 +137,7 @@ router.beforeEach((to, from, next) => {
 	let permission = to.name;
 	if (to.path == '/') {next('/perfil/3'); return;}
 	if (to.path == '/dashboard') {next('/perfil/3'); return;}
+	if (location.href.indexOf('/password') > 0) return;
 	if (location.href.indexOf('/competicion') > 0) return;
 	if (location.href.indexOf('/contacto') > 0) return;
 	if (location.href.indexOf('/login') > 0) return;

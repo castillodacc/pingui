@@ -42,6 +42,10 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::post('logout', 'LoginController@logout')->name('logout');
     // Route::get('logout', 'LoginController@logout');
 });
+Route::get('password/reiniciar', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reiniciar/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reiniciar', 'Auth\ResetPasswordController@reset');
 
 Route::post('app', 'RouteController@dataForTemplate');
 
