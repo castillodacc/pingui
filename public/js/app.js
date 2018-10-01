@@ -63802,10 +63802,7 @@ router.beforeEach(function (to, from, next) {
 	if (to.path == '/dashboard') {
 		next('/perfil/3');return;
 	}
-	return;
-	console.log(location.href.indexOf('/password'));
 	if (location.href.indexOf('/password') > 0) return;
-	console.log('asd');
 	if (location.href.indexOf('/competicion') > 0) return;
 	if (location.href.indexOf('/contacto') > 0) return;
 	if (location.href.indexOf('/login') > 0) return;
