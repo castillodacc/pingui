@@ -131,6 +131,7 @@ div.multiselect__tags {
           email: 'Correo electronico.',
           password: 'Contraseña.',
           password_confirmation: 'Confirmación de Contraseña.',
+          sex: 'Ingrese el sexo del usuario.',
           roles: 'Rol a desempeñar.',
           approval_state: 'Aprobación de usuario.',
           phone: 'Número telefonico.',

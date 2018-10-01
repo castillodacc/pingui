@@ -30,7 +30,7 @@ class UserUpdateRequest extends FormRequest
             'num_id'    => 'required|string|min:6|max:12|unique1:users',/*digits_between:6,9|exr_ced*/
             'password'  => 'nullable|string|min:6|max:20|confirmed',
             'sex'       => 'required|numeric',
-            'roles'     => 'required|array|max:2'
+            'roles'     => 'required|array|max:2',
             'user'      => 'required|alfa_space|min:3|max:25|unique1:users',
             'phone'     => 'nullable|numeric',
         ];

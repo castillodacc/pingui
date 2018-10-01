@@ -64410,9 +64410,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.pareja.sex = 1;
                 _this.pareja2.sex = 0;
             } else {
-                if (_this.user.sex) {
+                if (response.data.user.sex === 1) {
                     _this.pareja.sex = 0;
-                } else {
+                } else if (response.data.user.sex === 0) {
                     _this.pareja.sex = 1;
                 }
             }
@@ -71224,6 +71224,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         email: 'Correo electronico.',
         password: 'Contraseña.',
         password_confirmation: 'Confirmación de Contraseña.',
+        sex: 'Ingrese el sexo del usuario.',
         roles: 'Rol a desempeñar.',
         approval_state: 'Aprobación de usuario.',
         phone: 'Número telefonico.'
