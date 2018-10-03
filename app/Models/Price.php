@@ -19,9 +19,6 @@ class Price extends Model
         'category_id',
         'level_id',
         'subcategory_id',
-        // 'category_text',
-        // 'level_text',
-        // 'subcategory_text',
         'price',
         'tournament_id',
     ];
@@ -53,5 +50,16 @@ class Price extends Model
     public function subS()
     {
         return $this->belongsTo(Subcategory_standar::class, 'subcategory_id', 'id');
+    }
+
+    public function subHelp()
+    {
+        if ($this->category_id == 1) {
+            return $this->subO;
+        } elseif ($this->category_id == 2) {
+            return $this->subL;
+        } elseif ($this->category_id == 3) {
+            return $this->subS;
+        }
     }
 }

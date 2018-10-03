@@ -24,6 +24,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('csv-competition/{tournament}', 'ReportController@csvCompetition');
 });
 
+Route::get('lista/{slug}', 'RouteController@list');
+Route::get('pdf-lista/{id}', 'ReportController@ListInscriptions');
+
 /**
  * Rutas típicas de autentificación de la app.
  * reemplazando: Auth::routes();

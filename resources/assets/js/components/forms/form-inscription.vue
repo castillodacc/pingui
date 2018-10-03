@@ -153,7 +153,7 @@
 					</div>
 				</div>
 				<hr>
-				<p><a :href="'/inscritos/' + id" v-if="can('inscription.index')" class="btn btn-black">Ver Lista de inscritos</a></p>
+				<p><a :href="'/lista/' + tournament.slug" v-if="can('inscription.index')" class="btn btn-black">Ver Lista de inscritos</a></p>
 				<div v-if="r.method_pay == 1 && !r.state">
 					<p style="font-size: 14px;">No te olvides de llevar a cabo la forma de pago seleccionada.</p>
 					<p style="margin: 0">Banco: <b>{{ tournament.organizer.bank }}</b></p>
@@ -169,10 +169,6 @@
 <style>
 .borde {border: 1px solid;}
 p {font-size: 1.3em;}
-/**
-* The CSS shown here will not be introduced in the Quickstart guide, but shows
-* how you can use CSS to style your Element's container.
-*/
 .StripeElement {
 	background-color: white;
 	height: 40px;
@@ -183,15 +179,9 @@ p {font-size: 1.3em;}
 	-webkit-transition: box-shadow 150ms ease;
 	transition: box-shadow 150ms ease;
 }
-.StripeElement--focus {
-	box-shadow: 0 1px 3px 0 #cfd7df;
-}
-.StripeElement--invalid {
-	border-color: #fa755a;
-}
-.StripeElement--webkit-autofill {
-	background-color: #fefde5 !important;
-}
+.StripeElement--focus {box-shadow: 0 1px 3px 0 #cfd7df;}
+.StripeElement--invalid {border-color: #fa755a;}
+.StripeElement--webkit-autofill {background-color: #fefde5 !important;}
 </style>
 
 <script>
@@ -257,52 +247,71 @@ p {font-size: 1.3em;}
 		},
 		mounted() {
 			setTimeout(() => {
-				if(this.can('inscription.store')) {
-					this.inscription.tournament_id = this.id;
-					this.get();
-				}
-			}, 500);
+				this.inscription.tournament_id = this.id;
+				this.get();
+			}, 300);
 		},
 		methods: {
 			namePrice: function (id) {
 				for(let o in this.tournament.prices) {
 					if (this.tournament.prices[o].id == id) {
-						return this.tournament.prices[o].level_text + ((this.tournament.prices[o].subcategory_text) ? ' - ' + this.tournament.prices[o].subcategory_text: '');
+						return this.tournament.prices[o].level_text + ((this.tournament.prices[o].subcategory_text) ? ' - ' + this.tournament.prices[o].subcategory_text : '');
 					}
 				}
 			},
 			get: function () {
 				axios.post('/get-data', {id: this.id})
 				.then(response => {
-					this.tournament = response.data.tournament;
-					this.inscription.user_id = response.data.user.id;
-					let price = response.data.tournament.prices;
-					this.data = response.data.user;
-					if (response.data.state) {
-						this.r = response.data.state;
-					}
-					let pareja = response.data.user.parejas;
-					if (pareja[0]) {
-						this.pareja2 = ((pareja[0].febd_num) ? pareja[0].febd_num : '') + ' - ' + pareja[0].name + ' ' + pareja[0].last_name;
-						this.inscription.febd_num_2 = pareja[0].febd_num;
-						this.inscription.last_name_2 = pareja[0].last_name;
-						this.inscription.name_2 = pareja[0].name;
-					} else { this.msg.febd_num_2 = 'Agrege la pareja en el perfil'}
-					if (this.can('inscription.store2')) {
-						if (pareja[1]) {
-							this.pareja1 = ((pareja[1].febd_num) ? pareja[1].febd_num : '') + ' - ' + pareja[1].name + ' ' + pareja[1].last_name;
-							this.inscription.febd_num_1 = pareja[1].febd_num;
-							this.inscription.last_name_1 = pareja[1].last_name;
-							this.inscription.name_1 = pareja[1].name;
-						} else { this.msg.febd_num_1 = 'Agrege la pareja en el perfil'}
-					} else {
-						this.pareja1 = ((this.data.febd_num) ? this.data.febd_num : '') + ' - ' + this.data.name + ' ' + this.data.last_name;
-						this.inscription.febd_num_1 = this.data.febd_num;
-						this.inscription.name_1 = this.data.name;
-						this.inscription.last_name_1 = this.data.last_name;
-					}
-					if (this.tournament.organizer.t_publishable_key && this.tournament.organizer.t_secret_key) {
-						this.stripe(this.tournament.organizer.t_publishable_key);
+					if(this.can('inscription.store')) {
+						this.tournament = response.data.tournament;
+						this.inscription.user_id = response.data.user.id;
+						let price = response.data.tournament.prices;
+						this.data = response.data.user;
+						if (response.data.state) {
+							this.r = response.data.state;
+						}
+						let pareja = response.data.user.parejas;
+						if (this.can('inscription.store2')) {
+							if (pareja[0]) {
+								this.pareja1 = ((pareja[0].febd_num) ? pareja[0].febd_num : '') + ' - ' + pareja[0].name + ' ' + pareja[0].last_name;
+								this.inscription.febd_num_1 = pareja[0].febd_num;
+								this.inscription.last_name_1 = pareja[0].last_name;
+								this.inscription.name_1 = pareja[0].name;
+							} else { this.msg.febd_num_1 = 'Agrege la pareja en el perfil'}
+							if (pareja[1]) {
+								this.pareja2 = ((pareja[1].febd_num) ? pareja[1].febd_num : '') + ' - ' + pareja[1].name + ' ' + pareja[1].last_name;
+								this.inscription.febd_num_2 = pareja[1].febd_num;
+								this.inscription.last_name_2 = pareja[1].last_name;
+								this.inscription.name_2 = pareja[1].name;
+							} else { this.msg.febd_num_2 = 'Agrege la pareja en el perfil'}
+						} else {
+							if (this.data.sex == 0) {
+								this.pareja2 = ((this.data.febd_num) ? this.data.febd_num : '') + ' - ' + this.data.name + ' ' + this.data.last_name;
+								this.inscription.febd_num_2 = this.data.febd_num;
+								this.inscription.name_2 = this.data.name;
+								this.inscription.last_name_2 = this.data.last_name;
+								if (pareja[0]) {
+									this.pareja1 = ((pareja[0].febd_num) ? pareja[0].febd_num : '') + ' - ' + pareja[0].name + ' ' + pareja[0].last_name;
+									this.inscription.febd_num_1 = pareja[0].febd_num;
+									this.inscription.last_name_1 = pareja[0].last_name;
+									this.inscription.name_1 = pareja[0].name;
+								} else { this.msg.febd_num_1 = 'Agrege la pareja en el perfil'}
+							} else {
+								this.pareja1 = ((this.data.febd_num) ? this.data.febd_num : '') + ' - ' + this.data.name + ' ' + this.data.last_name;
+								this.inscription.febd_num_1 = this.data.febd_num;
+								this.inscription.name_1 = this.data.name;
+								this.inscription.last_name_1 = this.data.last_name;
+								if (pareja[0]) {
+									this.pareja2 = ((pareja[0].febd_num) ? pareja[0].febd_num : '') + ' - ' + pareja[0].name + ' ' + pareja[0].last_name;
+									this.inscription.febd_num_2 = pareja[0].febd_num;
+									this.inscription.last_name_2 = pareja[0].last_name;
+									this.inscription.name_2 = pareja[0].name;
+								} else { this.msg.febd_num_2 = 'Agrege la pareja en el perfil'}
+							}
+						}
+						if (this.tournament.organizer.t_publishable_key && this.tournament.organizer.t_secret_key) {
+							this.stripe(this.tournament.organizer.t_publishable_key);
+						}
 					}
 				});
 			},

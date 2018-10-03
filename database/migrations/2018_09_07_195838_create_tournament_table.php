@@ -95,9 +95,9 @@ class CreateTournamentTable extends Migration
 
         Schema::create('more_infos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 50);
+            $table->string('name', 150);
             $table->unsignedInteger('type_id');
-            $table->string('link', 50);
+            $table->string('link', 150);
             $table->boolean('active')->default(1);
             $table->unsignedInteger('tournament_id');
             $table->timestamps();

@@ -13,6 +13,12 @@
 			data-tooltip="tooltip"
 			v-if="can('inscription.generatecsv')"
 			><i class="glyphicon glyphicon-save"></i></a>
+			<a :href="'/pdf-lista/' + $route.params.id"
+			class="btn btn-info btn-xs"
+			title="Generar PDF de Bailarines"
+			data-tooltip="tooltip"
+			v-if="can('inscription.generatepdf')"
+			><i class="glyphicon glyphicon-circle-arrow-down"></i></a>
 		</div>
 		<div class="box-body">
 			<rs-table id="inscription" :tabla="tabla" uri="/inscription" :d="$route.params.id"></rs-table>

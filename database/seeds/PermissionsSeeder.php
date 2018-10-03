@@ -463,5 +463,12 @@ class PermissionsSeeder extends Seeder
             'action' => 'generatecsv',
             'description' => 'Permiso para Generar reporte csv de la competición'
         ]);
+
+        App\Models\Permisologia\Permission::create([
+            'name' => 'Generar reporte PDF',
+            'module' => 'inscription',
+            'action' => 'generatepdf',
+            'description' => 'Permiso para Generar reporte PDF de la competición'
+        ]);
     }
 }

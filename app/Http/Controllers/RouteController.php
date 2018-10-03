@@ -11,7 +11,7 @@ class RouteController extends Controller
 {
 
     public function __construct() {
-        $this->middleware('auth')->except(['front', 'publication', 'confirm', 'contact', 'dataForTemplate']);
+        $this->middleware('auth')->except(['front', 'publication', 'confirm', 'contact', 'dataForTemplate', 'list']);
     }
 
     /**
@@ -123,7 +123,7 @@ class RouteController extends Controller
 
     public function data(Request $request)
     {
-        $tournament = Tournament::select(['id', 'name', 'organizer_id'])->findOrFail($request->id);
+        $tournament = Tournament::select(['id', 'name', 'slug', 'organizer_id'])->findOrFail($request->id);
         $tournament->prices->each(function ($p) {
             if ($p->category_id == 1) {
                 $p->level_text = Category_open::findOrFail($p->subcategory_id)->name;
@@ -172,5 +172,12 @@ class RouteController extends Controller
             'message' => 'required|string',
         ]);
         \Mail::to('info@pingui.com')->send(new \App\Mail\Contact($request));
+    }
+
+    public function list($slug)
+    {
+        $tournament = Tournament::where('slug', $slug)->first();
+        if ($tournament == null) return redirect('/');
+        return view('inscription-list', compact('tournament'));
     }
 }

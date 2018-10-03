@@ -153,6 +153,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Anouar\Paypalpayment\PaypalpaymentServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -216,6 +217,8 @@ return [
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'PaypalPayment' => Anouar\Paypalpayment\Facades\PaypalPayment::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+
     ],
 
 ];

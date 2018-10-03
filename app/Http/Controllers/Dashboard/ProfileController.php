@@ -94,7 +94,7 @@ class ProfileController extends Controller
         $request->validate([
             'user_id' => 'required',
             'p_email' => 'nullable|email',
-            'p_febd_num' => 'nullable|numeric',
+            'p_febd_num' => 'nullable|numeric|unique:parejas,febd_num',
             'birthdate' => 'nullable',
             'sex' => 'required|numeric',
             'p_last_name' => 'required|string|min:3|max:40',

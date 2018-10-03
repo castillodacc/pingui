@@ -44,7 +44,11 @@ class ReportController extends Controller
 				// Menozena -> nombre de la Bailarina
 				$str .= "$i->last_name_2, $i->name_2" . ';';
 				// klub -> Club
-				$str .= $i->user->club->name . ';';
+				if ($i->user) {
+					$str .= optional($i->user->club)->name . ';';
+				} else {
+					$str .= ';';
+				}
 				// stat -> Nacionalidad
 				$str .= 'España;';
 				// dorsal
@@ -55,5 +59,13 @@ class ReportController extends Controller
 		$str_lg .= 'sutaz; idpar; idMuz; Menomuz; idZena;Menozena; klub; stat; Dorsal';
 		echo $str_lg . "\n";
 		return;
+	}
+
+	public function ListInscriptions($id)
+	{
+		$tournament = Tournament::findOrFail($id);
+		if ($tournament == null) return redirect('/');
+		$pdf = \PDF::loadView('pdf.inscription-list', compact('tournament'));
+		return $pdf->download("$tournament->name.pdf");
 	}
 }

@@ -142,6 +142,7 @@ router.beforeEach((to, from, next) => {
 	if (location.href.indexOf('/contacto') > 0) return;
 	if (location.href.indexOf('/login') > 0) return;
 	if (location.href.indexOf('/registro') > 0) return;
+	if (location.href.indexOf('/list') > 0) return;
 	if (to.path.indexOf('.jpg') > 0 ||
 		to.path.indexOf('.jpeg') > 0 ||
 		to.path.indexOf('.png') > 0 ||

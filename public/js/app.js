@@ -63807,6 +63807,7 @@ router.beforeEach(function (to, from, next) {
 	if (location.href.indexOf('/contacto') > 0) return;
 	if (location.href.indexOf('/login') > 0) return;
 	if (location.href.indexOf('/registro') > 0) return;
+	if (location.href.indexOf('/list') > 0) return;
 	if (to.path.indexOf('.jpg') > 0 || to.path.indexOf('.jpeg') > 0 || to.path.indexOf('.png') > 0 || to.path.indexOf('.ttf') > 0 || to.path.indexOf('.min') > 0 || to.path.indexOf('.css') > 0 || permission == 'error') {
 		next('/perfil/3');
 		return;
@@ -79482,6 +79483,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -80193,6 +80200,25 @@ var render = function() {
                 }
               },
               [_c("i", { staticClass: "glyphicon glyphicon-save" })]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.can("inscription.generatepdf")
+          ? _c(
+              "a",
+              {
+                staticClass: "btn btn-info btn-xs",
+                attrs: {
+                  href: "/pdf-lista/" + _vm.$route.params.id,
+                  title: "Generar PDF de Bailarines",
+                  "data-tooltip": "tooltip"
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "glyphicon glyphicon-circle-arrow-down"
+                })
+              ]
             )
           : _vm._e()
       ]),
@@ -81701,7 +81727,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n.borde {border: 1px solid;\n}\np {font-size: 1.3em;\n}\r\n/**\r\n* The CSS shown here will not be introduced in the Quickstart guide, but shows\r\n* how you can use CSS to style your Element's container.\r\n*/\n.StripeElement {\r\n\tbackground-color: white;\r\n\theight: 40px;\r\n\tpadding: 10px 12px;\r\n\tborder-radius: 4px;\r\n\tborder: 1px solid transparent;\r\n\t-webkit-box-shadow: 0 1px 3px 0 #e6ebf1;\r\n\t        box-shadow: 0 1px 3px 0 #e6ebf1;\r\n\t-webkit-transition: box-shadow 150ms ease;\r\n\t-webkit-transition: -webkit-box-shadow 150ms ease;\r\n\ttransition: -webkit-box-shadow 150ms ease;\r\n\ttransition: box-shadow 150ms ease;\r\n\ttransition: box-shadow 150ms ease, -webkit-box-shadow 150ms ease;\n}\n.StripeElement--focus {\r\n\t-webkit-box-shadow: 0 1px 3px 0 #cfd7df;\r\n\t        box-shadow: 0 1px 3px 0 #cfd7df;\n}\n.StripeElement--invalid {\r\n\tborder-color: #fa755a;\n}\n.StripeElement--webkit-autofill {\r\n\tbackground-color: #fefde5 !important;\n}\r\n", ""]);
+exports.push([module.i, "\n.borde {border: 1px solid;\n}\np {font-size: 1.3em;\n}\n.StripeElement {\r\n\tbackground-color: white;\r\n\theight: 40px;\r\n\tpadding: 10px 12px;\r\n\tborder-radius: 4px;\r\n\tborder: 1px solid transparent;\r\n\t-webkit-box-shadow: 0 1px 3px 0 #e6ebf1;\r\n\t        box-shadow: 0 1px 3px 0 #e6ebf1;\r\n\t-webkit-transition: box-shadow 150ms ease;\r\n\t-webkit-transition: -webkit-box-shadow 150ms ease;\r\n\ttransition: -webkit-box-shadow 150ms ease;\r\n\ttransition: box-shadow 150ms ease;\r\n\ttransition: box-shadow 150ms ease, -webkit-box-shadow 150ms ease;\n}\n.StripeElement--focus {-webkit-box-shadow: 0 1px 3px 0 #cfd7df;box-shadow: 0 1px 3px 0 #cfd7df;\n}\n.StripeElement--invalid {border-color: #fa755a;\n}\n.StripeElement--webkit-autofill {background-color: #fefde5 !important;\n}\r\n", ""]);
 
 // exports
 
@@ -81714,16 +81740,6 @@ exports.push([module.i, "\n.borde {border: 1px solid;\n}\np {font-size: 1.3em;\n
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_multiselect__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_multiselect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_multiselect__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -81977,11 +81993,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		var _this = this;
 
 		setTimeout(function () {
-			if (_this.can('inscription.store')) {
-				_this.inscription.tournament_id = _this.id;
-				_this.get();
-			}
-		}, 500);
+			_this.inscription.tournament_id = _this.id;
+			_this.get();
+		}, 300);
 	},
 
 	methods: {
@@ -81996,39 +82010,64 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var _this2 = this;
 
 			axios.post('/get-data', { id: this.id }).then(function (response) {
-				_this2.tournament = response.data.tournament;
-				_this2.inscription.user_id = response.data.user.id;
-				var price = response.data.tournament.prices;
-				_this2.data = response.data.user;
-				if (response.data.state) {
-					_this2.r = response.data.state;
-				}
-				var pareja = response.data.user.parejas;
-				if (pareja[0]) {
-					_this2.pareja2 = (pareja[0].febd_num ? pareja[0].febd_num : '') + ' - ' + pareja[0].name + ' ' + pareja[0].last_name;
-					_this2.inscription.febd_num_2 = pareja[0].febd_num;
-					_this2.inscription.last_name_2 = pareja[0].last_name;
-					_this2.inscription.name_2 = pareja[0].name;
-				} else {
-					_this2.msg.febd_num_2 = 'Agrege la pareja en el perfil';
-				}
-				if (_this2.can('inscription.store2')) {
-					if (pareja[1]) {
-						_this2.pareja1 = (pareja[1].febd_num ? pareja[1].febd_num : '') + ' - ' + pareja[1].name + ' ' + pareja[1].last_name;
-						_this2.inscription.febd_num_1 = pareja[1].febd_num;
-						_this2.inscription.last_name_1 = pareja[1].last_name;
-						_this2.inscription.name_1 = pareja[1].name;
-					} else {
-						_this2.msg.febd_num_1 = 'Agrege la pareja en el perfil';
+				if (_this2.can('inscription.store')) {
+					_this2.tournament = response.data.tournament;
+					_this2.inscription.user_id = response.data.user.id;
+					var price = response.data.tournament.prices;
+					_this2.data = response.data.user;
+					if (response.data.state) {
+						_this2.r = response.data.state;
 					}
-				} else {
-					_this2.pareja1 = (_this2.data.febd_num ? _this2.data.febd_num : '') + ' - ' + _this2.data.name + ' ' + _this2.data.last_name;
-					_this2.inscription.febd_num_1 = _this2.data.febd_num;
-					_this2.inscription.name_1 = _this2.data.name;
-					_this2.inscription.last_name_1 = _this2.data.last_name;
-				}
-				if (_this2.tournament.organizer.t_publishable_key && _this2.tournament.organizer.t_secret_key) {
-					_this2.stripe(_this2.tournament.organizer.t_publishable_key);
+					var pareja = response.data.user.parejas;
+					if (_this2.can('inscription.store2')) {
+						if (pareja[0]) {
+							_this2.pareja1 = (pareja[0].febd_num ? pareja[0].febd_num : '') + ' - ' + pareja[0].name + ' ' + pareja[0].last_name;
+							_this2.inscription.febd_num_1 = pareja[0].febd_num;
+							_this2.inscription.last_name_1 = pareja[0].last_name;
+							_this2.inscription.name_1 = pareja[0].name;
+						} else {
+							_this2.msg.febd_num_1 = 'Agrege la pareja en el perfil';
+						}
+						if (pareja[1]) {
+							_this2.pareja2 = (pareja[1].febd_num ? pareja[1].febd_num : '') + ' - ' + pareja[1].name + ' ' + pareja[1].last_name;
+							_this2.inscription.febd_num_2 = pareja[1].febd_num;
+							_this2.inscription.last_name_2 = pareja[1].last_name;
+							_this2.inscription.name_2 = pareja[1].name;
+						} else {
+							_this2.msg.febd_num_2 = 'Agrege la pareja en el perfil';
+						}
+					} else {
+						if (_this2.data.sex == 0) {
+							_this2.pareja2 = (_this2.data.febd_num ? _this2.data.febd_num : '') + ' - ' + _this2.data.name + ' ' + _this2.data.last_name;
+							_this2.inscription.febd_num_2 = _this2.data.febd_num;
+							_this2.inscription.name_2 = _this2.data.name;
+							_this2.inscription.last_name_2 = _this2.data.last_name;
+							if (pareja[0]) {
+								_this2.pareja1 = (pareja[0].febd_num ? pareja[0].febd_num : '') + ' - ' + pareja[0].name + ' ' + pareja[0].last_name;
+								_this2.inscription.febd_num_1 = pareja[0].febd_num;
+								_this2.inscription.last_name_1 = pareja[0].last_name;
+								_this2.inscription.name_1 = pareja[0].name;
+							} else {
+								_this2.msg.febd_num_1 = 'Agrege la pareja en el perfil';
+							}
+						} else {
+							_this2.pareja1 = (_this2.data.febd_num ? _this2.data.febd_num : '') + ' - ' + _this2.data.name + ' ' + _this2.data.last_name;
+							_this2.inscription.febd_num_1 = _this2.data.febd_num;
+							_this2.inscription.name_1 = _this2.data.name;
+							_this2.inscription.last_name_1 = _this2.data.last_name;
+							if (pareja[0]) {
+								_this2.pareja2 = (pareja[0].febd_num ? pareja[0].febd_num : '') + ' - ' + pareja[0].name + ' ' + pareja[0].last_name;
+								_this2.inscription.febd_num_2 = pareja[0].febd_num;
+								_this2.inscription.last_name_2 = pareja[0].last_name;
+								_this2.inscription.name_2 = pareja[0].name;
+							} else {
+								_this2.msg.febd_num_2 = 'Agrege la pareja en el perfil';
+							}
+						}
+					}
+					if (_this2.tournament.organizer.t_publishable_key && _this2.tournament.organizer.t_secret_key) {
+						_this2.stripe(_this2.tournament.organizer.t_publishable_key);
+					}
 				}
 			});
 		},
@@ -82811,7 +82850,7 @@ var render = function() {
                         "a",
                         {
                           staticClass: "btn btn-black",
-                          attrs: { href: "/inscritos/" + _vm.id }
+                          attrs: { href: "/lista/" + _vm.tournament.slug }
                         },
                         [_vm._v("Ver Lista de inscritos")]
                       )
