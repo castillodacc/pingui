@@ -1,6 +1,6 @@
 <template>
   <div>
-    <rs-modal id="inscription-form">
+    <rs-modal id="inscription-form" w="lg">
 
       <h4 class="card-title" slot="modal-title">
         <span class="glyphicon glyphicon-edit"></span>
@@ -14,21 +14,28 @@
 
               <spinner v-if="!formData.ready"></spinner>
               <div v-else>
-                <div class="col-md-12" v-for="input in entries[0]">
-                  <rs-input :name="input" required="true"
-                  :readonly="input.readonly"
-                  v-model="formData.data[input.id]"
-                  :msg="msg[input.id]"
-                  @input="formData.data[input.id] = arguments[0]"></rs-input>
+                <div class="row">
+
+                  <div class="col-md-8">
+                    <div class="col-md-12" v-for="input in entries[0]">
+                      <rs-input :name="input" required="true"
+                      :readonly="input.readonly"
+                      v-model="formData.data[input.id]"
+                      :msg="msg[input.id]"
+                      @input="formData.data[input.id] = arguments[0]"></rs-input>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="col-md-12" v-for="input in entries[1]">
+                      <rs-input :name="input" required="true"
+                      :readonly="input.readonly"
+                      v-model="formData.data[input.id]"
+                      :msg="msg[input.id]"
+                      @input="formData.data[input.id] = arguments[0]"></rs-input>
+                    </div>
+                  </div>
                 </div>
 
-                <div class="col-md-6" v-for="input in entries[1]">
-                  <rs-input :name="input" required="true"
-                  :readonly="input.readonly"
-                  v-model="formData.data[input.id]"
-                  :msg="msg[input.id]"
-                  @input="formData.data[input.id] = arguments[0]"></rs-input>
-                </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
@@ -75,6 +82,40 @@
                   </div>
                 </div>
 
+                <div class="row">
+                  <h4>Total a Pagar: <b>{{ total }} €</b> <small><a :href="'/perfil/3/' + formData.data.user_id" target="_black">Ver perfil</a></small></h4>
+                  <div class="col-md-12">
+                    <h4>Modalidades Inscritas:</h4>
+                    <div class="col-md-4">
+                      <p>Standard:</p>
+                      <div class="form-inline" v-for="p in prices" v-if="p.category_id == 3 && (formData.data.user.group_s == p.subcategory_id || formData.data.prices.indexOf(p.id) != -1)">
+                        <label :for="p.id">
+                          <input type="checkbox" :id="p.id" class="" :value="p.id" v-model="formData.data.prices">
+                          {{ p.name }} - {{ p.price }} €
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <p>Latino:</p>
+                      <div class="form-inline" v-for="p in prices" v-if="p.category_id == 2 && (formData.data.user.group_l == p.subcategory_id || formData.data.prices.indexOf(p.id) != -1)">
+                        <label :for="p.id">
+                          <input type="checkbox" :id="p.id" class="" :value="p.id" v-model="formData.data.prices">
+                          {{ p.name }} - {{ p.price }} €
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <p>Open:</p>
+                      <div class="form-inline" v-for="p in prices" v-if="p.category_id == 1">
+                        <label :for="p.id">
+                          <input type="checkbox" :id="p.id" :value="p.id" v-model="formData.data.prices">
+                          {{ p.name }} - {{ p.price }} €
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </form>
           </div>
@@ -95,7 +136,7 @@
   import Input from './../partials/input.vue';
 
   export default {
-    name: 'modal-form-permission',
+    name: 'modal-form-inscription',
     components: {
       'rs-modal': Modal,
       'rs-input': Input
@@ -103,6 +144,7 @@
     props: ['formData'],
     data () {
       return {
+        price: [],
         msg: {
           name: 'Nombre del Permiso.',
           description: 'Descripción a realizar.',
@@ -110,15 +152,41 @@
         },
         entries: [
         [
-        {label: 'Nombre Usuario', id: 'usuario', icon: 'user', readonly: true},
-        {label: 'Nombre pareja', id: 'pareja', icon: 'user', readonly: true},
+        {label: 'Bailarín', id: 'usuario', icon: 'fa fa-user', readonly: true},
+        {label: 'Bailarina', id: 'pareja', icon: 'fa fa-user-o', readonly: true},
         ],
         [
-        {label: 'FEBD usuario', id: 'febd_num_1', icon: 'user', readonly: true},
-        {label: 'FEBD pareja', id: 'febd_num_2', icon: 'user', readonly: true},
+        {label: 'FEBD', id: 'febd_num_1', icon: 'glyphicon glyphicon-globe', readonly: true},
+        {label: 'FEBD', id: 'febd_num_2', icon: 'glyphicon glyphicon-globe', readonly: true},
         ]
         ]
       };
+    },
+    computed: {
+      total: function () {
+        let price = 0, test = 0;
+        for(let i in this.formData.data.prices) {
+          for(let o in this.prices) {
+            if (this.prices[o].id == this.formData.data.prices[i]) {
+              if (this.prices[o].category_id == 1) {
+                price += Number(this.prices[o].price);
+              }
+              if ((this.prices[o].category_id == 2 || this.prices[o].category_id == 3) && test == 0) {
+                price += Number(this.prices[o].price);
+                test++;
+              }
+              continue;
+            }
+          }
+        }
+        return this.formData.data.pay = Number(price);
+      }
+    },
+    mounted() {
+      axios.post('/get-data-inscription', { id: this.$route.params.id })
+      .then(response => {
+        this.prices = response.data.price;
+      });
     },
     methods: {
       registrar: function () {

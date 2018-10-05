@@ -10,27 +10,24 @@ class ReportController extends Controller
 	public function csvCompetition(Request $request, $id)
 	{
 		$tournament = Tournament::findOrFail($id);
-		header("Content-type: text/csv; charset=utf-8");
+		header("Content-type: application/csv; charset=UTF-8");
 		header("Content-Disposition:attachment; filename=$tournament->slug.csv");
 		header("Pragma: no-cache");
 		header("Expires: 0");
-		$columns = array('sutaz', 'idpar', 'idMuz', 'Menomuz', 'idZena', 'Menozena', 'klub', 'stat', 'Dorsal');
+		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+
 		$str_lg = '';
 		foreach ($tournament->prices as $p) {
 			foreach ($p->inscriptions as $i) {
 				$str = '';
 				// sutaz -> CATEGORIAS
 				if ($p->category_id == 1) {
-					$str = 'OPEN ';
-					$str .= $p->subO->name;
+					$str = 'OPEN ' . $p->subO->name;
 				} elseif ($p->category_id == 2) {
-					$str = 'LAT '; // Latino
-					$str .= $p->subL->name;
-					$str .= ' - ' . $p->subL->category_latino->name;
+					$str = 'LAT ' . $p->subL->name . ' - ' . $p->subL->category_latino->name;
 				} else {
-					$str = 'STD '; // Standard
-					$str .= $p->subS->name;
-					$str .= ' - ' . $p->subS->category_standar->name;
+					$str = 'STD ';
+					$str .= $p->subS->name . ' - ' . $p->subS->category_standar->name;
 				}
 				$str .= ';';
 				// idpar -> ID de la pareja
@@ -57,6 +54,7 @@ class ReportController extends Controller
 			}
 		}
 		$str_lg .= 'sutaz; idpar; idMuz; Menomuz; idZena;Menozena; klub; stat; Dorsal';
+		$str_lg = utf8_decode($str_lg);
 		echo $str_lg . "\n";
 		return;
 	}

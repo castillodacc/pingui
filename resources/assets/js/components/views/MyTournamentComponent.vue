@@ -22,8 +22,8 @@
 				tabla: {
 					columns: [
 					{ title: 'Competencia', field: 'tournament', sort: 'name' },
-					{ title: 'Participante', field: 'user', sort: 'name', sortable: true },
-					{ title: 'Pareja', field: 'pareja', sort: 'name_2', sortable: true },
+					{ title: 'Bailarín', field: 'name_1', sort: 'name', sortable: true },
+					{ title: 'Bailarina', field: 'pareja', sort: 'name_2', sortable: true },
 					{ title: 'Tipo de pago', field: 'type_pay', sort: 'name_2', sortable: true },
 					{ title: 'Estado del pago', field: 'state_pay', sortable: true, class: 'text-center' },
 					{ title: 'Estado de Participación', field: 'state', sortable: true, class: 'text-center' },

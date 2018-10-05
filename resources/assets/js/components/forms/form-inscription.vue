@@ -72,7 +72,7 @@
 							<p style="margin: 0">Banco: <b>{{ tournament.organizer.bank }}</b></p>
 							<p style="margin: 0">Cuenta: <b>{{ tournament.organizer.account }}</b></p>
 							<p style="margin: 0">Titular: <b>{{ tournament.organizer.headline }}</b></p>
-							<p style="margin: 0">Monto: <b>{{ inscription.pay }} €</b></p>
+							<p style="margin: 0">Total: <b>{{ inscription.pay }} €</b></p>
 						</div>
 						<div id="payment-form" class="form-row" v-show="inscription.method_pay == 3 && (tournament.organizer.t_publishable_key && tournament.organizer.t_secret_key)">
 							<div class="form-row">
@@ -159,7 +159,7 @@
 					<p style="margin: 0">Banco: <b>{{ tournament.organizer.bank }}</b></p>
 					<p style="margin: 0">Cuenta: <b>{{ tournament.organizer.account }}</b></p>
 					<p style="margin: 0">Titular: <b>{{ tournament.organizer.headline }}</b></p>
-					<p style="margin: 0">Monto: <b>{{ r.pay }} €</b></p>
+					<p style="margin: 0">Total: <b>{{ r.pay }} €</b></p>
 				</div>
 			</div>
 		</div>

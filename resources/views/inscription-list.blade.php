@@ -98,7 +98,7 @@
 										{{ $p->subHelp()->category_standar->name }} - {{ $p->subHelp()->name }}
 										@endif
 									</span>
-								</h3> 
+								</h3>
 								<table class="table table-condensed table-hover table-striped">
 									<thead>
 										<tr>

@@ -87,7 +87,7 @@
                             <div class="form-group">
                                 <label for="birthdate" class="col-sm-2 control-label">Fecha de Nacimiento:</label>
                                 <div class="col-sm-10">
-                                    <date-picker id="birthdate4" v-model="user.birthdate" :config="{format: 'DD/MM/YYYY', useCurrent: false, locale: 'es'}"></date-picker>
+                                    <date-picker id="birthdate4" v-model="user.birthdate" :config="{format: 'DD/MM/YYYY', useCurrent: false, locale: 'es'}" autocomplete="off"></date-picker>
                                     <small id="birthdateHelp" class="form-text"></small>
                                 </div>
                             </div>
@@ -239,7 +239,8 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-9">
-                                    <button type="submit" class="btn btn-warning"> Siguiente</button>
+                                    <button type="submit" class="btn btn-success"> Siguiente</button>
+                                    <a href="/" class="btn btn-warning"> Lista de Competiciones</a>
                                 </div>
                             </div>
                         </form>
@@ -274,7 +275,7 @@
                             <div class="form-group">
                                 <label for="birthdate" class="col-sm-3 control-label">Fecha de Nacimiento:</label>
                                 <div class="col-sm-9">
-                                    <date-picker id="birthdate3" v-model="pareja.birthdate" :config="{format: 'DD/MM/YYYY', useCurrent: false, locale: 'es'}"></date-picker>
+                                    <date-picker id="birthdate3" v-model="pareja.birthdate" :config="{format: 'DD/MM/YYYY', useCurrent: false, locale: 'es'}" autocomplete="off"></date-picker>
                                     <small id="birthdateHelp" class="form-text"></small>
                                 </div>
                             </div>
@@ -330,7 +331,7 @@
                             <div class="form-group">
                                 <label for="birthdate2" class="col-sm-3 control-label">Fecha de Nacimiento:</label>
                                 <div class="col-sm-9">
-                                    <date-picker id="birthdate2" v-model="pareja2.birthdate" :config="{format: 'DD/MM/YYYY', useCurrent: false, locale: 'es'}"></date-picker>
+                                    <date-picker id="birthdate2" v-model="pareja2.birthdate" :config="{format: 'DD/MM/YYYY', useCurrent: false, locale: 'es'}" autocomplete="off"></date-picker>
                                     <small id="birthdateHelp" class="form-text"></small>
                                 </div>
                             </div>

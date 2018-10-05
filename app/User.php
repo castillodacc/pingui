@@ -38,8 +38,6 @@ class User extends Authenticatable
         'group_l',
         'group_s',
         'club_id',
-
-        'approval_state',
     ];
 
     /**

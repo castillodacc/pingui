@@ -8,14 +8,13 @@ html {
 }
 .row {
 	width: 100%;
-	/*display: inline-;*/
 }
 .col-md-12 {
 	width: 100%;
 	float: left;
 }
 .page-break {
-    page-break-after: always;
+	page-break-after: always;
 }
 .table {
 	width: 100%;
@@ -53,7 +52,17 @@ html {
 		</h3>
 		@foreach($tournament->prices->where('category_id', $n) as $p)
 		@if(!$p->inscriptions->count()) <?php continue; ?> @endif
-		<h3 style="min-width: 100%;display: block;padding-top:10px;color:#e32727;border-bottom: 1px solid #000; line-height: 0.1em; margin: 0px 0 14px; text-align: center; "><span style="padding:0 10px; background:#fff;color:#C63A36;font-size:16px;">{{ $p->subHelp()->name }}</span></h3> 
+		<h3 style="min-width: 100%;display: block;padding-top:10px;color:#e32727;border-bottom: 1px solid #000; line-height: 0.1em; margin: 0px 0 14px; text-align: center;">
+			<span style="padding:0 10px; background:#fff;color:#C63A36;font-size:16px;">
+				@if ($n == 1)
+				{{ $p->subHelp()->name }}
+				@elseif ($n == 2)
+				{{ $p->subHelp()->category_latino->name }} - {{ $p->subHelp()->name }}
+				@else
+				{{ $p->subHelp()->category_standar->name }} - {{ $p->subHelp()->name }}
+				@endif
+			</span>
+		</h3>
 		<table class="table table-condensed table-hover table-striped table-bordered">
 			<thead>
 				<tr>

@@ -79,7 +79,7 @@ class InscriptionController extends Controller
 
         $inscription = Inscription::create($data);
 
-        $inscription->prices()->attach($data['price']);
+        $inscription->prices()->attach(array_unique($data['price']));
 
         if ($inscription->method_pay == 2) {
             $inscription->delete();
@@ -100,11 +100,10 @@ class InscriptionController extends Controller
             if ($charge['status'] == 'succeeded') {
                 $inscription->restore();
                 $inscription->update(['state_pay' => true]);
-                // return redirect()->to(route('payment.store', $inscription->id));
-            } else {
-                // return redirect()->to(route('payment.cancel', $inscription->id));
             }
         }
+
+        \Mail::to($inscription->user->email)->send(new \App\Mail\Inscription($inscription));
     }
 
     /**
@@ -119,6 +118,10 @@ class InscriptionController extends Controller
         $data->pareja = $data->name_1 . ' ' . $data->last_name_1 . ' - ' . $data->name_2 . ' ' . $data->last_name_2;
         $data->usuario = $data->name_1 . ' ' . $data->last_name_1;
         $data->pareja = $data->name_2 . ' ' . $data->last_name_2;
+        $data->user;
+        $prices = $data->prices->pluck('id');
+        unset($data->prices);
+        $data->prices = $prices;
         return response()->json($data);
     }
 
@@ -134,11 +137,16 @@ class InscriptionController extends Controller
         $data = $this->validate($request, [
             'state' => 'nullable|numeric',
             'state_pay' => 'nullable|numeric',
+            'pay' => 'required'
         ],[],[
             'state' => 'estado de participación',
             'state_pay' => 'estado del pago',
+            'pay' => 'pago'
         ]);
-        Inscription::findOrFail($id)->update($data);
+        $prices = $this->validate($request, ['prices' => 'required|array'],[],['prices' => 'precios']);
+        $inscription = Inscription::findOrFail($id);
+        $inscription->update($data);
+        $inscription->update_pivot($request->prices, 'prices');
     }
 
     /**
@@ -161,6 +169,7 @@ class InscriptionController extends Controller
         $inscription->restore();
         $inscription->update(['state_pay' => true]);
         $tournament = Tournament::findOrFail($inscription->tournament_id);
+        \Mail::to($inscription->user->email)->send(new \App\Mail\Inscription($inscription));
         return view('inscription', compact('tournament'));
     }
 
@@ -185,5 +194,21 @@ class InscriptionController extends Controller
                 }
             }
         }
+    }
+
+    public function getData(Request $request)
+    {
+        $price = Price::where('tournament_id', $request->id)->get();
+        $price->each(function ($p) {
+            ;
+            if ($p->category_id == 1) {
+                $p->name = $p->subHelp()->name;
+            } elseif ($p->category_id == 2) {
+                $p->name = $p->subHelp()->name . ' - ' . Subcategory_latino::findOrFail($p->subcategory_id)->name;
+            } elseif ($p->category_id == 3) {
+                $p->name = $p->subHelp()->name . ' - ' . Subcategory_standar::findOrFail($p->subcategory_id)->name;
+            }
+        });
+        return compact('price');
     }
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="modal fade" :id="id" tabindex="-1" role="dialog" data-backdrop="static">
-    <div class="modal-dialog" :class="'modal-'+w" role="document">
+    <div class="modal-dialog" :class="'modal-' + w" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" aria-label="Close" data-dismiss="modal">

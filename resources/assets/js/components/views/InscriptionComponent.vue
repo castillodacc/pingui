@@ -48,8 +48,8 @@
 				tabla: {
 					columns: [
 					{ title: 'Dorsales', field: 'dorsal', sort: 'id', sortable: true },
-					{ title: 'Participante', field: 'last_name_1', sort: 'name', sortable: true },
-					{ title: 'Pareja', field: 'pareja', sort: 'name_2', sortable: true },
+					{ title: 'Bailarín', field: 'user', sort: 'name_1', sortable: true },
+					{ title: 'Bailarina', field: 'pareja', sort: 'name_2', sortable: true },
 					{ title: 'Tipo de pago', field: 'type_pay', sort: 'method_pay', sortable: true },
 					{ title: 'Estado del pago', field: 'state_pay', sortable: true, class: 'text-center' },
 					{ title: 'Estado de Participación', field: 'state', sortable: true, class: 'text-center' },

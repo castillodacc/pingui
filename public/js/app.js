@@ -64355,6 +64355,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -68179,7 +68180,8 @@ var render = function() {
                               format: "DD/MM/YYYY",
                               useCurrent: false,
                               locale: "es"
-                            }
+                            },
+                            autocomplete: "off"
                           },
                           model: {
                             value: _vm.user.birthdate,
@@ -69255,7 +69257,8 @@ var render = function() {
                               format: "DD/MM/YYYY",
                               useCurrent: false,
                               locale: "es"
-                            }
+                            },
+                            autocomplete: "off"
                           },
                           model: {
                             value: _vm.pareja.birthdate,
@@ -69585,7 +69588,8 @@ var render = function() {
                                   format: "DD/MM/YYYY",
                                   useCurrent: false,
                                   locale: "es"
-                                }
+                                },
+                                autocomplete: "off"
                               },
                               model: {
                                 value: _vm.pareja2.birthdate,
@@ -69758,9 +69762,13 @@ var staticRenderFns = [
       _c("div", { staticClass: "col-sm-offset-3 col-sm-9" }, [
         _c(
           "button",
-          { staticClass: "btn btn-warning", attrs: { type: "submit" } },
+          { staticClass: "btn btn-success", attrs: { type: "submit" } },
           [_vm._v(" Siguiente")]
-        )
+        ),
+        _vm._v(" "),
+        _c("a", { staticClass: "btn btn-warning", attrs: { href: "/" } }, [
+          _vm._v(" Lista de Competiciones")
+        ])
       ])
     ])
   },
@@ -77055,7 +77063,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 		return {
 			tabla: {
-				columns: [{ title: 'Competencia', field: 'tournament', sort: 'name' }, { title: 'Participante', field: 'user', sort: 'name', sortable: true }, { title: 'Pareja', field: 'pareja', sort: 'name_2', sortable: true }, { title: 'Tipo de pago', field: 'type_pay', sort: 'name_2', sortable: true }, { title: 'Estado del pago', field: 'state_pay', sortable: true, class: 'text-center' }, { title: 'Estado de Participación', field: 'state', sortable: true, class: 'text-center' }],
+				columns: [{ title: 'Competencia', field: 'tournament', sort: 'name' }, { title: 'Bailarín', field: 'name_1', sort: 'name', sortable: true }, { title: 'Bailarina', field: 'pareja', sort: 'name_2', sortable: true }, { title: 'Tipo de pago', field: 'type_pay', sort: 'name_2', sortable: true }, { title: 'Estado del pago', field: 'state_pay', sortable: true, class: 'text-center' }, { title: 'Estado de Participación', field: 'state', sortable: true, class: 'text-center' }],
 				options: [{ ico: 'fa fa-list', class: 'btn-success', title: 'Lista Participantes', func: function func(id, obj) {
 						_this.$router.push({ name: 'inscription.index', params: { id: obj.tournament_id } });
 					}, action: 'tournament.inscription' }]
@@ -79510,7 +79518,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				data: {}
 			},
 			tabla: {
-				columns: [{ title: 'Dorsales', field: 'dorsal', sort: 'id', sortable: true }, { title: 'Participante', field: 'last_name_1', sort: 'name', sortable: true }, { title: 'Pareja', field: 'pareja', sort: 'name_2', sortable: true }, { title: 'Tipo de pago', field: 'type_pay', sort: 'method_pay', sortable: true }, { title: 'Estado del pago', field: 'state_pay', sortable: true, class: 'text-center' }, { title: 'Estado de Participación', field: 'state', sortable: true, class: 'text-center' }],
+				columns: [{ title: 'Dorsales', field: 'dorsal', sort: 'id', sortable: true }, { title: 'Bailarín', field: 'user', sort: 'name_1', sortable: true }, { title: 'Bailarina', field: 'pareja', sort: 'name_2', sortable: true }, { title: 'Tipo de pago', field: 'type_pay', sort: 'method_pay', sortable: true }, { title: 'Estado del pago', field: 'state_pay', sortable: true, class: 'text-center' }, { title: 'Estado de Participación', field: 'state', sortable: true, class: 'text-center' }],
 				options: [{ ico: 'fa fa-edit', class: 'btn-info', title: 'Editar', func: function func(id) {
 						_this.openForm('edit', id);
 					}, action: 'tournament.update' }, { ico: 'fa fa-close', class: 'btn-danger', title: 'Eliminar', func: function func(id) {
@@ -79695,12 +79703,53 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'modal-form-permission',
+  name: 'modal-form-inscription',
   components: {
     'rs-modal': __WEBPACK_IMPORTED_MODULE_0__partials_modal_vue___default.a,
     'rs-input': __WEBPACK_IMPORTED_MODULE_1__partials_input_vue___default.a
@@ -79708,25 +79757,55 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   props: ['formData'],
   data: function data() {
     return {
+      price: [],
       msg: {
         name: 'Nombre del Permiso.',
         description: 'Descripción a realizar.',
         deleted_at: 'Activar o Inactivar permiso.'
       },
-      entries: [[{ label: 'Nombre Usuario', id: 'usuario', icon: 'user', readonly: true }, { label: 'Nombre pareja', id: 'pareja', icon: 'user', readonly: true }], [{ label: 'FEBD usuario', id: 'febd_num_1', icon: 'user', readonly: true }, { label: 'FEBD pareja', id: 'febd_num_2', icon: 'user', readonly: true }]]
+      entries: [[{ label: 'Bailarín', id: 'usuario', icon: 'fa fa-user', readonly: true }, { label: 'Bailarina', id: 'pareja', icon: 'fa fa-user-o', readonly: true }], [{ label: 'FEBD', id: 'febd_num_1', icon: 'glyphicon glyphicon-globe', readonly: true }, { label: 'FEBD', id: 'febd_num_2', icon: 'glyphicon glyphicon-globe', readonly: true }]]
     };
+  },
+
+  computed: {
+    total: function total() {
+      var price = 0,
+          test = 0;
+      for (var i in this.formData.data.prices) {
+        for (var o in this.prices) {
+          if (this.prices[o].id == this.formData.data.prices[i]) {
+            if (this.prices[o].category_id == 1) {
+              price += Number(this.prices[o].price);
+            }
+            if ((this.prices[o].category_id == 2 || this.prices[o].category_id == 3) && test == 0) {
+              price += Number(this.prices[o].price);
+              test++;
+            }
+            continue;
+          }
+        }
+      }
+      return this.formData.data.pay = Number(price);
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.post('/get-data-inscription', { id: this.$route.params.id }).then(function (response) {
+      _this.prices = response.data.price;
+    });
   },
 
   methods: {
     registrar: function registrar() {
-      var _this = this;
+      var _this2 = this;
 
       this.restoreMsg(this.msg);
       if (this.formData.cond === 'edit') {
         axios.put(this.formData.url, this.formData.data).then(function (response) {
           toastr.success('Registro Editado');
           $('#inscription-form').modal('hide');
-          _this.$emit('input');
+          _this2.$emit('input');
         });
       }
     }
@@ -79746,7 +79825,7 @@ var render = function() {
     [
       _c(
         "rs-modal",
-        { attrs: { id: "inscription-form" } },
+        { attrs: { id: "inscription-form", w: "lg" } },
         [
           _c(
             "h4",
@@ -79782,336 +79861,665 @@ var render = function() {
                   [
                     !_vm.formData.ready
                       ? _c("spinner")
-                      : _c(
-                          "div",
-                          [
-                            _vm._l(_vm.entries[0], function(input) {
-                              return _c(
-                                "div",
-                                { staticClass: "col-md-12" },
-                                [
-                                  _c("rs-input", {
-                                    attrs: {
-                                      name: input,
-                                      required: "true",
-                                      readonly: input.readonly,
-                                      msg: _vm.msg[input.id]
-                                    },
-                                    on: {
-                                      input: function($event) {
-                                        _vm.formData.data[input.id] =
-                                          arguments[0]
-                                      }
-                                    },
-                                    model: {
-                                      value: _vm.formData.data[input.id],
-                                      callback: function($$v) {
-                                        _vm.$set(
-                                          _vm.formData.data,
-                                          input.id,
-                                          $$v
-                                        )
+                      : _c("div", [
+                          _c("div", { staticClass: "row" }, [
+                            _c(
+                              "div",
+                              { staticClass: "col-md-8" },
+                              _vm._l(_vm.entries[0], function(input) {
+                                return _c(
+                                  "div",
+                                  { staticClass: "col-md-12" },
+                                  [
+                                    _c("rs-input", {
+                                      attrs: {
+                                        name: input,
+                                        required: "true",
+                                        readonly: input.readonly,
+                                        msg: _vm.msg[input.id]
                                       },
-                                      expression: "formData.data[input.id]"
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            }),
+                                      on: {
+                                        input: function($event) {
+                                          _vm.formData.data[input.id] =
+                                            arguments[0]
+                                        }
+                                      },
+                                      model: {
+                                        value: _vm.formData.data[input.id],
+                                        callback: function($$v) {
+                                          _vm.$set(
+                                            _vm.formData.data,
+                                            input.id,
+                                            $$v
+                                          )
+                                        },
+                                        expression: "formData.data[input.id]"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              })
+                            ),
                             _vm._v(" "),
-                            _vm._l(_vm.entries[1], function(input) {
-                              return _c(
-                                "div",
-                                { staticClass: "col-md-6" },
-                                [
-                                  _c("rs-input", {
-                                    attrs: {
-                                      name: input,
-                                      required: "true",
-                                      readonly: input.readonly,
-                                      msg: _vm.msg[input.id]
-                                    },
-                                    on: {
-                                      input: function($event) {
-                                        _vm.formData.data[input.id] =
-                                          arguments[0]
-                                      }
-                                    },
-                                    model: {
-                                      value: _vm.formData.data[input.id],
-                                      callback: function($$v) {
-                                        _vm.$set(
-                                          _vm.formData.data,
-                                          input.id,
-                                          $$v
-                                        )
+                            _c(
+                              "div",
+                              { staticClass: "col-md-4" },
+                              _vm._l(_vm.entries[1], function(input) {
+                                return _c(
+                                  "div",
+                                  { staticClass: "col-md-12" },
+                                  [
+                                    _c("rs-input", {
+                                      attrs: {
+                                        name: input,
+                                        required: "true",
+                                        readonly: input.readonly,
+                                        msg: _vm.msg[input.id]
                                       },
-                                      expression: "formData.data[input.id]"
+                                      on: {
+                                        input: function($event) {
+                                          _vm.formData.data[input.id] =
+                                            arguments[0]
+                                        }
+                                      },
+                                      model: {
+                                        value: _vm.formData.data[input.id],
+                                        callback: function($$v) {
+                                          _vm.$set(
+                                            _vm.formData.data,
+                                            input.id,
+                                            $$v
+                                          )
+                                        },
+                                        expression: "formData.data[input.id]"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              })
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-12" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass: "control-label",
+                                  attrs: { for: "method_pay" }
+                                },
+                                [
+                                  _c("span", {
+                                    staticClass: "glyphicon glyphicon-inbox"
+                                  }),
+                                  _vm._v(" Tipo de pago:\n                  ")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.formData.data.method_pay,
+                                      expression: "formData.data.method_pay"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: {
+                                    id: "method_pay",
+                                    required: "true",
+                                    disabled: ""
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.formData.data,
+                                        "method_pay",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("option", { attrs: { value: "1" } }, [
+                                    _vm._v("Transferencia")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "2" } }, [
+                                    _vm._v("Paypal")
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "small",
+                                {
+                                  staticClass: "form-text text-muted",
+                                  attrs: { id: "method_payHelp" }
+                                },
+                                [
+                                  _c("span", {
+                                    domProps: {
+                                      textContent: _vm._s(_vm.msg.method_pay)
                                     }
                                   })
-                                ],
-                                1
+                                ]
                               )
-                            }),
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass: "control-label",
+                                  attrs: { for: "state_pay" }
+                                },
+                                [
+                                  _c("span", {
+                                    staticClass: "glyphicon glyphicon-inbox"
+                                  }),
+                                  _vm._v(
+                                    " Estado del pago:\n                  "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.formData.data.state_pay,
+                                      expression: "formData.data.state_pay"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { id: "state_pay", required: "true" },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.formData.data,
+                                        "state_pay",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("option", { attrs: { value: "1" } }, [
+                                    _vm._v("Pagado")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { domProps: { value: null } }, [
+                                    _vm._v("No Aprobado")
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "small",
+                                {
+                                  staticClass: "form-text text-muted",
+                                  attrs: { id: "state_payHelp" }
+                                },
+                                [
+                                  _c("span", {
+                                    domProps: {
+                                      textContent: _vm._s(_vm.msg.state_pay)
+                                    }
+                                  })
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass: "control-label",
+                                  attrs: { for: "state" }
+                                },
+                                [
+                                  _c("span", {
+                                    staticClass: "glyphicon glyphicon-inbox"
+                                  }),
+                                  _vm._v(
+                                    " Aprobar Participación:\n                  "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.formData.data.state,
+                                      expression: "formData.data.state"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { id: "state", required: "true" },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.formData.data,
+                                        "state",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("option", { attrs: { value: "1" } }, [
+                                    _vm._v("Aprobado")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { domProps: { value: null } }, [
+                                    _vm._v("No Aprobado")
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "small",
+                                {
+                                  staticClass: "form-text text-muted",
+                                  attrs: { id: "stateHelp" }
+                                },
+                                [
+                                  _c("span", {
+                                    domProps: {
+                                      textContent: _vm._s(_vm.msg.state)
+                                    }
+                                  })
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "row" }, [
+                            _c("h4", [
+                              _vm._v("Total a Pagar: "),
+                              _c("b", [_vm._v(_vm._s(_vm.total) + " €")]),
+                              _vm._v(" "),
+                              _c("small", [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: {
+                                      href:
+                                        "/perfil/3/" +
+                                        _vm.formData.data.user_id,
+                                      target: "_black"
+                                    }
+                                  },
+                                  [_vm._v("Ver perfil")]
+                                )
+                              ])
+                            ]),
                             _vm._v(" "),
                             _c("div", { staticClass: "col-md-12" }, [
-                              _c("div", { staticClass: "form-group" }, [
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "control-label",
-                                    attrs: { for: "method_pay" }
-                                  },
-                                  [
-                                    _c("span", {
-                                      staticClass: "glyphicon glyphicon-inbox"
-                                    }),
-                                    _vm._v(" Tipo de pago:\n                  ")
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "select",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.formData.data.method_pay,
-                                        expression: "formData.data.method_pay"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    attrs: {
-                                      id: "method_pay",
-                                      required: "true",
-                                      disabled: ""
-                                    },
-                                    on: {
-                                      change: function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
-                                        _vm.$set(
-                                          _vm.formData.data,
-                                          "method_pay",
-                                          $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
+                              _c("h4", [_vm._v("Modalidades Inscritas:")]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "col-md-4" },
+                                [
+                                  _c("p", [_vm._v("Standard:")]),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.prices, function(p) {
+                                    return p.category_id == 3 &&
+                                      (_vm.formData.data.user.group_s ==
+                                        p.subcategory_id ||
+                                        _vm.formData.data.prices.indexOf(
+                                          p.id
+                                        ) != -1)
+                                      ? _c(
+                                          "div",
+                                          { staticClass: "form-inline" },
+                                          [
+                                            _c(
+                                              "label",
+                                              { attrs: { for: p.id } },
+                                              [
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value:
+                                                        _vm.formData.data
+                                                          .prices,
+                                                      expression:
+                                                        "formData.data.prices"
+                                                    }
+                                                  ],
+                                                  attrs: {
+                                                    type: "checkbox",
+                                                    id: p.id
+                                                  },
+                                                  domProps: {
+                                                    value: p.id,
+                                                    checked: Array.isArray(
+                                                      _vm.formData.data.prices
+                                                    )
+                                                      ? _vm._i(
+                                                          _vm.formData.data
+                                                            .prices,
+                                                          p.id
+                                                        ) > -1
+                                                      : _vm.formData.data.prices
+                                                  },
+                                                  on: {
+                                                    change: function($event) {
+                                                      var $$a =
+                                                          _vm.formData.data
+                                                            .prices,
+                                                        $$el = $event.target,
+                                                        $$c = $$el.checked
+                                                          ? true
+                                                          : false
+                                                      if (Array.isArray($$a)) {
+                                                        var $$v = p.id,
+                                                          $$i = _vm._i($$a, $$v)
+                                                        if ($$el.checked) {
+                                                          $$i < 0 &&
+                                                            (_vm.formData.data.prices = $$a.concat(
+                                                              [$$v]
+                                                            ))
+                                                        } else {
+                                                          $$i > -1 &&
+                                                            (_vm.formData.data.prices = $$a
+                                                              .slice(0, $$i)
+                                                              .concat(
+                                                                $$a.slice(
+                                                                  $$i + 1
+                                                                )
+                                                              ))
+                                                        }
+                                                      } else {
+                                                        _vm.$set(
+                                                          _vm.formData.data,
+                                                          "prices",
+                                                          $$c
+                                                        )
+                                                      }
+                                                    }
+                                                  }
+                                                }),
+                                                _vm._v(
+                                                  "\n                        " +
+                                                    _vm._s(p.name) +
+                                                    " - " +
+                                                    _vm._s(p.price) +
+                                                    " €\n                      "
+                                                )
+                                              ]
+                                            )
+                                          ]
                                         )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("option", { attrs: { value: "1" } }, [
-                                      _vm._v("Transferencia")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("option", { attrs: { value: "2" } }, [
-                                      _vm._v("Paypal")
-                                    ])
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "small",
-                                  {
-                                    staticClass: "form-text text-muted",
-                                    attrs: { id: "method_payHelp" }
-                                  },
-                                  [
-                                    _c("span", {
-                                      domProps: {
-                                        textContent: _vm._s(_vm.msg.method_pay)
-                                      }
-                                    })
-                                  ]
-                                )
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-md-6" }, [
-                              _c("div", { staticClass: "form-group" }, [
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "control-label",
-                                    attrs: { for: "state_pay" }
-                                  },
-                                  [
-                                    _c("span", {
-                                      staticClass: "glyphicon glyphicon-inbox"
-                                    }),
-                                    _vm._v(
-                                      " Estado del pago:\n                  "
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "select",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.formData.data.state_pay,
-                                        expression: "formData.data.state_pay"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    attrs: {
-                                      id: "state_pay",
-                                      required: "true"
-                                    },
-                                    on: {
-                                      change: function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
-                                        _vm.$set(
-                                          _vm.formData.data,
-                                          "state_pay",
-                                          $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
+                                      : _vm._e()
+                                  })
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "col-md-4" },
+                                [
+                                  _c("p", [_vm._v("Latino:")]),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.prices, function(p) {
+                                    return p.category_id == 2 &&
+                                      (_vm.formData.data.user.group_l ==
+                                        p.subcategory_id ||
+                                        _vm.formData.data.prices.indexOf(
+                                          p.id
+                                        ) != -1)
+                                      ? _c(
+                                          "div",
+                                          { staticClass: "form-inline" },
+                                          [
+                                            _c(
+                                              "label",
+                                              { attrs: { for: p.id } },
+                                              [
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value:
+                                                        _vm.formData.data
+                                                          .prices,
+                                                      expression:
+                                                        "formData.data.prices"
+                                                    }
+                                                  ],
+                                                  attrs: {
+                                                    type: "checkbox",
+                                                    id: p.id
+                                                  },
+                                                  domProps: {
+                                                    value: p.id,
+                                                    checked: Array.isArray(
+                                                      _vm.formData.data.prices
+                                                    )
+                                                      ? _vm._i(
+                                                          _vm.formData.data
+                                                            .prices,
+                                                          p.id
+                                                        ) > -1
+                                                      : _vm.formData.data.prices
+                                                  },
+                                                  on: {
+                                                    change: function($event) {
+                                                      var $$a =
+                                                          _vm.formData.data
+                                                            .prices,
+                                                        $$el = $event.target,
+                                                        $$c = $$el.checked
+                                                          ? true
+                                                          : false
+                                                      if (Array.isArray($$a)) {
+                                                        var $$v = p.id,
+                                                          $$i = _vm._i($$a, $$v)
+                                                        if ($$el.checked) {
+                                                          $$i < 0 &&
+                                                            (_vm.formData.data.prices = $$a.concat(
+                                                              [$$v]
+                                                            ))
+                                                        } else {
+                                                          $$i > -1 &&
+                                                            (_vm.formData.data.prices = $$a
+                                                              .slice(0, $$i)
+                                                              .concat(
+                                                                $$a.slice(
+                                                                  $$i + 1
+                                                                )
+                                                              ))
+                                                        }
+                                                      } else {
+                                                        _vm.$set(
+                                                          _vm.formData.data,
+                                                          "prices",
+                                                          $$c
+                                                        )
+                                                      }
+                                                    }
+                                                  }
+                                                }),
+                                                _vm._v(
+                                                  "\n                        " +
+                                                    _vm._s(p.name) +
+                                                    " - " +
+                                                    _vm._s(p.price) +
+                                                    " €\n                      "
+                                                )
+                                              ]
+                                            )
+                                          ]
                                         )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("option", { attrs: { value: "1" } }, [
-                                      _vm._v("Pagado")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c(
-                                      "option",
-                                      { domProps: { value: null } },
-                                      [_vm._v("No Aprobado")]
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "small",
-                                  {
-                                    staticClass: "form-text text-muted",
-                                    attrs: { id: "state_payHelp" }
-                                  },
-                                  [
-                                    _c("span", {
-                                      domProps: {
-                                        textContent: _vm._s(_vm.msg.state_pay)
-                                      }
-                                    })
-                                  ]
-                                )
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-md-6" }, [
-                              _c("div", { staticClass: "form-group" }, [
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "control-label",
-                                    attrs: { for: "state" }
-                                  },
-                                  [
-                                    _c("span", {
-                                      staticClass: "glyphicon glyphicon-inbox"
-                                    }),
-                                    _vm._v(
-                                      " Aprobar Participación:\n                  "
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "select",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.formData.data.state,
-                                        expression: "formData.data.state"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    attrs: { id: "state", required: "true" },
-                                    on: {
-                                      change: function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
-                                        _vm.$set(
-                                          _vm.formData.data,
-                                          "state",
-                                          $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
+                                      : _vm._e()
+                                  })
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "col-md-4" },
+                                [
+                                  _c("p", [_vm._v("Open:")]),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.prices, function(p) {
+                                    return p.category_id == 1
+                                      ? _c(
+                                          "div",
+                                          { staticClass: "form-inline" },
+                                          [
+                                            _c(
+                                              "label",
+                                              { attrs: { for: p.id } },
+                                              [
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value:
+                                                        _vm.formData.data
+                                                          .prices,
+                                                      expression:
+                                                        "formData.data.prices"
+                                                    }
+                                                  ],
+                                                  attrs: {
+                                                    type: "checkbox",
+                                                    id: p.id
+                                                  },
+                                                  domProps: {
+                                                    value: p.id,
+                                                    checked: Array.isArray(
+                                                      _vm.formData.data.prices
+                                                    )
+                                                      ? _vm._i(
+                                                          _vm.formData.data
+                                                            .prices,
+                                                          p.id
+                                                        ) > -1
+                                                      : _vm.formData.data.prices
+                                                  },
+                                                  on: {
+                                                    change: function($event) {
+                                                      var $$a =
+                                                          _vm.formData.data
+                                                            .prices,
+                                                        $$el = $event.target,
+                                                        $$c = $$el.checked
+                                                          ? true
+                                                          : false
+                                                      if (Array.isArray($$a)) {
+                                                        var $$v = p.id,
+                                                          $$i = _vm._i($$a, $$v)
+                                                        if ($$el.checked) {
+                                                          $$i < 0 &&
+                                                            (_vm.formData.data.prices = $$a.concat(
+                                                              [$$v]
+                                                            ))
+                                                        } else {
+                                                          $$i > -1 &&
+                                                            (_vm.formData.data.prices = $$a
+                                                              .slice(0, $$i)
+                                                              .concat(
+                                                                $$a.slice(
+                                                                  $$i + 1
+                                                                )
+                                                              ))
+                                                        }
+                                                      } else {
+                                                        _vm.$set(
+                                                          _vm.formData.data,
+                                                          "prices",
+                                                          $$c
+                                                        )
+                                                      }
+                                                    }
+                                                  }
+                                                }),
+                                                _vm._v(
+                                                  "\n                        " +
+                                                    _vm._s(p.name) +
+                                                    " - " +
+                                                    _vm._s(p.price) +
+                                                    " €\n                      "
+                                                )
+                                              ]
+                                            )
+                                          ]
                                         )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("option", { attrs: { value: "1" } }, [
-                                      _vm._v("Aprobado")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c(
-                                      "option",
-                                      { domProps: { value: null } },
-                                      [_vm._v("No Aprobado")]
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "small",
-                                  {
-                                    staticClass: "form-text text-muted",
-                                    attrs: { id: "stateHelp" }
-                                  },
-                                  [
-                                    _c("span", {
-                                      domProps: {
-                                        textContent: _vm._s(_vm.msg.state)
-                                      }
-                                    })
-                                  ]
-                                )
-                              ])
+                                      : _vm._e()
+                                  })
+                                ],
+                                2
+                              )
                             ])
-                          ],
-                          2
-                        )
+                          ])
+                        ])
                   ],
                   1
                 )
@@ -82609,7 +83017,7 @@ var render = function() {
                               ]),
                               _vm._v(" "),
                               _c("p", { staticStyle: { margin: "0" } }, [
-                                _vm._v("Monto: "),
+                                _vm._v("Total: "),
                                 _c("b", [
                                   _vm._v(_vm._s(_vm.inscription.pay) + " €")
                                 ])
@@ -82885,7 +83293,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("p", { staticStyle: { margin: "0" } }, [
-                        _vm._v("Monto: "),
+                        _vm._v("Total: "),
                         _c("b", [_vm._v(_vm._s(_vm.r.pay) + " €")])
                       ])
                     ])

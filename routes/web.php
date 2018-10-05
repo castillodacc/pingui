@@ -24,7 +24,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('csv-competition/{tournament}', 'ReportController@csvCompetition');
 });
 
-Route::get('lista/{slug}', 'RouteController@list');
+Route::get('lista/{slug}', 'RouteController@list')->name('list');
 Route::get('pdf-lista/{id}', 'ReportController@ListInscriptions');
 
 /**
@@ -102,6 +102,7 @@ Route::group(['middleware' => ['auth', 'onlyAjax']], function () {
 
     Route::resource('inscription', 'InscriptionController')->except(['create', 'edit']);
     Route::post('generate/{tournament}', 'InscriptionController@generateDorsales');
+    Route::post('get-data-inscription', 'InscriptionController@getData');
 
     Route::group(['prefix' => '/', 'namespace' => 'Dashboard', 'as' => 'Dashboard::'], function () {
         Route::post('auto-deleted', 'ProfileController@autoDeleting');
