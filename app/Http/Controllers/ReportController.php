@@ -31,13 +31,13 @@ class ReportController extends Controller
 				}
 				$str .= ';';
 				// idpar -> ID de la pareja
-				$str .= $i->user_id . ';';
+				$str .= /*$i->user_id . */';';
 				// idMuz -> ID del Bailarín
-				$str .= ';';
+				$str .= $i->febd_num_1 . ';';
 				// Menomuz -> nombre de la Bailarín
 				$str .= "$i->last_name_1, $i->name_1" . ';';
 				// idZena -> ID del Bailarina
-				$str .= ';';
+				$str .= $i->febd_num_2 . ';';
 				// Menozena -> nombre de la Bailarina
 				$str .= "$i->last_name_2, $i->name_2" . ';';
 				// klub -> Club

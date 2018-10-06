@@ -69,7 +69,7 @@ class ProfileController extends Controller
             'category_l' => 'nullable',
             'category_s' => 'nullable',
             'club_id' => 'required|numeric',
-            'febd_num' => 'nullable|numeric|digits_between:2,6',
+            'febd_num' => 'nullable|numeric',
             'group_l' => 'nullable',
             'group_s' => 'nullable',
             'trainer_l' => 'nullable',
@@ -94,7 +94,7 @@ class ProfileController extends Controller
         $request->validate([
             'user_id' => 'required',
             'p_email' => 'nullable|email',
-            'p_febd_num' => 'nullable|numeric|unique:parejas,febd_num',
+            'p_febd_num' => 'nullable|numeric',
             'birthdate' => 'nullable',
             'sex' => 'required|numeric',
             'p_last_name' => 'required|string|min:3|max:40',
