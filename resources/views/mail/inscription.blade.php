@@ -1,6 +1,6 @@
 @extends('mail.layouts')
 @section('saludo')
-Hola...
+Hola {{ $data->user->fullName() }}.
 @endsection
 @section('content')
 <tr>

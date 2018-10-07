@@ -74,7 +74,7 @@
 								<h1  class="hidden-xs hidden-sm">{{ $tournament->name }}</h1>
 							</div>
 							<div class="row">
-								<div class="pull-left col-md-7 col-xs-12">
+								<div class="pull-left col-md-5 col-xs-12">
 									<small>Se realizará: {{ Carbon::parse($tournament->start)->format('d/m/Y') }}.</small><br>
 									<small><strong>Organizador:</strong> {{ $tournament->organizer->name }}.</small><br>
 									<small><strong>Inscripción: {{ ($tournament->inscription) ? 'Abierta' : 'Cerrada' }}.</strong></small><br>
@@ -94,6 +94,11 @@
 										@endforeach
 									</ul>
 								</div>
+								@if(\Auth::check() && $tournament->inscriptions->where('user_id', \Auth::user()->id)->count() == 1)
+								<div id="app" class="col-md-7">
+									<inscription id="{{ $tournament->id }}"></inscription>
+								</div>
+								@endif
 								@if($tournament->moreInfo->where('active', 1)->count())
 								<div class="pull-right col-md-5 col-xs-12">
 									<h5><b>Más Información:</b></h5>
@@ -140,27 +145,7 @@
 								@endif
 							</div>
 							<div class="row">
-								@if(\Auth::check() && $tournament->inscriptions->where('user_id', \Auth::user()->id)->count() == 1)
-								<div class="col-md-12">
-									<div class="alert alert-success" role="alert">
-										<h4 class="text-center">Tu registro a la competición se ha realizado correctamente...</h4>
-										<p>Estado del pago: 
-											@if($tournament->inscriptions->where('user_id', \Auth::user()->id)->first()->state_pay == 1)
-											Aprobado
-											@else
-											En espera de aprobación...
-											@endif
-										</p>
-										<p>Estado de Participación:
-											@if($tournament->inscriptions->where('user_id', \Auth::user()->id)->first()->state == 1)
-											Aprobado
-											@else
-											En espera de aprobación...
-											@endif
-										</p>
-									</div>
-								</div>
-								@elseif(\Auth::check() && \Auth::user()->febd_num == '')
+								@if(\Auth::check())
 								<div class="col-md-12">
 									<div class="alert alert-info" role="alert">
 										<span class="text-warning">
@@ -187,15 +172,13 @@
 										</div>
 										@endif
 										@if($tournament->inscription)
+										@if(\Auth::guest() || (\Auth::check() && $tournament->inscriptions->where('user_id', \Auth::user()->id)->count() == 0))
 										<div class="col-md-3">
 											<a href="{{ route('publication.inscription', $tournament->slug) }}" class="btn btn-warning btn-block">
-												@if(\Auth::check() && $tournament->inscriptions->where('user_id', \Auth::user()->id)->count() == 1)
 												Inscripción
-												@else
-												Inscribete
-												@endif
 											</a>
 										</div>
+										@endif
 										@elseif($tournament->results)
 										<div class="col-md-4">
 											<a href="http://results.pingui.es/events.php?pod_id={{ $tournament->results }}" class="btn btn-danger btn-block" target="_blank">Resultados</a>
@@ -268,5 +251,6 @@
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/jquery.flexslider.min.js"></script>
 	<script type="text/javascript" src="/js/custom.js"></script>
+	<script type="text/javascript" src="/js/app.js"></script>
 </body>
 </html>

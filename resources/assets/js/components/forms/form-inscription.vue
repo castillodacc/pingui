@@ -1,5 +1,5 @@
 <template>
-	<div class="col-md-8" v-if="can('inscription.store')">
+	<div class="row" v-if="can('inscription.store')">
 		<form @submit.prevent="register" v-if="r === true">
 			<h4>Datos de pareja</h4>
 			<div class="col-md-6">
@@ -128,23 +128,23 @@
 				</div>
 			</div>
 		</form>
-		<div class="col-md-12" v-else>
+		<div class="col-md-12" v-if="r === false">
 			<div class="alert alert-success">
-				<h3 class="text-center">Tu registro a la competición se ha finalizado correctamente..</h3>
+				<h3 class="text-center" style="margin: 0">Tu registro a la competición se ha finalizado correctamente..</h3>
 				<p>Hola {{ data.name }} {{ data.last_name }}, Se ha registrado correctamente en la competición.</p>
 				<p>
 					<b>Estado del pago: </b>
-					<span v-if="r.state_pay == 1">Ya fué aprobado su pago...</span>
+					<span v-if="t.state_pay == 1">Ya fué aprobado su pago...</span>
 					<span v-else>En espera de aprobación...</span>
 				</p>
 				<p>
 					<b>Estado de Participación: </b>
-					<span v-if="r.state == 1">Ya fué aprobada su participación en la competencia...</span>
+					<span v-if="t.state == 1">Ya fué aprobada su participación en la competencia...</span>
 					<span v-else>En espera de aprobación...</span>
 				</p>
 				<div class="row">
 					<div class="col-md-12">
-						<template v-for="p in r.prices">
+						<template v-for="p in t.prices">
 							<span class="label label-info" style="display: inline; font-size: 1em; margin-right: 10px;">
 								{{ cate(p.category_id) }} - {{ namePrice(p.id) }}
 							</span>
@@ -154,12 +154,12 @@
 				</div>
 				<hr>
 				<p><a :href="'/lista/' + tournament.slug" v-if="can('inscription.index')" class="btn btn-black">Ver Lista de inscritos</a></p>
-				<div v-if="r.method_pay == 1 && !r.state">
+				<div v-if="t.method_pay == 1 && !t.state">
 					<p style="font-size: 14px;">No te olvides de llevar a cabo la forma de pago seleccionada.</p>
 					<p style="margin: 0">Banco: <b>{{ tournament.organizer.bank }}</b></p>
 					<p style="margin: 0">Cuenta: <b>{{ tournament.organizer.account }}</b></p>
 					<p style="margin: 0">Titular: <b>{{ tournament.organizer.headline }}</b></p>
-					<p style="margin: 0">Total: <b>{{ r.pay }} €</b></p>
+					<p style="margin: 0">Total: <b>{{ t.pay }} €</b></p>
 				</div>
 			</div>
 		</div>
@@ -199,7 +199,8 @@ p {font-size: 1.3em;}
 				prices: [],
 				pareja1: '',
 				pareja2: '',
-				r: true,
+				t: {},
+				r: '',
 				data: {},
 				tournament: {
 					organizer: {}
@@ -267,9 +268,12 @@ p {font-size: 1.3em;}
 						this.inscription.user_id = response.data.user.id;
 						let price = response.data.tournament.prices;
 						this.data = response.data.user;
-						if (response.data.state) {
-							this.r = response.data.state;
+						if (response.data.state.id) {
+							this.r = false;
+						} else {
+							this.r = true;
 						}
+						this.t = response.data.state;
 						let pareja = response.data.user.parejas;
 						if (this.can('inscription.store2')) {
 							if (pareja[0]) {

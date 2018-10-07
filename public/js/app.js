@@ -82349,7 +82349,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			prices: [],
 			pareja1: '',
 			pareja2: '',
-			r: true,
+			t: {},
+			r: '',
 			data: {},
 			tournament: {
 				organizer: {}
@@ -82423,9 +82424,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 					_this2.inscription.user_id = response.data.user.id;
 					var price = response.data.tournament.prices;
 					_this2.data = response.data.user;
-					if (response.data.state) {
-						_this2.r = response.data.state;
+					if (response.data.state.id) {
+						_this2.r = false;
+					} else {
+						_this2.r = true;
 					}
+					_this2.t = response.data.state;
 					var pareja = response.data.user.parejas;
 					if (_this2.can('inscription.store2')) {
 						if (pareja[0]) {
@@ -82589,7 +82593,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm.can("inscription.store")
-    ? _c("div", { staticClass: "col-md-8" }, [
+    ? _c("div", { staticClass: "row" }, [
         _vm.r === true
           ? _c(
               "form",
@@ -83176,13 +83180,20 @@ var render = function() {
                 )
               ]
             )
-          : _c("div", { staticClass: "col-md-12" }, [
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.r === false
+          ? _c("div", { staticClass: "col-md-12" }, [
               _c("div", { staticClass: "alert alert-success" }, [
-                _c("h3", { staticClass: "text-center" }, [
-                  _vm._v(
-                    "Tu registro a la competición se ha finalizado correctamente.."
-                  )
-                ]),
+                _c(
+                  "h3",
+                  { staticClass: "text-center", staticStyle: { margin: "0" } },
+                  [
+                    _vm._v(
+                      "Tu registro a la competición se ha finalizado correctamente.."
+                    )
+                  ]
+                ),
                 _vm._v(" "),
                 _c("p", [
                   _vm._v(
@@ -83197,7 +83208,7 @@ var render = function() {
                 _c("p", [
                   _c("b", [_vm._v("Estado del pago: ")]),
                   _vm._v(" "),
-                  _vm.r.state_pay == 1
+                  _vm.t.state_pay == 1
                     ? _c("span", [_vm._v("Ya fué aprobado su pago...")])
                     : _c("span", [_vm._v("En espera de aprobación...")])
                 ]),
@@ -83205,7 +83216,7 @@ var render = function() {
                 _c("p", [
                   _c("b", [_vm._v("Estado de Participación: ")]),
                   _vm._v(" "),
-                  _vm.r.state == 1
+                  _vm.t.state == 1
                     ? _c("span", [
                         _vm._v(
                           "Ya fué aprobada su participación en la competencia..."
@@ -83219,7 +83230,7 @@ var render = function() {
                     "div",
                     { staticClass: "col-md-12" },
                     [
-                      _vm._l(_vm.r.prices, function(p) {
+                      _vm._l(_vm.t.prices, function(p) {
                         return [
                           _c(
                             "span",
@@ -83265,7 +83276,7 @@ var render = function() {
                     : _vm._e()
                 ]),
                 _vm._v(" "),
-                _vm.r.method_pay == 1 && !_vm.r.state
+                _vm.t.method_pay == 1 && !_vm.t.state
                   ? _c("div", [
                       _c("p", { staticStyle: { "font-size": "14px" } }, [
                         _vm._v(
@@ -83294,12 +83305,13 @@ var render = function() {
                       _vm._v(" "),
                       _c("p", { staticStyle: { margin: "0" } }, [
                         _vm._v("Total: "),
-                        _c("b", [_vm._v(_vm._s(_vm.r.pay) + " €")])
+                        _c("b", [_vm._v(_vm._s(_vm.t.pay) + " €")])
                       ])
                     ])
                   : _vm._e()
               ])
             ])
+          : _vm._e()
       ])
     : _vm._e()
 }

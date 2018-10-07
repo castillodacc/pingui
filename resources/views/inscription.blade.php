@@ -90,7 +90,9 @@
 								</div>
 							</div>
 							@endif
-							<inscription id="{{ $tournament->id }}"></inscription>
+							<div class="col-md-8">
+								<inscription id="{{ $tournament->id }}"></inscription>
+							</div>
 						</div>
 						@else
 						<div class="">
