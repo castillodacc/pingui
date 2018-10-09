@@ -111,7 +111,7 @@
 							<a href="#">
 								<div class="shop-item">
 									<div class="shop-item-image" style="cursor: pointer;    max-height: 321px;" onclick="location.href= '{{ route('publication.show', $t->slug) }}'">
-										<img width="262" height="328" src="#" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="" srcset="{{ asset('storage/' . $t->image) }}" sizes="(max-width: 262px) 100vw, 262px" style="min-height: 330px;">	
+										<img width="262" height="328" src="{{ asset('storage/' . $t->image) }}" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="" srcset="{{ asset('storage/' . $t->image) }}" sizes="(max-width: 262px) 100vw, 262px" style="min-height: 330px;">	
 										<div class="shop-item-detail">
 											<p class="product woocommerce add_to_cart_inline " style="border:4px solid #ccc; padding: 12px;">
 												<a href="{{ route('publication.show', $t->slug) }}">
@@ -124,7 +124,7 @@
 										<a href="{{ route('publication.show', $t->slug) }}">{{ $t->name }}</a>
 									</h4>
 									<div class="product-rating-home">
-										<div class="star-rating">Fecga: {{ \Carbon::parse($t->start)->format('d/m/Y') }}.
+										<div class="star-rating">Fecha: {{ \Carbon::parse($t->start)->format('d/m/Y') }}.
 										</div>
 									</div>
 									<span class="onsale">Inscripción: <b>{{ ($t->inscription) ? 'Abierta' : 'Cerrada' }}</b>.</span><br>

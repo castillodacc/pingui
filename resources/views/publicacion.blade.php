@@ -145,7 +145,7 @@
 								@endif
 							</div>
 							<div class="row">
-								@if(\Auth::check())
+								@if(\Auth::check() && $tournament->inscriptions->where('user_id', \Auth::user()->id)->count() == 0)
 								<div class="col-md-12">
 									<div class="alert alert-info" role="alert">
 										<span class="text-warning">
