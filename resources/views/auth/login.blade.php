@@ -17,7 +17,7 @@
 
                     <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
                         <label for="email" class="control-label">Correo:</label>
-                        <input id="email" type="email" class="form-control" name="email"  placeholder="Email" value="{{ old('email') }}" required autofocus>
+                        <input id="email" type="email" class="form-control" name="email"  placeholder="Email" value="{{ (env('APP_ENV') == 'local') ? 'root@pingui.es' : old('email') }}" required autofocus>
                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                         @if ($errors->has('email'))
                         <span class="help-block">
@@ -28,7 +28,7 @@
 
                     <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }} has-feedback">
                         <label for="password" class="control-label">Contraseña:</label>
-                        <input id="password" type="password" class="form-control" name="password"  placeholder="Contraseña" value="" required>
+                        <input id="password" type="password" class="form-control" name="password"  placeholder="Contraseña" value="{{ (env('APP_ENV') == 'local') ? 'secret' : '' }}" required>
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                         @if ($errors->has('password'))
                         <span class="help-block">

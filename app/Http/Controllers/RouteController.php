@@ -102,7 +102,7 @@ class RouteController extends Controller
     {
         $tournament = Tournament::where('slug', '=', $slug)->first();
         if ($tournament == null) return redirect('/');
-        return view('inscription', compact('tournament', ''));
+        return view('inscription', compact('tournament'));
     }
 
     public function confirm($slug)

@@ -393,7 +393,9 @@ p {font-size: 1.3em;}
 				var card = elements.create('card', {style: style});
 
 				// Add an instance of the card Element into the `card-element` <div>.
-				card.mount('#card-element');
+				setTimeout(() => {
+					card.mount('#card-element');
+				}, 1000);
 
 				// Handle real-time validation errors from the card Element.
 				card.addEventListener('change', function(event) {
