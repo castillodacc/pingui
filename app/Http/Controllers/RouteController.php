@@ -86,8 +86,8 @@ class RouteController extends Controller
 
     public function front()
     {
-        $tournament2 = \App\Models\Tournament::take(10)->orderBy('id', 'desc')->get();
-        $tournament = Tournament::orderBy('id', 'desc')->paginate(10);
+        $tournament2 = Tournament::take(10)->orderBy('id', 'DESC')->where('inscription', 1)->get();
+        $tournament = Tournament::orderBy('inscription', 'DESC')->orderBy('id', 'DESC')->paginate(10);
         return view('frontend', compact('tournament', 'tournament2'));
     }
 

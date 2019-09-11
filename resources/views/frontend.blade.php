@@ -106,11 +106,49 @@
 			<section id="competitions" class="module-small" style="min-height: 100vh">
 				<div class="container">
 					<div class="row multi-columns-row">
+						<?php $n = 1; ?>
 						@foreach($tournament as $t)
+						@if($n == 2)
+						<?php $n = 3; ?>
 						<div class="col-sm-6 col-md-3 col-lg-3">
 							<a href="#">
 								<div class="shop-item">
-									<div class="shop-item-image" style="cursor: pointer;    max-height: 321px;" onclick="location.href= '{{ route('publication.show', $t->slug) }}'">
+									<div class="shop-item-image" style="cursor: pointer;max-height: 321px;" onclick="location.href= '{{ route('publication.show', $t->slug) }}'">
+										<img width="262" height="328" src="{{ asset('storage/' . $t->image) }}" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="" srcset="{{ asset('storage/' . $t->image) }}" sizes="(max-width: 262px) 100vw, 262px" style="min-height: 330px;">	
+										<div class="shop-item-detail">
+											<p class="product woocommerce add_to_cart_inline " style="border:4px solid #ccc; padding: 12px;">
+												<a href="{{ route('publication.show', $t->slug) }}">
+													<b style="font-size: 1.5em">Ver Detalles</b>
+												</a>
+											</p>
+										</div>
+									</div>
+									<h4 class="shop-item-title font-alt">
+										<a href="{{ route('publication.show', $t->slug) }}">{{ $t->name }}</a>
+									</h4>
+									<div class="product-rating-home">
+										<div class="star-rating">Fecha: {{ \Carbon::parse($t->start)->format('d/m/Y') }}.
+										</div>
+									</div>
+									<span class="onsale">Inscripción: <b>{{ ($t->inscription) ? 'Abierta' : 'Cerrada' }}</b>.</span><br>
+								</div>
+							</a>
+						</div>
+						@else
+						<?php $n++; ?>
+						@endif
+						@endforeach
+						<?php $n = 1; ?>
+						@foreach($tournament as $t)
+						@if($n == 2)
+						<?php $n++; continue; ?>
+						@else
+						<?php $n++; ?>
+						@endif
+						<div class="col-sm-6 col-md-3 col-lg-3">
+							<a href="#">
+								<div class="shop-item">
+									<div class="shop-item-image" style="cursor: pointer;max-height: 321px;" onclick="location.href= '{{ route('publication.show', $t->slug) }}'">
 										<img width="262" height="328" src="{{ asset('storage/' . $t->image) }}" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="" srcset="{{ asset('storage/' . $t->image) }}" sizes="(max-width: 262px) 100vw, 262px" style="min-height: 330px;">	
 										<div class="shop-item-detail">
 											<p class="product woocommerce add_to_cart_inline " style="border:4px solid #ccc; padding: 12px;">

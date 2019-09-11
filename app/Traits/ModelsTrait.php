@@ -109,7 +109,7 @@ trait ModelsTrait
 	public static function dataForPaginate($select = ['*'], $changes = null, $options = [])
 	{
 		$order = ($select[0] == '*') ? 'id' : $select[0];
-		$data = Self::orderBy(request()->order?:$order, request()->dir?:'ASC')
+		$data = Self::orderBy(request()->order?:$order, request()->dir?:'DESC')
 		->search(request()->search)
 		->select($select)
 		->paginate(request()->num?:10);
