@@ -609,7 +609,7 @@
           for(let i in this.hijos) {
             category = this.searchCat(this.p_category, this.hijos[i]);
 
-            this.prices.push({
+            let data = {
               price: this.price,
               category_id: this.p_category,
               level_id: category.category_id,
@@ -617,7 +617,19 @@
               category_text: this.cate(this.p_category),
               level_text: this.hijos[i].split(' - ')[0],
               subcategory_text: this.hijos[i].split(' - ')[1],
-            });
+            };
+
+            let test = 1;
+            for(let o in this.prices) {
+              if (data['category_id'] == this.prices[o]['category_id'] &&
+                data['subcategory_id'] == this.prices[o]['subcategory_id']) {
+                this.prices[o].price = data['price'];
+                test = 0;
+              }
+            }
+            if (test) {
+              this.prices.push(data);
+            }
           }
           this.price = '';
           this.p_category = '';

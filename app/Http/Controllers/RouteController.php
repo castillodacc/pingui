@@ -11,14 +11,19 @@ class RouteController extends Controller
 {
 
     public function __construct() {
-        $this->middleware('auth')->except(['front', 'publication', 'confirm', 'contact', 'dataForTemplate', 'list']);
+        $this->middleware('auth')->only([
+            'index',
+            'canPermission',
+            'inscription',
+            'data',
+        ]);
     }
 
     /**
      * Vista principal que renderizara vuejs
      * @return view
      */
-    function index()
+    public function index()
     {
     	return view('index');
     }
@@ -88,7 +93,16 @@ class RouteController extends Controller
     {
         $tournament2 = Tournament::take(10)->orderBy('id', 'DESC')->where('inscription', 1)->get();
         $tournament = Tournament::orderBy('inscription', 'DESC')->orderBy('id', 'DESC')->paginate(10);
-        return view('frontend', compact('tournament', 'tournament2'));
+        $all = $tournament->all();
+        $data = [];
+        if (isset($all[1]) && $all[1]->inscription == 1) {
+            foreach ($all as $key => $value) {
+                $data[] = $value;
+            }
+        } else {
+            $data = $all;
+        }
+        return view('frontend', compact('tournament', 'tournament2', 'data'));
     }
 
     public function publication($slug)
@@ -162,7 +176,7 @@ class RouteController extends Controller
         return view('contact');
     }
 
-    public function contact_save(Request $request)
+    public function contactSave(Request $request)
     {
         $request->validate([
             'name' => 'required|string',

@@ -29,8 +29,8 @@ class Tournament extends Model
         'hours',
         'maps',
         'info',
-        'price',
-        'entrance_price',
+        // 'price',
+        // 'entrance_price',
         'record_id',
     ];
 

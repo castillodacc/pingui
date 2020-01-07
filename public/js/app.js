@@ -80241,7 +80241,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         for (var i in this.hijos) {
           category = this.searchCat(this.p_category, this.hijos[i]);
 
-          this.prices.push({
+          var data = {
             price: this.price,
             category_id: this.p_category,
             level_id: category.category_id,
@@ -80249,7 +80249,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             category_text: this.cate(this.p_category),
             level_text: this.hijos[i].split(' - ')[0],
             subcategory_text: this.hijos[i].split(' - ')[1]
-          });
+          };
+
+          var test = 1;
+          for (var o in this.prices) {
+            if (data['category_id'] == this.prices[o]['category_id'] && data['subcategory_id'] == this.prices[o]['subcategory_id']) {
+              this.prices[o].price = data['price'];
+              test = 0;
+            }
+          }
+          if (test) {
+            this.prices.push(data);
+          }
         }
         this.price = '';
         this.p_category = '';

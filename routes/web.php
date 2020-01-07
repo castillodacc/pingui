@@ -15,7 +15,7 @@ Route::get('/', 'RouteController@front');
 Route::get('competicion/{slug}', 'RouteController@publication')->name('publication.show');
 Route::get('confirm/{slug}', 'RouteController@confirm');
 Route::get('contacto', 'RouteController@contact');
-Route::post('contact-save', 'RouteController@contact_save');
+Route::post('contact-save', 'RouteController@contactSave');
 Route::get('competicion/{slug}/inscribir', 'RouteController@inscription')->name('publication.inscription');
 
 Route::group(['middleware' => 'auth'], function () {
