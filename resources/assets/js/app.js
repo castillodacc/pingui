@@ -73,6 +73,7 @@ Vue.mixin({
 
 Vue.component('spinner', require('./components/partials/spinner.vue'));
 Vue.component('inscription', require('./components/forms/form-inscription.vue'));
+Vue.component('inscription-online', require('./components/forms/form-inscription-online.vue'));
 Vue.component('contact', require('./components/forms/form-contact.vue'));
 
 const app = new Vue({

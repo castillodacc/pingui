@@ -72,8 +72,9 @@
 							<h1 class="hidden-xs hidden-sm">{{ $tournament->name }}</h1>
 							<hr>
 						</div>
-						@if(\Auth::check())
+						@if(\Auth::check() || $tournament->type_id == 2)
 						<div class="">
+							@if($tournament->type_id == 1)
 							<div class="col-md-8">
 								<div class="alert alert-info" role="alert">
 									<span class="text-warning">
@@ -81,6 +82,7 @@
 									</span>
 								</div>
 							</div>
+							@endif
 							@if(isset($cancel))
 							<div class="col-md-8">
 								<div class="alert alert-danger" role="alert">
@@ -91,14 +93,22 @@
 							</div>
 							@endif
 							<div class="col-md-8">
+								@if($tournament->type_id == 1)
 								<inscription id="{{ $tournament->id }}"></inscription>
+								@else
+								<inscription-online id="{{ $tournament->id }}"></inscription-online>
+								@endif
 							</div>
 						</div>
 						@else
 						<div class="">
 							<div class="alert alert-info" role="alert">
 								<span class="text-warning">
-									<b><a href="/login" class="btn btn-danger">Inicia Sesion Para Registrarte</a></b>
+									<b>
+										<a href="/login" class="btn btn-danger">
+											Inicia Sesion Para Registrarte
+										</a>
+									</b>
 								</span>
 							</div>
 						</div>

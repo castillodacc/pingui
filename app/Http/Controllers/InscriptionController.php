@@ -103,7 +103,8 @@ class InscriptionController extends Controller
             }
         }
 
-        \Mail::to($inscription->user->email)->send(new \App\Mail\Inscription($inscription));
+        \Mail::to($inscription->user->email)
+        ->send(new \App\Mail\Inscription($inscription));
     }
 
     /**
@@ -119,8 +120,9 @@ class InscriptionController extends Controller
         $data->usuario = $data->name_1 . ' ' . $data->last_name_1;
         $data->pareja = $data->name_2 . ' ' . $data->last_name_2;
         $data->user;
+        $data->type_id = $data->tournament->type_id;
         $prices = $data->prices->pluck('id');
-        unset($data->prices);
+        unset($data->prices, $data->tournament);
         $data->prices = $prices;
         return response()->json($data);
     }
@@ -200,7 +202,6 @@ class InscriptionController extends Controller
     {
         $price = Price::where('tournament_id', $request->id)->get();
         $price->each(function ($p) {
-            ;
             if ($p->category_id == 1) {
                 $p->name = $p->subHelp()->name;
             } elseif ($p->category_id == 2) {
@@ -210,5 +211,106 @@ class InscriptionController extends Controller
             }
         });
         return compact('price');
+    }
+
+    /**
+     * Store a newly created resource in storage for on line.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function online(Request $request)
+    {
+        $data = $this->validate($request, [
+            'pay' => 'required|numeric',
+            'name' => 'required|string',
+            'club' => 'required|string',
+            'phone' => 'required',
+            'email' => 'required|email',
+            'coach' => 'nullable|string',
+            'price' => 'nullable|array',
+            'sex_id' => 'required|numeric',
+            'country' => 'required|string',
+            'last_name' => 'required|string',
+            'birthdate' => 'required|date',
+            'method_pay' => 'required|numeric',
+            'category_id' => 'required|numeric',
+            'name_couple' => 'nullable|string',
+            'tournament_id' => 'required|numeric',
+            'last_name_couple' => 'nullable|string',
+        ],[],[
+            'pay' => 'pago',
+            'name' => 'nombre',
+            'club' => 'club',
+            'phone' => 'telefono',
+            'email' => 'correo',
+            'coach' => 'entrenador',
+            'price' => 'precio',
+            'sex_id' => 'sexo',
+            'country' => 'pais',
+            'last_name' => 'apellido',
+            'birthdate' => 'fecha',
+            'method_pay' => 'metodo de pago',
+            'category_id' => 'categoria',
+            'name_couple' => 'nombre',
+            'tournament_id' => 'torneo',
+            'last_name_couple' => 'apellido',
+        ]);
+
+        $data_save = [
+            'febd_num_1' => null,
+            'febd_num_2' => null,
+            'last_name_1' => $data['last_name'],
+            'last_name_2' => optional($data)['last_name_couple'],
+            'name_1' => $data['name'],
+            'name_2' => optional($data)['name_couple'],
+            // 'price' => $data['price'],
+            'tournament_id' => $data['tournament_id'],
+            'method_pay' => $data['method_pay'],
+            'pay' => $data['pay'],
+        ];
+        $inscription = Inscription::create($data_save);
+
+        $data_save2 = [
+            'club' => $data['club'],
+            'phone' => $data['phone'],
+            'email' => $data['email'],
+            'coach' => $data['coach'],
+            'sex_id' => optional($data)['sex_id'],
+            'country' => $data['country'],
+            'birthdate' => $data['birthdate'],
+            'category_id' => $data['category_id'],
+            'inscription_id' => $inscription->id,
+        ];
+        \App\Models\InscriptionOnline::create($data_save2);
+
+        $inscription->prices()->attach(array_unique($data['price']));
+
+        if ($inscription->method_pay == 2) {
+            $inscription->delete();
+            $paypal = new Paypal($inscription);
+            $payment = $paypal->generate();
+            return $payment->getApprovalLink();
+        }
+
+        if ($inscription->method_pay == 3) {
+            $inscription->delete();
+            \Stripe\Stripe::setApiKey($inscription->tournament->organizer->t_secret_key);
+            $charge = \Stripe\Charge::create([
+                'amount' => $request->pay . '00',
+                'currency' => env('CURRENCY'),
+                'description' => 'Pago de Competición a PINGUI:'  . $inscription->tournament->name,
+                'source' => $request->stripeToken
+            ]);
+            if ($charge['status'] == 'succeeded') {
+                $inscription->restore();
+                $inscription->update(['state_pay' => true]);
+            }
+        }
+
+        \Mail::to($data['email'])
+        ->send(new \App\Mail\Inscription($inscription));
+
+        $request->session()->put('register_inscription', $inscription->id);
     }
 }

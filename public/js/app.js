@@ -16135,157 +16135,6 @@ return jQuery;
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(211)
-/* template */
-var __vue_template__ = __webpack_require__(212)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/partials/modal.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5f7fe347", Component.options)
-  } else {
-    hotAPI.reload("data-v-5f7fe347", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-var utils = __webpack_require__(2);
-var normalizeHeaderName = __webpack_require__(161);
-
-var DEFAULT_CONTENT_TYPE = {
-  'Content-Type': 'application/x-www-form-urlencoded'
-};
-
-function setContentTypeIfUnset(headers, value) {
-  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
-    headers['Content-Type'] = value;
-  }
-}
-
-function getDefaultAdapter() {
-  var adapter;
-  if (typeof XMLHttpRequest !== 'undefined') {
-    // For browsers use XHR adapter
-    adapter = __webpack_require__(145);
-  } else if (typeof process !== 'undefined') {
-    // For node use HTTP adapter
-    adapter = __webpack_require__(145);
-  }
-  return adapter;
-}
-
-var defaults = {
-  adapter: getDefaultAdapter(),
-
-  transformRequest: [function transformRequest(data, headers) {
-    normalizeHeaderName(headers, 'Content-Type');
-    if (utils.isFormData(data) ||
-      utils.isArrayBuffer(data) ||
-      utils.isBuffer(data) ||
-      utils.isStream(data) ||
-      utils.isFile(data) ||
-      utils.isBlob(data)
-    ) {
-      return data;
-    }
-    if (utils.isArrayBufferView(data)) {
-      return data.buffer;
-    }
-    if (utils.isURLSearchParams(data)) {
-      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
-      return data.toString();
-    }
-    if (utils.isObject(data)) {
-      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
-      return JSON.stringify(data);
-    }
-    return data;
-  }],
-
-  transformResponse: [function transformResponse(data) {
-    /*eslint no-param-reassign:0*/
-    if (typeof data === 'string') {
-      try {
-        data = JSON.parse(data);
-      } catch (e) { /* Ignore */ }
-    }
-    return data;
-  }],
-
-  /**
-   * A timeout in milliseconds to abort a request. If set to 0 (default) a
-   * timeout is not created.
-   */
-  timeout: 0,
-
-  xsrfCookieName: 'XSRF-TOKEN',
-  xsrfHeaderName: 'X-XSRF-TOKEN',
-
-  maxContentLength: -1,
-
-  validateStatus: function validateStatus(status) {
-    return status >= 200 && status < 300;
-  }
-};
-
-defaults.headers = {
-  common: {
-    'Accept': 'application/json, text/plain, */*'
-  }
-};
-
-utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
-  defaults.headers[method] = {};
-});
-
-utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
-});
-
-module.exports = defaults;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(144)))
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(true)
 		module.exports = factory(__webpack_require__(0), __webpack_require__(8), __webpack_require__(185));
@@ -16699,7 +16548,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__3__;
 });
 
 /***/ }),
-/* 12 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
@@ -16728,6 +16577,157 @@ if(false) {
 	// When the module is disposed, remove the <style> tags
 	module.hot.dispose(function() { update(); });
 }
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(211)
+/* template */
+var __vue_template__ = __webpack_require__(212)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/partials/modal.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5f7fe347", Component.options)
+  } else {
+    hotAPI.reload("data-v-5f7fe347", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var utils = __webpack_require__(2);
+var normalizeHeaderName = __webpack_require__(161);
+
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+};
+
+function setContentTypeIfUnset(headers, value) {
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
+}
+
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(145);
+  } else if (typeof process !== 'undefined') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(145);
+  }
+  return adapter;
+}
+
+var defaults = {
+  adapter: getDefaultAdapter(),
+
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Content-Type');
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data)) {
+      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      return JSON.stringify(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    /*eslint no-param-reassign:0*/
+    if (typeof data === 'string') {
+      try {
+        data = JSON.parse(data);
+      } catch (e) { /* Ignore */ }
+    }
+    return data;
+  }],
+
+  /**
+   * A timeout in milliseconds to abort a request. If set to 0 (default) a
+   * timeout is not created.
+   */
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  }
+};
+
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
+  }
+};
+
+utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+
+module.exports = defaults;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(144)))
 
 /***/ }),
 /* 13 */
@@ -49415,7 +49415,7 @@ if (inBrowser && window.Vue) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(151);
-module.exports = __webpack_require__(294);
+module.exports = __webpack_require__(299);
 
 
 /***/ }),
@@ -49507,7 +49507,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.mixin({
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('spinner', __webpack_require__(283));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('inscription', __webpack_require__(286));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('contact', __webpack_require__(291));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('inscription-online', __webpack_require__(291));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('contact', __webpack_require__(296));
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 	router: __WEBPACK_IMPORTED_MODULE_2__router__["a" /* default */],
@@ -53037,7 +53038,7 @@ module.exports = __webpack_require__(158);
 var utils = __webpack_require__(2);
 var bind = __webpack_require__(143);
 var Axios = __webpack_require__(160);
-var defaults = __webpack_require__(10);
+var defaults = __webpack_require__(12);
 
 /**
  * Create an instance of Axios
@@ -53110,7 +53111,7 @@ module.exports = function isBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(10);
+var defaults = __webpack_require__(12);
 var utils = __webpack_require__(2);
 var InterceptorManager = __webpack_require__(168);
 var dispatchRequest = __webpack_require__(169);
@@ -53606,7 +53607,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(2);
 var transformData = __webpack_require__(170);
 var isCancel = __webpack_require__(147);
-var defaults = __webpack_require__(10);
+var defaults = __webpack_require__(12);
 var isAbsoluteURL = __webpack_require__(171);
 var combineURLs = __webpack_require__(172);
 
@@ -66420,9 +66421,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_bootstrap_datetimepicker__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_bootstrap_datetimepicker__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_bootstrap_datetimepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_bootstrap_datetimepicker__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_eonasdan_bootstrap_datetimepicker_build_css_bootstrap_datetimepicker_css__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_eonasdan_bootstrap_datetimepicker_build_css_bootstrap_datetimepicker_css__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_eonasdan_bootstrap_datetimepicker_build_css_bootstrap_datetimepicker_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_eonasdan_bootstrap_datetimepicker_build_css_bootstrap_datetimepicker_css__);
 //
 //
@@ -73544,7 +73545,7 @@ exports.push([module.i, "\nselect.form-control {\r\n  width: 100% !important;\n}
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_modal_vue__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_modal_vue__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_modal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__partials_modal_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__partials_input_vue__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__partials_input_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__partials_input_vue__);
@@ -74597,15 +74598,15 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_modal_vue__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_modal_vue__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_modal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__partials_modal_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__partials_input_vue__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__partials_input_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__partials_input_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_bootstrap_datetimepicker__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_bootstrap_datetimepicker__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_bootstrap_datetimepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_bootstrap_datetimepicker__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__partials_input_checkbox_permissions_vue__ = __webpack_require__(221);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__partials_input_checkbox_permissions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__partials_input_checkbox_permissions_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_eonasdan_bootstrap_datetimepicker_build_css_bootstrap_datetimepicker_css__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_eonasdan_bootstrap_datetimepicker_build_css_bootstrap_datetimepicker_css__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_eonasdan_bootstrap_datetimepicker_build_css_bootstrap_datetimepicker_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_eonasdan_bootstrap_datetimepicker_build_css_bootstrap_datetimepicker_css__);
 //
 //
@@ -75562,7 +75563,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_modal_vue__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_modal_vue__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_modal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__partials_modal_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__partials_input_vue__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__partials_input_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__partials_input_vue__);
@@ -79616,10 +79617,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_input_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__partials_input_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_multiselect__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_multiselect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_multiselect__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_bootstrap_datetimepicker__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_bootstrap_datetimepicker__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_bootstrap_datetimepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_bootstrap_datetimepicker__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_eonasdan_bootstrap_datetimepicker_build_css_bootstrap_datetimepicker_css__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_eonasdan_bootstrap_datetimepicker_build_css_bootstrap_datetimepicker_css__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_eonasdan_bootstrap_datetimepicker_build_css_bootstrap_datetimepicker_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_eonasdan_bootstrap_datetimepicker_build_css_bootstrap_datetimepicker_css__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -80009,7 +80023,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       ico: '',
       data: {
         inscription: false,
-        organizer_id: ''
+        organizer_id: '',
+        type_id: ''
       },
       entries: {
         0: [{ label: 'Titulo', id: 'name', icon: 'edit' }, { label: 'Detalles', id: 'description', icon: 'edit' }, { label: 'Resultados', id: 'results', icon: 'edit' }, { label: 'Ruta al Mapa', id: 'maps', icon: 'edit' }]
@@ -80019,7 +80034,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         description: 'Detalles generales.',
         start: 'Fecha a comenzar el evento.',
         end: 'Fecha a terminar el evento.',
-        organizador: 'Organizador de la competición.',
+        organizer_id: 'Organizador de la competición.',
         price: 'precio para bailarines.',
         p_category: 'Categorias de baile.',
         entrance_price: 'precios de entradas.',
@@ -80383,8 +80398,80 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-6" }, [
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _c("date-picker", {
+                        attrs: {
+                          id: "start",
+                          config: {
+                            format: "DD/MM/YYYY",
+                            useCurrent: true,
+                            showClear: true,
+                            showClose: true
+                          }
+                        },
+                        model: {
+                          value: _vm.data.start,
+                          callback: function($$v) {
+                            _vm.$set(_vm.data, "start", $$v)
+                          },
+                          expression: "data.start"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("small", {
+                        staticClass: "form-text text-muted",
+                        attrs: { id: "startHelp" },
+                        domProps: { textContent: _vm._s(_vm.msg.start) }
+                      })
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c("date-picker", {
+                        attrs: {
+                          id: "end",
+                          config: {
+                            format: "DD/MM/YYYY",
+                            useCurrent: true,
+                            showClear: true,
+                            showClose: true
+                          }
+                        },
+                        model: {
+                          value: _vm.data.end,
+                          callback: function($$v) {
+                            _vm.$set(_vm.data, "end", $$v)
+                          },
+                          expression: "data.end"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("small", {
+                        staticClass: "form-text text-muted",
+                        attrs: { id: "endHelp" },
+                        domProps: { textContent: _vm._s(_vm.msg.end) }
+                      })
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _vm._m(0),
+                    _vm._m(2),
                     _vm._v(" "),
                     _c(
                       "select",
@@ -80535,80 +80622,68 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-6" }, [
-                  _c(
-                    "div",
-                    { staticClass: "form-group" },
-                    [
-                      _vm._m(1),
-                      _vm._v(" "),
-                      _c("date-picker", {
-                        attrs: {
-                          id: "start",
-                          config: {
-                            format: "DD/MM/YYYY",
-                            useCurrent: true,
-                            showClear: true,
-                            showClose: true
+                  _c("div", { staticClass: "form-group" }, [
+                    _vm._m(3),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.data.type_id,
+                            expression: "data.type_id"
                           }
-                        },
-                        model: {
-                          value: _vm.data.start,
-                          callback: function($$v) {
-                            _vm.$set(_vm.data, "start", $$v)
-                          },
-                          expression: "data.start"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("small", {
-                        staticClass: "form-text text-muted",
-                        attrs: { id: "startHelp" },
-                        domProps: { textContent: _vm._s(_vm.msg.start) }
-                      })
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c(
-                    "div",
-                    { staticClass: "form-group" },
-                    [
-                      _vm._m(2),
-                      _vm._v(" "),
-                      _c("date-picker", {
-                        attrs: {
-                          id: "end",
-                          config: {
-                            format: "DD/MM/YYYY",
-                            useCurrent: true,
-                            showClear: true,
-                            showClose: true
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "type_id" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.data,
+                              "type_id",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
                           }
-                        },
-                        model: {
-                          value: _vm.data.end,
-                          callback: function($$v) {
-                            _vm.$set(_vm.data, "end", $$v)
-                          },
-                          expression: "data.end"
                         }
-                      }),
-                      _vm._v(" "),
-                      _c("small", {
-                        staticClass: "form-text text-muted",
-                        attrs: { id: "endHelp" },
-                        domProps: { textContent: _vm._s(_vm.msg.end) }
-                      })
-                    ],
-                    1
-                  )
+                      },
+                      [
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Seleccione")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "1" } }, [
+                          _vm._v("Normal")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "2" } }, [
+                          _vm._v("On-Line")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("small", {
+                      staticClass: "form-text text-muted",
+                      attrs: { id: "type_idHelp" },
+                      domProps: { textContent: _vm._s(_vm.msg.type_id) }
+                    })
+                  ])
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-6" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _vm._m(3),
+                    _vm._m(4),
                     _vm._v(" "),
                     _c("input", {
                       attrs: { id: "image", type: "file", accept: "image/*" },
@@ -80625,7 +80700,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-6" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _vm._m(4),
+                    _vm._m(5),
                     _vm._v(" "),
                     _c("div", { staticClass: "input-group" }, [
                       _c("input", {
@@ -80706,7 +80781,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-6" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _vm._m(5),
+                    _vm._m(6),
                     _vm._v(" "),
                     _c("input", {
                       attrs: {
@@ -80730,7 +80805,7 @@ var render = function() {
                     "div",
                     { staticClass: "form-group" },
                     [
-                      _vm._m(6),
+                      _vm._m(7),
                       _vm._v(" "),
                       _c("rs-multiselect", {
                         attrs: {
@@ -80762,7 +80837,7 @@ var render = function() {
                   _c("div", { staticClass: "row" }, [
                     _c("div", { staticClass: "col-md-6" }, [
                       _c("div", { staticClass: "form-group" }, [
-                        _vm._m(7),
+                        _vm._m(8),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -80796,7 +80871,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-5" }, [
                       _c("div", { staticClass: "form-group" }, [
-                        _vm._m(8),
+                        _vm._m(9),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -80878,7 +80953,7 @@ var render = function() {
                   _c("div", { staticClass: "row" }, [
                     _c("div", { staticClass: "col-md-2" }, [
                       _c("div", { staticClass: "form-group" }, [
-                        _vm._m(9),
+                        _vm._m(10),
                         _vm._v(" "),
                         _c(
                           "select",
@@ -80934,7 +81009,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("small", {
                           staticClass: "form-text text-muted",
-                          attrs: { id: "type_idHelp" },
+                          attrs: { id: "" },
                           domProps: { textContent: _vm._s(_vm.msg.type_id) }
                         })
                       ])
@@ -80942,7 +81017,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-4" }, [
                       _c("div", { staticClass: "form-group" }, [
-                        _vm._m(10),
+                        _vm._m(11),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -80972,7 +81047,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("small", {
                           staticClass: "form-text text-muted",
-                          attrs: { id: "nameHelp" },
+                          attrs: { id: "" },
                           domProps: { textContent: _vm._s(_vm.msg.name_) }
                         })
                       ])
@@ -80981,7 +81056,7 @@ var render = function() {
                     _vm.more_info_.type_id == 1
                       ? _c("div", { staticClass: "col-md-4" }, [
                           _c("div", { staticClass: "form-group" }, [
-                            _vm._m(11),
+                            _vm._m(12),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -81021,7 +81096,7 @@ var render = function() {
                     _vm.more_info_.type_id > 1
                       ? _c("div", { staticClass: "col-md-4" }, [
                           _c("div", { staticClass: "form-group" }, [
-                            _vm._m(12),
+                            _vm._m(13),
                             _vm._v(" "),
                             _c("input", {
                               staticClass: "form-control",
@@ -81139,7 +81214,7 @@ var render = function() {
                   _c("div", { staticClass: "row" }, [
                     _c("div", { staticClass: "col-md-3" }, [
                       _c("div", { staticClass: "form-group" }, [
-                        _vm._m(13),
+                        _vm._m(14),
                         _vm._v(" "),
                         _c(
                           "select",
@@ -81203,7 +81278,7 @@ var render = function() {
                             "div",
                             { staticClass: "form-group" },
                             [
-                              _vm._m(14),
+                              _vm._m(15),
                               _vm._v(" "),
                               _c("rs-multiselect", {
                                 attrs: {
@@ -81242,7 +81317,7 @@ var render = function() {
                             "div",
                             { staticClass: "form-group" },
                             [
-                              _vm._m(15),
+                              _vm._m(16),
                               _vm._v(" "),
                               _c("rs-multiselect", {
                                 attrs: {
@@ -81281,7 +81356,7 @@ var render = function() {
                             "div",
                             { staticClass: "form-group" },
                             [
-                              _vm._m(16),
+                              _vm._m(17),
                               _vm._v(" "),
                               _c("rs-multiselect", {
                                 attrs: {
@@ -81314,7 +81389,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-2" }, [
                       _c("div", { staticClass: "form-group" }, [
-                        _vm._m(17),
+                        _vm._m(18),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -81359,7 +81434,7 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _vm._m(18)
+                    _vm._m(19)
                   ])
                 ])
               ],
@@ -81386,7 +81461,7 @@ var render = function() {
                           "table",
                           { staticClass: "table table-condensed table-hover" },
                           [
-                            _vm._m(19),
+                            _vm._m(20),
                             _vm._v(" "),
                             _c(
                               "tbody",
@@ -81453,7 +81528,7 @@ var render = function() {
                           "table",
                           { staticClass: "table table-condensed table-hover" },
                           [
-                            _vm._m(20),
+                            _vm._m(21),
                             _vm._v(" "),
                             _c(
                               "tbody",
@@ -81524,7 +81599,7 @@ var render = function() {
                           "table",
                           { staticClass: "table table-condensed table-hover" },
                           [
-                            _vm._m(21),
+                            _vm._m(22),
                             _vm._v(" "),
                             _c(
                               "tbody",
@@ -81593,19 +81668,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "label",
-      { staticClass: "control-label", attrs: { for: "organizer_id" } },
-      [
-        _c("span", { staticClass: "edit" }),
-        _vm._v(" Organizador:\n              ")
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
       { staticClass: "control-label", attrs: { for: "start" } },
       [
         _c("span", { staticClass: "edit" }),
@@ -81623,6 +81685,32 @@ var staticRenderFns = [
       [
         _c("span", { staticClass: "edit" }),
         _vm._v(" Fecha final de competición:\n              ")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "organizer_id" } },
+      [
+        _c("span", { staticClass: "edit" }),
+        _vm._v(" Organizador:\n              ")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "type_id" } },
+      [
+        _c("span", { staticClass: "edit" }),
+        _vm._v(" Tipo de competicion:\n              ")
       ]
     )
   },
@@ -82082,10 +82170,38 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_modal_vue__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_modal_vue__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_modal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__partials_modal_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__partials_input_vue__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__partials_input_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__partials_input_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -82703,105 +82819,237 @@ var render = function() {
                                 [
                                   _c("p", [_vm._v("Standard:")]),
                                   _vm._v(" "),
-                                  _vm._l(_vm.prices, function(p) {
-                                    return p.category_id == 3 &&
-                                      (_vm.formData.data.user.group_s ==
-                                        p.subcategory_id ||
-                                        _vm.formData.data.prices.indexOf(
-                                          p.id
-                                        ) != -1)
-                                      ? _c(
-                                          "div",
-                                          { staticClass: "form-inline" },
-                                          [
-                                            _c(
-                                              "label",
-                                              { attrs: { for: p.id } },
+                                  _vm.formData.data.tipe_id == 1
+                                    ? _vm._l(_vm.prices, function(p) {
+                                        return p.category_id == 3 &&
+                                          (_vm.formData.data.user.group_s ==
+                                            p.subcategory_id ||
+                                            _vm.formData.data.prices.indexOf(
+                                              p.id
+                                            ) != -1)
+                                          ? _c(
+                                              "div",
+                                              { staticClass: "form-inline" },
                                               [
-                                                _c("input", {
-                                                  directives: [
-                                                    {
-                                                      name: "model",
-                                                      rawName: "v-model",
-                                                      value:
-                                                        _vm.formData.data
-                                                          .prices,
-                                                      expression:
-                                                        "formData.data.prices"
-                                                    }
-                                                  ],
-                                                  attrs: {
-                                                    type: "checkbox",
-                                                    id: p.id
-                                                  },
-                                                  domProps: {
-                                                    value: p.id,
-                                                    checked: Array.isArray(
-                                                      _vm.formData.data.prices
-                                                    )
-                                                      ? _vm._i(
-                                                          _vm.formData.data
-                                                            .prices,
-                                                          p.id
-                                                        ) > -1
-                                                      : _vm.formData.data.prices
-                                                  },
-                                                  on: {
-                                                    change: function($event) {
-                                                      var $$a =
-                                                          _vm.formData.data
-                                                            .prices,
-                                                        $$el = $event.target,
-                                                        $$c = $$el.checked
-                                                          ? true
-                                                          : false
-                                                      if (Array.isArray($$a)) {
-                                                        var $$v = p.id,
-                                                          $$i = _vm._i($$a, $$v)
-                                                        if ($$el.checked) {
-                                                          $$i < 0 &&
-                                                            _vm.$set(
-                                                              _vm.formData.data,
-                                                              "prices",
-                                                              $$a.concat([$$v])
-                                                            )
-                                                        } else {
-                                                          $$i > -1 &&
-                                                            _vm.$set(
-                                                              _vm.formData.data,
-                                                              "prices",
-                                                              $$a
-                                                                .slice(0, $$i)
-                                                                .concat(
-                                                                  $$a.slice(
-                                                                    $$i + 1
-                                                                  )
-                                                                )
-                                                            )
+                                                _c(
+                                                  "label",
+                                                  { attrs: { for: p.id } },
+                                                  [
+                                                    _c("input", {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value:
+                                                            _vm.formData.data
+                                                              .prices,
+                                                          expression:
+                                                            "formData.data.prices"
                                                         }
-                                                      } else {
-                                                        _vm.$set(
-                                                          _vm.formData.data,
-                                                          "prices",
-                                                          $$c
+                                                      ],
+                                                      attrs: {
+                                                        type: "checkbox",
+                                                        id: p.id
+                                                      },
+                                                      domProps: {
+                                                        value: p.id,
+                                                        checked: Array.isArray(
+                                                          _vm.formData.data
+                                                            .prices
                                                         )
+                                                          ? _vm._i(
+                                                              _vm.formData.data
+                                                                .prices,
+                                                              p.id
+                                                            ) > -1
+                                                          : _vm.formData.data
+                                                              .prices
+                                                      },
+                                                      on: {
+                                                        change: function(
+                                                          $event
+                                                        ) {
+                                                          var $$a =
+                                                              _vm.formData.data
+                                                                .prices,
+                                                            $$el =
+                                                              $event.target,
+                                                            $$c = $$el.checked
+                                                              ? true
+                                                              : false
+                                                          if (
+                                                            Array.isArray($$a)
+                                                          ) {
+                                                            var $$v = p.id,
+                                                              $$i = _vm._i(
+                                                                $$a,
+                                                                $$v
+                                                              )
+                                                            if ($$el.checked) {
+                                                              $$i < 0 &&
+                                                                _vm.$set(
+                                                                  _vm.formData
+                                                                    .data,
+                                                                  "prices",
+                                                                  $$a.concat([
+                                                                    $$v
+                                                                  ])
+                                                                )
+                                                            } else {
+                                                              $$i > -1 &&
+                                                                _vm.$set(
+                                                                  _vm.formData
+                                                                    .data,
+                                                                  "prices",
+                                                                  $$a
+                                                                    .slice(
+                                                                      0,
+                                                                      $$i
+                                                                    )
+                                                                    .concat(
+                                                                      $$a.slice(
+                                                                        $$i + 1
+                                                                      )
+                                                                    )
+                                                                )
+                                                            }
+                                                          } else {
+                                                            _vm.$set(
+                                                              _vm.formData.data,
+                                                              "prices",
+                                                              $$c
+                                                            )
+                                                          }
+                                                        }
                                                       }
-                                                    }
-                                                  }
-                                                }),
-                                                _vm._v(
-                                                  "\n                        " +
-                                                    _vm._s(p.name) +
-                                                    " - " +
-                                                    _vm._s(p.price) +
-                                                    " €\n                      "
+                                                    }),
+                                                    _vm._v(
+                                                      "\n                          " +
+                                                        _vm._s(p.name) +
+                                                        " - " +
+                                                        _vm._s(p.price) +
+                                                        " €\n                        "
+                                                    )
+                                                  ]
                                                 )
                                               ]
                                             )
-                                          ]
-                                        )
-                                      : _vm._e()
-                                  })
+                                          : _vm._e()
+                                      })
+                                    : _vm._l(_vm.prices, function(p) {
+                                        return p.category_id == 3 &&
+                                          _vm.formData.data.prices.indexOf(
+                                            p.id
+                                          ) != -1
+                                          ? _c(
+                                              "div",
+                                              { staticClass: "form-inline" },
+                                              [
+                                                _c(
+                                                  "label",
+                                                  { attrs: { for: p.id } },
+                                                  [
+                                                    _c("input", {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value:
+                                                            _vm.formData.data
+                                                              .prices,
+                                                          expression:
+                                                            "formData.data.prices"
+                                                        }
+                                                      ],
+                                                      attrs: {
+                                                        type: "checkbox",
+                                                        id: p.id
+                                                      },
+                                                      domProps: {
+                                                        value: p.id,
+                                                        checked: Array.isArray(
+                                                          _vm.formData.data
+                                                            .prices
+                                                        )
+                                                          ? _vm._i(
+                                                              _vm.formData.data
+                                                                .prices,
+                                                              p.id
+                                                            ) > -1
+                                                          : _vm.formData.data
+                                                              .prices
+                                                      },
+                                                      on: {
+                                                        change: function(
+                                                          $event
+                                                        ) {
+                                                          var $$a =
+                                                              _vm.formData.data
+                                                                .prices,
+                                                            $$el =
+                                                              $event.target,
+                                                            $$c = $$el.checked
+                                                              ? true
+                                                              : false
+                                                          if (
+                                                            Array.isArray($$a)
+                                                          ) {
+                                                            var $$v = p.id,
+                                                              $$i = _vm._i(
+                                                                $$a,
+                                                                $$v
+                                                              )
+                                                            if ($$el.checked) {
+                                                              $$i < 0 &&
+                                                                _vm.$set(
+                                                                  _vm.formData
+                                                                    .data,
+                                                                  "prices",
+                                                                  $$a.concat([
+                                                                    $$v
+                                                                  ])
+                                                                )
+                                                            } else {
+                                                              $$i > -1 &&
+                                                                _vm.$set(
+                                                                  _vm.formData
+                                                                    .data,
+                                                                  "prices",
+                                                                  $$a
+                                                                    .slice(
+                                                                      0,
+                                                                      $$i
+                                                                    )
+                                                                    .concat(
+                                                                      $$a.slice(
+                                                                        $$i + 1
+                                                                      )
+                                                                    )
+                                                                )
+                                                            }
+                                                          } else {
+                                                            _vm.$set(
+                                                              _vm.formData.data,
+                                                              "prices",
+                                                              $$c
+                                                            )
+                                                          }
+                                                        }
+                                                      }
+                                                    }),
+                                                    _vm._v(
+                                                      "\n                          " +
+                                                        _vm._s(p.name) +
+                                                        " - " +
+                                                        _vm._s(p.price) +
+                                                        " €\n                        "
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e()
+                                      })
                                 ],
                                 2
                               ),
@@ -82812,105 +83060,237 @@ var render = function() {
                                 [
                                   _c("p", [_vm._v("Latino:")]),
                                   _vm._v(" "),
-                                  _vm._l(_vm.prices, function(p) {
-                                    return p.category_id == 2 &&
-                                      (_vm.formData.data.user.group_l ==
-                                        p.subcategory_id ||
-                                        _vm.formData.data.prices.indexOf(
-                                          p.id
-                                        ) != -1)
-                                      ? _c(
-                                          "div",
-                                          { staticClass: "form-inline" },
-                                          [
-                                            _c(
-                                              "label",
-                                              { attrs: { for: p.id } },
+                                  _vm.formData.data.tipe_id == 1
+                                    ? _vm._l(_vm.prices, function(p) {
+                                        return p.category_id == 2 &&
+                                          (_vm.formData.data.user.group_l ==
+                                            p.subcategory_id ||
+                                            _vm.formData.data.prices.indexOf(
+                                              p.id
+                                            ) != -1)
+                                          ? _c(
+                                              "div",
+                                              { staticClass: "form-inline" },
                                               [
-                                                _c("input", {
-                                                  directives: [
-                                                    {
-                                                      name: "model",
-                                                      rawName: "v-model",
-                                                      value:
-                                                        _vm.formData.data
-                                                          .prices,
-                                                      expression:
-                                                        "formData.data.prices"
-                                                    }
-                                                  ],
-                                                  attrs: {
-                                                    type: "checkbox",
-                                                    id: p.id
-                                                  },
-                                                  domProps: {
-                                                    value: p.id,
-                                                    checked: Array.isArray(
-                                                      _vm.formData.data.prices
-                                                    )
-                                                      ? _vm._i(
-                                                          _vm.formData.data
-                                                            .prices,
-                                                          p.id
-                                                        ) > -1
-                                                      : _vm.formData.data.prices
-                                                  },
-                                                  on: {
-                                                    change: function($event) {
-                                                      var $$a =
-                                                          _vm.formData.data
-                                                            .prices,
-                                                        $$el = $event.target,
-                                                        $$c = $$el.checked
-                                                          ? true
-                                                          : false
-                                                      if (Array.isArray($$a)) {
-                                                        var $$v = p.id,
-                                                          $$i = _vm._i($$a, $$v)
-                                                        if ($$el.checked) {
-                                                          $$i < 0 &&
-                                                            _vm.$set(
-                                                              _vm.formData.data,
-                                                              "prices",
-                                                              $$a.concat([$$v])
-                                                            )
-                                                        } else {
-                                                          $$i > -1 &&
-                                                            _vm.$set(
-                                                              _vm.formData.data,
-                                                              "prices",
-                                                              $$a
-                                                                .slice(0, $$i)
-                                                                .concat(
-                                                                  $$a.slice(
-                                                                    $$i + 1
-                                                                  )
-                                                                )
-                                                            )
+                                                _c(
+                                                  "label",
+                                                  { attrs: { for: p.id } },
+                                                  [
+                                                    _c("input", {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value:
+                                                            _vm.formData.data
+                                                              .prices,
+                                                          expression:
+                                                            "formData.data.prices"
                                                         }
-                                                      } else {
-                                                        _vm.$set(
-                                                          _vm.formData.data,
-                                                          "prices",
-                                                          $$c
+                                                      ],
+                                                      attrs: {
+                                                        type: "checkbox",
+                                                        id: p.id
+                                                      },
+                                                      domProps: {
+                                                        value: p.id,
+                                                        checked: Array.isArray(
+                                                          _vm.formData.data
+                                                            .prices
                                                         )
+                                                          ? _vm._i(
+                                                              _vm.formData.data
+                                                                .prices,
+                                                              p.id
+                                                            ) > -1
+                                                          : _vm.formData.data
+                                                              .prices
+                                                      },
+                                                      on: {
+                                                        change: function(
+                                                          $event
+                                                        ) {
+                                                          var $$a =
+                                                              _vm.formData.data
+                                                                .prices,
+                                                            $$el =
+                                                              $event.target,
+                                                            $$c = $$el.checked
+                                                              ? true
+                                                              : false
+                                                          if (
+                                                            Array.isArray($$a)
+                                                          ) {
+                                                            var $$v = p.id,
+                                                              $$i = _vm._i(
+                                                                $$a,
+                                                                $$v
+                                                              )
+                                                            if ($$el.checked) {
+                                                              $$i < 0 &&
+                                                                _vm.$set(
+                                                                  _vm.formData
+                                                                    .data,
+                                                                  "prices",
+                                                                  $$a.concat([
+                                                                    $$v
+                                                                  ])
+                                                                )
+                                                            } else {
+                                                              $$i > -1 &&
+                                                                _vm.$set(
+                                                                  _vm.formData
+                                                                    .data,
+                                                                  "prices",
+                                                                  $$a
+                                                                    .slice(
+                                                                      0,
+                                                                      $$i
+                                                                    )
+                                                                    .concat(
+                                                                      $$a.slice(
+                                                                        $$i + 1
+                                                                      )
+                                                                    )
+                                                                )
+                                                            }
+                                                          } else {
+                                                            _vm.$set(
+                                                              _vm.formData.data,
+                                                              "prices",
+                                                              $$c
+                                                            )
+                                                          }
+                                                        }
                                                       }
-                                                    }
-                                                  }
-                                                }),
-                                                _vm._v(
-                                                  "\n                        " +
-                                                    _vm._s(p.name) +
-                                                    " - " +
-                                                    _vm._s(p.price) +
-                                                    " €\n                      "
+                                                    }),
+                                                    _vm._v(
+                                                      "\n                          " +
+                                                        _vm._s(p.name) +
+                                                        " - " +
+                                                        _vm._s(p.price) +
+                                                        " €\n                        "
+                                                    )
+                                                  ]
                                                 )
                                               ]
                                             )
-                                          ]
-                                        )
-                                      : _vm._e()
-                                  })
+                                          : _vm._e()
+                                      })
+                                    : _vm._l(_vm.prices, function(p) {
+                                        return p.category_id == 2 &&
+                                          _vm.formData.data.prices.indexOf(
+                                            p.id
+                                          ) != -1
+                                          ? _c(
+                                              "div",
+                                              { staticClass: "form-inline" },
+                                              [
+                                                _c(
+                                                  "label",
+                                                  { attrs: { for: p.id } },
+                                                  [
+                                                    _c("input", {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value:
+                                                            _vm.formData.data
+                                                              .prices,
+                                                          expression:
+                                                            "formData.data.prices"
+                                                        }
+                                                      ],
+                                                      attrs: {
+                                                        type: "checkbox",
+                                                        id: p.id
+                                                      },
+                                                      domProps: {
+                                                        value: p.id,
+                                                        checked: Array.isArray(
+                                                          _vm.formData.data
+                                                            .prices
+                                                        )
+                                                          ? _vm._i(
+                                                              _vm.formData.data
+                                                                .prices,
+                                                              p.id
+                                                            ) > -1
+                                                          : _vm.formData.data
+                                                              .prices
+                                                      },
+                                                      on: {
+                                                        change: function(
+                                                          $event
+                                                        ) {
+                                                          var $$a =
+                                                              _vm.formData.data
+                                                                .prices,
+                                                            $$el =
+                                                              $event.target,
+                                                            $$c = $$el.checked
+                                                              ? true
+                                                              : false
+                                                          if (
+                                                            Array.isArray($$a)
+                                                          ) {
+                                                            var $$v = p.id,
+                                                              $$i = _vm._i(
+                                                                $$a,
+                                                                $$v
+                                                              )
+                                                            if ($$el.checked) {
+                                                              $$i < 0 &&
+                                                                _vm.$set(
+                                                                  _vm.formData
+                                                                    .data,
+                                                                  "prices",
+                                                                  $$a.concat([
+                                                                    $$v
+                                                                  ])
+                                                                )
+                                                            } else {
+                                                              $$i > -1 &&
+                                                                _vm.$set(
+                                                                  _vm.formData
+                                                                    .data,
+                                                                  "prices",
+                                                                  $$a
+                                                                    .slice(
+                                                                      0,
+                                                                      $$i
+                                                                    )
+                                                                    .concat(
+                                                                      $$a.slice(
+                                                                        $$i + 1
+                                                                      )
+                                                                    )
+                                                                )
+                                                            }
+                                                          } else {
+                                                            _vm.$set(
+                                                              _vm.formData.data,
+                                                              "prices",
+                                                              $$c
+                                                            )
+                                                          }
+                                                        }
+                                                      }
+                                                    }),
+                                                    _vm._v(
+                                                      "\n                          " +
+                                                        _vm._s(p.name) +
+                                                        " - " +
+                                                        _vm._s(p.price) +
+                                                        " €\n                        "
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e()
+                                      })
                                 ],
                                 2
                               ),
@@ -85920,11 +86300,1812 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(292)
+}
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(292)
+var __vue_script__ = __webpack_require__(294)
 /* template */
-var __vue_template__ = __webpack_require__(293)
+var __vue_template__ = __webpack_require__(295)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/forms/form-inscription-online.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-180924aa", Component.options)
+  } else {
+    hotAPI.reload("data-v-180924aa", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 292 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(293);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(5)("d2bbc91e", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-180924aa\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./form-inscription-online.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-180924aa\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./form-inscription-online.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 293 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.borde {border: 1px solid;\n}\np {font-size: 1.3em;\n}\n.StripeElement {\r\n\tbackground-color: white;\r\n\theight: 40px;\r\n\tpadding: 10px 12px;\r\n\tborder-radius: 4px;\r\n\tborder: 1px solid transparent;\r\n\t-webkit-box-shadow: 0 1px 3px 0 #e6ebf1;\r\n\t        box-shadow: 0 1px 3px 0 #e6ebf1;\r\n\t-webkit-transition: box-shadow 150ms ease;\r\n\t-webkit-transition: -webkit-box-shadow 150ms ease;\r\n\ttransition: -webkit-box-shadow 150ms ease;\r\n\ttransition: box-shadow 150ms ease;\r\n\ttransition: box-shadow 150ms ease, -webkit-box-shadow 150ms ease;\n}\n.StripeElement--focus {-webkit-box-shadow: 0 1px 3px 0 #cfd7df;box-shadow: 0 1px 3px 0 #cfd7df;\n}\n.StripeElement--invalid {border-color: #fa755a;\n}\n.StripeElement--webkit-autofill {background-color: #fefde5 !important;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 294 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_bootstrap_datetimepicker__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_bootstrap_datetimepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_bootstrap_datetimepicker__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_eonasdan_bootstrap_datetimepicker_build_css_bootstrap_datetimepicker_css__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_eonasdan_bootstrap_datetimepicker_build_css_bootstrap_datetimepicker_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_eonasdan_bootstrap_datetimepicker_build_css_bootstrap_datetimepicker_css__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	name: 'inscription-online',
+	components: { DatePicker: __WEBPACK_IMPORTED_MODULE_0_vue_bootstrap_datetimepicker___default.a },
+	props: ['id'],
+	data: function data() {
+		return {
+			stripe_objec: {},
+			card: {},
+			prices: [],
+			// 		t: {},
+			config: {
+				format: 'DD/MM/YYYY',
+				useCurrent: true,
+				showClear: true,
+				showClose: true
+			},
+			category_id: '',
+			r: null,
+			// data: {},
+			form: {
+				// email: 'rennyarmando@gmail.com',
+				// phone: '04147264958',
+				// category_id: 1,
+				// sex_id: 1,
+				// name: 'Renny',
+				// last_name: 'Suarez',
+				// name_couple: 'Renny2',
+				// last_name_couple: 'Suarez2',
+				// birthdate: '05/05/2020',
+				// club: 'club',
+				// coach: 'entrenador',
+				// country: 'pais',
+				pay: 0,
+				method_pay: 0,
+				// name: '',
+				// name_couple: '',
+				price: []
+			},
+			tournament: {
+				organizer: {}
+			},
+			msg: {
+				email: 'Email asociado.',
+				phone: 'Telefono de contacto.',
+				category_id: 'Categoria a competir.',
+				sex_id: 'Genero del participante.',
+				name: 'Nombre del participante.',
+				last_name: 'Apellido del participante.',
+				name_couple: 'Nombre de la pareja.',
+				last_name_couple: 'Apellido de la pareja.',
+				birthdate: 'Fecha de Nacimiento.',
+				club: 'Club del participante.',
+				coach: 'Entrenador de baila.',
+				country: 'Pais donde reside.'
+			}
+			// 		inscription: {
+			// 			user_id: '',
+			// 			tournament_id: '',
+			// 			febd_num_1: '',
+			// 			last_name_1: '',
+			// 			name_1: '',
+			// 			febd_num_2: '',
+			// 			name_2: '',
+			// 			last_name_2: '',
+			// 			price: '',
+			// 			method_pay: '',
+			// 			pay: 0,
+			// 		}
+		};
+	},
+
+	watch: {
+		prices: function prices(_prices) {
+			var price = 0,
+			    add_pay = 0,
+			    ids = [];
+			var _iteratorNormalCompletion = true;
+			var _didIteratorError = false;
+			var _iteratorError = undefined;
+
+			try {
+				for (var _iterator = _prices[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+					var p = _step.value;
+
+					ids.push(p.id);
+					if (p.category_id == 1) {
+						price += Number(p.price);
+					}
+					if ((p.category_id == 2 || p.category_id == 3) && add_pay == 0) {
+						price += Number(p.price);
+						add_pay++;
+					}
+				}
+			} catch (err) {
+				_didIteratorError = true;
+				_iteratorError = err;
+			} finally {
+				try {
+					if (!_iteratorNormalCompletion && _iterator.return) {
+						_iterator.return();
+					}
+				} finally {
+					if (_didIteratorError) {
+						throw _iteratorError;
+					}
+				}
+			}
+
+			this.form.price = ids;
+			this.form.pay = Number(price);
+		},
+		category_id: function category_id(value) {
+			if (value == 1) {
+				this.form.pay = 5;
+			} else {
+				this.form.pay = 10;
+			}
+			this.form.category_id = value;
+		}
+	},
+	mounted: function mounted() {
+		var _this = this;
+
+		axios.post('/get-data', { id: this.id }).then(function (response) {
+			var user = response.data.user;
+			var organizer = response.data.tournament.organizer;
+
+			_this.data = response.data.state;
+			_this.form.tournament_id = _this.id;
+			_this.r = !response.data.state.id;
+			_this.tournament = response.data.tournament;
+
+			if (organizer.t_publishable_key && organizer.t_secret_key) {
+				_this.stripe(organizer.t_publishable_key);
+			}
+			if (user) {
+				_this.form.email = user.email;
+				_this.form.phone = user.phone;
+				_this.form.name = user.name + ' ' + user.last_name;
+				_this.form.birthdate = user.birthdate;
+			}
+			// 				this.inscription.user_id = response.data.user.id;
+			// 				this.t = response.data.state;
+			// 				let pareja = response.data.user.parejas;
+			// 				if (this.can('inscription.store2')) {
+			// 					if (pareja[0]) {
+			// 						this.pareja1 = ((pareja[0].febd_num) ? pareja[0].febd_num : '') + ' - ' + pareja[0].name + ' ' + pareja[0].last_name;
+			// 						this.inscription.febd_num_1 = pareja[0].febd_num;
+			// 						this.inscription.last_name_1 = pareja[0].last_name;
+			// 						this.inscription.name_1 = pareja[0].name;
+			// 					} else { this.msg.febd_num_1 = 'Agrege la pareja en el perfil'}
+			// 					if (pareja[1]) {
+			// 						this.pareja2 = ((pareja[1].febd_num) ? pareja[1].febd_num : '') + ' - ' + pareja[1].name + ' ' + pareja[1].last_name;
+			// 						this.inscription.febd_num_2 = pareja[1].febd_num;
+			// 						this.inscription.last_name_2 = pareja[1].last_name;
+			// 						this.inscription.name_2 = pareja[1].name;
+			// 					} else { this.msg.febd_num_2 = 'Agrege la pareja en el perfil'}
+			// 				} else {
+			// 					if (this.data.sex == 0) {
+			// this.pareja2 = ((this.data.febd_num) ? this.data.febd_num : '') + ' - ' + this.data.name + ' ' + this.data.last_name;
+			// 						this.inscription.febd_num_2 = this.data.febd_num;
+			// this.inscription.name_2 = this.data.name;
+			// 						this.inscription.last_name_2 = this.data.last_name;
+			// 						if (pareja[0]) {
+			// 							this.pareja1 = ((pareja[0].febd_num) ? pareja[0].febd_num : '') + ' - ' + pareja[0].name + ' ' + pareja[0].last_name;
+			// 							this.inscription.febd_num_1 = pareja[0].febd_num;
+			// 							this.inscription.last_name_1 = pareja[0].last_name;
+			// 							this.inscription.name_1 = pareja[0].name;
+			// 						} else { this.msg.febd_num_1 = 'Agrege la pareja en el perfil'}
+			// 					} else {
+			// 						this.pareja1 = ((this.data.febd_num) ? this.data.febd_num : '') + ' - ' + this.data.name + ' ' + this.data.last_name;
+			// 						this.inscription.febd_num_1 = this.data.febd_num;
+			// 						this.inscription.name_1 = this.data.name;
+			// 						this.inscription.last_name_1 = this.data.last_name;
+			// 						if (pareja[0]) {
+			// 							this.pareja2 = ((pareja[0].febd_num) ? pareja[0].febd_num : '') + ' - ' + pareja[0].name + ' ' + pareja[0].last_name;
+			// 							this.inscription.febd_num_2 = pareja[0].febd_num;
+			// 							this.inscription.last_name_2 = pareja[0].last_name;
+			// 							this.inscription.name_2 = pareja[0].name;
+			// 						} else { this.msg.febd_num_2 = 'Agrege la pareja en el perfil'}
+			// 					}
+			// 				}
+			// 			}
+		});
+	},
+
+	methods: {
+		namePrice: function namePrice(id) {
+			for (var o in this.tournament.prices) {
+				if (this.tournament.prices[o].id == id) {
+					return this.tournament.prices[o].level_text + (this.tournament.prices[o].subcategory_text ? ' - ' + this.tournament.prices[o].subcategory_text : '');
+				}
+			}
+		},
+		cate: function cate(n) {
+			if (n === 1) {
+				return 'Open';
+			} else if (n === 2) {
+				return 'Latino';
+			} else if (n === 3) {
+				return 'Standard';
+			}
+		},
+		open: function open() {
+			$('#confirm').modal('show');
+			setTimeout(function () {
+				$('#confirm, body').css({ 'padding-right': '0px' });
+			}, 100);
+			$('.modal-backdrop').hide();
+		},
+		register: function register(event) {
+			var _this2 = this;
+
+			if (this.form.method_pay == 3) {
+				this.stripe_objec.createToken(this.card).then(function (result) {
+					if (result.error) {
+						// Inform the user if there was an error.
+						var errorElement = document.getElementById('card-errors');
+						errorElement.textContent = result.error.message;
+						toastr.info('Error En la conexión');
+					} else {
+						// Send the token to your server.
+						_this2.form.stripeToken = result.token.id;
+						// this.stripeTokenHandler(result.token);
+						_this2.send();
+					}
+				});
+			} else {
+				this.send();
+			}
+		},
+		send: function send() {
+			var _this3 = this;
+
+			toastr.info('Procesando Información, ¡por favor espere!');
+			axios.post('/inscription-online', this.form).then(function (response) {
+				if (_this3.form.method_pay == 2) {
+					toastr.success('Registro exitoso, espere respuesta de PayPal');
+					setTimeout(function () {
+						return window.location.href = response.data;
+					}, 1000);
+				} else {
+					toastr.success('Registro exitoso');
+					setTimeout(function () {
+						return window.location.reload();
+					}, 1000);
+				}
+			});
+		},
+		stripe: function stripe(public_key) {
+			// Create a Stripe client.
+			this.stripe_objec = Stripe(public_key);
+			// Create an instance of Elements.
+			var elements = this.stripe_objec.elements();
+			// Custom styling can be passed to options when creating an Element.
+			// (Note that this demo uses a wider set of styles than the guide below.)
+			var style = {
+				base: {
+					color: '#32325d',
+					lineHeight: '18px',
+					fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+					fontSmoothing: 'antialiased',
+					fontSize: '16px',
+					'::placeholder': {
+						color: '#aab7c4'
+					}
+				},
+				invalid: {
+					color: '#fa755a',
+					iconColor: '#fa755a'
+				}
+			};
+			// Create an instance of the card Element.
+			var card = elements.create('card', { style: style });
+
+			// Add an instance of the card Element into the `card-element` <div>.
+			setTimeout(function () {
+				card.mount('#card-element');
+			}, 1000);
+
+			// Handle real-time validation errors from the card Element.
+			card.addEventListener('change', function (event) {
+				var displayError = document.getElementById('card-errors');
+				if (event.error) {
+					displayError.textContent = event.error.message;
+				} else {
+					displayError.textContent = '';
+				}
+			});
+			this.card = card;
+		}
+	}
+});
+
+/***/ }),
+/* 295 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _vm.r == true
+      ? _c(
+          "form",
+          {
+            staticClass: "row",
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.register($event)
+              }
+            }
+          },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.email,
+                      expression: "form.email"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "email", type: "text" },
+                  domProps: { value: _vm.form.email },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "email", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("small", {
+                  staticClass: "form-text text-muted",
+                  attrs: { id: "emailHelp" },
+                  domProps: { textContent: _vm._s(_vm.msg.email) }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.phone,
+                      expression: "form.phone"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "phone", type: "text" },
+                  domProps: { value: _vm.form.phone },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "phone", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("small", {
+                  staticClass: "form-text text-muted",
+                  attrs: { id: "phoneHelp" },
+                  domProps: { textContent: _vm._s(_vm.msg.phone) }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-md-6", staticStyle: { height: "76px" } },
+              [
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _c("label", { staticClass: "form-inline col-xs-6" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.category_id,
+                          expression: "category_id"
+                        }
+                      ],
+                      attrs: { type: "radio", id: "category_id", value: "1" },
+                      domProps: { checked: _vm._q(_vm.category_id, "1") },
+                      on: {
+                        change: function($event) {
+                          _vm.category_id = "1"
+                        }
+                      }
+                    }),
+                    _vm._v("\n\t\t\t\t\t\tIndividual\n\t\t\t\t\t")
+                  ]),
+                  _vm._v(" "),
+                  _c("label", { staticClass: "form-inline col-xs-6" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.category_id,
+                          expression: "category_id"
+                        }
+                      ],
+                      attrs: { type: "radio", id: "category_id", value: "2" },
+                      domProps: { checked: _vm._q(_vm.category_id, "2") },
+                      on: {
+                        change: function($event) {
+                          _vm.category_id = "2"
+                        }
+                      }
+                    }),
+                    _vm._v("\n\t\t\t\t\t\tPareja\n\t\t\t\t\t")
+                  ]),
+                  _vm._v(" "),
+                  _c("small", {
+                    staticClass: "form-text text-muted",
+                    attrs: { id: "category_idHelp" },
+                    domProps: { textContent: _vm._s(_vm.msg.category_id) }
+                  })
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.form.category_id == 1,
+                    expression: "form.category_id == 1"
+                  }
+                ],
+                staticClass: "col-md-6",
+                staticStyle: { height: "76px" }
+              },
+              [
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(4),
+                  _vm._v(" "),
+                  _c("label", { staticClass: "form-inline col-xs-6" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.sex_id,
+                          expression: "form.sex_id"
+                        }
+                      ],
+                      attrs: { type: "radio", id: "sex_id", value: "1" },
+                      domProps: { checked: _vm._q(_vm.form.sex_id, "1") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(_vm.form, "sex_id", "1")
+                        }
+                      }
+                    }),
+                    _vm._v("\n\t\t\t\t\t\tHombre\n\t\t\t\t\t")
+                  ]),
+                  _vm._v(" "),
+                  _c("label", { staticClass: "form-inline col-xs-6" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.sex_id,
+                          expression: "form.sex_id"
+                        }
+                      ],
+                      attrs: { type: "radio", id: "sex_id", value: "2" },
+                      domProps: { checked: _vm._q(_vm.form.sex_id, "2") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(_vm.form, "sex_id", "2")
+                        }
+                      }
+                    }),
+                    _vm._v("\n\t\t\t\t\t\tDama\n\t\t\t\t\t")
+                  ]),
+                  _vm._v(" "),
+                  _c("small", {
+                    staticClass: "form-text text-muted",
+                    attrs: { id: "sex_idHelp" },
+                    domProps: { textContent: _vm._s(_vm.msg.sex_id) }
+                  })
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _vm._m(5),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.name,
+                      expression: "form.name"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "name", type: "text" },
+                  domProps: { value: _vm.form.name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "name", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("small", {
+                  staticClass: "form-text text-muted",
+                  attrs: { id: "nameHelp" },
+                  domProps: { textContent: _vm._s(_vm.msg.name) }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _vm._m(6),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.last_name,
+                      expression: "form.last_name"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "last_name", type: "text" },
+                  domProps: { value: _vm.form.last_name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "last_name", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("small", {
+                  staticClass: "form-text text-muted",
+                  attrs: { id: "last_nameHelp" },
+                  domProps: { textContent: _vm._s(_vm.msg.last_name) }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c(
+                "div",
+                { staticClass: "form-group" },
+                [
+                  _vm._m(7),
+                  _vm._v(" "),
+                  _c("date-picker", {
+                    attrs: { id: "birthdate", config: _vm.config },
+                    model: {
+                      value: _vm.form.birthdate,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "birthdate", $$v)
+                      },
+                      expression: "form.birthdate"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("small", {
+                    staticClass: "form-text text-muted",
+                    attrs: { id: "birthdateHelp" },
+                    domProps: { textContent: _vm._s(_vm.msg.birthdate) }
+                  })
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _vm._m(8),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.club,
+                      expression: "form.club"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "club", type: "text" },
+                  domProps: { value: _vm.form.club },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "club", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("small", {
+                  staticClass: "form-text text-muted",
+                  attrs: { id: "clubHelp" },
+                  domProps: { textContent: _vm._s(_vm.msg.club) }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _vm._m(9),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.coach,
+                      expression: "form.coach"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "coach", type: "text" },
+                  domProps: { value: _vm.form.coach },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "coach", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("small", {
+                  staticClass: "form-text text-muted",
+                  attrs: { id: "coachHelp" },
+                  domProps: { textContent: _vm._s(_vm.msg.coach) }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _vm._m(10),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.country,
+                      expression: "form.country"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "country", type: "text" },
+                  domProps: { value: _vm.form.country },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "country", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("small", {
+                  staticClass: "form-text text-muted",
+                  attrs: { id: "countryHelp" },
+                  domProps: { textContent: _vm._s(_vm.msg.country) }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-12" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _c("h4", [
+                      _vm._v("Total a Pagar: "),
+                      _c("b", [_vm._v(_vm._s(_vm.form.pay) + " €")])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.form.pay,
+                        expression: "form.pay"
+                      }
+                    ],
+                    staticClass: "col-md-12"
+                  },
+                  [
+                    _c("p", [_vm._v("Seleccione el tipo de pago:")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _vm.tournament.organizer.headline &&
+                      _vm.tournament.organizer.account &&
+                      _vm.tournament.organizer.bank
+                        ? _c(
+                            "div",
+                            {
+                              staticClass: "col-md-4 btn borde",
+                              class: { "btn-black": _vm.form.method_pay == 1 },
+                              on: {
+                                click: function($event) {
+                                  _vm.form.method_pay = 1
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n\t\t\t\t\t\t\t\tTransferencia\n\t\t\t\t\t\t\t"
+                              )
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.tournament.organizer.paypal_client_id &&
+                      _vm.tournament.organizer.paypal_client_secret
+                        ? _c(
+                            "div",
+                            {
+                              staticClass: "col-md-4 btn borde",
+                              class: { "btn-black": _vm.form.method_pay == 2 },
+                              on: {
+                                click: function($event) {
+                                  _vm.form.method_pay = 2
+                                }
+                              }
+                            },
+                            [_vm._v("\n\t\t\t\t\t\t\t\tPaypal\n\t\t\t\t\t\t\t")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.tournament.organizer.t_publishable_key &&
+                      _vm.tournament.organizer.t_secret_key
+                        ? _c(
+                            "div",
+                            {
+                              staticClass: "col-md-4 btn borde",
+                              class: { "btn-black": _vm.form.method_pay == 3 },
+                              on: {
+                                click: function($event) {
+                                  _vm.form.method_pay = 3
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n\t\t\t\t\t\t\t\tTarjeta\n\t\t\t\t\t\t\t"
+                              )
+                            ]
+                          )
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("small", {
+                      staticClass: "form-text text-muted",
+                      attrs: { id: "method_payHelp" },
+                      domProps: { textContent: _vm._s(_vm.msg.method_pay) }
+                    }),
+                    _vm._v(" "),
+                    _vm.form.method_pay == 1
+                      ? _c("div", { staticClass: "col-md-12" }, [
+                          _c("p", { staticStyle: { "font-size": "14px" } }, [
+                            _vm._v(
+                              "Guarde los datos bancarios y deposite la cantidad acordada."
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticStyle: { margin: "0" } }, [
+                            _vm._v("Banco: "),
+                            _c("b", [
+                              _vm._v(_vm._s(_vm.tournament.organizer.bank))
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticStyle: { margin: "0" } }, [
+                            _vm._v("Cuenta: "),
+                            _c("b", [
+                              _vm._v(_vm._s(_vm.tournament.organizer.account))
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticStyle: { margin: "0" } }, [
+                            _vm._v("Titular: "),
+                            _c("b", [
+                              _vm._v(_vm._s(_vm.tournament.organizer.headline))
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticStyle: { margin: "0" } }, [
+                            _vm._v("Total: "),
+                            _c("b", [_vm._v(_vm._s(_vm.form.pay) + " €")])
+                          ])
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value:
+                              _vm.form.method_pay == 3 &&
+                              (_vm.tournament.organizer.t_publishable_key &&
+                                _vm.tournament.organizer.t_secret_key),
+                            expression:
+                              "form.method_pay == 3 && (tournament.organizer.t_publishable_key && tournament.organizer.t_secret_key)"
+                          }
+                        ],
+                        staticClass: "form-row",
+                        attrs: { id: "payment-form" }
+                      },
+                      [_vm._m(11)]
+                    )
+                  ]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-12" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "span pull-right",
+                  staticStyle: { padding: "15px" }
+                },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-black",
+                      attrs: { type: "button" },
+                      on: { click: _vm.open }
+                    },
+                    [_vm._v("Registrar")]
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "modal fade",
+                attrs: {
+                  id: "confirm",
+                  role: "dialog",
+                  "aria-hidden": "true",
+                  "data-backdrop": "static",
+                  "data-keyboard": "false"
+                }
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "modal-dialog",
+                    staticStyle: { top: "100px" },
+                    attrs: { role: "document" }
+                  },
+                  [
+                    _c("div", { staticClass: "modal-content" }, [
+                      _vm._m(12),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "modal-body" }, [
+                        _c("p", [
+                          _vm._v(
+                            "\n\t\t\t\t\t\t\t\tIntegrante: " +
+                              _vm._s(_vm.form.name) +
+                              " " +
+                              _vm._s(_vm.form.last_name) +
+                              "\n\t\t\t\t\t\t\t\t"
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("small", {
+                          staticClass: "form-text text-muted",
+                          attrs: { id: "nameHelp" }
+                        }),
+                        _vm._v(" "),
+                        _c("small", {
+                          staticClass: "form-text text-muted",
+                          attrs: { id: "name_coupleHelp" }
+                        }),
+                        _vm._v(" "),
+                        _c("small", {
+                          staticClass: "form-text text-muted",
+                          attrs: { id: "priceHelp" }
+                        }),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n\t\t\t\t\t\t\t\tMétodo de Pago:\n\t\t\t\t\t\t\t\t"
+                          ),
+                          _vm.form.method_pay == 1
+                            ? _c("span", [_vm._v("Transferencia")])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.form.method_pay == 2
+                            ? _c("span", [_vm._v("PayPal")])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.form.method_pay == 3
+                            ? _c("span", [_vm._v("Tarjeta")])
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _c("small", {
+                          staticClass: "form-text text-muted",
+                          attrs: { id: "method_payHelp" }
+                        }),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            " Total a Pagar: " + _vm._s(_vm.form.pay) + " € "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(13)
+                    ])
+                  ]
+                )
+              ]
+            )
+          ]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.r == false
+      ? _c("div", { staticClass: "col-md-12" }, [
+          _c("div", { staticClass: "alert alert-success" }, [
+            _c(
+              "h3",
+              { staticClass: "text-center", staticStyle: { margin: "0" } },
+              [
+                _vm._v(
+                  "Tu registro a la competición se ha finalizado correctamente.."
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "Hola " +
+                  _vm._s(_vm.data.name_1) +
+                  " " +
+                  _vm._s(_vm.data.last_name_1) +
+                  ", Se ha registrado correctamente en la competición."
+              )
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _c("b", [_vm._v("Estado del pago: ")]),
+              _vm._v(" "),
+              _vm.data.state_pay == 1
+                ? _c("span", [_vm._v("Ya fué aprobado su pago...")])
+                : _c("span", [_vm._v("En espera de aprobación...")])
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _c("b", [_vm._v("Estado de Participación: ")]),
+              _vm._v(" "),
+              _vm.data.state == 1
+                ? _c("span", [
+                    _vm._v(
+                      "Ya fué aprobada su participación en la competencia..."
+                    )
+                  ])
+                : _c("span", [_vm._v("En espera de aprobación...")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c(
+                "div",
+                { staticClass: "col-md-12" },
+                [
+                  _vm._l(_vm.data.prices, function(p) {
+                    return [
+                      _c(
+                        "span",
+                        {
+                          staticClass: "label label-info",
+                          staticStyle: {
+                            display: "inline",
+                            "font-size": "1em",
+                            "margin-right": "10px"
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n\t\t\t\t\t\t\t\t" +
+                              _vm._s(_vm.cate(p.category_id)) +
+                              " - " +
+                              _vm._s(_vm.namePrice(p.id)) +
+                              "\n\t\t\t\t\t\t\t"
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("wbr")
+                    ]
+                  })
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c("p", [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-black",
+                  attrs: { href: "/lista/" + _vm.tournament.slug }
+                },
+                [_vm._v("Ver Lista de inscritos")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                { staticClass: "btn btn-danger", attrs: { href: "/clean/" } },
+                [_vm._v("Cerrar Ventana")]
+              )
+            ]),
+            _vm._v(" "),
+            _vm.data.method_pay == 1 && !_vm.data.state
+              ? _c("div", [
+                  _c("p", { staticStyle: { "font-size": "14px" } }, [
+                    _vm._v(
+                      "No te olvides de llevar a cabo la forma de pago seleccionada."
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticStyle: { margin: "0" } }, [
+                    _vm._v("Banco: "),
+                    _c("b", [_vm._v(_vm._s(_vm.tournament.organizer.bank))])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticStyle: { margin: "0" } }, [
+                    _vm._v("Cuenta: "),
+                    _c("b", [_vm._v(_vm._s(_vm.tournament.organizer.account))])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticStyle: { margin: "0" } }, [
+                    _vm._v("Titular: "),
+                    _c("b", [_vm._v(_vm._s(_vm.tournament.organizer.headline))])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticStyle: { margin: "0" } }, [
+                    _vm._v("Total: "),
+                    _c("b", [_vm._v(_vm._s(_vm.data.pay) + " €")])
+                  ])
+                ])
+              : _vm._e()
+          ])
+        ])
+      : _vm._e()
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-12" }, [
+      _c("h4", [_vm._v("Datos de Inscripcion")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "email" } },
+      [
+        _c("span", { staticClass: "fa fa-email" }),
+        _vm._v(" Correo electronico:\n\t\t\t\t\t")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "phone" } },
+      [
+        _c("span", { staticClass: "fa fa-phone" }),
+        _vm._v(" Telefono:\n\t\t\t\t\t")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "category_id" } },
+      [
+        _c("span", { staticClass: "fa fa-category_id" }),
+        _vm._v(" Categoria:\n\t\t\t\t\t")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "sex_id" } },
+      [
+        _c("span", { staticClass: "fa fa-sex_id" }),
+        _vm._v(" Sexo:\n\t\t\t\t\t")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "name" } },
+      [
+        _c("span", { staticClass: "fa fa-name" }),
+        _vm._v(" Nombre:\n\t\t\t\t\t")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "last_name" } },
+      [
+        _c("span", { staticClass: "fa fa-last_name" }),
+        _vm._v(" Apellido:\n\t\t\t\t\t")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "birthdate" } },
+      [
+        _c("span", { staticClass: "edit" }),
+        _vm._v(" Fecha de Nacimiento:\n                ")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "club" } },
+      [_c("span", { staticClass: "fa fa-club" }), _vm._v(" Club:\n\t\t\t\t\t")]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "coach" } },
+      [
+        _c("span", { staticClass: "fa fa-coach" }),
+        _vm._v(" Coach:\n\t\t\t\t\t")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "country" } },
+      [
+        _c("span", { staticClass: "fa fa-country" }),
+        _vm._v(" Pais:\n\t\t\t\t\t")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row" }, [
+      _c("label", { attrs: { for: "card-element" } }, [
+        _vm._v(
+          "\n\t\t\t\t\t\t\t\t\tTarjeta de Débito y Crédito\n\t\t\t\t\t\t\t\t"
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "card-element" } }),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "card-errors", role: "alert" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header btn-black" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      ),
+      _vm._v(" "),
+      _c("h4", { staticClass: "modal-title" }, [
+        _vm._v(
+          "¿Esta Seguro de Registrar su participación en esta competición?"
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Cancelar")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-success", attrs: { type: "submit" } },
+        [_vm._v("Confirmar")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-180924aa", module.exports)
+  }
+}
+
+/***/ }),
+/* 296 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(297)
+/* template */
+var __vue_template__ = __webpack_require__(298)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -85963,7 +88144,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 292 */
+/* 297 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -86039,7 +88220,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 293 */
+/* 298 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -86324,7 +88505,7 @@ if (false) {
 }
 
 /***/ }),
-/* 294 */
+/* 299 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

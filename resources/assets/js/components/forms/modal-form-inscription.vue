@@ -88,21 +88,49 @@
                     <h4>Modalidades Inscritas:</h4>
                     <div class="col-md-4">
                       <p>Standard:</p>
-                      <div class="form-inline" v-for="p in prices" v-if="p.category_id == 3 && (formData.data.user.group_s == p.subcategory_id || formData.data.prices.indexOf(p.id) != -1)">
-                        <label :for="p.id">
-                          <input type="checkbox" :id="p.id" class="" :value="p.id" v-model="formData.data.prices">
-                          {{ p.name }} - {{ p.price }} €
-                        </label>
-                      </div>
+                      <template v-if="formData.data.tipe_id == 1">
+                        <div class="form-inline"
+                        v-for="p in prices"
+                        v-if="p.category_id == 3 && (formData.data.user.group_s == p.subcategory_id || formData.data.prices.indexOf(p.id) != -1)">
+                          <label :for="p.id">
+                            <input type="checkbox" :id="p.id" class="" :value="p.id" v-model="formData.data.prices">
+                            {{ p.name }} - {{ p.price }} €
+                          </label>
+                        </div>
+                      </template>
+                      <template v-else>
+                        <div class="form-inline"
+                        v-for="p in prices"
+                        v-if="p.category_id == 3 && formData.data.prices.indexOf(p.id) != -1">
+                          <label :for="p.id">
+                            <input type="checkbox" :id="p.id" class="" :value="p.id" v-model="formData.data.prices">
+                            {{ p.name }} - {{ p.price }} €
+                          </label>
+                        </div>
+                      </template>
                     </div>
                     <div class="col-md-4">
                       <p>Latino:</p>
-                      <div class="form-inline" v-for="p in prices" v-if="p.category_id == 2 && (formData.data.user.group_l == p.subcategory_id || formData.data.prices.indexOf(p.id) != -1)">
-                        <label :for="p.id">
-                          <input type="checkbox" :id="p.id" class="" :value="p.id" v-model="formData.data.prices">
-                          {{ p.name }} - {{ p.price }} €
-                        </label>
-                      </div>
+                      <template v-if="formData.data.tipe_id == 1">
+                        <div class="form-inline"
+                        v-for="p in prices"
+                        v-if="p.category_id == 2 && (formData.data.user.group_l == p.subcategory_id || formData.data.prices.indexOf(p.id) != -1)">
+                          <label :for="p.id">
+                            <input type="checkbox" :id="p.id" class="" :value="p.id" v-model="formData.data.prices">
+                            {{ p.name }} - {{ p.price }} €
+                          </label>
+                        </div>
+                      </template>
+                      <template v-else>
+                        <div class="form-inline"
+                        v-for="p in prices"
+                        v-if="p.category_id == 2 && formData.data.prices.indexOf(p.id) != -1">
+                          <label :for="p.id">
+                            <input type="checkbox" :id="p.id" class="" :value="p.id" v-model="formData.data.prices">
+                            {{ p.name }} - {{ p.price }} €
+                          </label>
+                        </div>
+                      </template>
                     </div>
                     <div class="col-md-4">
                       <p>Open:</p>

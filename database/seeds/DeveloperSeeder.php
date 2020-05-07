@@ -603,13 +603,6 @@ class DeveloperSeeder extends Seeder
             \App\Models\Club::create($value);
         }
 
-        /*for ($i = 2; $i <= 100; $i++) { 
-            DB::table('role_user')->insert([
-                'user_id' => $i,
-                'role_id' => rand(2, 3)
-            ]);
-        }*/
-
         $category_opens = [
             "Adulto Lat",
             "Adulto Std",

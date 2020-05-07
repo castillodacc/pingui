@@ -33,7 +33,10 @@ class UserRootSeeder extends Seeder
             'special'       => 'all-access'
         ]);
 
-        DB::table('role_user')->insert(['user_id' => $user->id, 'role_id' => $rol->id]);
+        DB::table('role_user')->insert([
+            'user_id' => $user->id,
+            'role_id' => $rol->id
+        ]);
 
         $num = App\Models\Permisologia\Permission::all()->count();
         $data = [];

@@ -14,8 +14,6 @@ class RouteController extends Controller
         $this->middleware('auth')->only([
             'index',
             'canPermission',
-            'inscription',
-            'data',
         ]);
     }
 
@@ -105,7 +103,7 @@ class RouteController extends Controller
         return view('frontend', compact('tournament', 'tournament2', 'data'));
     }
 
-    public function publication($slug)
+    public function publication($slug = null)
     {
         $tournament = Tournament::where('slug', '=', $slug)->first();
         if ($tournament == null) return redirect('/');
@@ -116,7 +114,14 @@ class RouteController extends Controller
     {
         $tournament = Tournament::where('slug', '=', $slug)->first();
         if ($tournament == null) return redirect('/');
-        return view('inscription', compact('tournament'));
+        if ($tournament->inscription == 0) $tournament->id = null;
+
+        if ($tournament->type_id == 1) {
+            $this->middleware('auth');
+            return view('inscription', compact('tournament'));
+        } else {
+            return view('inscription', compact('tournament'));
+        }
     }
 
     public function confirm($slug)
@@ -137,7 +142,12 @@ class RouteController extends Controller
 
     public function data(Request $request)
     {
-        $tournament = Tournament::select(['id', 'name', 'slug', 'organizer_id'])->findOrFail($request->id);
+        $tournament = Tournament::select([
+            'id', 'name', 'slug', 'organizer_id', 'type_id'
+        ])->findOrFail($request->id);
+        if ($tournament->type_id == 1) {
+            $this->middleware('auth');
+        }
         $tournament->prices->each(function ($p) {
             if ($p->category_id == 1) {
                 $p->level_text = Category_open::findOrFail($p->subcategory_id)->name;
@@ -154,21 +164,56 @@ class RouteController extends Controller
         $tournament->organizer->paypal_client_secret = ($tournament->organizer->paypal_client_secret) ? true : false;
         $tournament->organizer->t_secret_key = ($tournament->organizer->t_secret_key) ? true : false;
 
-        $inscription = Inscription::where('tournament_id', '=', $request->id)
-        ->where('user_id', '=', \Auth::user()->id)
-        ->select(['id', 'last_name_1', 'last_name_2', 'method_pay', 'name_1', 'name_2', 'pay', 'state', 'state_pay'])
-        ->first();
         $state = false;
-        if ($inscription) {
-            $state = $inscription;
-            $state->prices->each(function ($p) {
-                unset($p->pivot, $p->tournament_id);
-            });
+        if ($tournament->type_id == 1) {
+            $inscription = Inscription::where('tournament_id', '=', $request->id)
+            ->where('user_id', '=', \Auth::user()->id)
+            ->select([
+                'id',
+                'last_name_1',
+                'last_name_2',
+                'method_pay',
+                'name_1',
+                'name_2',
+                'pay',
+                'state',
+                'state_pay'
+            ])
+            ->first();
+            if ($inscription) {
+                $state = $inscription;
+                $state->prices->each(function ($p) {
+                    unset($p->pivot, $p->tournament_id);
+                });
+            }
+        } elseif ($request->session()->has('register_inscription')) {
+            $inscription = Inscription::where(
+                'tournament_id', $request->session()->has('register_inscription')
+            )
+            ->select([
+                'id',
+                'last_name_1',
+                'last_name_2',
+                'method_pay',
+                'name_1',
+                'name_2',
+                'pay',
+                'state',
+                'state_pay'
+            ])
+            ->first();
+            if ($inscription) {
+                $state = $inscription;
+                $state->prices->each(function ($p) {
+                    unset($p->pivot, $p->tournament_id);
+                });
+            }
         }
-        if (\Auth::guest()) return;
-        $user = \Auth::user();
-        $user->parejas;
-        return response()->json(compact('user', 'state', 'tournament'));
+        if (\Auth::check()) {
+            $user = \Auth::user();
+            $user->parejas;
+        }
+        return compact('user', 'state', 'tournament');
     }
 
     public function contact()
@@ -193,5 +238,11 @@ class RouteController extends Controller
         $tournament = Tournament::where('slug', $slug)->first();
         if ($tournament == null) return redirect('/');
         return view('inscription-list', compact('tournament'));
+    }
+
+    public function clean(Request $request)
+    {
+        $request->session()->forget('register_inscription');
+        return redirect('/');
     }
 }

@@ -72,6 +72,50 @@
 						<div class="pull-right col-md-8 col-xs-12">
 							<div class="row">
 								<h1  class="hidden-xs hidden-sm">{{ $tournament->name }}</h1>
+								<p class="text-justify">{{ $tournament->description }}</p>
+							</div>
+							<div class="row">
+								@if(\Auth::check() && $tournament->inscriptions->where('user_id', \Auth::user()->id)->count() == 0)
+								<div class="col-md-12">
+									<div class="alert alert-info" role="alert">
+										<span class="text-warning">
+											<a href="/perfil/3">Actualiza tu <b>perfil</b> para inscribirte.</a>
+										</span>
+									</div>
+								</div>
+								@endif
+								<div class="col-md-12">
+									<div class="row">
+										@if(\Auth::guest() && $tournament->type_id == 1)
+										<div class="col-md-3">
+											<a href="/registro" class="btn btn-primary btn-block">Registrate</a>
+										</div>
+										@endif
+										@if($tournament->maps)
+										<div class="col-md-2">
+											<a href="{{ $tournament->maps }}" class="btn btn-black btn-block" target="_blank">Mapa</a>
+										</div>
+										@endif
+										@if($tournament->hours && $tournament->show_hour)
+										<div class="col-md-3">
+											<a href="{{ asset('storage/hours/' . $tournament->hours) }}" class="btn btn-success btn-block" target="_blank">Horarios</a>
+										</div>
+										@endif
+										@if($tournament->inscription)
+										@if(\Auth::guest() || (\Auth::check() && $tournament->inscriptions->where('user_id', \Auth::user()->id)->count() == 0))
+										<div class="col-md-3">
+											<a href="{{ route('publication.inscription', $tournament->slug) }}" class="btn btn-warning btn-block">
+												Inscripción
+											</a>
+										</div>
+										@endif
+										@elseif($tournament->results)
+										<div class="col-md-4">
+											<a href="http://results.pingui.es/events.php?pod_id={{ $tournament->results }}" class="btn btn-danger btn-block" target="_blank">Resultados</a>
+										</div>
+										@endif
+									</div>
+								</div>
 							</div>
 							<div class="row">
 								<div class="pull-left col-md-5 col-xs-12">
@@ -80,10 +124,9 @@
 									<small><strong>Inscripción: {{ ($tournament->inscription) ? 'Abierta' : 'Cerrada' }}.</strong></small><br>
 									@if($tournament->info)
 									<small><strong>Precio de competición:</strong> <a href="{{ asset('storage/info/' . $tournament->info) }}" class="btn btn-info btn-block" target="_blank">Consultar Hoja Informativa</a></small><br>
-									<div class="col-md-4">
-
-									</div>
+									<div class="col-md-4"></div>
 									@endif
+									@if($tournament->type_id == 1)
 									<h5><b>Precios de los Opens:</b></h5>
 									<ul>
 										@foreach($tournament->prices->where('category_id', 1) as $p)
@@ -93,6 +136,7 @@
 										</li>
 										@endforeach
 									</ul>
+									@endif
 								</div>
 								@if(\Auth::check() && $tournament->inscriptions->where('user_id', \Auth::user()->id)->count() == 1)
 								<div id="app" class="col-md-7">
@@ -111,7 +155,7 @@
 									</ul>
 								</div>
 								@endif
-								@if(\Auth::guest())
+								@if(\Auth::guest() && $tournament->type_id == 1)
 								<div class="pull-right col-md-4 col-xs-12 hidden-xs hidden-sm" style="border: 1px solid; border-radius: 10px">
 									<div class="card card-container ">
 										<span id="profile-name" class="profile-name-card"><b class="text-center">Inicia Sesión</b></span>
@@ -144,54 +188,10 @@
 								</div>
 								@endif
 							</div>
-							<div class="row">
-								@if(\Auth::check() && $tournament->inscriptions->where('user_id', \Auth::user()->id)->count() == 0)
-								<div class="col-md-12">
-									<div class="alert alert-info" role="alert">
-										<span class="text-warning">
-											<a href="/perfil/3">Actualiza tu <b>perfil</b> para inscribirte.</a>
-										</span>
-									</div>
-								</div>
-								@endif
-								<div class="col-md-12">
-									<div class="row">
-										@if(\Auth::guest())
-										<div class="col-md-3">
-											<a href="/registro" class="btn btn-primary btn-block">Registrate</a>
-										</div>
-										@endif
-										@if($tournament->maps)
-										<div class="col-md-2">
-											<a href="{{ $tournament->maps }}" class="btn btn-black btn-block" target="_blank">Mapa</a>
-										</div>
-										@endif
-										@if($tournament->hours && $tournament->show_hour)
-										<div class="col-md-3">
-											<a href="{{ asset('storage/hours/' . $tournament->hours) }}" class="btn btn-success btn-block" target="_blank">Horarios</a>
-										</div>
-										@endif
-										@if($tournament->inscription)
-										@if(\Auth::guest() || (\Auth::check() && $tournament->inscriptions->where('user_id', \Auth::user()->id)->count() == 0))
-										<div class="col-md-3">
-											<a href="{{ route('publication.inscription', $tournament->slug) }}" class="btn btn-warning btn-block">
-												Inscripción
-											</a>
-										</div>
-										@endif
-										@elseif($tournament->results)
-										<div class="col-md-4">
-											<a href="http://results.pingui.es/events.php?pod_id={{ $tournament->results }}" class="btn btn-danger btn-block" target="_blank">Resultados</a>
-										</div>
-										@endif
-									</div>
-								</div>
-							</div>
-							<hr>
-							<p class="text-justify">{{ $tournament->description }}</p>
 						</div>
 						<hr>
 						<div class="clearfix"></div>
+						@if($tournament->type_id == 1)
 						<div class="row">
 							<div class="col-md-8">
 								<h4><b>Categorias Participantes:</b></h4>
@@ -229,6 +229,7 @@
 								</div>
 							</div>
 						</div>
+						@endif
 					</div>
 				</div>
 			</div>

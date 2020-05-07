@@ -17,6 +17,25 @@
               @input="data[input.id] = arguments[0]"></rs-input>
             </div>
 
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="start" class="control-label">
+                  <span class="edit"></span> Fecha de inicio de competición:
+                </label>
+                <date-picker id="start" v-model="data.start" :config="{format: 'DD/MM/YYYY', useCurrent: true, showClear: true, showClose: true}"></date-picker>
+                <small id="startHelp" class="form-text text-muted" v-text="msg.start"></small>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="end" class="control-label">
+                  <span class="edit"></span> Fecha final de competición:
+                </label>
+                <date-picker id="end" v-model="data.end" :config="{format: 'DD/MM/YYYY', useCurrent: true, showClear: true, showClose: true}"></date-picker>
+                <small id="endHelp" class="form-text text-muted" v-text="msg.end"></small>
+              </div>
+            </div>
 
             <div class="col-md-6">
               <div class="form-group">
@@ -43,21 +62,15 @@
 
             <div class="col-md-6">
               <div class="form-group">
-                <label for="start" class="control-label">
-                  <span class="edit"></span> Fecha de inicio de competición:
+                <label for="type_id" class="control-label">
+                  <span class="edit"></span> Tipo de competicion:
                 </label>
-                <date-picker id="start" v-model="data.start" :config="{format: 'DD/MM/YYYY', useCurrent: true, showClear: true, showClose: true}"></date-picker>
-                <small id="startHelp" class="form-text text-muted" v-text="msg.start"></small>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="end" class="control-label">
-                  <span class="edit"></span> Fecha final de competición:
-                </label>
-                <date-picker id="end" v-model="data.end" :config="{format: 'DD/MM/YYYY', useCurrent: true, showClear: true, showClose: true}"></date-picker>
-                <small id="endHelp" class="form-text text-muted" v-text="msg.end"></small>
+                <select id="type_id" class="form-control" v-model="data.type_id">
+                  <option value="">Seleccione</option>
+                  <option value="1">Normal</option>
+                  <option value="2">On-Line</option>
+                </select>
+                <small id="type_idHelp" class="form-text text-muted" v-text="msg.type_id"></small>
               </div>
             </div>
 
@@ -157,7 +170,7 @@
                       <option value="2">CSV</option>
                       <option value="3">PDF</option>
                     </select>
-                    <small id="type_idHelp" class="form-text text-muted" v-text="msg.type_id"></small>
+                    <small id="" class="form-text text-muted" v-text="msg.type_id"></small>
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -166,7 +179,7 @@
                       <span class="edit"></span> Nombre del Hipervinculo:
                     </label>
                     <input type="text" id="name" class="form-control" v-model="more_info_.name">
-                    <small id="nameHelp" class="form-text text-muted" v-text="msg.name_"></small>
+                    <small id="" class="form-text text-muted" v-text="msg.name_"></small>
                   </div>
                 </div>
                 <div class="col-md-4" v-if="more_info_.type_id == 1">
@@ -387,7 +400,8 @@
         ico: '',
         data: {
           inscription: false,
-          organizer_id: ''
+          organizer_id: '',
+          type_id: ''
         },
         entries: {
           0: [
@@ -402,7 +416,7 @@
           description: 'Detalles generales.',
           start: 'Fecha a comenzar el evento.',
           end: 'Fecha a terminar el evento.',
-          organizador: 'Organizador de la competición.',
+          organizer_id: 'Organizador de la competición.',
           price: 'precio para bailarines.',
           p_category: 'Categorias de baile.',
           entrance_price: 'precios de entradas.',

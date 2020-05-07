@@ -150,7 +150,6 @@ class CreateTournamentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inscriptions');
         Schema::dropIfExists('referee_tournament');
         Schema::dropIfExists('category_open_tournament');
         Schema::dropIfExists('subcategory_latino_tournament');
@@ -158,6 +157,8 @@ class CreateTournamentTable extends Migration
         Schema::dropIfExists('hotels');
         Schema::dropIfExists('inscription_price');
         Schema::dropIfExists('prices');
+        Schema::dropIfExists('more_infos');
+        Schema::dropIfExists('inscriptions');
         Schema::dropIfExists('tournaments');
     }
 }

@@ -1,6 +1,10 @@
 @extends('mail.layouts')
 @section('saludo')
+@if($data->user_id)
 Hola {{ $data->user->fullName() }}.
+@else
+Hola {{ $data->name_1 }} {{ $data->name_2 }}.
+@endif
 @endsection
 @section('content')
 <tr>
@@ -20,7 +24,7 @@ Hola {{ $data->user->fullName() }}.
 		<p>Para ver el listado de participantes <a href="{{ route('list', $data->tournament->slug) }}">haz click aquí</a>.</p>
 		<p>Para ver más información sobre la competición visita nuestra página web: <a href="{{ url('/') }}">{{ url('/') }}</a></p>
 		<p>Un cordial saludo.</p>
-		<p>El equipo de PINGUI.es</p>
+		<p>El equipo de <a href="{{ url('/') }}">PINGUI.es</a></p>
 	</td>
 </tr>
 @endsection

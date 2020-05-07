@@ -1,0 +1,641 @@
+<template>
+	<div class="row">
+		<form class="row" @submit.prevent="register" v-if="r == true">
+			<div class="col-md-12">
+				<h4>Datos de Inscripcion</h4>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="email" class="control-label">
+						<span class="fa fa-email"></span> Correo electronico:
+					</label>
+					<input id="email" type="text" class="form-control" v-model="form.email">
+					<small id="emailHelp" class="form-text text-muted" v-text="msg.email"></small>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="phone" class="control-label">
+						<span class="fa fa-phone"></span> Telefono:
+					</label>
+					<input id="phone" type="text" class="form-control" v-model="form.phone">
+					<small id="phoneHelp" class="form-text text-muted" v-text="msg.phone"></small>
+				</div>
+			</div>
+			<div class="col-md-6" style="height: 76px">
+				<div class="form-group">
+					<label for="category_id" class="control-label">
+						<span class="fa fa-category_id"></span> Categoria:
+					</label>
+					<label class="form-inline col-xs-6">
+						<input type="radio" id="category_id" value="1" v-model="category_id">
+						Individual
+					</label>
+					<label class="form-inline col-xs-6">
+						<input type="radio" id="category_id" value="2" v-model="category_id">
+						Pareja
+					</label>
+					<small id="category_idHelp" class="form-text text-muted" v-text="msg.category_id"></small>
+				</div>
+			</div>
+			<div class="col-md-6" v-show="form.category_id == 1" style="height: 76px">
+				<div class="form-group">
+					<label for="sex_id" class="control-label">
+						<span class="fa fa-sex_id"></span> Sexo:
+					</label>
+					<label class="form-inline col-xs-6">
+						<input type="radio" id="sex_id" value="1" v-model="form.sex_id">
+						Hombre
+					</label>
+					<label class="form-inline col-xs-6">
+						<input type="radio" id="sex_id" value="2" v-model="form.sex_id">
+						Dama
+					</label>
+					<small id="sex_idHelp" class="form-text text-muted" v-text="msg.sex_id"></small>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="name" class="control-label">
+						<span class="fa fa-name"></span> Nombre:
+					</label>
+					<input id="name" type="text" class="form-control"  v-model="form.name">
+					<small id="nameHelp" class="form-text text-muted" v-text="msg.name"></small>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="last_name" class="control-label">
+						<span class="fa fa-last_name"></span> Apellido:
+					</label>
+					<input id="last_name" type="text" class="form-control"  v-model="form.last_name">
+					<small id="last_nameHelp" class="form-text text-muted" v-text="msg.last_name"></small>
+				</div>
+			</div>
+			<!-- <div class="col-md-6" v-if="form.category_id == 2">
+				<div class="form-group">
+					<label for="name_couple" class="control-label">
+						<span class="fa fa-name_couple"></span> Nombre de pareja:
+					</label>
+					<input id="name_couple" type="text" class="form-control" v-model="form.name_couple">
+					<small id="name_coupleHelp" class="form-text text-muted" v-text="msg.name_couple"></small>
+				</div>
+			</div>
+			<div class="col-md-6" v-if="form.category_id == 2">
+				<div class="form-group">
+					<label for="last_name_couple" class="control-label">
+						<span class="fa fa-last_name_couple"></span> Apellido de pareja:
+					</label>
+					<input id="last_name_couple" type="text" class="form-control" v-model="form.last_name_couple">
+					<small id="last_name_coupleHelp" class="form-text text-muted" v-text="msg.last_name_couple"></small>
+				</div>
+			</div> -->
+			<div class="col-md-6">
+              <div class="form-group">
+                <label for="birthdate" class="control-label">
+                  <span class="edit"></span> Fecha de Nacimiento:
+                </label>
+                <date-picker id="birthdate"
+                :config="config"
+                v-model="form.birthdate"/>
+                <small id="birthdateHelp"
+                class="form-text text-muted"
+                v-text="msg.birthdate"></small>
+              </div>
+            </div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="club" class="control-label">
+						<span class="fa fa-club"></span> Club:
+					</label>
+					<input id="club" type="text" class="form-control" v-model="form.club">
+					<small id="clubHelp" class="form-text text-muted" v-text="msg.club"></small>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="coach" class="control-label">
+						<span class="fa fa-coach"></span> Coach:
+					</label>
+					<input id="coach" type="text" class="form-control" v-model="form.coach">
+					<small id="coachHelp" class="form-text text-muted" v-text="msg.coach"></small>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="country" class="control-label">
+						<span class="fa fa-country"></span> Pais:
+					</label>
+					<input id="country" type="text" class="form-control" v-model="form.country">
+					<small id="countryHelp" class="form-text text-muted" v-text="msg.country"></small>
+				</div>
+			</div>
+			<!-- Juvenil Por debajo de 13 -->
+			<!-- Por debajo de 16 -->
+			<!-- Por debajo de 21 -->
+			<!-- Por debajo de 35 -->
+			<!-- Por encima de 35 -->
+			<!-- <div class="col-md-6" v-if="form.category_id == 1" style="height: 77px">
+				<div class="form-group">
+					<label for="group_age" class="control-label">
+						<span class="fa fa-group_age"></span> Grupo de Edad:
+					</label>
+					<label class="form-inline col-xs-6">
+						<input type="radio" id="group_age" value="1" v-model="form.group_age">
+					</label>
+					<label class="form-inline col-xs-6">
+						<input type="radio" id="group_age" value="2" v-model="form.group_age">
+					</label>
+				</div>
+			</div> -->
+			<!-- English Walts -->
+			<!-- Tango -->
+			<!-- Viennese Waltz -->
+			<!-- Slow Foxtrot -->
+			<!-- Quickstep -->
+			<!-- samba -->
+			<!-- cha cha cha -->
+			<!-- rumba -->
+			<!-- paso doble -->
+			<!-- jive -->
+			<!-- <div class="col-md-6" v-if="form.category_id == 1" style="height: 77px">
+				<div class="form-group">
+					<label for="group_age" class="control-label">
+						<span class="fa fa-group_age"></span> Baile:
+					</label>
+					<label class="form-inline col-xs-6">
+						<input type="radio" id="group_age" value="1" v-model="form.group_age">
+					</label>
+				</div>
+			</div> -->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- <div class="row">
+						<h4>Seleccione la modalidad que desea bailar:</h4>
+						<div class="col-md-4">
+							<p>Standard:</p>
+							<div class="form-inline"
+							v-if="p.category_id == 3"
+							v-for="(p, i) in tournament.prices">
+								<label :for="p.id">
+									<input type="checkbox"
+									:id="p.id"
+									:value="p"
+									v-model="prices">
+									{{ p.level_text }} - 
+									{{ p.subcategory_text }} - 
+									{{ p.price }} €
+								</label>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<p>Latino:</p>
+							<div class="form-inline"
+							v-for="(p, i) in tournament.prices"
+							v-if="p.category_id == 2">
+								<label :for="p.id">
+									<input type="checkbox"
+									:id="p.id"
+									:value="p"
+									v-model="prices">
+									{{ p.level_text }} - 
+									{{ p.subcategory_text }} - 
+									{{ p.price }} €
+								</label>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<p>Open:</p>
+							<div class="form-inline"
+							v-for="(p, i) in tournament.prices"
+							v-if="p.category_id == 1">
+								<label :for="p.id">
+									<input type="checkbox"
+									:id="p.id"
+									:value="p"
+									v-model="prices">
+									{{ p.level_text }} - {{ p.price }} €
+								</label>
+							</div>
+						</div>
+					</div> -->
+					<div class="row">
+						<div class="col-md-12">
+							<h4>Total a Pagar: <b>{{ form.pay }} €</b></h4>
+						</div>
+					</div>
+					<div class="col-md-12" v-show="form.pay">
+						<p>Seleccione el tipo de pago:</p>
+						<div class="col-md-12">
+							<div class="col-md-4 btn borde"
+							:class="{'btn-black': form.method_pay == 1}"
+							@click="form.method_pay = 1"
+							v-if="tournament.organizer.headline && tournament.organizer.account && tournament.organizer.bank">
+								Transferencia
+							</div>
+							<div class="col-md-4 btn borde"
+							:class="{'btn-black': form.method_pay == 2}"
+							@click="form.method_pay = 2"
+							v-if="tournament.organizer.paypal_client_id && tournament.organizer.paypal_client_secret">
+								Paypal
+							</div>
+							<div class="col-md-4 btn borde"
+							:class="{'btn-black': form.method_pay == 3}"
+							@click="form.method_pay = 3"
+							v-if="tournament.organizer.t_publishable_key && tournament.organizer.t_secret_key">
+								Tarjeta
+							</div>
+						</div>
+						<small id="method_payHelp" class="form-text text-muted" v-text="msg.method_pay"></small>
+						<div class="col-md-12" v-if="form.method_pay == 1">
+							<p style="font-size: 14px;">Guarde los datos bancarios y deposite la cantidad acordada.</p>
+							<p style="margin: 0">Banco: <b>{{ tournament.organizer.bank }}</b></p>
+							<p style="margin: 0">Cuenta: <b>{{ tournament.organizer.account }}</b></p>
+							<p style="margin: 0">Titular: <b>{{ tournament.organizer.headline }}</b></p>
+							<p style="margin: 0">Total: <b>{{ form.pay }} €</b></p>
+						</div>
+						<div id="payment-form"
+						class="form-row"
+						v-show="form.method_pay == 3 && (tournament.organizer.t_publishable_key && tournament.organizer.t_secret_key)">
+							<div class="form-row">
+								<label for="card-element">
+									Tarjeta de Débito y Crédito
+								</label>
+								<div id="card-element"></div>
+								<div id="card-errors" role="alert"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="span pull-right" style="padding: 15px">
+					<button type="button" class="btn btn-black" @click="open">Registrar</button>
+				</div>
+			</div>
+			<div id="confirm" class="modal fade" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+				<div class="modal-dialog" role="document" style="top: 100px">
+					<div class="modal-content">
+						<div class="modal-header btn-black">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title">¿Esta Seguro de Registrar su participación en esta competición?</h4>
+						</div>
+						<div class="modal-body">
+							<p>
+								Integrante: {{ form.name }} {{ form.last_name }}
+								<!-- <template v-if="form.category_id == 1"> -->
+									<!-- Integrante: {{ form.name }} -->
+								<!-- </template> -->
+								<!-- <template v-else-if="form.category_id == 2"> -->
+									<!-- Integrantes: {{ form.name }} y {{ form.name_couple }} -->
+								<!-- </template> -->
+							</p>
+							<small id="nameHelp" class="form-text text-muted"></small>
+							<small id="name_coupleHelp" class="form-text text-muted"></small>
+							<!-- <p>
+								Categorias: 
+								<span class="label label-info" v-for="p in prices" style="margin: 3px">
+									{{ p.level_text }}
+									<template v-if="p.subcategory_text">
+										- {{ p.subcategory_text }}
+									</template>
+								</span>
+							</p> -->
+							<small id="priceHelp" class="form-text text-muted"></small>
+							<p>
+								Método de Pago:
+								<span v-if="form.method_pay == 1">Transferencia</span>
+								<span v-if="form.method_pay == 2">PayPal</span>
+								<span v-if="form.method_pay == 3">Tarjeta</span>
+							</p>
+							<small id="method_payHelp" class="form-text text-muted"></small>
+							<p> Total a Pagar: {{ form.pay }} € </p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+							<button type="submit" class="btn btn-success">Confirmar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<div class="col-md-12" v-if="r == false">
+			<div class="alert alert-success">
+				<h3 class="text-center" style="margin: 0">Tu registro a la competición se ha finalizado correctamente..</h3>
+				<p>Hola {{ data.name_1 }} {{ data.last_name_1 }}, Se ha registrado correctamente en la competición.</p>
+				<p>
+					<b>Estado del pago: </b>
+					<span v-if="data.state_pay == 1">Ya fué aprobado su pago...</span>
+					<span v-else>En espera de aprobación...</span>
+				</p>
+				<p>
+					<b>Estado de Participación: </b>
+					<span v-if="data.state == 1">Ya fué aprobada su participación en la competencia...</span>
+					<span v-else>En espera de aprobación...</span>
+				</p>
+				<div class="row">
+					<div class="col-md-12">
+						<template v-for="p in data.prices">
+							<span class="label label-info" style="display: inline; font-size: 1em; margin-right: 10px;">
+								{{ cate(p.category_id) }} - {{ namePrice(p.id) }}
+							</span>
+							<wbr></wbr>
+						</template>
+					</div>
+				</div>
+				<hr>
+				<p>
+					<a :href="'/lista/' + tournament.slug" class="btn btn-black">Ver Lista de inscritos</a>
+					<a href="/clean/" class="btn btn-danger">Cerrar Ventana</a>
+				</p>
+				<div v-if="data.method_pay == 1 && !data.state">
+					<p style="font-size: 14px;">No te olvides de llevar a cabo la forma de pago seleccionada.</p>
+					<p style="margin: 0">Banco: <b>{{ tournament.organizer.bank }}</b></p>
+					<p style="margin: 0">Cuenta: <b>{{ tournament.organizer.account }}</b></p>
+					<p style="margin: 0">Titular: <b>{{ tournament.organizer.headline }}</b></p>
+					<p style="margin: 0">Total: <b>{{ data.pay }} €</b></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<style>
+.borde {border: 1px solid;}
+p {font-size: 1.3em;}
+.StripeElement {
+	background-color: white;
+	height: 40px;
+	padding: 10px 12px;
+	border-radius: 4px;
+	border: 1px solid transparent;
+	box-shadow: 0 1px 3px 0 #e6ebf1;
+	-webkit-transition: box-shadow 150ms ease;
+	transition: box-shadow 150ms ease;
+}
+.StripeElement--focus {box-shadow: 0 1px 3px 0 #cfd7df;}
+.StripeElement--invalid {border-color: #fa755a;}
+.StripeElement--webkit-autofill {background-color: #fefde5 !important;}
+</style>
+
+<script>
+	import DatePicker from 'vue-bootstrap-datetimepicker';
+	import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css';
+	export default {
+		name: 'inscription-online',
+		components: { DatePicker },
+		props: ['id'],
+		data() {
+			return {
+				stripe_objec: {},
+				card: {},
+				prices: [],
+		// 		t: {},
+				config: {
+					format: 'DD/MM/YYYY',
+					useCurrent: true,
+					showClear: true,
+					showClose: true
+				},
+				category_id: '',
+				r: null,
+				// data: {},
+				form: {
+// email: 'rennyarmando@gmail.com',
+// phone: '04147264958',
+// category_id: 1,
+// sex_id: 1,
+// name: 'Renny',
+// last_name: 'Suarez',
+// name_couple: 'Renny2',
+// last_name_couple: 'Suarez2',
+// birthdate: '05/05/2020',
+// club: 'club',
+// coach: 'entrenador',
+// country: 'pais',
+					pay: 0,
+					method_pay: 0,
+					// name: '',
+					// name_couple: '',
+					price: []
+				},
+				tournament: {
+					organizer: {}
+				},
+				msg: {
+					email: 'Email asociado.',
+					phone: 'Telefono de contacto.',
+					category_id: 'Categoria a competir.',
+					sex_id: 'Genero del participante.',
+					name: 'Nombre del participante.',
+					last_name: 'Apellido del participante.',
+					name_couple: 'Nombre de la pareja.',
+					last_name_couple: 'Apellido de la pareja.',
+					birthdate: 'Fecha de Nacimiento.',
+					club: 'Club del participante.',
+					coach: 'Entrenador de baila.',
+					country: 'Pais donde reside.',
+				},
+		// 		inscription: {
+		// 			user_id: '',
+		// 			tournament_id: '',
+		// 			febd_num_1: '',
+		// 			last_name_1: '',
+		// 			name_1: '',
+		// 			febd_num_2: '',
+		// 			name_2: '',
+		// 			last_name_2: '',
+		// 			price: '',
+		// 			method_pay: '',
+		// 			pay: 0,
+		// 		}
+			};
+		},
+		watch: {
+			prices: function (prices) {
+				let price = 0, add_pay = 0, ids = []
+				for(let p of prices) {
+					ids.push(p.id)
+					if (p.category_id == 1) {
+						price += Number(p.price);
+					}
+					if ((p.category_id == 2 || p.category_id == 3) && add_pay == 0) {
+						price += Number(p.price);
+						add_pay++;
+					}
+				}
+				this.form.price = ids;
+				this.form.pay = Number(price);
+			},
+			category_id: function (value) {
+				if (value == 1) {
+					this.form.pay = 5
+				} else {
+					this.form.pay = 10
+				}
+				this.form.category_id = value
+			}
+		},
+		mounted() {
+			axios.post('/get-data', { id: this.id })
+			.then(response => {
+				let user = response.data.user
+				let organizer = response.data.tournament.organizer
+
+				this.data = response.data.state
+				this.form.tournament_id = this.id
+				this.r = ! response.data.state.id
+				this.tournament = response.data.tournament
+
+				if (organizer.t_publishable_key && organizer.t_secret_key) {
+					this.stripe(organizer.t_publishable_key);
+				}
+				if (user) {
+					this.form.email = user.email
+					this.form.phone = user.phone
+					this.form.name = user.name + ' ' + user.last_name
+					this.form.birthdate = user.birthdate
+				}
+		// 				this.inscription.user_id = response.data.user.id;
+		// 				this.t = response.data.state;
+		// 				let pareja = response.data.user.parejas;
+		// 				if (this.can('inscription.store2')) {
+		// 					if (pareja[0]) {
+		// 						this.pareja1 = ((pareja[0].febd_num) ? pareja[0].febd_num : '') + ' - ' + pareja[0].name + ' ' + pareja[0].last_name;
+		// 						this.inscription.febd_num_1 = pareja[0].febd_num;
+		// 						this.inscription.last_name_1 = pareja[0].last_name;
+		// 						this.inscription.name_1 = pareja[0].name;
+		// 					} else { this.msg.febd_num_1 = 'Agrege la pareja en el perfil'}
+		// 					if (pareja[1]) {
+		// 						this.pareja2 = ((pareja[1].febd_num) ? pareja[1].febd_num : '') + ' - ' + pareja[1].name + ' ' + pareja[1].last_name;
+		// 						this.inscription.febd_num_2 = pareja[1].febd_num;
+		// 						this.inscription.last_name_2 = pareja[1].last_name;
+		// 						this.inscription.name_2 = pareja[1].name;
+		// 					} else { this.msg.febd_num_2 = 'Agrege la pareja en el perfil'}
+		// 				} else {
+		// 					if (this.data.sex == 0) {
+								// this.pareja2 = ((this.data.febd_num) ? this.data.febd_num : '') + ' - ' + this.data.name + ' ' + this.data.last_name;
+		// 						this.inscription.febd_num_2 = this.data.febd_num;
+								// this.inscription.name_2 = this.data.name;
+		// 						this.inscription.last_name_2 = this.data.last_name;
+		// 						if (pareja[0]) {
+		// 							this.pareja1 = ((pareja[0].febd_num) ? pareja[0].febd_num : '') + ' - ' + pareja[0].name + ' ' + pareja[0].last_name;
+		// 							this.inscription.febd_num_1 = pareja[0].febd_num;
+		// 							this.inscription.last_name_1 = pareja[0].last_name;
+		// 							this.inscription.name_1 = pareja[0].name;
+		// 						} else { this.msg.febd_num_1 = 'Agrege la pareja en el perfil'}
+		// 					} else {
+		// 						this.pareja1 = ((this.data.febd_num) ? this.data.febd_num : '') + ' - ' + this.data.name + ' ' + this.data.last_name;
+		// 						this.inscription.febd_num_1 = this.data.febd_num;
+		// 						this.inscription.name_1 = this.data.name;
+		// 						this.inscription.last_name_1 = this.data.last_name;
+		// 						if (pareja[0]) {
+		// 							this.pareja2 = ((pareja[0].febd_num) ? pareja[0].febd_num : '') + ' - ' + pareja[0].name + ' ' + pareja[0].last_name;
+		// 							this.inscription.febd_num_2 = pareja[0].febd_num;
+		// 							this.inscription.last_name_2 = pareja[0].last_name;
+		// 							this.inscription.name_2 = pareja[0].name;
+		// 						} else { this.msg.febd_num_2 = 'Agrege la pareja en el perfil'}
+		// 					}
+		// 				}
+		// 			}
+				});
+		},
+		methods: {
+			namePrice: function (id) {
+				for(let o in this.tournament.prices) {
+					if (this.tournament.prices[o].id == id) {
+						return this.tournament.prices[o].level_text + ((this.tournament.prices[o].subcategory_text) ? ' - ' + this.tournament.prices[o].subcategory_text : '');
+					}
+				}
+			},
+			cate: function (n) {
+				if (n === 1) {
+					return 'Open';
+				} else if (n === 2) {
+					return 'Latino';
+				} else if (n === 3) {
+					return 'Standard';
+				}
+			},
+			open: function () {
+				$('#confirm').modal('show');
+				setTimeout(function () {$('#confirm, body').css({'padding-right': '0px'});}, 100);
+				$('.modal-backdrop').hide();
+			},
+			register: function (event) {
+				if (this.form.method_pay == 3) {
+					this.stripe_objec.createToken(this.card).then((result) => {
+						if (result.error) {
+							// Inform the user if there was an error.
+							var errorElement = document.getElementById('card-errors');
+							errorElement.textContent = result.error.message;
+							toastr.info('Error En la conexión');
+						} else {
+							// Send the token to your server.
+							this.form.stripeToken = result.token.id;
+							// this.stripeTokenHandler(result.token);
+							this.send();
+						}
+					});
+				} else {
+					this.send();
+				}
+			},
+			send: function () {
+				toastr.info('Procesando Información, ¡por favor espere!');
+				axios.post('/inscription-online', this.form)
+				.then(response => {
+					if (this.form.method_pay == 2) {
+						toastr.success('Registro exitoso, espere respuesta de PayPal');
+						setTimeout(() => window.location.href = response.data, 1000);
+					} else {
+						toastr.success('Registro exitoso');
+						setTimeout(() => window.location.reload(), 1000);
+					}
+				});
+			},
+			stripe: function (public_key) {
+				// Create a Stripe client.
+				this.stripe_objec = Stripe(public_key);
+				// Create an instance of Elements.
+				var elements = this.stripe_objec.elements();
+				// Custom styling can be passed to options when creating an Element.
+				// (Note that this demo uses a wider set of styles than the guide below.)
+				var style = {
+					base: {
+						color: '#32325d',
+						lineHeight: '18px',
+						fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+						fontSmoothing: 'antialiased',
+						fontSize: '16px',
+						'::placeholder': {
+							color: '#aab7c4'
+						}
+					},
+					invalid: {
+						color: '#fa755a',
+						iconColor: '#fa755a'
+					}
+				};
+				// Create an instance of the card Element.
+				var card = elements.create('card', {style: style});
+
+				// Add an instance of the card Element into the `card-element` <div>.
+				setTimeout(() => {
+					card.mount('#card-element');
+				}, 1000);
+
+				// Handle real-time validation errors from the card Element.
+				card.addEventListener('change', function(event) {
+					var displayError = document.getElementById('card-errors');
+					if (event.error) {
+						displayError.textContent = event.error.message;
+					} else {
+						displayError.textContent = '';
+					}
+				});
+				this.card = card;
+			}
+		}
+	}
+</script>

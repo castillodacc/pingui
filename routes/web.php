@@ -17,6 +17,8 @@ Route::get('confirm/{slug}', 'RouteController@confirm');
 Route::get('contacto', 'RouteController@contact');
 Route::post('contact-save', 'RouteController@contactSave');
 Route::get('competicion/{slug}/inscribir', 'RouteController@inscription')->name('publication.inscription');
+Route::post('get-data', 'RouteController@data');
+Route::get('clean', 'RouteController@clean');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('payment/cancel/{id}', 'InscriptionController@paymentCancel')->name('payment.cancel');
@@ -56,8 +58,6 @@ Route::post('app', 'RouteController@dataForTemplate');
  * Requieren autentificación.
  */
 Route::group(['middleware' => ['auth', 'onlyAjax']], function () {
-
-    Route::post('get-data', 'RouteController@data');
 
     /**
      * Admin, Acceso para usuarios con privilegios.
@@ -117,5 +117,8 @@ Route::group(['middleware' => ['auth', 'onlyAjax']], function () {
     Route::post('admin/app', 'RouteController@canPermission');
 
 });
+
+Route::post('inscription-online', 'InscriptionController@online')
+->middleware('onlyAjax');
 
 Route::get('{any?}', 'RouteController@index')->where('any', '.*');
