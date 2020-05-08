@@ -188,7 +188,7 @@ class RouteController extends Controller
             }
         } elseif ($request->session()->has('register_inscription')) {
             $inscription = Inscription::where(
-                'tournament_id', $request->session()->has('register_inscription')
+                'id', $request->session()->get('register_inscription')
             )
             ->select([
                 'id',

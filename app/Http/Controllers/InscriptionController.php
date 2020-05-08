@@ -181,6 +181,7 @@ class InscriptionController extends Controller
         $inscription = Inscription::withTrashed()->findOrFail($id);
         $tournament = Tournament::findOrFail($inscription->tournament_id);
         $cancel = 'Transacción cancelada o fallida.';
+        $request->session()->put('register_inscription', null);
         return view('inscription', compact('tournament', 'cancel'));
     }
 
@@ -303,8 +304,13 @@ class InscriptionController extends Controller
                 'source' => $request->stripeToken
             ]);
             if ($charge['status'] == 'succeeded') {
+                $request->session()->put(
+                    'register_inscription', $inscription->id
+                );
                 $inscription->restore();
                 $inscription->update(['state_pay' => true]);
+            } else {
+                return;
             }
         }
 
