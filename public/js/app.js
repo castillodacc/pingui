@@ -86776,6 +86776,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -86821,18 +86822,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				organizer: {}
 			},
 			msg: {
-				email: 'Email asociado.',
-				phone: 'Telefono de contacto.',
-				category_id: 'Categoria a competir.',
-				sex_id: 'Genero del participante.',
-				name: 'Nombre del participante.',
-				last_name: 'Apellido del participante.',
-				name_couple: 'Nombre de la pareja.',
-				last_name_couple: 'Apellido de la pareja.',
-				birthdate: 'Fecha de Nacimiento.',
-				club: 'Club del participante.',
-				coach: 'Entrenador de baila.',
-				country: 'Pais donde reside.'
+				// email: 'Email asociado.',
+				// phone: 'Telefono de contacto.',
+				// category_id: 'Categoria a competir.',
+				// sex_id: 'Genero del participante.',
+				// name: 'Nombre del participante.',
+				// last_name: 'Apellido del participante.',
+				// name_couple: 'Nombre de la pareja.',
+				// last_name_couple: 'Apellido de la pareja.',
+				// birthdate: 'Fecha de Nacimiento.',
+				// club: 'Club del participante.',
+				// coach: 'Entrenador de baila.',
+				// country: 'Pais donde reside.',
 			}
 			// 		inscription: {
 			// 			user_id: '',
@@ -87190,7 +87191,7 @@ var render = function() {
                         }
                       }
                     }),
-                    _vm._v("\n\t\t\t\t\t\tIndividual\n\t\t\t\t\t")
+                    _vm._v("\n\t\t\t\t\t\tSingle\n\t\t\t\t\t")
                   ]),
                   _vm._v(" "),
                   _c("label", { staticClass: "form-inline col-xs-6" }, [
@@ -87211,7 +87212,7 @@ var render = function() {
                         }
                       }
                     }),
-                    _vm._v("\n\t\t\t\t\t\tPareja\n\t\t\t\t\t")
+                    _vm._v("\n\t\t\t\t\t\tCouple\n\t\t\t\t\t")
                   ]),
                   _vm._v(" "),
                   _c("small", {
@@ -87495,7 +87496,7 @@ var render = function() {
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col-md-12" }, [
                     _c("h4", [
-                      _vm._v("Total a Pagar: "),
+                      _vm._v("Total to pay: "),
                       _c("b", [_vm._v(_vm._s(_vm.form.pay) + " €")])
                     ])
                   ])
@@ -87515,7 +87516,7 @@ var render = function() {
                     staticClass: "col-md-12"
                   },
                   [
-                    _c("p", [_vm._v("Seleccione el tipo de pago:")]),
+                    _c("p", [_vm._v("Select type of payment:")]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-12" }, [
                       _vm.tournament.organizer.headline &&
@@ -87534,7 +87535,7 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n\t\t\t\t\t\t\t\tTransferencia\n\t\t\t\t\t\t\t"
+                                "\n\t\t\t\t\t\t\t\tTransfor\n\t\t\t\t\t\t\t"
                               )
                             ]
                           )
@@ -87570,11 +87571,7 @@ var render = function() {
                                 }
                               }
                             },
-                            [
-                              _vm._v(
-                                "\n\t\t\t\t\t\t\t\tTarjeta\n\t\t\t\t\t\t\t"
-                              )
-                            ]
+                            [_vm._v("\n\t\t\t\t\t\t\t\tCard\n\t\t\t\t\t\t\t")]
                           )
                         : _vm._e()
                     ]),
@@ -87589,26 +87586,26 @@ var render = function() {
                       ? _c("div", { staticClass: "col-md-12" }, [
                           _c("p", { staticStyle: { "font-size": "14px" } }, [
                             _vm._v(
-                              "Guarde los datos bancarios y deposite la cantidad acordada."
+                              "Save bank details and deposit agreed amount."
                             )
                           ]),
                           _vm._v(" "),
                           _c("p", { staticStyle: { margin: "0" } }, [
-                            _vm._v("Banco: "),
+                            _vm._v("Bank: "),
                             _c("b", [
                               _vm._v(_vm._s(_vm.tournament.organizer.bank))
                             ])
                           ]),
                           _vm._v(" "),
                           _c("p", { staticStyle: { margin: "0" } }, [
-                            _vm._v("Cuenta: "),
+                            _vm._v("Account: "),
                             _c("b", [
                               _vm._v(_vm._s(_vm.tournament.organizer.account))
                             ])
                           ]),
                           _vm._v(" "),
                           _c("p", { staticStyle: { margin: "0" } }, [
-                            _vm._v("Titular: "),
+                            _vm._v("Headline: "),
                             _c("b", [
                               _vm._v(_vm._s(_vm.tournament.organizer.headline))
                             ])
@@ -87661,7 +87658,7 @@ var render = function() {
                       attrs: { type: "button" },
                       on: { click: _vm.open }
                     },
-                    [_vm._v("Registrar")]
+                    [_vm._v("Register")]
                   )
                 ]
               )
@@ -87694,7 +87691,7 @@ var render = function() {
                       _c("div", { staticClass: "modal-body" }, [
                         _c("p", [
                           _vm._v(
-                            "\n\t\t\t\t\t\t\t\tIntegrante: " +
+                            "\n\t\t\t\t\t\t\t\tMember: " +
                               _vm._s(_vm.form.name) +
                               " " +
                               _vm._s(_vm.form.last_name) +
@@ -87719,7 +87716,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("p", [
                           _vm._v(
-                            "\n\t\t\t\t\t\t\t\tMétodo de Pago:\n\t\t\t\t\t\t\t\t"
+                            "\n\t\t\t\t\t\t\t\tPayment method:\n\t\t\t\t\t\t\t\t"
                           ),
                           _vm.form.method_pay == 1
                             ? _c("span", [_vm._v("Transferencia")])
@@ -87741,7 +87738,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("p", [
                           _vm._v(
-                            " Total a Pagar: " + _vm._s(_vm.form.pay) + " € "
+                            " Total to pay: " + _vm._s(_vm.form.pay) + " € "
                           )
                         ])
                       ]),
@@ -87764,39 +87761,42 @@ var render = function() {
               { staticClass: "text-center", staticStyle: { margin: "0" } },
               [
                 _vm._v(
-                  "Tu registro a la competición se ha finalizado correctamente.."
+                  "Your registration to the competition has been successfully completed."
                 )
               ]
             ),
             _vm._v(" "),
             _c("p", [
               _vm._v(
-                "Hola " +
+                "Hello " +
                   _vm._s(_vm.data.name_1) +
                   " " +
                   _vm._s(_vm.data.last_name_1) +
-                  ", Se ha registrado correctamente en la competición."
+                  ", You have successfully entered the competition."
               )
             ]),
             _vm._v(" "),
             _c("p", [
-              _c("b", [_vm._v("Estado del pago: ")]),
+              _vm._v("\n\t\t\t\t\t: \n\t\t\t\t\t"),
+              _c("b", [_vm._v("Payment status: ")]),
               _vm._v(" "),
               _vm.data.state_pay == 1
-                ? _c("span", [_vm._v("Ya fué aprobado su pago...")])
-                : _c("span", [_vm._v("En espera de aprobación...")])
+                ? _c("span", [
+                    _vm._v("Your payment has already been approved...")
+                  ])
+                : _c("span", [_vm._v("Awaiting approval...")])
             ]),
             _vm._v(" "),
             _c("p", [
-              _c("b", [_vm._v("Estado de Participación: ")]),
+              _c("b", [_vm._v("Participation Status: ")]),
               _vm._v(" "),
               _vm.data.state == 1
                 ? _c("span", [
                     _vm._v(
-                      "Ya fué aprobada su participación en la competencia..."
+                      "Your participation in the competition has already been approved..."
                     )
                   ])
-                : _c("span", [_vm._v("En espera de aprobación...")])
+                : _c("span", [_vm._v("Awaiting approval...")])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "row" }, [
@@ -87858,22 +87858,22 @@ var render = function() {
               ? _c("div", [
                   _c("p", { staticStyle: { "font-size": "14px" } }, [
                     _vm._v(
-                      "No te olvides de llevar a cabo la forma de pago seleccionada."
+                      "Do not forget to carry out the selected payment method."
                     )
                   ]),
                   _vm._v(" "),
                   _c("p", { staticStyle: { margin: "0" } }, [
-                    _vm._v("Banco: "),
+                    _vm._v("Bank: "),
                     _c("b", [_vm._v(_vm._s(_vm.tournament.organizer.bank))])
                   ]),
                   _vm._v(" "),
                   _c("p", { staticStyle: { margin: "0" } }, [
-                    _vm._v("Cuenta: "),
+                    _vm._v("Account: "),
                     _c("b", [_vm._v(_vm._s(_vm.tournament.organizer.account))])
                   ]),
                   _vm._v(" "),
                   _c("p", { staticStyle: { margin: "0" } }, [
-                    _vm._v("Titular: "),
+                    _vm._v("Owner: "),
                     _c("b", [_vm._v(_vm._s(_vm.tournament.organizer.headline))])
                   ]),
                   _vm._v(" "),
@@ -87894,7 +87894,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-12" }, [
-      _c("h4", [_vm._v("Datos de Inscripcion")])
+      _c("h4", [_vm._v("Registration Information")])
     ])
   },
   function() {
@@ -87906,7 +87906,7 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "email" } },
       [
         _c("span", { staticClass: "fa fa-email" }),
-        _vm._v(" Correo electronico:\n\t\t\t\t\t")
+        _vm._v(" E-mail:\n\t\t\t\t\t")
       ]
     )
   },
@@ -87919,7 +87919,7 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "phone" } },
       [
         _c("span", { staticClass: "fa fa-phone" }),
-        _vm._v(" Telefono:\n\t\t\t\t\t")
+        _vm._v(" Phone:\n\t\t\t\t\t")
       ]
     )
   },
@@ -87932,7 +87932,7 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "category_id" } },
       [
         _c("span", { staticClass: "fa fa-category_id" }),
-        _vm._v(" Categoria:\n\t\t\t\t\t")
+        _vm._v(" Category:\n\t\t\t\t\t")
       ]
     )
   },
@@ -87943,10 +87943,7 @@ var staticRenderFns = [
     return _c(
       "label",
       { staticClass: "control-label", attrs: { for: "sex_id" } },
-      [
-        _c("span", { staticClass: "fa fa-sex_id" }),
-        _vm._v(" Sexo:\n\t\t\t\t\t")
-      ]
+      [_c("span", { staticClass: "fa fa-sex_id" }), _vm._v(" Sex:\n\t\t\t\t\t")]
     )
   },
   function() {
@@ -87956,10 +87953,7 @@ var staticRenderFns = [
     return _c(
       "label",
       { staticClass: "control-label", attrs: { for: "name" } },
-      [
-        _c("span", { staticClass: "fa fa-name" }),
-        _vm._v(" Nombre:\n\t\t\t\t\t")
-      ]
+      [_c("span", { staticClass: "fa fa-name" }), _vm._v(" Name:\n\t\t\t\t\t")]
     )
   },
   function() {
@@ -87971,7 +87965,7 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "last_name" } },
       [
         _c("span", { staticClass: "fa fa-last_name" }),
-        _vm._v(" Apellido:\n\t\t\t\t\t")
+        _vm._v(" Last Name:\n\t\t\t\t\t")
       ]
     )
   },
@@ -87984,7 +87978,7 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "birthdate" } },
       [
         _c("span", { staticClass: "edit" }),
-        _vm._v(" Fecha de Nacimiento:\n                ")
+        _vm._v(" Birthdate:\n                ")
       ]
     )
   },
@@ -88020,7 +88014,7 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "country" } },
       [
         _c("span", { staticClass: "fa fa-country" }),
-        _vm._v(" Pais:\n\t\t\t\t\t")
+        _vm._v(" Country:\n\t\t\t\t\t")
       ]
     )
   },
@@ -88030,9 +88024,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-row" }, [
       _c("label", { attrs: { for: "card-element" } }, [
-        _vm._v(
-          "\n\t\t\t\t\t\t\t\t\tTarjeta de Débito y Crédito\n\t\t\t\t\t\t\t\t"
-        )
+        _vm._v("\n\t\t\t\t\t\t\t\t\tdebit and credit card\n\t\t\t\t\t\t\t\t")
       ]),
       _vm._v(" "),
       _c("div", { attrs: { id: "card-element" } }),
@@ -88060,7 +88052,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("h4", { staticClass: "modal-title" }, [
         _vm._v(
-          "¿Esta Seguro de Registrar su participación en esta competición?"
+          "Are you sure to register your participation in this competition?"
         )
       ])
     ])
@@ -88076,13 +88068,13 @@ var staticRenderFns = [
           staticClass: "btn btn-danger",
           attrs: { type: "button", "data-dismiss": "modal" }
         },
-        [_vm._v("Cancelar")]
+        [_vm._v("Cancel")]
       ),
       _vm._v(" "),
       _c(
         "button",
         { staticClass: "btn btn-success", attrs: { type: "submit" } },
-        [_vm._v("Confirmar")]
+        [_vm._v("Confirm")]
       )
     ])
   }

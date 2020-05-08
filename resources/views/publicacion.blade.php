@@ -105,7 +105,7 @@
 										@if(\Auth::guest() || (\Auth::check() && $tournament->inscriptions->where('user_id', \Auth::user()->id)->count() == 0))
 										<div class="col-md-3">
 											<a href="{{ route('publication.inscription', $tournament->slug) }}" class="btn btn-warning btn-block">
-												Inscripción
+												Entry Form
 											</a>
 										</div>
 										@endif
@@ -119,11 +119,11 @@
 							</div>
 							<div class="row">
 								<div class="pull-left col-md-5 col-xs-12">
-									<small>Se realizará: {{ Carbon::parse($tournament->start)->format('d/m/Y') }}.</small><br>
-									<small><strong>Organizador:</strong> {{ $tournament->organizer->name }}.</small><br>
-									<small><strong>Inscripción: {{ ($tournament->inscription) ? 'Abierta' : 'Cerrada' }}.</strong></small><br>
+									<small>Date: {{ Carbon::parse($tournament->start)->format('d/m/Y') }}.</small><br>
+									<small><strong>Organizer:</strong> {{ $tournament->organizer->name }}.</small><br>
+									<small><strong>Registration: {{ ($tournament->inscription) ? 'Open' : 'Close' }}.</strong></small><br>
 									@if($tournament->info)
-									<small><strong>Precio de competición:</strong> <a href="{{ asset('storage/info/' . $tournament->info) }}" class="btn btn-info btn-block" target="_blank">Consultar Hoja Informativa</a></small><br>
+									<small><strong>Price of competition:</strong> <a href="{{ asset('storage/info/' . $tournament->info) }}" class="btn btn-info btn-block" target="_blank">Consultar Hoja Informativa</a></small><br>
 									<div class="col-md-4"></div>
 									@endif
 									@if($tournament->type_id == 1)

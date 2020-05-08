@@ -2,12 +2,12 @@
 	<div class="row">
 		<form class="row" @submit.prevent="register" v-if="r == true">
 			<div class="col-md-12">
-				<h4>Datos de Inscripcion</h4>
+				<h4>Registration Information</h4>
 			</div>
 			<div class="col-md-6">
 				<div class="form-group">
 					<label for="email" class="control-label">
-						<span class="fa fa-email"></span> Correo electronico:
+						<span class="fa fa-email"></span> E-mail:
 					</label>
 					<input id="email" type="text" class="form-control" v-model="form.email">
 					<small id="emailHelp" class="form-text text-muted" v-text="msg.email"></small>
@@ -16,7 +16,7 @@
 			<div class="col-md-6">
 				<div class="form-group">
 					<label for="phone" class="control-label">
-						<span class="fa fa-phone"></span> Telefono:
+						<span class="fa fa-phone"></span> Phone:
 					</label>
 					<input id="phone" type="text" class="form-control" v-model="form.phone">
 					<small id="phoneHelp" class="form-text text-muted" v-text="msg.phone"></small>
@@ -25,15 +25,15 @@
 			<div class="col-md-6" style="height: 76px">
 				<div class="form-group">
 					<label for="category_id" class="control-label">
-						<span class="fa fa-category_id"></span> Categoria:
+						<span class="fa fa-category_id"></span> Category:
 					</label>
 					<label class="form-inline col-xs-6">
 						<input type="radio" id="category_id" value="1" v-model="category_id">
-						Individual
+						Single
 					</label>
 					<label class="form-inline col-xs-6">
 						<input type="radio" id="category_id" value="2" v-model="category_id">
-						Pareja
+						Couple
 					</label>
 					<small id="category_idHelp" class="form-text text-muted" v-text="msg.category_id"></small>
 				</div>
@@ -41,7 +41,7 @@
 			<div class="col-md-6" v-show="form.category_id == 1" style="height: 76px">
 				<div class="form-group">
 					<label for="sex_id" class="control-label">
-						<span class="fa fa-sex_id"></span> Sexo:
+						<span class="fa fa-sex_id"></span> Sex:
 					</label>
 					<label class="form-inline col-xs-6">
 						<input type="radio" id="sex_id" value="1" v-model="form.sex_id">
@@ -57,7 +57,7 @@
 			<div class="col-md-6">
 				<div class="form-group">
 					<label for="name" class="control-label">
-						<span class="fa fa-name"></span> Nombre:
+						<span class="fa fa-name"></span> Name:
 					</label>
 					<input id="name" type="text" class="form-control"  v-model="form.name">
 					<small id="nameHelp" class="form-text text-muted" v-text="msg.name"></small>
@@ -66,7 +66,7 @@
 			<div class="col-md-6">
 				<div class="form-group">
 					<label for="last_name" class="control-label">
-						<span class="fa fa-last_name"></span> Apellido:
+						<span class="fa fa-last_name"></span> Last Name:
 					</label>
 					<input id="last_name" type="text" class="form-control"  v-model="form.last_name">
 					<small id="last_nameHelp" class="form-text text-muted" v-text="msg.last_name"></small>
@@ -93,7 +93,7 @@
 			<div class="col-md-6">
               <div class="form-group">
                 <label for="birthdate" class="control-label">
-                  <span class="edit"></span> Fecha de Nacimiento:
+                  <span class="edit"></span> Birthdate:
                 </label>
                 <date-picker id="birthdate"
                 :config="config"
@@ -124,7 +124,7 @@
 			<div class="col-md-6">
 				<div class="form-group">
 					<label for="country" class="control-label">
-						<span class="fa fa-country"></span> Pais:
+						<span class="fa fa-country"></span> Country:
 					</label>
 					<input id="country" type="text" class="form-control" v-model="form.country">
 					<small id="countryHelp" class="form-text text-muted" v-text="msg.country"></small>
@@ -221,17 +221,17 @@
 					</div> -->
 					<div class="row">
 						<div class="col-md-12">
-							<h4>Total a Pagar: <b>{{ form.pay }} €</b></h4>
+							<h4>Total to pay: <b>{{ form.pay }} €</b></h4>
 						</div>
 					</div>
 					<div class="col-md-12" v-show="form.pay">
-						<p>Seleccione el tipo de pago:</p>
+						<p>Select type of payment:</p>
 						<div class="col-md-12">
 							<div class="col-md-4 btn borde"
 							:class="{'btn-black': form.method_pay == 1}"
 							@click="form.method_pay = 1"
 							v-if="tournament.organizer.headline && tournament.organizer.account && tournament.organizer.bank">
-								Transferencia
+								Transfor
 							</div>
 							<div class="col-md-4 btn borde"
 							:class="{'btn-black': form.method_pay == 2}"
@@ -243,15 +243,15 @@
 							:class="{'btn-black': form.method_pay == 3}"
 							@click="form.method_pay = 3"
 							v-if="tournament.organizer.t_publishable_key && tournament.organizer.t_secret_key">
-								Tarjeta
+								Card
 							</div>
 						</div>
 						<small id="method_payHelp" class="form-text text-muted" v-text="msg.method_pay"></small>
 						<div class="col-md-12" v-if="form.method_pay == 1">
-							<p style="font-size: 14px;">Guarde los datos bancarios y deposite la cantidad acordada.</p>
-							<p style="margin: 0">Banco: <b>{{ tournament.organizer.bank }}</b></p>
-							<p style="margin: 0">Cuenta: <b>{{ tournament.organizer.account }}</b></p>
-							<p style="margin: 0">Titular: <b>{{ tournament.organizer.headline }}</b></p>
+							<p style="font-size: 14px;">Save bank details and deposit agreed amount.</p>
+							<p style="margin: 0">Bank: <b>{{ tournament.organizer.bank }}</b></p>
+							<p style="margin: 0">Account: <b>{{ tournament.organizer.account }}</b></p>
+							<p style="margin: 0">Headline: <b>{{ tournament.organizer.headline }}</b></p>
 							<p style="margin: 0">Total: <b>{{ form.pay }} €</b></p>
 						</div>
 						<div id="payment-form"
@@ -259,7 +259,7 @@
 						v-show="form.method_pay == 3 && (tournament.organizer.t_publishable_key && tournament.organizer.t_secret_key)">
 							<div class="form-row">
 								<label for="card-element">
-									Tarjeta de Débito y Crédito
+									debit and credit card
 								</label>
 								<div id="card-element"></div>
 								<div id="card-errors" role="alert"></div>
@@ -270,7 +270,7 @@
 			</div>
 			<div class="col-md-12">
 				<div class="span pull-right" style="padding: 15px">
-					<button type="button" class="btn btn-black" @click="open">Registrar</button>
+					<button type="button" class="btn btn-black" @click="open">Register</button>
 				</div>
 			</div>
 			<div id="confirm" class="modal fade" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
@@ -278,11 +278,11 @@
 					<div class="modal-content">
 						<div class="modal-header btn-black">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title">¿Esta Seguro de Registrar su participación en esta competición?</h4>
+							<h4 class="modal-title">Are you sure to register your participation in this competition?</h4>
 						</div>
 						<div class="modal-body">
 							<p>
-								Integrante: {{ form.name }} {{ form.last_name }}
+								Member: {{ form.name }} {{ form.last_name }}
 								<!-- <template v-if="form.category_id == 1"> -->
 									<!-- Integrante: {{ form.name }} -->
 								<!-- </template> -->
@@ -303,17 +303,17 @@
 							</p> -->
 							<small id="priceHelp" class="form-text text-muted"></small>
 							<p>
-								Método de Pago:
+								Payment method:
 								<span v-if="form.method_pay == 1">Transferencia</span>
 								<span v-if="form.method_pay == 2">PayPal</span>
 								<span v-if="form.method_pay == 3">Tarjeta</span>
 							</p>
 							<small id="method_payHelp" class="form-text text-muted"></small>
-							<p> Total a Pagar: {{ form.pay }} € </p>
+							<p> Total to pay: {{ form.pay }} € </p>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-							<button type="submit" class="btn btn-success">Confirmar</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+							<button type="submit" class="btn btn-success">Confirm</button>
 						</div>
 					</div>
 				</div>
@@ -321,17 +321,18 @@
 		</form>
 		<div class="col-md-12" v-if="r == false">
 			<div class="alert alert-success">
-				<h3 class="text-center" style="margin: 0">Tu registro a la competición se ha finalizado correctamente..</h3>
-				<p>Hola {{ data.name_1 }} {{ data.last_name_1 }}, Se ha registrado correctamente en la competición.</p>
+				<h3 class="text-center" style="margin: 0">Your registration to the competition has been successfully completed.</h3>
+				<p>Hello {{ data.name_1 }} {{ data.last_name_1 }}, You have successfully entered the competition.</p>
 				<p>
-					<b>Estado del pago: </b>
-					<span v-if="data.state_pay == 1">Ya fué aprobado su pago...</span>
-					<span v-else>En espera de aprobación...</span>
+					: 
+					<b>Payment status: </b>
+					<span v-if="data.state_pay == 1">Your payment has already been approved...</span>
+					<span v-else>Awaiting approval...</span>
 				</p>
 				<p>
-					<b>Estado de Participación: </b>
-					<span v-if="data.state == 1">Ya fué aprobada su participación en la competencia...</span>
-					<span v-else>En espera de aprobación...</span>
+					<b>Participation Status: </b>
+					<span v-if="data.state == 1">Your participation in the competition has already been approved...</span>
+					<span v-else>Awaiting approval...</span>
 				</p>
 				<div class="row">
 					<div class="col-md-12">
@@ -349,10 +350,10 @@
 					<a href="/clean/" class="btn btn-danger">Cerrar Ventana</a>
 				</p>
 				<div v-if="data.method_pay == 1 && !data.state">
-					<p style="font-size: 14px;">No te olvides de llevar a cabo la forma de pago seleccionada.</p>
-					<p style="margin: 0">Banco: <b>{{ tournament.organizer.bank }}</b></p>
-					<p style="margin: 0">Cuenta: <b>{{ tournament.organizer.account }}</b></p>
-					<p style="margin: 0">Titular: <b>{{ tournament.organizer.headline }}</b></p>
+					<p style="font-size: 14px;">Do not forget to carry out the selected payment method.</p>
+					<p style="margin: 0">Bank: <b>{{ tournament.organizer.bank }}</b></p>
+					<p style="margin: 0">Account: <b>{{ tournament.organizer.account }}</b></p>
+					<p style="margin: 0">Owner: <b>{{ tournament.organizer.headline }}</b></p>
 					<p style="margin: 0">Total: <b>{{ data.pay }} €</b></p>
 				</div>
 			</div>
@@ -423,18 +424,18 @@ p {font-size: 1.3em;}
 					organizer: {}
 				},
 				msg: {
-					email: 'Email asociado.',
-					phone: 'Telefono de contacto.',
-					category_id: 'Categoria a competir.',
-					sex_id: 'Genero del participante.',
-					name: 'Nombre del participante.',
-					last_name: 'Apellido del participante.',
-					name_couple: 'Nombre de la pareja.',
-					last_name_couple: 'Apellido de la pareja.',
-					birthdate: 'Fecha de Nacimiento.',
-					club: 'Club del participante.',
-					coach: 'Entrenador de baila.',
-					country: 'Pais donde reside.',
+					// email: 'Email asociado.',
+					// phone: 'Telefono de contacto.',
+					// category_id: 'Categoria a competir.',
+					// sex_id: 'Genero del participante.',
+					// name: 'Nombre del participante.',
+					// last_name: 'Apellido del participante.',
+					// name_couple: 'Nombre de la pareja.',
+					// last_name_couple: 'Apellido de la pareja.',
+					// birthdate: 'Fecha de Nacimiento.',
+					// club: 'Club del participante.',
+					// coach: 'Entrenador de baila.',
+					// country: 'Pais donde reside.',
 				},
 		// 		inscription: {
 		// 			user_id: '',
