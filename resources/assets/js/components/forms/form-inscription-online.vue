@@ -2,7 +2,7 @@
 	<div class="row">
 		<form class="row" @submit.prevent="register" v-if="r == true">
 			<div class="col-md-12">
-				<h4>Registration Information</h4>
+				<h4>Registration Information:</h4>
 			</div>
 			<div class="col-md-6">
 				<div class="form-group">

@@ -55,4 +55,9 @@ class Inscription extends Model
     {
         return $this->belongsToMany(Price::class);
     }
+
+    public function inscriptionOnline()
+    {
+        return $this->hasOne(InscriptionOnline::class);
+    }
 }

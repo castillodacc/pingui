@@ -69,10 +69,74 @@
 					<div  id="app" class="col-md-12">
 						<div class="row">
 							<div class="col-md-12">
-								<h2 class="text-center"><span style="color:#C63A36">LISTA DE INSCRITOS</span></h2>
+								<h2 class="text-center"><span style="color:#C63A36">{{ $tournament->type_id == 1 ? 'LISTA DE INSCRITOS' : 'LIST' }}</span></h2>
 								<h3 class="text-center text-uppercase">{{ $tournament->name }}</h3>
-								<h3 style="padding-top:20px;color:#e32727;border-bottom: 1px solid #000; line-height: 0.1em; margin: 10px 0 20px; text-align: center; "><span style="padding:0 10px; background:#fff;color:#C63A36;font-size:28px;">{{ $tournament->inscriptions->count() }} Parejas</span></h3> 
+								@if($tournament->type_id == 2)
+								<h3 style="padding-top:20px;color:#e32727;border-bottom: 1px solid #000; line-height: 0.1em; margin: 10px 0 20px; text-align: center;">
+									<span style="padding:0 10px; background:#fff;color:#C63A36;font-size:28px;">
+										Single
+									</span>
+								</h3>
+								<div class="row">
+									<div class="col-md-12">
+										<table class="table table-condensed table-hover table-striped">
+											<thead>
+												<tr>
+													<th>Nombre</th>
+													<th>Apellido</th>
+													<th>Club</th>
+													<th>Email</th>
+												</tr>
+											</thead>
+											<tbody>
+												@foreach($tournament->inscriptions as $i)
+												<?php if ($i->inscriptionOnline->category_id == 2) {continue;} ?>
+												<tr>
+													<td>{{ $i->name_1 }}</td>
+													<td>{{ $i->lats_name_1 }}</td>
+													<td>{{ $i->inscriptionOnline->club }}</td>
+													<td>{{ $i->inscriptionOnline->email }}</td>
+												</tr>
+												@endforeach
+											</tbody>
+										</table>
+									</div>
+								</div>
+								@endif
+								@if($tournament->type_id == 2)
+								<h3 style="padding-top:20px;color:#e32727;border-bottom: 1px solid #000; line-height: 0.1em; margin: 10px 0 20px; text-align: center;">
+									<span style="padding:0 10px; background:#fff;color:#C63A36;font-size:28px;">
+										Couple
+									</span>
+								</h3>
+								<div class="row">
+									<div class="col-md-12">
+										<table class="table table-condensed table-hover table-striped">
+											<thead>
+												<tr>
+													<th>Nombre</th>
+													<th>Apellido</th>
+													<th>Club</th>
+													<th>Email</th>
+												</tr>
+											</thead>
+											<tbody>
+												@foreach($tournament->inscriptions as $i)
+												<?php if ($i->inscriptionOnline->category_id == 1) {continue;} ?>
+												<tr>
+													<td>{{ $i->name_1 }}</td>
+													<td>{{ $i->lats_name_1 }}</td>
+													<td>{{ $i->inscriptionOnline->club }}</td>
+													<td>{{ $i->inscriptionOnline->email }}</td>
+												</tr>
+												@endforeach
+											</tbody>
+										</table>
+									</div>
+								</div>
+								@endif
 							</div>
+							@if(!$tournament->type_id == 1)
 							@foreach([1,2,3] as $n)
 							<div class="col-md-4">
 								<h3 class="text-center">
@@ -118,6 +182,7 @@
 								@endforeach
 							</div>
 							@endforeach
+							@endif
 						</div>
 					</div>
 				</div>

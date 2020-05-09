@@ -87894,7 +87894,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-12" }, [
-      _c("h4", [_vm._v("Registration Information")])
+      _c("h4", [_vm._v("Registration Information:")])
     ])
   },
   function() {
