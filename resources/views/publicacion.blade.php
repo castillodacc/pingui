@@ -123,7 +123,11 @@
 									<small><strong>Organizer:</strong> {{ $tournament->organizer->name }}.</small><br>
 									<small><strong>Registration: {{ ($tournament->inscription) ? 'Open' : 'Close' }}.</strong></small><br>
 									@if($tournament->info)
+									@if($tournament->type_id == 1)
 									<small><strong>Price of competition:</strong> <a href="{{ asset('storage/info/' . $tournament->info) }}" class="btn btn-info btn-block" target="_blank">Consultar Hoja Informativa</a></small><br>
+									@else
+									<small><strong>Price of competition:</strong> <a href="{{ asset('storage/info/' . $tournament->info) }}" class="btn btn-info btn-block" target="_blank">Consult Fact Sheet</a></small><br>
+									@endif
 									<div class="col-md-4"></div>
 									@endif
 									@if($tournament->type_id == 1)
