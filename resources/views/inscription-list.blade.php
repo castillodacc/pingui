@@ -93,7 +93,7 @@
 												<?php if ($i->inscriptionOnline->category_id == 2) {continue;} ?>
 												<tr>
 													<td>{{ $i->name_1 }}</td>
-													<td>{{ $i->lats_name_1 }}</td>
+													<td>{{ $i->last_name_1 }}</td>
 													<td>{{ $i->inscriptionOnline->club }}</td>
 													<td>{{ $i->inscriptionOnline->email }}</td>
 												</tr>
@@ -125,7 +125,7 @@
 												<?php if ($i->inscriptionOnline->category_id == 1) {continue;} ?>
 												<tr>
 													<td>{{ $i->name_1 }}</td>
-													<td>{{ $i->lats_name_1 }}</td>
+													<td>{{ $i->last_name_1 }}</td>
 													<td>{{ $i->inscriptionOnline->club }}</td>
 													<td>{{ $i->inscriptionOnline->email }}</td>
 												</tr>

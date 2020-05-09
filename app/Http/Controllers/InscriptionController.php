@@ -230,7 +230,7 @@ class InscriptionController extends Controller
             'email' => 'required|email',
             'coach' => 'nullable|string',
             'price' => 'nullable|array',
-            'sex_id' => 'required|numeric',
+            'sex_id' => 'nullable|numeric',
             'country' => 'required|string',
             'last_name' => 'required|string',
             'birthdate' => 'required|date',
