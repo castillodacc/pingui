@@ -16,7 +16,7 @@
 			<div class="col-md-6">
 				<div class="form-group">
 					<label for="phone" class="control-label">
-						<span class="fa fa-phone"></span> Phone:
+						<span class="fa fa-phone"></span> Telephone (Preferably with whatsapp):
 					</label>
 					<input id="phone" type="text" class="form-control" v-model="form.phone">
 					<small id="phoneHelp" class="form-text text-muted" v-text="msg.phone"></small>
@@ -28,11 +28,11 @@
 						<span class="fa fa-category_id"></span> Category:
 					</label>
 					<label class="form-inline col-xs-6">
-						<input type="radio" id="category_id" value="1" v-model="category_id">
+						<input type="radio" id="category_id" value="1" v-model="form.category_id">
 						Single
 					</label>
 					<label class="form-inline col-xs-6">
-						<input type="radio" id="category_id" value="2" v-model="category_id">
+						<input type="radio" id="category_id" value="2" v-model="form.category_id">
 						Couple
 					</label>
 					<small id="category_idHelp" class="form-text text-muted" v-text="msg.category_id"></small>
@@ -75,7 +75,7 @@
 			<!-- <div class="col-md-6" v-if="form.category_id == 2">
 				<div class="form-group">
 					<label for="name_couple" class="control-label">
-						<span class="fa fa-name_couple"></span> Nombre de pareja:
+						<span class="fa fa-name_couple"></span> Name couple:
 					</label>
 					<input id="name_couple" type="text" class="form-control" v-model="form.name_couple">
 					<small id="name_coupleHelp" class="form-text text-muted" v-text="msg.name_couple"></small>
@@ -84,7 +84,7 @@
 			<div class="col-md-6" v-if="form.category_id == 2">
 				<div class="form-group">
 					<label for="last_name_couple" class="control-label">
-						<span class="fa fa-last_name_couple"></span> Apellido de pareja:
+						<span class="fa fa-last_name_couple"></span> Last naeme couple:
 					</label>
 					<input id="last_name_couple" type="text" class="form-control" v-model="form.last_name_couple">
 					<small id="last_name_coupleHelp" class="form-text text-muted" v-text="msg.last_name_couple"></small>
@@ -130,44 +130,30 @@
 					<small id="countryHelp" class="form-text text-muted" v-text="msg.country"></small>
 				</div>
 			</div>
-			<!-- Juvenil Por debajo de 13 -->
-			<!-- Por debajo de 16 -->
-			<!-- Por debajo de 21 -->
-			<!-- Por debajo de 35 -->
-			<!-- Por encima de 35 -->
-			<!-- <div class="col-md-6" v-if="form.category_id == 1" style="height: 77px">
+			<div class="col-md-6">
 				<div class="form-group">
-					<label for="group_age" class="control-label">
-						<span class="fa fa-group_age"></span> Grupo de Edad:
+					<label for="age_group" class="control-label">
+						<span class="fa fa-age_group"></span> Age Group (You can join more than one):
 					</label>
-					<label class="form-inline col-xs-6">
-						<input type="radio" id="group_age" value="1" v-model="form.group_age">
+					<label :for="'age_group'+i" class="form-inline col-xs-6" v-for="(a, i) in age_groups">
+						<input type="checkbox" :id="'age_group'+i" :value="i" v-model="form.age_group">
+						{{ a }}
 					</label>
-					<label class="form-inline col-xs-6">
-						<input type="radio" id="group_age" value="2" v-model="form.group_age">
-					</label>
+					<small id="age_groupHelp" class="form-text text-muted" v-text="msg.age_group"></small>
 				</div>
-			</div> -->
-			<!-- English Walts -->
-			<!-- Tango -->
-			<!-- Viennese Waltz -->
-			<!-- Slow Foxtrot -->
-			<!-- Quickstep -->
-			<!-- samba -->
-			<!-- cha cha cha -->
-			<!-- rumba -->
-			<!-- paso doble -->
-			<!-- jive -->
-			<!-- <div class="col-md-6" v-if="form.category_id == 1" style="height: 77px">
+			</div>
+			<div class="col-md-6">
 				<div class="form-group">
-					<label for="group_age" class="control-label">
-						<span class="fa fa-group_age"></span> Baile:
+					<label for="dance" class="control-label">
+						<span class="fa fa-dance"></span> Dance:
 					</label>
-					<label class="form-inline col-xs-6">
-						<input type="radio" id="group_age" value="1" v-model="form.group_age">
+					<label :for="'dance'+i" class="form-inline col-xs-6" v-for="(a, i) in dances">
+						<input type="checkbox" :id="'dance'+i" :value="i" v-model="form.dance">
+						{{ a }}
 					</label>
+					<small id="danceHelp" class="form-text text-muted" v-text="msg.dance"></small>
 				</div>
-			</div> -->
+			</div>
 			<div class="row">
 				<div class="col-md-12">
 					<!-- <div class="row">
@@ -221,7 +207,7 @@
 					</div> -->
 					<div class="row">
 						<div class="col-md-12">
-							<h4>Total to pay: <b>{{ form.pay }} €</b></h4>
+							<h4>Total to pay: <b>{{ pay }} €</b></h4>
 						</div>
 					</div>
 					<div class="col-md-12" v-show="form.pay">
@@ -324,7 +310,6 @@
 				<h3 class="text-center" style="margin: 0">Your registration to the competition has been successfully completed.</h3>
 				<p>Hello {{ data.name_1 }} {{ data.last_name_1 }}, You have successfully entered the competition.</p>
 				<p>
-					: 
 					<b>Payment status: </b>
 					<span v-if="data.state_pay == 1">Your payment has already been approved...</span>
 					<span v-else>Awaiting approval...</span>
@@ -336,9 +321,9 @@
 				</p>
 				<div class="row">
 					<div class="col-md-12">
-						<template v-for="p in data.prices">
+						<template v-for="d in data.dance">
 							<span class="label label-info" style="display: inline; font-size: 1em; margin-right: 10px;">
-								{{ cate(p.category_id) }} - {{ namePrice(p.id) }}
+								{{ dances[d] }}
 							</span>
 							<wbr></wbr>
 						</template>
@@ -346,8 +331,8 @@
 				</div>
 				<hr>
 				<p>
-					<a :href="'/lista/' + tournament.slug" class="btn btn-black">Ver Lista de inscritos</a>
-					<a href="/clean/" class="btn btn-danger">Cerrar Ventana</a>
+					<a :href="'/lista/' + tournament.slug" class="btn btn-black">Registered List</a>
+					<a href="/clean/" class="btn btn-danger">Close Message</a>
 				</p>
 				<div v-if="data.method_pay == 1 && !data.state">
 					<p style="font-size: 14px;">Do not forget to carry out the selected payment method.</p>
@@ -388,6 +373,25 @@ p {font-size: 1.3em;}
 		props: ['id'],
 		data() {
 			return {
+				age_groups: [
+				'JUVENIL 13 years old',
+				'Under 16',
+				'Under 21',
+				'Under 35',
+				'Over 35',
+				],
+				dances: [
+				'English Walts',
+				'Tango',
+				'Viennese Waltz',
+				'Slow Foxtrot',
+				'Quickstep',
+				'Samba',
+				'Cha cha cha',
+				'Rumba',
+				'Paso doble',
+				'Jive',
+				],
 				stripe_objec: {},
 				card: {},
 				prices: [],
@@ -398,7 +402,6 @@ p {font-size: 1.3em;}
 					showClear: true,
 					showClose: true
 				},
-				category_id: '',
 				r: null,
 				// data: {},
 				form: {
@@ -418,7 +421,9 @@ p {font-size: 1.3em;}
 					method_pay: 0,
 					// name: '',
 					// name_couple: '',
-					price: []
+					age_group: [],
+					dance: [],
+					price: [],
 				},
 				tournament: {
 					organizer: {}
@@ -452,31 +457,34 @@ p {font-size: 1.3em;}
 		// 		}
 			};
 		},
-		watch: {
-			prices: function (prices) {
-				let price = 0, add_pay = 0, ids = []
-				for(let p of prices) {
-					ids.push(p.id)
-					if (p.category_id == 1) {
-						price += Number(p.price);
-					}
-					if ((p.category_id == 2 || p.category_id == 3) && add_pay == 0) {
-						price += Number(p.price);
-						add_pay++;
-					}
+		computed: {
+			pay: function () {
+				let pay = 0;
+				if (this.form.category_id == 1) {
+					pay = 5
+				} else if (this.form.category_id == 2) {
+					pay = 10
 				}
-				this.form.price = ids;
-				this.form.pay = Number(price);
-			},
-			category_id: function (value) {
-				if (value == 1) {
-					this.form.pay = 5
-				} else {
-					this.form.pay = 10
-				}
-				this.form.category_id = value
+				return this.form.pay = this.form.dance.length * pay
 			}
 		},
+		// watch: {
+		// 	prices: function (prices) {
+		// 		let price = 0, add_pay = 0, ids = []
+		// 		for(let p of prices) {
+		// 			ids.push(p.id)
+		// 			if (p.category_id == 1) {
+		// 				price += Number(p.price);
+		// 			}
+		// 			if ((p.category_id == 2 || p.category_id == 3) && add_pay == 0) {
+		// 				price += Number(p.price);
+		// 				add_pay++;
+		// 			}
+		// 		}
+		// 		this.form.price = ids;
+		// 		this.form.pay = Number(price);
+		// 	},
+		// },
 		mounted() {
 			axios.post('/get-data', { id: this.id })
 			.then(response => {

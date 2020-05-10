@@ -207,6 +207,8 @@ class RouteController extends Controller
                 $state->prices->each(function ($p) {
                     unset($p->pivot, $p->tournament_id);
                 });
+                $state->dance = explode(',', $inscription->inscriptionOnline->dance);
+                unset($inscription->inscriptionOnline);
             }
         }
         if (\Auth::check()) {

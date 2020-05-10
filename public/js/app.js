@@ -86762,21 +86762,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -86786,6 +86771,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	props: ['id'],
 	data: function data() {
 		return {
+			age_groups: ['JUVENIL 13 years old', 'Under 16', 'Under 21', 'Under 35', 'Over 35'],
+			dances: ['English Walts', 'Tango', 'Viennese Waltz', 'Slow Foxtrot', 'Quickstep', 'Samba', 'Cha cha cha', 'Rumba', 'Paso doble', 'Jive'],
 			stripe_objec: {},
 			card: {},
 			prices: [],
@@ -86796,7 +86783,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				showClear: true,
 				showClose: true
 			},
-			category_id: '',
 			r: null,
 			// data: {},
 			form: {
@@ -86816,6 +86802,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				method_pay: 0,
 				// name: '',
 				// name_couple: '',
+				age_group: [],
+				dance: [],
 				price: []
 			},
 			tournament: {
@@ -86851,55 +86839,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		};
 	},
 
-	watch: {
-		prices: function prices(_prices) {
-			var price = 0,
-			    add_pay = 0,
-			    ids = [];
-			var _iteratorNormalCompletion = true;
-			var _didIteratorError = false;
-			var _iteratorError = undefined;
-
-			try {
-				for (var _iterator = _prices[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-					var p = _step.value;
-
-					ids.push(p.id);
-					if (p.category_id == 1) {
-						price += Number(p.price);
-					}
-					if ((p.category_id == 2 || p.category_id == 3) && add_pay == 0) {
-						price += Number(p.price);
-						add_pay++;
-					}
-				}
-			} catch (err) {
-				_didIteratorError = true;
-				_iteratorError = err;
-			} finally {
-				try {
-					if (!_iteratorNormalCompletion && _iterator.return) {
-						_iterator.return();
-					}
-				} finally {
-					if (_didIteratorError) {
-						throw _iteratorError;
-					}
-				}
+	computed: {
+		pay: function pay() {
+			var pay = 0;
+			if (this.form.category_id == 1) {
+				pay = 5;
+			} else if (this.form.category_id == 2) {
+				pay = 10;
 			}
-
-			this.form.price = ids;
-			this.form.pay = Number(price);
-		},
-		category_id: function category_id(value) {
-			if (value == 1) {
-				this.form.pay = 5;
-			} else {
-				this.form.pay = 10;
-			}
-			this.form.category_id = value;
+			return this.form.pay = this.form.dance.length * pay;
 		}
 	},
+	// watch: {
+	// 	prices: function (prices) {
+	// 		let price = 0, add_pay = 0, ids = []
+	// 		for(let p of prices) {
+	// 			ids.push(p.id)
+	// 			if (p.category_id == 1) {
+	// 				price += Number(p.price);
+	// 			}
+	// 			if ((p.category_id == 2 || p.category_id == 3) && add_pay == 0) {
+	// 				price += Number(p.price);
+	// 				add_pay++;
+	// 			}
+	// 		}
+	// 		this.form.price = ids;
+	// 		this.form.pay = Number(price);
+	// 	},
+	// },
 	mounted: function mounted() {
 		var _this = this;
 
@@ -87179,15 +87146,15 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.category_id,
-                          expression: "category_id"
+                          value: _vm.form.category_id,
+                          expression: "form.category_id"
                         }
                       ],
                       attrs: { type: "radio", id: "category_id", value: "1" },
-                      domProps: { checked: _vm._q(_vm.category_id, "1") },
+                      domProps: { checked: _vm._q(_vm.form.category_id, "1") },
                       on: {
                         change: function($event) {
-                          _vm.category_id = "1"
+                          return _vm.$set(_vm.form, "category_id", "1")
                         }
                       }
                     }),
@@ -87200,15 +87167,15 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.category_id,
-                          expression: "category_id"
+                          value: _vm.form.category_id,
+                          expression: "form.category_id"
                         }
                       ],
                       attrs: { type: "radio", id: "category_id", value: "2" },
-                      domProps: { checked: _vm._q(_vm.category_id, "2") },
+                      domProps: { checked: _vm._q(_vm.form.category_id, "2") },
                       on: {
                         change: function($event) {
-                          _vm.category_id = "2"
+                          return _vm.$set(_vm.form, "category_id", "2")
                         }
                       }
                     }),
@@ -87491,13 +87458,167 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c(
+                "div",
+                { staticClass: "form-group" },
+                [
+                  _vm._m(11),
+                  _vm._v(" "),
+                  _vm._l(_vm.age_groups, function(a, i) {
+                    return _c(
+                      "label",
+                      {
+                        staticClass: "form-inline col-xs-6",
+                        attrs: { for: "age_group" + i }
+                      },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.age_group,
+                              expression: "form.age_group"
+                            }
+                          ],
+                          attrs: { type: "checkbox", id: "age_group" + i },
+                          domProps: {
+                            value: i,
+                            checked: Array.isArray(_vm.form.age_group)
+                              ? _vm._i(_vm.form.age_group, i) > -1
+                              : _vm.form.age_group
+                          },
+                          on: {
+                            change: function($event) {
+                              var $$a = _vm.form.age_group,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = i,
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 &&
+                                    _vm.$set(
+                                      _vm.form,
+                                      "age_group",
+                                      $$a.concat([$$v])
+                                    )
+                                } else {
+                                  $$i > -1 &&
+                                    _vm.$set(
+                                      _vm.form,
+                                      "age_group",
+                                      $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1))
+                                    )
+                                }
+                              } else {
+                                _vm.$set(_vm.form, "age_group", $$c)
+                              }
+                            }
+                          }
+                        }),
+                        _vm._v("\n\t\t\t\t\t\t" + _vm._s(a) + "\n\t\t\t\t\t")
+                      ]
+                    )
+                  }),
+                  _vm._v(" "),
+                  _c("small", {
+                    staticClass: "form-text text-muted",
+                    attrs: { id: "age_groupHelp" },
+                    domProps: { textContent: _vm._s(_vm.msg.age_group) }
+                  })
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c(
+                "div",
+                { staticClass: "form-group" },
+                [
+                  _vm._m(12),
+                  _vm._v(" "),
+                  _vm._l(_vm.dances, function(a, i) {
+                    return _c(
+                      "label",
+                      {
+                        staticClass: "form-inline col-xs-6",
+                        attrs: { for: "dance" + i }
+                      },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.dance,
+                              expression: "form.dance"
+                            }
+                          ],
+                          attrs: { type: "checkbox", id: "dance" + i },
+                          domProps: {
+                            value: i,
+                            checked: Array.isArray(_vm.form.dance)
+                              ? _vm._i(_vm.form.dance, i) > -1
+                              : _vm.form.dance
+                          },
+                          on: {
+                            change: function($event) {
+                              var $$a = _vm.form.dance,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = i,
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 &&
+                                    _vm.$set(
+                                      _vm.form,
+                                      "dance",
+                                      $$a.concat([$$v])
+                                    )
+                                } else {
+                                  $$i > -1 &&
+                                    _vm.$set(
+                                      _vm.form,
+                                      "dance",
+                                      $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1))
+                                    )
+                                }
+                              } else {
+                                _vm.$set(_vm.form, "dance", $$c)
+                              }
+                            }
+                          }
+                        }),
+                        _vm._v("\n\t\t\t\t\t\t" + _vm._s(a) + "\n\t\t\t\t\t")
+                      ]
+                    )
+                  }),
+                  _vm._v(" "),
+                  _c("small", {
+                    staticClass: "form-text text-muted",
+                    attrs: { id: "danceHelp" },
+                    domProps: { textContent: _vm._s(_vm.msg.dance) }
+                  })
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-md-12" }, [
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col-md-12" }, [
                     _c("h4", [
                       _vm._v("Total to pay: "),
-                      _c("b", [_vm._v(_vm._s(_vm.form.pay) + " €")])
+                      _c("b", [_vm._v(_vm._s(_vm.pay) + " €")])
                     ])
                   ])
                 ]),
@@ -87636,7 +87757,7 @@ var render = function() {
                         staticClass: "form-row",
                         attrs: { id: "payment-form" }
                       },
-                      [_vm._m(11)]
+                      [_vm._m(13)]
                     )
                   ]
                 )
@@ -87686,7 +87807,7 @@ var render = function() {
                   },
                   [
                     _c("div", { staticClass: "modal-content" }, [
-                      _vm._m(12),
+                      _vm._m(14),
                       _vm._v(" "),
                       _c("div", { staticClass: "modal-body" }, [
                         _c("p", [
@@ -87743,7 +87864,7 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _vm._m(13)
+                      _vm._m(15)
                     ])
                   ]
                 )
@@ -87777,7 +87898,6 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("p", [
-              _vm._v("\n\t\t\t\t\t: \n\t\t\t\t\t"),
               _c("b", [_vm._v("Payment status: ")]),
               _vm._v(" "),
               _vm.data.state_pay == 1
@@ -87804,7 +87924,7 @@ var render = function() {
                 "div",
                 { staticClass: "col-md-12" },
                 [
-                  _vm._l(_vm.data.prices, function(p) {
+                  _vm._l(_vm.data.dance, function(d) {
                     return [
                       _c(
                         "span",
@@ -87819,9 +87939,7 @@ var render = function() {
                         [
                           _vm._v(
                             "\n\t\t\t\t\t\t\t\t" +
-                              _vm._s(_vm.cate(p.category_id)) +
-                              " - " +
-                              _vm._s(_vm.namePrice(p.id)) +
+                              _vm._s(_vm.dances[d]) +
                               "\n\t\t\t\t\t\t\t"
                           )
                         ]
@@ -87844,13 +87962,13 @@ var render = function() {
                   staticClass: "btn btn-black",
                   attrs: { href: "/lista/" + _vm.tournament.slug }
                 },
-                [_vm._v("Ver Lista de inscritos")]
+                [_vm._v("Registered List")]
               ),
               _vm._v(" "),
               _c(
                 "a",
                 { staticClass: "btn btn-danger", attrs: { href: "/clean/" } },
-                [_vm._v("Cerrar Ventana")]
+                [_vm._v("Close Message")]
               )
             ]),
             _vm._v(" "),
@@ -87919,7 +88037,7 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "phone" } },
       [
         _c("span", { staticClass: "fa fa-phone" }),
-        _vm._v(" Phone:\n\t\t\t\t\t")
+        _vm._v(" Telephone (Preferably with whatsapp):\n\t\t\t\t\t")
       ]
     )
   },
@@ -88015,6 +88133,32 @@ var staticRenderFns = [
       [
         _c("span", { staticClass: "fa fa-country" }),
         _vm._v(" Country:\n\t\t\t\t\t")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "age_group" } },
+      [
+        _c("span", { staticClass: "fa fa-age_group" }),
+        _vm._v(" Age Group (You can join more than one):\n\t\t\t\t\t")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "dance" } },
+      [
+        _c("span", { staticClass: "fa fa-dance" }),
+        _vm._v(" Dance:\n\t\t\t\t\t")
       ]
     )
   },

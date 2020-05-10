@@ -20,11 +20,13 @@ class InscriptionOnline extends Model
     	'phone',
     	'email',
     	'coach',
+    	'dance',
     	'sex_id',
     	'country',
+    	'age_group',
     	'birthdate',
     	'category_id',
-        'inscription_id'
+    	'inscription_id',
     ];
 
     /**
