@@ -86847,6 +86847,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			} else if (this.form.category_id == 2) {
 				pay = 10;
 			}
+			if (this.form.age_group.length == 1) {
+				if (this.form.age_group.indexOf(0) != -1) {
+					return this.form.pay = 0;
+				}
+			}
 			return this.form.pay = this.form.dance.length * pay;
 		}
 	},
@@ -87623,144 +87628,124 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.form.pay,
-                        expression: "form.pay"
-                      }
-                    ],
-                    staticClass: "col-md-12"
-                  },
-                  [
-                    _c("p", [_vm._v("Select type of payment:")]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-12" }, [
-                      _vm.tournament.organizer.headline &&
-                      _vm.tournament.organizer.account &&
-                      _vm.tournament.organizer.bank
-                        ? _c(
-                            "div",
-                            {
-                              staticClass: "col-md-4 btn borde",
-                              class: { "btn-black": _vm.form.method_pay == 1 },
-                              on: {
-                                click: function($event) {
-                                  _vm.form.method_pay = 1
-                                }
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("p", [_vm._v("Select type of payment:")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _vm.tournament.organizer.headline &&
+                    _vm.tournament.organizer.account &&
+                    _vm.tournament.organizer.bank
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "col-md-4 btn borde",
+                            class: { "btn-black": _vm.form.method_pay == 1 },
+                            on: {
+                              click: function($event) {
+                                _vm.form.method_pay = 1
                               }
-                            },
-                            [
-                              _vm._v(
-                                "\n\t\t\t\t\t\t\t\tTransfor\n\t\t\t\t\t\t\t"
-                              )
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.tournament.organizer.paypal_client_id &&
-                      _vm.tournament.organizer.paypal_client_secret
-                        ? _c(
-                            "div",
-                            {
-                              staticClass: "col-md-4 btn borde",
-                              class: { "btn-black": _vm.form.method_pay == 2 },
-                              on: {
-                                click: function($event) {
-                                  _vm.form.method_pay = 2
-                                }
-                              }
-                            },
-                            [_vm._v("\n\t\t\t\t\t\t\t\tPaypal\n\t\t\t\t\t\t\t")]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.tournament.organizer.t_publishable_key &&
-                      _vm.tournament.organizer.t_secret_key
-                        ? _c(
-                            "div",
-                            {
-                              staticClass: "col-md-4 btn borde",
-                              class: { "btn-black": _vm.form.method_pay == 3 },
-                              on: {
-                                click: function($event) {
-                                  _vm.form.method_pay = 3
-                                }
-                              }
-                            },
-                            [_vm._v("\n\t\t\t\t\t\t\t\tCard\n\t\t\t\t\t\t\t")]
-                          )
-                        : _vm._e()
-                    ]),
-                    _vm._v(" "),
-                    _c("small", {
-                      staticClass: "form-text text-muted",
-                      attrs: { id: "method_payHelp" },
-                      domProps: { textContent: _vm._s(_vm.msg.method_pay) }
-                    }),
-                    _vm._v(" "),
-                    _vm.form.method_pay == 1
-                      ? _c("div", { staticClass: "col-md-12" }, [
-                          _c("p", { staticStyle: { "font-size": "14px" } }, [
-                            _vm._v(
-                              "Save bank details and deposit agreed amount."
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("p", { staticStyle: { margin: "0" } }, [
-                            _vm._v("Bank: "),
-                            _c("b", [
-                              _vm._v(_vm._s(_vm.tournament.organizer.bank))
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("p", { staticStyle: { margin: "0" } }, [
-                            _vm._v("Account: "),
-                            _c("b", [
-                              _vm._v(_vm._s(_vm.tournament.organizer.account))
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("p", { staticStyle: { margin: "0" } }, [
-                            _vm._v("Headline: "),
-                            _c("b", [
-                              _vm._v(_vm._s(_vm.tournament.organizer.headline))
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("p", { staticStyle: { margin: "0" } }, [
-                            _vm._v("Total: "),
-                            _c("b", [_vm._v(_vm._s(_vm.form.pay) + " €")])
-                          ])
-                        ])
+                            }
+                          },
+                          [_vm._v("\n\t\t\t\t\t\t\t\tTransfor\n\t\t\t\t\t\t\t")]
+                        )
                       : _vm._e(),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        directives: [
+                    _vm.tournament.organizer.paypal_client_id &&
+                    _vm.tournament.organizer.paypal_client_secret
+                      ? _c(
+                          "div",
                           {
-                            name: "show",
-                            rawName: "v-show",
-                            value:
-                              _vm.form.method_pay == 3 &&
-                              (_vm.tournament.organizer.t_publishable_key &&
-                                _vm.tournament.organizer.t_secret_key),
-                            expression:
-                              "form.method_pay == 3 && (tournament.organizer.t_publishable_key && tournament.organizer.t_secret_key)"
-                          }
-                        ],
-                        staticClass: "form-row",
-                        attrs: { id: "payment-form" }
-                      },
-                      [_vm._m(13)]
-                    )
-                  ]
-                )
+                            staticClass: "col-md-4 btn borde",
+                            class: { "btn-black": _vm.form.method_pay == 2 },
+                            on: {
+                              click: function($event) {
+                                _vm.form.method_pay = 2
+                              }
+                            }
+                          },
+                          [_vm._v("\n\t\t\t\t\t\t\t\tPaypal\n\t\t\t\t\t\t\t")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.tournament.organizer.t_publishable_key &&
+                    _vm.tournament.organizer.t_secret_key
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "col-md-4 btn borde",
+                            class: { "btn-black": _vm.form.method_pay == 3 },
+                            on: {
+                              click: function($event) {
+                                _vm.form.method_pay = 3
+                              }
+                            }
+                          },
+                          [_vm._v("\n\t\t\t\t\t\t\t\tCard\n\t\t\t\t\t\t\t")]
+                        )
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("small", {
+                    staticClass: "form-text text-muted",
+                    attrs: { id: "method_payHelp" },
+                    domProps: { textContent: _vm._s(_vm.msg.method_pay) }
+                  }),
+                  _vm._v(" "),
+                  _vm.form.method_pay == 1
+                    ? _c("div", { staticClass: "col-md-12" }, [
+                        _c("p", { staticStyle: { "font-size": "14px" } }, [
+                          _vm._v("Save bank details and deposit agreed amount.")
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticStyle: { margin: "0" } }, [
+                          _vm._v("Bank: "),
+                          _c("b", [
+                            _vm._v(_vm._s(_vm.tournament.organizer.bank))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticStyle: { margin: "0" } }, [
+                          _vm._v("Account: "),
+                          _c("b", [
+                            _vm._v(_vm._s(_vm.tournament.organizer.account))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticStyle: { margin: "0" } }, [
+                          _vm._v("Headline: "),
+                          _c("b", [
+                            _vm._v(_vm._s(_vm.tournament.organizer.headline))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticStyle: { margin: "0" } }, [
+                          _vm._v("Total: "),
+                          _c("b", [_vm._v(_vm._s(_vm.form.pay) + " €")])
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value:
+                            _vm.form.method_pay == 3 &&
+                            (_vm.tournament.organizer.t_publishable_key &&
+                              _vm.tournament.organizer.t_secret_key),
+                          expression:
+                            "form.method_pay == 3 && (tournament.organizer.t_publishable_key && tournament.organizer.t_secret_key)"
+                        }
+                      ],
+                      staticClass: "form-row",
+                      attrs: { id: "payment-form" }
+                    },
+                    [_vm._m(13)]
+                  )
+                ])
               ])
             ]),
             _vm._v(" "),

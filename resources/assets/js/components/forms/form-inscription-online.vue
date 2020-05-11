@@ -210,7 +210,7 @@
 							<h4>Total to pay: <b>{{ pay }} €</b></h4>
 						</div>
 					</div>
-					<div class="col-md-12" v-show="form.pay">
+					<div class="col-md-12">
 						<p>Select type of payment:</p>
 						<div class="col-md-12">
 							<div class="col-md-4 btn borde"
@@ -464,6 +464,11 @@ p {font-size: 1.3em;}
 					pay = 5
 				} else if (this.form.category_id == 2) {
 					pay = 10
+				}
+				if (this.form.age_group.length == 1) {
+					if (this.form.age_group.indexOf(0) != -1) {
+						return this.form.pay = 0
+					}
 				}
 				return this.form.pay = this.form.dance.length * pay
 			}
