@@ -31,6 +31,7 @@ html {
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 </head>
+@if($tournament->type_id == 1)
 <div class="row">
 	<div class="col-md-12">
 		<h2 class="text-center"><span style="color:#C63A36">LISTA DE INSCRITOS</span></h2>
@@ -85,3 +86,72 @@ html {
 	<div class="page-break"></div>
 	@endforeach
 </div>
+@endif
+
+
+
+@if($tournament->type_id == 2)
+<div class="row">
+	<div class="col-md-12">
+		<h2 class="text-center"><span style="color:#C63A36">LIST</span></h2>
+		<h2 class="text-center text-uppercase">{{ $tournament->name }}</h2>
+		<h3 style="padding-top:10px;color:#e32727;border-bottom: 1px solid #000; line-height: 0.1em; margin: 10px 0 20px; text-align: center; "><span style="padding:0 10px; background:#fff;color:#C63A36;font-size:20px;">{{ $tournament->inscriptions->count() }} Inscribed</span></h3> 
+	</div>
+	@foreach($dances as $key => $value)
+	<?php
+	$test = true;
+	foreach ($tournament->inscriptions as $i) {
+		if (in_array($key, explode(',', $i->inscriptionOnline->dance))) {
+			$test = false; continue;
+		}
+	}
+	if ($test) {continue;}
+	?>
+	<div class="col-md-4">
+		<h2 class="text-center" style="min-width: 100%;display: block;">
+			<span style="color:#C63A36">
+				{{ $value }}
+			</span>
+		</h2>
+		@foreach($age_groups as $key_ag => $value_ag)
+		<?php
+		$test2 = true;
+		foreach ($tournament->inscriptions as $i) {
+			if (in_array($key_ag, explode(',', $i->inscriptionOnline->age_group)) && in_array($key, explode(',', $i->inscriptionOnline->dance))) {
+				$test2 = false; continue;
+			}
+		}
+		if ($test2) {continue;}
+		?>
+		<h4 class="text-center" style="min-width: 100%;display: block;">
+			<span style="color:#C63A36">
+				{{ $value_ag }}
+			</span>
+		</h4>
+		<table class="table table-condensed table-hover table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Apellido</th>
+					<th>Pais</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach($tournament->inscriptions as $i)
+				<?php if (! in_array($key, explode(',', $i->inscriptionOnline->dance))) {continue;} ?>
+				<?php if (! in_array($key_ag, explode(',', $i->inscriptionOnline->age_group))) {continue;} ?>
+				<tr>
+					<td>{{ $i->name_1 }}</td>
+					<td>{{ $i->last_name_1 }}</td>
+					<td>{{ $i->inscriptionOnline->country }}</td>
+				</tr>
+				@endforeach
+			</tbody>
+		</table>
+		@endforeach
+	</div>
+	<hr>
+	<div class="page-break"></div>
+	@endforeach
+</div>
+@endif

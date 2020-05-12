@@ -63,7 +63,28 @@ class ReportController extends Controller
 	{
 		$tournament = Tournament::findOrFail($id);
 		if ($tournament == null) return redirect('/');
-		$pdf = \PDF::loadView('pdf.inscription-list', compact('tournament'));
-		return $pdf->download("$tournament->name.pdf");
+		$age_groups = [
+            'JUVENIL 13 years old',
+            'Under 16',
+            'Under 21',
+            'Under 35',
+            'Over 35',
+        ];
+        $dances = [
+            'Cha cha cha',
+            'English Walts',
+            'Jive',
+            'Paso doble',
+            'Quickstep',
+            'Rumba',
+            'Samba',
+            'Slow Foxtrot',
+            'Tango',
+            'Viennese Waltz',
+        ];
+		return \PDF::loadView(
+			'pdf.inscription-list',
+			compact('tournament', 'age_groups', 'dances')
+		)->stream("$tournament->name.pdf");
 	}
 }

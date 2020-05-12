@@ -239,7 +239,29 @@ class RouteController extends Controller
     {
         $tournament = Tournament::where('slug', $slug)->first();
         if ($tournament == null) return redirect('/');
-        return view('inscription-list', compact('tournament'));
+        $age_groups = [
+            'JUVENIL 13 years old',
+            'Under 16',
+            'Under 21',
+            'Under 35',
+            'Over 35',
+        ];
+        $dances = [
+            'Cha cha cha',
+            'English Walts',
+            'Jive',
+            'Paso doble',
+            'Quickstep',
+            'Rumba',
+            'Samba',
+            'Slow Foxtrot',
+            'Tango',
+            'Viennese Waltz',
+        ];
+        return view(
+            'inscription-list',
+            compact('tournament', 'age_groups', 'dances')
+        );
     }
 
     public function clean(Request $request)

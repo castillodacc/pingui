@@ -86772,7 +86772,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	data: function data() {
 		return {
 			age_groups: ['JUVENIL 13 years old', 'Under 16', 'Under 21', 'Under 35', 'Over 35'],
-			dances: ['English Walts', 'Tango', 'Viennese Waltz', 'Slow Foxtrot', 'Quickstep', 'Samba', 'Cha cha cha', 'Rumba', 'Paso doble', 'Jive'],
+			dances: ['Cha cha cha', 'English Walts', 'Jive', 'Paso doble', 'Quickstep', 'Rumba', 'Samba', 'Slow Foxtrot', 'Tango', 'Viennese Waltz'],
 			stripe_objec: {},
 			card: {},
 			prices: [],

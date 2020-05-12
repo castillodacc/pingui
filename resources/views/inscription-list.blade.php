@@ -72,11 +72,32 @@
 								<h2 class="text-center"><span style="color:#C63A36">{{ $tournament->type_id == 1 ? 'LISTA DE INSCRITOS' : 'LIST' }}</span></h2>
 								<h3 class="text-center text-uppercase">{{ $tournament->name }}</h3>
 								@if($tournament->type_id == 2)
-								<h3 style="padding-top:20px;color:#e32727;border-bottom: 1px solid #000; line-height: 0.1em; margin: 10px 0 20px; text-align: center;">
+								@foreach($dances as $key => $value)
+								<?php
+								$test = true;
+								foreach ($tournament->inscriptions as $i) {
+									if (in_array($key, explode(',', $i->inscriptionOnline->dance))) {
+										$test = false; continue;
+									}
+								}
+								if ($test) {continue;}
+								?>
+ 								<h3 style="padding-top:20px;color:#e32727;border-bottom: 1px solid #000; line-height: 0.1em; margin: 10px 0 20px; text-align: center;">
 									<span style="padding:0 10px; background:#fff;color:#C63A36;font-size:28px;">
-										Single
+										{{ $value }}
 									</span>
 								</h3>
+								@foreach($age_groups as $key_ag => $value_ag)
+								<?php
+								$test2 = true;
+								foreach ($tournament->inscriptions as $i) {
+									if (in_array($key_ag, explode(',', $i->inscriptionOnline->age_group)) && in_array($key, explode(',', $i->inscriptionOnline->dance))) {
+										$test2 = false; continue;
+									}
+								}
+								if ($test2) {continue;}
+								?>
+								<h4 class="text-center">{{ $value_ag }}</h4>
 								<div class="row">
 									<div class="col-md-12">
 										<table class="table table-condensed table-hover table-striped">
@@ -84,16 +105,19 @@
 												<tr>
 													<th>Nombre</th>
 													<th>Apellido</th>
+													<th>Pais</th>
 													<th>Club</th>
 													<th>Email</th>
 												</tr>
 											</thead>
 											<tbody>
 												@foreach($tournament->inscriptions as $i)
-												<?php if ($i->inscriptionOnline->category_id == 2) {continue;} ?>
+												<?php if (! in_array($key, explode(',', $i->inscriptionOnline->dance))) {continue;} ?>
+												<?php if (! in_array($key_ag, explode(',', $i->inscriptionOnline->age_group))) {continue;} ?>
 												<tr>
 													<td>{{ $i->name_1 }}</td>
 													<td>{{ $i->last_name_1 }}</td>
+													<td>{{ $i->inscriptionOnline->country }}</td>
 													<td>{{ $i->inscriptionOnline->club }}</td>
 													<td>{{ $i->inscriptionOnline->email }}</td>
 												</tr>
@@ -102,38 +126,8 @@
 										</table>
 									</div>
 								</div>
-								@endif
-								@if($tournament->type_id == 2)
-								<h3 style="padding-top:20px;color:#e32727;border-bottom: 1px solid #000; line-height: 0.1em; margin: 10px 0 20px; text-align: center;">
-									<span style="padding:0 10px; background:#fff;color:#C63A36;font-size:28px;">
-										Couple
-									</span>
-								</h3>
-								<div class="row">
-									<div class="col-md-12">
-										<table class="table table-condensed table-hover table-striped">
-											<thead>
-												<tr>
-													<th>Nombre</th>
-													<th>Apellido</th>
-													<th>Club</th>
-													<th>Email</th>
-												</tr>
-											</thead>
-											<tbody>
-												@foreach($tournament->inscriptions as $i)
-												<?php if ($i->inscriptionOnline->category_id == 1) {continue;} ?>
-												<tr>
-													<td>{{ $i->name_1 }}</td>
-													<td>{{ $i->last_name_1 }}</td>
-													<td>{{ $i->inscriptionOnline->club }}</td>
-													<td>{{ $i->inscriptionOnline->email }}</td>
-												</tr>
-												@endforeach
-											</tbody>
-										</table>
-									</div>
-								</div>
+								@endforeach
+								@endforeach
 								@endif
 							</div>
 							@if(!$tournament->type_id == 1)
