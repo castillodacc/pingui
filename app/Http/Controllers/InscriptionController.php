@@ -235,7 +235,7 @@ class InscriptionController extends Controller
             'country' => 'required|string',
             'age_group' => 'required|array',
             'last_name' => 'required|string',
-            'birthdate' => 'required|date',
+            'birthdate' => 'required',
             'method_pay' => 'required|numeric',
             'category_id' => 'required|numeric',
             'name_couple' => 'nullable|string',
