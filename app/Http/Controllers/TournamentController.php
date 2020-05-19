@@ -186,6 +186,7 @@ class TournamentController extends Controller
             'hoteles' => 'nullable|array',
             'subcategory_latino' => 'nullable|array',
             'subcategory_standar' => 'nullable|array',
+            'type_id' => 'required|numeric'
         ],[],[
             'name' => 'titulo',
             'description' => 'detalles',
@@ -203,6 +204,7 @@ class TournamentController extends Controller
             'category_open' => 'categoria open',
             'subcategory_latino' => 'categoria latino',
             'subcategory_standar' => 'categoria standard',
+            'type_id' => 'tipo'
         ]);
 
         $data['slug'] = str_replace(' ', '-', $data['name']);
