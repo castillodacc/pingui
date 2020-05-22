@@ -103,13 +103,13 @@ class ReportController extends Controller
 						// idpar -> ID de la pareja
 						$str .= /*$i->user_id . */';';
 						// idMuz -> ID del Bailarín
-						$str .= /*$i->febd_num_1 . */';';
+						$str .= $i->febd_num_1 . ';';
 						// Menomuz -> nombre del Bailarín
 						$str .= "$i->last_name_1, $i->name_1" . ';';
 						// idZena -> ID del Bailarina
-						$str .= /*$i->febd_num_2 . */';';
+						$str .= $i->febd_num_2 . ';';
 						// Menozena -> nombre de la Bailarina
-						$str .= /*"$i->last_name_2, $i->name_2" . */';';
+						$str .= "$i->last_name_2, $i->name_2" . ';';
 						// klub -> Club
 						$str .= $i->inscriptionOnline->club . ';';
 						// stat -> Nacionalidad

@@ -467,7 +467,7 @@ p {font-size: 1.3em;}
 				}
 				if (this.form.age_group.length == 1) {
 					if (this.form.age_group.indexOf(0) != -1) {
-						return this.form.pay = 0
+						pay = 3
 					}
 				}
 				return this.form.pay = this.form.dance.length * pay
