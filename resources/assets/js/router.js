@@ -149,6 +149,7 @@ router.beforeEach((to, from, next) => {
 		to.path.indexOf('.ttf') > 0 ||
 		to.path.indexOf('.min') > 0 ||
 		to.path.indexOf('.css') > 0 ||
+		to.path.indexOf('.js') > 0 ||
 		permission == 'error') {
 		next('/perfil/3');
 		return;

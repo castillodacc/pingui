@@ -65,16 +65,16 @@ class ReportController extends Controller
 				'Over 35',
 			];
 			$dances = [
-				'Cha cha cha',
 				'English Walts',
-				'Jive',
-				'Paso doble',
-				'Quickstep',
-				'Rumba',
-				'Samba',
-				'Slow Foxtrot',
 				'Tango',
 				'Viennese Waltz',
+				'Slow Foxtrot',
+				'Quickstep',
+				'Samba',
+				'Cha cha cha',
+				'Rumba',
+				'Paso doble',
+				'Jive',
 			];
 			foreach ($dances as $key => $value) {
 				$test = true;
@@ -140,16 +140,16 @@ class ReportController extends Controller
             'Over 35',
         ];
         $dances = [
-            'Cha cha cha',
-            'English Walts',
-            'Jive',
-            'Paso doble',
-            'Quickstep',
-            'Rumba',
-            'Samba',
-            'Slow Foxtrot',
-            'Tango',
-            'Viennese Waltz',
+        	'English Walts',
+        	'Tango',
+        	'Viennese Waltz',
+        	'Slow Foxtrot',
+        	'Quickstep',
+        	'Samba',
+        	'Cha cha cha',
+        	'Rumba',
+        	'Paso doble',
+        	'Jive',
         ];
 		return \PDF::loadView(
 			'pdf.inscription-list',

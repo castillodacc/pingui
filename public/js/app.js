@@ -2036,57 +2036,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -2097,7 +2046,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	data: function data() {
 		return {
 			age_groups: ['JUVENIL 13 years old', 'Under 16', 'Under 21', 'Under 35', 'Over 35'],
-			dances: ['Cha cha cha', 'English Walts', 'Jive', 'Paso doble', 'Quickstep', 'Rumba', 'Samba', 'Slow Foxtrot', 'Tango', 'Viennese Waltz'],
+			dances: ['English Walts', 'Tango', 'Viennese Waltz', 'Slow Foxtrot', 'Quickstep', 'Samba', 'Cha cha cha', 'Rumba', 'Paso doble', 'Jive'],
 			stripe_objec: {},
 			card: {},
 			prices: [],
@@ -2111,22 +2060,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			r: null,
 			// data: {},
 			form: {
-				// email: 'rennyarmando@gmail.com',
-				// phone: '04147264958',
-				// category_id: 1,
-				// sex_id: 1,
-				// name: 'Renny',
-				// last_name: 'Suarez',
-				// name_couple: 'Renny2',
-				// last_name_couple: 'Suarez2',
-				// birthdate: '05/05/2020',
-				// club: 'club',
-				// coach: 'entrenador',
-				// country: 'pais',
 				pay: 0,
 				method_pay: 0,
-				// name: '',
-				// name_couple: '',
 				age_group: [],
 				dance: [],
 				price: []
@@ -2134,69 +2069,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			tournament: {
 				organizer: {}
 			},
-			msg: {
-				// email: 'Email asociado.',
-				// phone: 'Telefono de contacto.',
-				// category_id: 'Categoria a competir.',
-				// sex_id: 'Genero del participante.',
-				// name: 'Nombre del participante.',
-				// last_name: 'Apellido del participante.',
-				// name_couple: 'Nombre de la pareja.',
-				// last_name_couple: 'Apellido de la pareja.',
-				// birthdate: 'Fecha de Nacimiento.',
-				// club: 'Club del participante.',
-				// coach: 'Entrenador de baila.',
-				// country: 'Pais donde reside.',
-			}
-			// 		inscription: {
-			// 			user_id: '',
-			// 			tournament_id: '',
-			// 			febd_num_1: '',
-			// 			last_name_1: '',
-			// 			name_1: '',
-			// 			febd_num_2: '',
-			// 			name_2: '',
-			// 			last_name_2: '',
-			// 			price: '',
-			// 			method_pay: '',
-			// 			pay: 0,
-			// 		}
+			msg: {}
 		};
 	},
 
 	computed: {
 		pay: function pay() {
-			var pay = 0;
-			if (this.form.category_id == 1) {
-				pay = 5;
-			} else if (this.form.category_id == 2) {
-				pay = 10;
+			var age = 0;
+			if (!this.form.category_id) {
+				return this.form.pay = 0;
 			}
-			if (this.form.age_group.length == 1) {
-				if (this.form.age_group.indexOf(0) != -1) {
-					pay = 3;
+			var cat = this.form.category_id == 1 ? 1 : 2;
+			var _iteratorNormalCompletion = true;
+			var _didIteratorError = false;
+			var _iteratorError = undefined;
+
+			try {
+				for (var _iterator = this.form.age_group[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+					var a = _step.value;
+
+					age += a == 0 ? 3 : 5;
+				}
+			} catch (err) {
+				_didIteratorError = true;
+				_iteratorError = err;
+			} finally {
+				try {
+					if (!_iteratorNormalCompletion && _iterator.return) {
+						_iterator.return();
+					}
+				} finally {
+					if (_didIteratorError) {
+						throw _iteratorError;
+					}
 				}
 			}
-			return this.form.pay = this.form.dance.length * pay;
+
+			return this.form.pay = this.form.dance.length * age * cat;
 		}
 	},
-	// watch: {
-	// 	prices: function (prices) {
-	// 		let price = 0, add_pay = 0, ids = []
-	// 		for(let p of prices) {
-	// 			ids.push(p.id)
-	// 			if (p.category_id == 1) {
-	// 				price += Number(p.price);
-	// 			}
-	// 			if ((p.category_id == 2 || p.category_id == 3) && add_pay == 0) {
-	// 				price += Number(p.price);
-	// 				add_pay++;
-	// 			}
-	// 		}
-	// 		this.form.price = ids;
-	// 		this.form.pay = Number(price);
-	// 	},
-	// },
 	mounted: function mounted() {
 		var _this = this;
 
@@ -60524,809 +60435,825 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
-    _vm.r == true
-      ? _c(
-          "form",
-          {
-            staticClass: "row",
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                return _vm.register($event)
+    _c("div", { staticClass: "col-md-12" }, [
+      _vm.r == true
+        ? _c(
+            "form",
+            {
+              staticClass: "row",
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.register($event)
+                }
               }
-            }
-          },
-          [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-6" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _vm._m(1),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.email,
-                      expression: "form.email"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "email", type: "text" },
-                  domProps: { value: _vm.form.email },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "email", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("small", {
-                  staticClass: "form-text text-muted",
-                  attrs: { id: "emailHelp" },
-                  domProps: { textContent: _vm._s(_vm.msg.email) }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-6" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _vm._m(2),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.phone,
-                      expression: "form.phone"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "phone", type: "text" },
-                  domProps: { value: _vm.form.phone },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "phone", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("small", {
-                  staticClass: "form-text text-muted",
-                  attrs: { id: "phoneHelp" },
-                  domProps: { textContent: _vm._s(_vm.msg.phone) }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-md-6", staticStyle: { height: "76px" } },
-              [
+            },
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
                 _c("div", { staticClass: "form-group" }, [
-                  _vm._m(3),
+                  _vm._m(1),
                   _vm._v(" "),
-                  _c("label", { staticClass: "form-inline col-xs-6" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.category_id,
-                          expression: "form.category_id"
-                        }
-                      ],
-                      attrs: { type: "radio", id: "category_id", value: "1" },
-                      domProps: { checked: _vm._q(_vm.form.category_id, "1") },
-                      on: {
-                        change: function($event) {
-                          return _vm.$set(_vm.form, "category_id", "1")
-                        }
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.email,
+                        expression: "form.email"
                       }
-                    }),
-                    _vm._v("\n\t\t\t\t\t\tSingle\n\t\t\t\t\t")
-                  ]),
-                  _vm._v(" "),
-                  _c("label", { staticClass: "form-inline col-xs-6" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.category_id,
-                          expression: "form.category_id"
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "email", type: "text" },
+                    domProps: { value: _vm.form.email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
                         }
-                      ],
-                      attrs: { type: "radio", id: "category_id", value: "2" },
-                      domProps: { checked: _vm._q(_vm.form.category_id, "2") },
-                      on: {
-                        change: function($event) {
-                          return _vm.$set(_vm.form, "category_id", "2")
-                        }
+                        _vm.$set(_vm.form, "email", $event.target.value)
                       }
-                    }),
-                    _vm._v("\n\t\t\t\t\t\tCouple\n\t\t\t\t\t")
-                  ]),
+                    }
+                  }),
                   _vm._v(" "),
                   _c("small", {
                     staticClass: "form-text text-muted",
-                    attrs: { id: "category_idHelp" },
-                    domProps: { textContent: _vm._s(_vm.msg.category_id) }
+                    attrs: { id: "emailHelp" },
+                    domProps: { textContent: _vm._s(_vm.msg.email) }
                   })
                 ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.form.category_id == 1,
-                    expression: "form.category_id == 1"
-                  }
-                ],
-                staticClass: "col-md-6",
-                staticStyle: { height: "76px" }
-              },
-              [
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
                 _c("div", { staticClass: "form-group" }, [
-                  _vm._m(4),
+                  _vm._m(2),
                   _vm._v(" "),
-                  _c("label", { staticClass: "form-inline col-xs-6" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.sex_id,
-                          expression: "form.sex_id"
-                        }
-                      ],
-                      attrs: { type: "radio", id: "sex_id", value: "1" },
-                      domProps: { checked: _vm._q(_vm.form.sex_id, "1") },
-                      on: {
-                        change: function($event) {
-                          return _vm.$set(_vm.form, "sex_id", "1")
-                        }
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.phone,
+                        expression: "form.phone"
                       }
-                    }),
-                    _vm._v("\n\t\t\t\t\t\tHombre\n\t\t\t\t\t")
-                  ]),
-                  _vm._v(" "),
-                  _c("label", { staticClass: "form-inline col-xs-6" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.sex_id,
-                          expression: "form.sex_id"
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "phone", type: "text" },
+                    domProps: { value: _vm.form.phone },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
                         }
-                      ],
-                      attrs: { type: "radio", id: "sex_id", value: "2" },
-                      domProps: { checked: _vm._q(_vm.form.sex_id, "2") },
-                      on: {
-                        change: function($event) {
-                          return _vm.$set(_vm.form, "sex_id", "2")
-                        }
+                        _vm.$set(_vm.form, "phone", $event.target.value)
                       }
-                    }),
-                    _vm._v("\n\t\t\t\t\t\tDama\n\t\t\t\t\t")
-                  ]),
+                    }
+                  }),
                   _vm._v(" "),
                   _c("small", {
                     staticClass: "form-text text-muted",
-                    attrs: { id: "sex_idHelp" },
-                    domProps: { textContent: _vm._s(_vm.msg.sex_id) }
+                    attrs: { id: "phoneHelp" },
+                    domProps: { textContent: _vm._s(_vm.msg.phone) }
                   })
                 ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-6" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _vm._m(5),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.name,
-                      expression: "form.name"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "name", type: "text" },
-                  domProps: { value: _vm.form.name },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "name", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("small", {
-                  staticClass: "form-text text-muted",
-                  attrs: { id: "nameHelp" },
-                  domProps: { textContent: _vm._s(_vm.msg.name) }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-6" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _vm._m(6),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.last_name,
-                      expression: "form.last_name"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "last_name", type: "text" },
-                  domProps: { value: _vm.form.last_name },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "last_name", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("small", {
-                  staticClass: "form-text text-muted",
-                  attrs: { id: "last_nameHelp" },
-                  domProps: { textContent: _vm._s(_vm.msg.last_name) }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-6" }, [
+              ]),
+              _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "form-group" },
+                { staticClass: "col-md-6", staticStyle: { height: "75px" } },
                 [
-                  _vm._m(7),
-                  _vm._v(" "),
-                  _c("date-picker", {
-                    attrs: { id: "birthdate", config: _vm.config },
-                    model: {
-                      value: _vm.form.birthdate,
-                      callback: function($$v) {
-                        _vm.$set(_vm.form, "birthdate", $$v)
-                      },
-                      expression: "form.birthdate"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("small", {
-                    staticClass: "form-text text-muted",
-                    attrs: { id: "birthdateHelp" },
-                    domProps: { textContent: _vm._s(_vm.msg.birthdate) }
-                  })
-                ],
-                1
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-6" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _vm._m(8),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.club,
-                      expression: "form.club"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "club", type: "text" },
-                  domProps: { value: _vm.form.club },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "club", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("small", {
-                  staticClass: "form-text text-muted",
-                  attrs: { id: "clubHelp" },
-                  domProps: { textContent: _vm._s(_vm.msg.club) }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-6" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _vm._m(9),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.coach,
-                      expression: "form.coach"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "coach", type: "text" },
-                  domProps: { value: _vm.form.coach },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "coach", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("small", {
-                  staticClass: "form-text text-muted",
-                  attrs: { id: "coachHelp" },
-                  domProps: { textContent: _vm._s(_vm.msg.coach) }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-6" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _vm._m(10),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.country,
-                      expression: "form.country"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "country", type: "text" },
-                  domProps: { value: _vm.form.country },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "country", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("small", {
-                  staticClass: "form-text text-muted",
-                  attrs: { id: "countryHelp" },
-                  domProps: { textContent: _vm._s(_vm.msg.country) }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-6" }, [
-              _c(
-                "div",
-                { staticClass: "form-group" },
-                [
-                  _vm._m(11),
-                  _vm._v(" "),
-                  _vm._l(_vm.age_groups, function(a, i) {
-                    return _c(
-                      "label",
-                      {
-                        staticClass: "form-inline col-xs-6",
-                        attrs: { for: "age_group" + i }
-                      },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.age_group,
-                              expression: "form.age_group"
-                            }
-                          ],
-                          attrs: { type: "checkbox", id: "age_group" + i },
-                          domProps: {
-                            value: i,
-                            checked: Array.isArray(_vm.form.age_group)
-                              ? _vm._i(_vm.form.age_group, i) > -1
-                              : _vm.form.age_group
-                          },
-                          on: {
-                            change: function($event) {
-                              var $$a = _vm.form.age_group,
-                                $$el = $event.target,
-                                $$c = $$el.checked ? true : false
-                              if (Array.isArray($$a)) {
-                                var $$v = i,
-                                  $$i = _vm._i($$a, $$v)
-                                if ($$el.checked) {
-                                  $$i < 0 &&
-                                    _vm.$set(
-                                      _vm.form,
-                                      "age_group",
-                                      $$a.concat([$$v])
-                                    )
-                                } else {
-                                  $$i > -1 &&
-                                    _vm.$set(
-                                      _vm.form,
-                                      "age_group",
-                                      $$a
-                                        .slice(0, $$i)
-                                        .concat($$a.slice($$i + 1))
-                                    )
-                                }
-                              } else {
-                                _vm.$set(_vm.form, "age_group", $$c)
-                              }
-                            }
+                  _c("div", { staticClass: "form-group" }, [
+                    _vm._m(3),
+                    _vm._v(" "),
+                    _c("label", { staticClass: "form-inline col-xs-6" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.category_id,
+                            expression: "form.category_id"
                           }
-                        }),
-                        _vm._v("\n\t\t\t\t\t\t" + _vm._s(a) + "\n\t\t\t\t\t")
-                      ]
-                    )
-                  }),
-                  _vm._v(" "),
-                  _c("small", {
-                    staticClass: "form-text text-muted",
-                    attrs: { id: "age_groupHelp" },
-                    domProps: { textContent: _vm._s(_vm.msg.age_group) }
-                  })
-                ],
-                2
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-6" }, [
-              _c(
-                "div",
-                { staticClass: "form-group" },
-                [
-                  _vm._m(12),
-                  _vm._v(" "),
-                  _vm._l(_vm.dances, function(a, i) {
-                    return _c(
-                      "label",
-                      {
-                        staticClass: "form-inline col-xs-6",
-                        attrs: { for: "dance" + i }
-                      },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.dance,
-                              expression: "form.dance"
-                            }
-                          ],
-                          attrs: { type: "checkbox", id: "dance" + i },
-                          domProps: {
-                            value: i,
-                            checked: Array.isArray(_vm.form.dance)
-                              ? _vm._i(_vm.form.dance, i) > -1
-                              : _vm.form.dance
-                          },
-                          on: {
-                            change: function($event) {
-                              var $$a = _vm.form.dance,
-                                $$el = $event.target,
-                                $$c = $$el.checked ? true : false
-                              if (Array.isArray($$a)) {
-                                var $$v = i,
-                                  $$i = _vm._i($$a, $$v)
-                                if ($$el.checked) {
-                                  $$i < 0 &&
-                                    _vm.$set(
-                                      _vm.form,
-                                      "dance",
-                                      $$a.concat([$$v])
-                                    )
-                                } else {
-                                  $$i > -1 &&
-                                    _vm.$set(
-                                      _vm.form,
-                                      "dance",
-                                      $$a
-                                        .slice(0, $$i)
-                                        .concat($$a.slice($$i + 1))
-                                    )
-                                }
-                              } else {
-                                _vm.$set(_vm.form, "dance", $$c)
-                              }
-                            }
+                        ],
+                        attrs: { type: "radio", id: "category_id", value: "1" },
+                        domProps: {
+                          checked: _vm._q(_vm.form.category_id, "1")
+                        },
+                        on: {
+                          change: function($event) {
+                            return _vm.$set(_vm.form, "category_id", "1")
                           }
-                        }),
-                        _vm._v("\n\t\t\t\t\t\t" + _vm._s(a) + "\n\t\t\t\t\t")
-                      ]
-                    )
-                  }),
-                  _vm._v(" "),
-                  _c("small", {
-                    staticClass: "form-text text-muted",
-                    attrs: { id: "danceHelp" },
-                    domProps: { textContent: _vm._s(_vm.msg.dance) }
-                  })
-                ],
-                2
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-12" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-12" }, [
-                    _c("h4", [
-                      _vm._v("Total to pay: "),
-                      _c("b", [_vm._v(_vm._s(_vm.pay) + " €")])
-                    ])
+                        }
+                      }),
+                      _vm._v("\n\t\t\t\t\t\tSingle\n\t\t\t\t\t")
+                    ]),
+                    _vm._v(" "),
+                    _c("label", { staticClass: "form-inline col-xs-6" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.category_id,
+                            expression: "form.category_id"
+                          }
+                        ],
+                        attrs: { type: "radio", id: "category_id", value: "2" },
+                        domProps: {
+                          checked: _vm._q(_vm.form.category_id, "2")
+                        },
+                        on: {
+                          change: function($event) {
+                            return _vm.$set(_vm.form, "category_id", "2")
+                          }
+                        }
+                      }),
+                      _vm._v("\n\t\t\t\t\t\tCouple\n\t\t\t\t\t")
+                    ]),
+                    _vm._v(" "),
+                    _c("small", {
+                      staticClass: "form-text text-muted",
+                      attrs: { id: "category_idHelp" },
+                      domProps: { textContent: _vm._s(_vm.msg.category_id) }
+                    })
                   ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-12" }, [
-                  _c("p", [_vm._v("Select type of payment:")]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-12" }, [
-                    _vm.tournament.organizer.headline &&
-                    _vm.tournament.organizer.account &&
-                    _vm.tournament.organizer.bank
-                      ? _c(
-                          "div",
-                          {
-                            staticClass: "col-md-4 btn borde",
-                            class: { "btn-black": _vm.form.method_pay == 1 },
-                            on: {
-                              click: function($event) {
-                                _vm.form.method_pay = 1
-                              }
-                            }
-                          },
-                          [_vm._v("\n\t\t\t\t\t\t\t\tTransfor\n\t\t\t\t\t\t\t")]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.tournament.organizer.paypal_client_id &&
-                    _vm.tournament.organizer.paypal_client_secret
-                      ? _c(
-                          "div",
-                          {
-                            staticClass: "col-md-4 btn borde",
-                            class: { "btn-black": _vm.form.method_pay == 2 },
-                            on: {
-                              click: function($event) {
-                                _vm.form.method_pay = 2
-                              }
-                            }
-                          },
-                          [_vm._v("\n\t\t\t\t\t\t\t\tPaypal\n\t\t\t\t\t\t\t")]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.tournament.organizer.t_publishable_key &&
-                    _vm.tournament.organizer.t_secret_key
-                      ? _c(
-                          "div",
-                          {
-                            staticClass: "col-md-4 btn borde",
-                            class: { "btn-black": _vm.form.method_pay == 3 },
-                            on: {
-                              click: function($event) {
-                                _vm.form.method_pay = 3
-                              }
-                            }
-                          },
-                          [_vm._v("\n\t\t\t\t\t\t\t\tCard\n\t\t\t\t\t\t\t")]
-                        )
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("small", {
-                    staticClass: "form-text text-muted",
-                    attrs: { id: "method_payHelp" },
-                    domProps: { textContent: _vm._s(_vm.msg.method_pay) }
-                  }),
-                  _vm._v(" "),
-                  _vm.form.method_pay == 1
-                    ? _c("div", { staticClass: "col-md-12" }, [
-                        _c("p", { staticStyle: { "font-size": "14px" } }, [
-                          _vm._v("Save bank details and deposit agreed amount.")
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticStyle: { margin: "0" } }, [
-                          _vm._v("Bank: "),
-                          _c("b", [
-                            _vm._v(_vm._s(_vm.tournament.organizer.bank))
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticStyle: { margin: "0" } }, [
-                          _vm._v("Account: "),
-                          _c("b", [
-                            _vm._v(_vm._s(_vm.tournament.organizer.account))
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticStyle: { margin: "0" } }, [
-                          _vm._v("Headline: "),
-                          _c("b", [
-                            _vm._v(_vm._s(_vm.tournament.organizer.headline))
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticStyle: { margin: "0" } }, [
-                          _vm._v("Total: "),
-                          _c("b", [_vm._v(_vm._s(_vm.form.pay) + " €")])
-                        ])
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value:
-                            _vm.form.method_pay == 3 &&
-                            (_vm.tournament.organizer.t_publishable_key &&
-                              _vm.tournament.organizer.t_secret_key),
-                          expression:
-                            "form.method_pay == 3 && (tournament.organizer.t_publishable_key && tournament.organizer.t_secret_key)"
-                        }
-                      ],
-                      staticClass: "form-row",
-                      attrs: { id: "payment-form" }
-                    },
-                    [_vm._m(13)]
-                  )
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-12" }, [
+                ]
+              ),
+              _vm._v(" "),
               _c(
                 "div",
                 {
-                  staticClass: "span pull-right",
-                  staticStyle: { padding: "15px" }
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.form.category_id == 1,
+                      expression: "form.category_id == 1"
+                    }
+                  ],
+                  staticClass: "col-md-6",
+                  staticStyle: { height: "75px" }
                 },
                 [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-black",
-                      attrs: { type: "button" },
-                      on: { click: _vm.open }
-                    },
-                    [_vm._v("Register")]
-                  )
+                  _c("div", { staticClass: "form-group" }, [
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _c("label", { staticClass: "form-inline col-xs-6" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.sex_id,
+                            expression: "form.sex_id"
+                          }
+                        ],
+                        attrs: { type: "radio", id: "sex_id", value: "1" },
+                        domProps: { checked: _vm._q(_vm.form.sex_id, "1") },
+                        on: {
+                          change: function($event) {
+                            return _vm.$set(_vm.form, "sex_id", "1")
+                          }
+                        }
+                      }),
+                      _vm._v("\n\t\t\t\t\t\tMale\n\t\t\t\t\t")
+                    ]),
+                    _vm._v(" "),
+                    _c("label", { staticClass: "form-inline col-xs-6" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.sex_id,
+                            expression: "form.sex_id"
+                          }
+                        ],
+                        attrs: { type: "radio", id: "sex_id", value: "2" },
+                        domProps: { checked: _vm._q(_vm.form.sex_id, "2") },
+                        on: {
+                          change: function($event) {
+                            return _vm.$set(_vm.form, "sex_id", "2")
+                          }
+                        }
+                      }),
+                      _vm._v("\n\t\t\t\t\t\tFemale\n\t\t\t\t\t")
+                    ]),
+                    _vm._v(" "),
+                    _c("small", {
+                      staticClass: "form-text text-muted",
+                      attrs: { id: "sex_idHelp" },
+                      domProps: { textContent: _vm._s(_vm.msg.sex_id) }
+                    })
+                  ])
                 ]
-              )
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "modal fade",
-                attrs: {
-                  id: "confirm",
-                  role: "dialog",
-                  "aria-hidden": "true",
-                  "data-backdrop": "static",
-                  "data-keyboard": "false"
-                }
-              },
-              [
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(5),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.name,
+                        expression: "form.name"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "name", type: "text" },
+                    domProps: { value: _vm.form.name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "name", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("small", {
+                    staticClass: "form-text text-muted",
+                    attrs: { id: "nameHelp" },
+                    domProps: { textContent: _vm._s(_vm.msg.name) }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(6),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.last_name,
+                        expression: "form.last_name"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "last_name", type: "text" },
+                    domProps: { value: _vm.form.last_name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "last_name", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("small", {
+                    staticClass: "form-text text-muted",
+                    attrs: { id: "last_nameHelp" },
+                    domProps: { textContent: _vm._s(_vm.msg.last_name) }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _vm._m(7),
+                    _vm._v(" "),
+                    _c("date-picker", {
+                      attrs: { id: "birthdate", config: _vm.config },
+                      model: {
+                        value: _vm.form.birthdate,
+                        callback: function($$v) {
+                          _vm.$set(_vm.form, "birthdate", $$v)
+                        },
+                        expression: "form.birthdate"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("small", {
+                      staticClass: "form-text text-muted",
+                      attrs: { id: "birthdateHelp" },
+                      domProps: { textContent: _vm._s(_vm.msg.birthdate) }
+                    })
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(8),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.club,
+                        expression: "form.club"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "club", type: "text" },
+                    domProps: { value: _vm.form.club },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "club", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("small", {
+                    staticClass: "form-text text-muted",
+                    attrs: { id: "clubHelp" },
+                    domProps: { textContent: _vm._s(_vm.msg.club) }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(9),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.coach,
+                        expression: "form.coach"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "coach", type: "text" },
+                    domProps: { value: _vm.form.coach },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "coach", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("small", {
+                    staticClass: "form-text text-muted",
+                    attrs: { id: "coachHelp" },
+                    domProps: { textContent: _vm._s(_vm.msg.coach) }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(10),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.country,
+                        expression: "form.country"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "country", type: "text" },
+                    domProps: { value: _vm.form.country },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "country", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("small", {
+                    staticClass: "form-text text-muted",
+                    attrs: { id: "countryHelp" },
+                    domProps: { textContent: _vm._s(_vm.msg.country) }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _vm._m(11),
+                    _vm._v(" "),
+                    _vm._l(_vm.age_groups, function(a, i) {
+                      return _c(
+                        "label",
+                        {
+                          staticClass: "form-inline col-xs-6",
+                          attrs: { for: "age_group" + i }
+                        },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.age_group,
+                                expression: "form.age_group"
+                              }
+                            ],
+                            attrs: { type: "checkbox", id: "age_group" + i },
+                            domProps: {
+                              value: i,
+                              checked: Array.isArray(_vm.form.age_group)
+                                ? _vm._i(_vm.form.age_group, i) > -1
+                                : _vm.form.age_group
+                            },
+                            on: {
+                              change: function($event) {
+                                var $$a = _vm.form.age_group,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = i,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      _vm.$set(
+                                        _vm.form,
+                                        "age_group",
+                                        $$a.concat([$$v])
+                                      )
+                                  } else {
+                                    $$i > -1 &&
+                                      _vm.$set(
+                                        _vm.form,
+                                        "age_group",
+                                        $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1))
+                                      )
+                                  }
+                                } else {
+                                  _vm.$set(_vm.form, "age_group", $$c)
+                                }
+                              }
+                            }
+                          }),
+                          _vm._v("\n\t\t\t\t\t\t" + _vm._s(a) + "\n\t\t\t\t\t")
+                        ]
+                      )
+                    }),
+                    _vm._v(" "),
+                    _c("small", {
+                      staticClass: "form-text text-muted",
+                      attrs: { id: "age_groupHelp" },
+                      domProps: { textContent: _vm._s(_vm.msg.age_group) }
+                    })
+                  ],
+                  2
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "clearfix" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _vm._m(12),
+                    _vm._v(" "),
+                    _vm._l(_vm.dances, function(a, i) {
+                      return _c(
+                        "label",
+                        {
+                          staticClass: "form-inline col-xs-6",
+                          attrs: { for: "dance" + i }
+                        },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.dance,
+                                expression: "form.dance"
+                              }
+                            ],
+                            attrs: { type: "checkbox", id: "dance" + i },
+                            domProps: {
+                              value: i,
+                              checked: Array.isArray(_vm.form.dance)
+                                ? _vm._i(_vm.form.dance, i) > -1
+                                : _vm.form.dance
+                            },
+                            on: {
+                              change: function($event) {
+                                var $$a = _vm.form.dance,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = i,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      _vm.$set(
+                                        _vm.form,
+                                        "dance",
+                                        $$a.concat([$$v])
+                                      )
+                                  } else {
+                                    $$i > -1 &&
+                                      _vm.$set(
+                                        _vm.form,
+                                        "dance",
+                                        $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1))
+                                      )
+                                  }
+                                } else {
+                                  _vm.$set(_vm.form, "dance", $$c)
+                                }
+                              }
+                            }
+                          }),
+                          _vm._v("\n\t\t\t\t\t\t" + _vm._s(a) + "\n\t\t\t\t\t")
+                        ]
+                      )
+                    }),
+                    _vm._v(" "),
+                    _c("small", {
+                      staticClass: "form-text text-muted",
+                      attrs: { id: "danceHelp" },
+                      domProps: { textContent: _vm._s(_vm.msg.dance) }
+                    })
+                  ],
+                  2
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "clearfix" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _c("h4", [
+                        _vm._v("Total to pay: "),
+                        _c("b", [_vm._v(_vm._s(_vm.pay) + " €")])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _c("p", [_vm._v("Select type of payment:")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _vm.tournament.organizer.headline &&
+                      _vm.tournament.organizer.account &&
+                      _vm.tournament.organizer.bank
+                        ? _c(
+                            "div",
+                            {
+                              staticClass: "col-md-4 btn borde",
+                              class: { "btn-black": _vm.form.method_pay == 1 },
+                              on: {
+                                click: function($event) {
+                                  _vm.form.method_pay = 1
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n\t\t\t\t\t\t\t\tTransfor\n\t\t\t\t\t\t\t"
+                              )
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.tournament.organizer.paypal_client_id &&
+                      _vm.tournament.organizer.paypal_client_secret
+                        ? _c(
+                            "div",
+                            {
+                              staticClass: "col-md-4 btn borde",
+                              class: { "btn-black": _vm.form.method_pay == 2 },
+                              on: {
+                                click: function($event) {
+                                  _vm.form.method_pay = 2
+                                }
+                              }
+                            },
+                            [_vm._v("\n\t\t\t\t\t\t\t\tPaypal\n\t\t\t\t\t\t\t")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.tournament.organizer.t_publishable_key &&
+                      _vm.tournament.organizer.t_secret_key
+                        ? _c(
+                            "div",
+                            {
+                              staticClass: "col-md-4 btn borde",
+                              class: { "btn-black": _vm.form.method_pay == 3 },
+                              on: {
+                                click: function($event) {
+                                  _vm.form.method_pay = 3
+                                }
+                              }
+                            },
+                            [_vm._v("\n\t\t\t\t\t\t\t\tCard\n\t\t\t\t\t\t\t")]
+                          )
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("small", {
+                      staticClass: "form-text text-muted",
+                      attrs: { id: "method_payHelp" },
+                      domProps: { textContent: _vm._s(_vm.msg.method_pay) }
+                    }),
+                    _vm._v(" "),
+                    _vm.form.method_pay == 1
+                      ? _c("div", { staticClass: "col-md-12" }, [
+                          _c("p", { staticStyle: { "font-size": "14px" } }, [
+                            _vm._v(
+                              "Save bank details and deposit agreed amount."
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticStyle: { margin: "0" } }, [
+                            _vm._v("Bank: "),
+                            _c("b", [
+                              _vm._v(_vm._s(_vm.tournament.organizer.bank))
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticStyle: { margin: "0" } }, [
+                            _vm._v("Account: "),
+                            _c("b", [
+                              _vm._v(_vm._s(_vm.tournament.organizer.account))
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticStyle: { margin: "0" } }, [
+                            _vm._v("Headline: "),
+                            _c("b", [
+                              _vm._v(_vm._s(_vm.tournament.organizer.headline))
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticStyle: { margin: "0" } }, [
+                            _vm._v("Total: "),
+                            _c("b", [_vm._v(_vm._s(_vm.form.pay) + " €")])
+                          ])
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value:
+                              _vm.form.method_pay == 3 &&
+                              (_vm.tournament.organizer.t_publishable_key &&
+                                _vm.tournament.organizer.t_secret_key),
+                            expression:
+                              "form.method_pay == 3 && (tournament.organizer.t_publishable_key && tournament.organizer.t_secret_key)"
+                          }
+                        ],
+                        staticClass: "form-row",
+                        attrs: { id: "payment-form" }
+                      },
+                      [_vm._m(13)]
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-12" }, [
                 _c(
                   "div",
                   {
-                    staticClass: "modal-dialog",
-                    staticStyle: { top: "100px" },
-                    attrs: { role: "document" }
+                    staticClass: "span pull-right",
+                    staticStyle: { padding: "15px" }
                   },
                   [
-                    _c("div", { staticClass: "modal-content" }, [
-                      _vm._m(14),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "modal-body" }, [
-                        _c("p", [
-                          _vm._v(
-                            "\n\t\t\t\t\t\t\t\tMember: " +
-                              _vm._s(_vm.form.name) +
-                              " " +
-                              _vm._s(_vm.form.last_name) +
-                              "\n\t\t\t\t\t\t\t\t"
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("small", {
-                          staticClass: "form-text text-muted",
-                          attrs: { id: "nameHelp" }
-                        }),
-                        _vm._v(" "),
-                        _c("small", {
-                          staticClass: "form-text text-muted",
-                          attrs: { id: "name_coupleHelp" }
-                        }),
-                        _vm._v(" "),
-                        _c("small", {
-                          staticClass: "form-text text-muted",
-                          attrs: { id: "priceHelp" }
-                        }),
-                        _vm._v(" "),
-                        _c("p", [
-                          _vm._v(
-                            "\n\t\t\t\t\t\t\t\tPayment method:\n\t\t\t\t\t\t\t\t"
-                          ),
-                          _vm.form.method_pay == 1
-                            ? _c("span", [_vm._v("Transferencia")])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.form.method_pay == 2
-                            ? _c("span", [_vm._v("PayPal")])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.form.method_pay == 3
-                            ? _c("span", [_vm._v("Tarjeta")])
-                            : _vm._e()
-                        ]),
-                        _vm._v(" "),
-                        _c("small", {
-                          staticClass: "form-text text-muted",
-                          attrs: { id: "method_payHelp" }
-                        }),
-                        _vm._v(" "),
-                        _c("p", [
-                          _vm._v(
-                            " Total to pay: " + _vm._s(_vm.form.pay) + " € "
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(15)
-                    ])
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-black",
+                        attrs: { type: "button" },
+                        on: { click: _vm.open }
+                      },
+                      [_vm._v("Register")]
+                    )
                   ]
                 )
-              ]
-            )
-          ]
-        )
-      : _vm._e(),
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "modal fade",
+                  attrs: {
+                    id: "confirm",
+                    role: "dialog",
+                    "aria-hidden": "true",
+                    "data-backdrop": "static",
+                    "data-keyboard": "false"
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "modal-dialog",
+                      staticStyle: { top: "100px" },
+                      attrs: { role: "document" }
+                    },
+                    [
+                      _c("div", { staticClass: "modal-content" }, [
+                        _vm._m(14),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "modal-body" }, [
+                          _c("p", [
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t\tMember: " +
+                                _vm._s(_vm.form.name) +
+                                " " +
+                                _vm._s(_vm.form.last_name) +
+                                "\n\t\t\t\t\t\t\t"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("small", {
+                            staticClass: "form-text text-muted",
+                            attrs: { id: "nameHelp" }
+                          }),
+                          _vm._v(" "),
+                          _c("small", {
+                            staticClass: "form-text text-muted",
+                            attrs: { id: "name_coupleHelp" }
+                          }),
+                          _vm._v(" "),
+                          _c("small", {
+                            staticClass: "form-text text-muted",
+                            attrs: { id: "priceHelp" }
+                          }),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t\tPayment method:\n\t\t\t\t\t\t\t\t"
+                            ),
+                            _vm.form.method_pay == 1
+                              ? _c("span", [_vm._v("Transfe")])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.form.method_pay == 2
+                              ? _c("span", [_vm._v("PayPal")])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.form.method_pay == 3
+                              ? _c("span", [_vm._v("Card")])
+                              : _vm._e()
+                          ]),
+                          _vm._v(" "),
+                          _c("small", {
+                            staticClass: "form-text text-muted",
+                            attrs: { id: "method_payHelp" }
+                          }),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              " Total to pay: " + _vm._s(_vm.form.pay) + " € "
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(15)
+                      ])
+                    ]
+                  )
+                ]
+              )
+            ]
+          )
+        : _vm._e()
+    ]),
     _vm._v(" "),
     _vm.r == false
       ? _c("div", { staticClass: "col-md-12" }, [
@@ -61392,9 +61319,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n\t\t\t\t\t\t\t\t" +
+                            "\n\t\t\t\t\t\t\t" +
                               _vm._s(_vm.dances[d]) +
-                              "\n\t\t\t\t\t\t\t"
+                              "\n\t\t\t\t\t\t"
                           )
                         ]
                       ),
@@ -61548,10 +61475,7 @@ var staticRenderFns = [
     return _c(
       "label",
       { staticClass: "control-label", attrs: { for: "birthdate" } },
-      [
-        _c("span", { staticClass: "edit" }),
-        _vm._v(" Birthdate:\n                ")
-      ]
+      [_c("span", { staticClass: "edit" }), _vm._v(" Birthdate:\n\t\t\t\t\t")]
     )
   },
   function() {
@@ -88870,7 +88794,7 @@ router.beforeEach(function (to, from, next) {
 	if (location.href.indexOf('/login') > 0) return;
 	if (location.href.indexOf('/registro') > 0) return;
 	if (location.href.indexOf('/list') > 0) return;
-	if (to.path.indexOf('.jpg') > 0 || to.path.indexOf('.jpeg') > 0 || to.path.indexOf('.png') > 0 || to.path.indexOf('.ttf') > 0 || to.path.indexOf('.min') > 0 || to.path.indexOf('.css') > 0 || permission == 'error') {
+	if (to.path.indexOf('.jpg') > 0 || to.path.indexOf('.jpeg') > 0 || to.path.indexOf('.png') > 0 || to.path.indexOf('.ttf') > 0 || to.path.indexOf('.min') > 0 || to.path.indexOf('.css') > 0 || to.path.indexOf('.js') > 0 || permission == 'error') {
 		next('/perfil/3');
 		return;
 	}
