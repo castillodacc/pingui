@@ -280,7 +280,7 @@ class InscriptionController extends Controller
             'club' => $data['club'],
             'phone' => $data['phone'],
             'email' => $data['email'],
-            'coach' => $data['coach'],
+            'coach' => optional($data)['coach'],
             'sex_id' => optional($data)['sex_id'],
             'country' => $data['country'],
             'birthdate' => $data['birthdate'],
