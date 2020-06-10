@@ -73,7 +73,7 @@
 						<small id="last_nameHelp" class="form-text text-muted" v-text="msg.last_name"></small>
 					</div>
 				</div>
-				<!-- <div class="col-md-6" v-if="form.category_id == 2">
+				<div class="col-md-6" v-if="form.category_id == 2">
 					<div class="form-group">
 						<label for="name_couple" class="control-label">
 							<span class="fa fa-name_couple"></span> Name couple:
@@ -85,12 +85,12 @@
 				<div class="col-md-6" v-if="form.category_id == 2">
 					<div class="form-group">
 						<label for="last_name_couple" class="control-label">
-							<span class="fa fa-last_name_couple"></span> Last naeme couple:
+							<span class="fa fa-last_name_couple"></span> Last name couple:
 						</label>
 						<input id="last_name_couple" type="text" class="form-control" v-model="form.last_name_couple">
 						<small id="last_name_coupleHelp" class="form-text text-muted" v-text="msg.last_name_couple"></small>
 					</div>
-				</div> -->
+				</div>
 				<div class="col-md-6">
 					<div class="form-group">
 						<label for="birthdate" class="control-label">
@@ -171,7 +171,7 @@
 								:class="{'btn-black': form.method_pay == 1}"
 								@click="form.method_pay = 1"
 								v-if="tournament.organizer.headline && tournament.organizer.account && tournament.organizer.bank">
-									Transfor
+									Transfer
 								</div>
 								<div class="col-md-4 btn borde"
 								:class="{'btn-black': form.method_pay == 2}"
@@ -238,7 +238,7 @@
 								<small id="priceHelp" class="form-text text-muted"></small>
 								<p>
 									Payment method:
-									<span v-if="form.method_pay == 1">Transfe</span>
+									<span v-if="form.method_pay == 1">Transfer</span>
 									<span v-if="form.method_pay == 2">PayPal</span>
 									<span v-if="form.method_pay == 3">Card</span>
 								</p>

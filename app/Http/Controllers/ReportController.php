@@ -56,7 +56,7 @@ class ReportController extends Controller
 			}
 			$str_lg .= 'sutaz; idpar; idMuz; Menomuz; idZena;Menozena; klub; stat; Dorsal';
 		} elseif ($tournament->type_id == 2) {
-			$str_lg .= "sutaz;idpar;idMuz;Menomuz;idZena;Menozena;klub;stat;Dorsal;;;;;;;;;;;;;;;;;\n";
+			$str_lg .= "sutaz;idpar;idMuz;Menomuz;idZena;Menozena;klub;stat;Dorsal;phone;email;;;;;;;;;;;;;;;\n";
 			$age_groups = [
 				'JUVENIL 13 years old',
 				'Under 16',
@@ -111,15 +111,18 @@ class ReportController extends Controller
 						// Menozena -> nombre de la Bailarina
 						$str .= "$i->last_name_2, $i->name_2" . ';';
 						// klub -> Club
-						$str .= $i->inscriptionOnline->club . ';';
+						$str .= optional($i->inscriptionOnline)->club . ';';
 						// stat -> Nacionalidad
-						$str .= $i->inscriptionOnline->country . ';';
+						$str .= optional($i->inscriptionOnline)->country . ';';
+						// phone -> Telefono
+						$str .= optional($i->inscriptionOnline)->phone . ';';
+						// email -> Correo
+						$str .= optional($i->inscriptionOnline)->email . ';';
 						// Dorsal
 						$str .= $i->dorsal . ';';
 						$str .= ';;;;;;;;;;;;;;;;;';
 						$str_lg .= $str .= "\n";
 					}
-
 				}
 			}
 		}

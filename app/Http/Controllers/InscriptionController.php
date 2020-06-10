@@ -241,25 +241,6 @@ class InscriptionController extends Controller
             'name_couple' => 'nullable|string',
             'tournament_id' => 'required|numeric',
             'last_name_couple' => 'nullable|string',
-        ],[],[
-            // 'pay' => 'pago',
-            // 'name' => 'nombre',
-            // 'club' => 'club',
-            // 'phone' => 'telefono',
-            // 'email' => 'correo',
-            // 'coach' => 'entrenador',
-            // 'price' => 'precio',
-            // 'dance' => 'telefono',
-            // 'sex_id' => 'sexo',
-            // 'country' => 'pais',
-            // 'age_group' => 'grupo de edad',
-            // 'last_name' => 'apellido',
-            // 'birthdate' => 'fecha',
-            // 'method_pay' => 'metodo de pago',
-            // 'category_id' => 'categoria',
-            // 'name_couple' => 'nombre',
-            // 'tournament_id' => 'torneo',
-            // 'last_name_couple' => 'apellido',
         ]);
 
         $data_save = [

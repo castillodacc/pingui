@@ -60718,12 +60718,94 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
+              _vm.form.category_id == 2
+                ? _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _vm._m(7),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.name_couple,
+                            expression: "form.name_couple"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "name_couple", type: "text" },
+                        domProps: { value: _vm.form.name_couple },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form,
+                              "name_couple",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("small", {
+                        staticClass: "form-text text-muted",
+                        attrs: { id: "name_coupleHelp" },
+                        domProps: { textContent: _vm._s(_vm.msg.name_couple) }
+                      })
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.form.category_id == 2
+                ? _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _vm._m(8),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.last_name_couple,
+                            expression: "form.last_name_couple"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "last_name_couple", type: "text" },
+                        domProps: { value: _vm.form.last_name_couple },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form,
+                              "last_name_couple",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("small", {
+                        staticClass: "form-text text-muted",
+                        attrs: { id: "last_name_coupleHelp" },
+                        domProps: {
+                          textContent: _vm._s(_vm.msg.last_name_couple)
+                        }
+                      })
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
               _c("div", { staticClass: "col-md-6" }, [
                 _c(
                   "div",
                   { staticClass: "form-group" },
                   [
-                    _vm._m(7),
+                    _vm._m(9),
                     _vm._v(" "),
                     _c("date-picker", {
                       attrs: { id: "birthdate", config: _vm.config },
@@ -60748,7 +60830,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "col-md-6" }, [
                 _c("div", { staticClass: "form-group" }, [
-                  _vm._m(8),
+                  _vm._m(10),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -60782,7 +60864,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "col-md-6" }, [
                 _c("div", { staticClass: "form-group" }, [
-                  _vm._m(9),
+                  _vm._m(11),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -60816,7 +60898,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "col-md-6" }, [
                 _c("div", { staticClass: "form-group" }, [
-                  _vm._m(10),
+                  _vm._m(12),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -60853,7 +60935,7 @@ var render = function() {
                   "div",
                   { staticClass: "form-group" },
                   [
-                    _vm._m(11),
+                    _vm._m(13),
                     _vm._v(" "),
                     _vm._l(_vm.age_groups, function(a, i) {
                       return _c(
@@ -60932,7 +61014,7 @@ var render = function() {
                   "div",
                   { staticClass: "form-group" },
                   [
-                    _vm._m(12),
+                    _vm._m(14),
                     _vm._v(" "),
                     _vm._l(_vm.dances, function(a, i) {
                       return _c(
@@ -61037,7 +61119,7 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n\t\t\t\t\t\t\t\tTransfor\n\t\t\t\t\t\t\t"
+                                "\n\t\t\t\t\t\t\t\tTransfer\n\t\t\t\t\t\t\t"
                               )
                             ]
                           )
@@ -61138,7 +61220,7 @@ var render = function() {
                         staticClass: "form-row",
                         attrs: { id: "payment-form" }
                       },
-                      [_vm._m(13)]
+                      [_vm._m(15)]
                     )
                   ])
                 ])
@@ -61187,7 +61269,7 @@ var render = function() {
                     },
                     [
                       _c("div", { staticClass: "modal-content" }, [
-                        _vm._m(14),
+                        _vm._m(16),
                         _vm._v(" "),
                         _c("div", { staticClass: "modal-body" }, [
                           _c("p", [
@@ -61220,7 +61302,7 @@ var render = function() {
                               "\n\t\t\t\t\t\t\t\tPayment method:\n\t\t\t\t\t\t\t\t"
                             ),
                             _vm.form.method_pay == 1
-                              ? _c("span", [_vm._v("Transfe")])
+                              ? _c("span", [_vm._v("Transfer")])
                               : _vm._e(),
                             _vm._v(" "),
                             _vm.form.method_pay == 2
@@ -61244,7 +61326,7 @@ var render = function() {
                           ])
                         ]),
                         _vm._v(" "),
-                        _vm._m(15)
+                        _vm._m(17)
                       ])
                     ]
                   )
@@ -61465,6 +61547,32 @@ var staticRenderFns = [
       [
         _c("span", { staticClass: "fa fa-last_name" }),
         _vm._v(" Last Name:\n\t\t\t\t\t")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "name_couple" } },
+      [
+        _c("span", { staticClass: "fa fa-name_couple" }),
+        _vm._v(" Name couple:\n\t\t\t\t\t")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "control-label", attrs: { for: "last_name_couple" } },
+      [
+        _c("span", { staticClass: "fa fa-last_name_couple" }),
+        _vm._v(" Last name couple:\n\t\t\t\t\t")
       ]
     )
   },
