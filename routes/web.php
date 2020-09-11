@@ -121,4 +121,14 @@ Route::group(['middleware' => ['auth', 'onlyAjax']], function () {
 Route::post('inscription-online', 'InscriptionController@online')
 ->middleware('onlyAjax');
 
-Route::get('{any?}', 'RouteController@index')->where('any', '.*');
+Route::get('storage/hours/{path?}', function ($path = null) {
+    if (! $path) {
+        return redirect()->back();
+    }
+    header('Content-type: application/pdf');
+    echo file_get_contents(storage_path("app/public/info/{$path}"));
+    return;
+});
+
+Route::get('{any?}', 'RouteController@index')
+->where('any', '.*');
