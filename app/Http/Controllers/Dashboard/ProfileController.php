@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ { ChangePasswordRequest, UpdatePerfilUserRequest };
 use App\Models\ { Club, Pareja, Category_latino, Category_standar, Subcategory_latino, Subcategory_standar };
 
@@ -70,8 +71,8 @@ class ProfileController extends Controller
             'category_s' => 'nullable',
             'club_id' => 'required|numeric',
             'febd_num' => 'nullable|numeric',
-            'group_l' => 'nullable',
-            'group_s' => 'nullable',
+            'group_l' => Rule::requiredIf($request->category_l),
+            'group_s' => Rule::requiredIf($request->category_s),
             'trainer_l' => 'nullable',
             'trainer_s' => 'nullable',
             'international_id' => 'nullable'

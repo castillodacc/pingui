@@ -79971,6 +79971,288 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -79978,26 +80260,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'form-tournament',
+  name: "form-tournament",
   components: {
-    'rs-input': __WEBPACK_IMPORTED_MODULE_0__partials_input_vue___default.a,
-    'rs-multiselect': __WEBPACK_IMPORTED_MODULE_1_vue_multiselect___default.a,
+    "rs-input": __WEBPACK_IMPORTED_MODULE_0__partials_input_vue___default.a,
+    "rs-multiselect": __WEBPACK_IMPORTED_MODULE_1_vue_multiselect___default.a,
     DatePicker: __WEBPACK_IMPORTED_MODULE_2_vue_bootstrap_datetimepicker___default.a
   },
-  props: ['formData'],
+  props: ["formData"],
   data: function data() {
     return {
       hijos: [],
-      p_category: '',
-      price: '',
+      p_category: "",
+      price: "",
       prices: [],
       more_info_: {
-        type_id: ''
+        type_id: ""
       },
       more_info: [],
       organizers: [],
-      link: '',
-      hotel: '',
+      link: "",
+      hotel: "",
       hoteles: [],
       referees: [],
       file: null,
@@ -80005,40 +80287,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       category_opens: [],
       category_latinos: [],
       category_standars: [],
-      title: '',
-      ico: '',
+      title: "",
+      ico: "",
       data: {
         inscription: false,
-        organizer_id: ''
+        organizer_id: ""
       },
       entries: {
-        0: [{ label: 'Titulo', id: 'name', icon: 'edit' }, { label: 'Detalles', id: 'description', icon: 'edit' }, { label: 'Resultados', id: 'results', icon: 'edit' }, { label: 'Ruta al Mapa', id: 'maps', icon: 'edit' }]
+        0: [{ label: "Titulo", id: "name", icon: "edit" }, { label: "Detalles", id: "description", icon: "edit" }, { label: "Resultados", id: "results", icon: "edit" }, { label: "Ruta al Mapa", id: "maps", icon: "edit" }]
       },
       msg: {
-        name: 'Nombre de la competición.',
-        description: 'Detalles generales.',
-        start: 'Fecha a comenzar el evento.',
-        end: 'Fecha a terminar el evento.',
-        organizador: 'Organizador de la competición.',
-        price: 'precio para bailarines.',
-        p_category: 'Categorias de baile.',
-        entrance_price: 'precios de entradas.',
-        results: 'Resultados finales de la competición.',
-        maps: 'Enlace a google maps de la competición.',
-        link_: 'Link de acceso.',
-        inscription: 'Inscripción Abierta o Cerrada.',
-        file: 'Seleccione el archivo según el tipo.',
-        image: 'Imagen Destacada',
-        hours: 'Horario de la competencia',
-        info: 'Hoja informativa',
-        referee: 'Referees de la competencia',
-        type_id: 'Tipo de archivo.',
-        name_: 'Nombre para el Hipervinculo.',
-        category_open: 'Seleccione las categorias open que participan.',
-        subcategory_latino: 'Seleccione las categorias latinos que participan.',
-        subcategory_standar: 'Seleccione las categorias standard  que participan.',
-        hotel: 'Ingrese el nombre del hotel',
-        link: 'Ingrese el link del hotel'
+        name: "Nombre de la competición.",
+        description: "Detalles generales.",
+        start: "Fecha a comenzar el evento.",
+        end: "Fecha a terminar el evento.",
+        organizador: "Organizador de la competición.",
+        price: "precio para bailarines.",
+        p_category: "Categorias de baile.",
+        entrance_price: "precios de entradas.",
+        results: "Resultados finales de la competición.",
+        maps: "Enlace a google maps de la competición.",
+        link_: "Link de acceso.",
+        inscription: "Inscripción Abierta o Cerrada.",
+        file: "Seleccione el archivo según el tipo.",
+        image: "Imagen Destacada",
+        hours: "Horario de la competencia",
+        info: "Hoja informativa",
+        referee: "Referees de la competencia",
+        type_id: "Tipo de archivo.",
+        name_: "Nombre para el Hipervinculo.",
+        category_open: "Seleccione las categorias open que participan.",
+        subcategory_latino: "Seleccione las categorias latinos que participan.",
+        subcategory_standar: "Seleccione las categorias standard  que participan.",
+        hotel: "Ingrese el nombre del hotel",
+        link: "Ingrese el link del hotel"
       }
     };
   },
@@ -80053,9 +80335,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     this.get();
     if (this.$route.params.id) {
-      axios.get('/tournament/' + this.$route.params.id).then(function (response) {
-        _this.title = 'Editar Competencia:';
-        _this.ico = 'edit';
+      axios.get("/tournament/" + this.$route.params.id).then(function (response) {
+        _this.title = "Editar Competencia:";
+        _this.ico = "edit";
         _this.data = response.data;
         var h = response.data.hotels;
         for (var i in h) {
@@ -80083,20 +80365,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
 
         if (response.data.image) {
-          _this.msg.image = '<a href="/storage/' + response.data.image + '" target="_blank">' + response.data.image + '<a>';
+          _this.msg.image = '<a href="/storage/' + response.data.image + '" target="_blank">' + response.data.image + "<a>";
         }
         if (response.data.hours) {
-          _this.msg.hours = '<a href="/storage/hours/' + response.data.hours + '" target="_blank">' + response.data.hours + '<a>';
+          _this.msg.hours = '<a href="/storage/hours/' + response.data.hours + '" target="_blank">' + response.data.hours + "<a>";
         }
         if (response.data.info) {
-          _this.msg.info = '<a href="/storage/info/' + response.data.info + '" target="_blank">' + response.data.info + '<a>';
+          _this.msg.info = '<a href="/storage/info/' + response.data.info + '" target="_blank">' + response.data.info + "<a>";
         }
       }).catch(function (error) {
-        _this.$router.push({ name: 'tournament.index' });
+        _this.$router.push({ name: "tournament.index" });
       });
     } else {
-      this.title = 'Registrar Competencia:';
-      this.ico = 'plus';
+      this.title = "Registrar Competencia:";
+      this.ico = "plus";
     }
   },
 
@@ -80127,7 +80409,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     get: function get() {
       var _this2 = this;
 
-      axios.post('/get-tournament').then(function (response) {
+      axios.post("/get-tournament").then(function (response) {
         _this2.organizers = response.data.organizers;
         _this2.referees = response.data.referees;
         _this2.referees_options = [];
@@ -80145,9 +80427,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var files = e.target.files || e.dataTransfer.files;
       var data = new FormData();
       data.append(e.target.id, files[0]);
-      axios.post('/upload/' + e.target.id, data).then(function (response) {
+      axios.post("/upload/" + e.target.id, data).then(function (response) {
         _this3.data[e.target.id] = response.data;
-        _this3.msg[e.target.id] = '<a href="/storage/hours/' + response.data + '" target="_blank">' + response.data + '<a>';
+        _this3.msg[e.target.id] = '<a href="/storage/' + e.target.id + "/" + response.data + '" target="_blank">' + response.data + "<a>";
       });
     },
     getImage: function getImage(e) {
@@ -80167,17 +80449,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var files = e.target.files || e.dataTransfer.files;
       var data = new FormData();
       data.append(e.target.id, files[0]);
-      axios.post('/upload-file/' + this.more_info_.type_id, data).then(function (response) {
+      axios.post("/upload-file/" + this.more_info_.type_id, data).then(function (response) {
         _this5.more_info_.link = response.data;
       });
     },
     addmore_info: function addmore_info() {
-      if (this.more_info_.type_id != '' && this.more_info_.name != '' && this.more_info_.link != '') {
+      if (this.more_info_.type_id != "" && this.more_info_.name != "" && this.more_info_.link != "") {
         if (isNaN(this.more_info_.type_id)) {
-          return toastr.error('El campo tipo solo admite valore numéricos.');
+          return toastr.error("El campo tipo solo admite valore numéricos.");
         }
-        if (this.more_info_.type_id == 1 && this.more_info_.link.indexOf('http')) {
-          return toastr.error('El link debe ser la direccion completa http://www.dominio.com');
+        if (this.more_info_.type_id == 1 && this.more_info_.link.indexOf("http")) {
+          return toastr.error("El link debe ser la direccion completa http://www.dominio.com");
         }
         this.more_info.push({
           name: this.more_info_.name,
@@ -80186,22 +80468,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
         this.resetmore_info();
       } else {
-        toastr.error('Debe rellenar todos los campos.');
+        toastr.error("Debe rellenar todos los campos.");
       }
     },
     resetmore_info: function resetmore_info() {
-      this.more_info_.name = '';
-      this.more_info_.type_id = '';
-      this.more_info_.link = '';
+      this.more_info_.name = "";
+      this.more_info_.type_id = "";
+      this.more_info_.link = "";
     },
-
     cate: function cate(n) {
       if (n === 1) {
-        return 'Open';
+        return "Open";
       } else if (n === 2) {
-        return 'Latino';
+        return "Latino";
       } else if (n === 3) {
-        return 'Standard';
+        return "Standard";
       }
     },
     searchCat: function searchCat(category, subcategory) {
@@ -80228,13 +80509,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     addP: function addP() {
       if (this.price && this.p_category) {
         if (isNaN(this.price)) {
-          return toastr.error('El campo precio solo admite valore numéricos.');
+          return toastr.error("El campo precio solo admite valore numéricos.");
         }
         if (this.price > 200) {
-          return toastr.error('El campo precio no puede ser tan algo.');
+          return toastr.error("El campo precio no puede ser tan algo.");
         }
         if (this.p_category == 1 && this.hijos.length == 0) {
-          return toastr.error('Debe agregar un valor el campo.');
+          return toastr.error("Debe agregar un valor el campo.");
         }
         var price = [],
             category = void 0;
@@ -80247,14 +80528,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             level_id: category.category_id,
             subcategory_id: category.id,
             category_text: this.cate(this.p_category),
-            level_text: this.hijos[i].split(' - ')[0],
-            subcategory_text: this.hijos[i].split(' - ')[1]
+            level_text: this.hijos[i].split(" - ")[0],
+            subcategory_text: this.hijos[i].split(" - ")[1]
           };
 
           var test = 1;
           for (var o in this.prices) {
-            if (data['category_id'] == this.prices[o]['category_id'] && data['subcategory_id'] == this.prices[o]['subcategory_id']) {
-              this.prices[o].price = data['price'];
+            if (data["category_id"] == this.prices[o]["category_id"] && data["subcategory_id"] == this.prices[o]["subcategory_id"]) {
+              this.prices[o].price = data["price"];
               test = 0;
             }
           }
@@ -80262,24 +80543,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.prices.push(data);
           }
         }
-        this.price = '';
-        this.p_category = '';
+        this.price = "";
+        this.p_category = "";
         this.hijos = [];
       } else {
-        return toastr.error('Debe llenar todos los campos.');
+        return toastr.error("Debe llenar todos los campos.");
       }
     },
     add: function add() {
       if (this.link && this.hotel) {
-        if (this.link.indexOf('http')) {
-          return toastr.error('El link debe ser la direccion completa http://www.dominio.com');
+        if (this.link.indexOf("http")) {
+          return toastr.error("El link debe ser la direccion completa http://www.dominio.com");
         }
         this.hoteles.push({
           link: this.link,
           hotel: this.hotel
         });
-        this.link = '';
-        this.hotel = '';
+        this.link = "";
+        this.hotel = "";
       }
     },
     remove: function remove(i, array) {
@@ -80304,14 +80585,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.data.more_info = this.more_info;
 
       if (this.$route.params.id) {
-        axios.put('/tournament/' + this.data.id, this.data).then(function (response) {
-          toastr.success('Competencia Actualizada');
-          _this6.$router.push({ name: 'tournament.index' });
+        axios.put("/tournament/" + this.data.id, this.data).then(function (response) {
+          toastr.success("Competencia Actualizada");
+          _this6.$router.push({ name: "tournament.index" });
         });
       } else {
-        axios.post('/tournament', this.data).then(function (response) {
-          toastr.success('Competencia Registrada');
-          _this6.$router.push({ name: 'tournament.index' });
+        axios.post("/tournament", this.data).then(function (response) {
+          toastr.success("Competencia Registrada");
+          _this6.$router.push({ name: "tournament.index" });
         });
       }
     }
@@ -80330,7 +80611,7 @@ var render = function() {
     _c("div", { staticClass: "box-header" }, [
       _c("h3", { staticClass: "box-title" }, [
         _c("span", { class: "glyphicon glyphicon-" + _vm.ico }),
-        _vm._v(" " + _vm._s(_vm.title))
+        _vm._v(" " + _vm._s(_vm.title) + "\n    ")
       ])
     ]),
     _vm._v(" "),
@@ -80352,10 +80633,10 @@ var render = function() {
               "div",
               { staticClass: "col-md-10 col-md-offset-1" },
               [
-                _vm._l(_vm.entries[0], function(input) {
+                _vm._l(_vm.entries[0], function(input, i) {
                   return _c(
                     "div",
-                    { staticClass: "col-md-6" },
+                    { key: i, staticClass: "col-md-6" },
                     [
                       _c("rs-input", {
                         attrs: {
@@ -80424,8 +80705,9 @@ var render = function() {
                           _vm._v("Seleccione un organizador")
                         ]),
                         _vm._v(" "),
-                        _vm._l(_vm.organizers, function(o) {
+                        _vm._l(_vm.organizers, function(o, i) {
                           return _c("option", {
+                            key: i,
                             domProps: {
                               value: o.id,
                               textContent: _vm._s(o.name)
@@ -80512,7 +80794,7 @@ var render = function() {
                             }),
                             _vm._v(" "),
                             _c("span", { staticClass: "edit" }),
-                            _vm._v(" Inscripción: "),
+                            _vm._v(" Inscripción:\n                "),
                             _c("b", [
                               _vm._v(
                                 _vm._s(
@@ -80845,7 +81127,7 @@ var render = function() {
                       _c(
                         "ul",
                         _vm._l(_vm.hoteles, function(h, i) {
-                          return _c("li", [
+                          return _c("li", { key: i }, [
                             _c("span", [
                               _c("a", {
                                 attrs: { href: h.link, target: "_blank" },
@@ -81086,12 +81368,12 @@ var render = function() {
                       _c(
                         "ul",
                         _vm._l(_vm.more_info, function(m, i) {
-                          return _c("li", [
+                          return _c("li", { key: i }, [
                             _c("a", {
                               attrs: { href: m.link, target: "_blank" },
                               domProps: { textContent: _vm._s(m.name) }
                             }),
-                            _vm._v(" - \n                    "),
+                            _vm._v(" -\n                    "),
                             m.type_id == 1
                               ? _c("span", [_vm._v("LINK")])
                               : m.type_id == 2
@@ -81390,46 +81672,56 @@ var render = function() {
                             _vm._v(" "),
                             _c(
                               "tbody",
-                              _vm._l(_vm.prices, function(p, i) {
-                                return p.category_id == 1
-                                  ? _c(
-                                      "tr",
-                                      { staticStyle: { "font-size": "12px" } },
-                                      [
-                                        _c("td", [
-                                          _vm._v(_vm._s(p.level_text))
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("td", [
-                                          _vm._v(_vm._s(p.price) + " "),
-                                          _c("b", [_vm._v("€")])
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("td", [
-                                          _c(
-                                            "button",
-                                            {
-                                              staticClass:
-                                                "btn btn-danger btn-xs",
-                                              attrs: { type: "button" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.remove(i, "prices")
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c("span", {
-                                                staticClass: "fa fa-remove"
-                                              })
-                                            ]
-                                          )
-                                        ])
-                                      ]
-                                    )
-                                  : _vm._e()
-                              }),
-                              0
+                              [
+                                _vm._l(_vm.prices, function(p, i) {
+                                  return [
+                                    p.category_id == 1
+                                      ? _c(
+                                          "tr",
+                                          {
+                                            key: i,
+                                            staticStyle: { "font-size": "12px" }
+                                          },
+                                          [
+                                            _c("td", [
+                                              _vm._v(_vm._s(p.level_text))
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("td", [
+                                              _vm._v(_vm._s(p.price) + " "),
+                                              _c("b", [_vm._v("€")])
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("td", [
+                                              _c(
+                                                "button",
+                                                {
+                                                  staticClass:
+                                                    "btn btn-danger btn-xs",
+                                                  attrs: { type: "button" },
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.remove(
+                                                        i,
+                                                        "prices"
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _c("span", {
+                                                    staticClass: "fa fa-remove"
+                                                  })
+                                                ]
+                                              )
+                                            ])
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  ]
+                                })
+                              ],
+                              2
                             )
                           ]
                         )
@@ -81457,50 +81749,60 @@ var render = function() {
                             _vm._v(" "),
                             _c(
                               "tbody",
-                              _vm._l(_vm.prices, function(p, i) {
-                                return p.category_id == 2
-                                  ? _c(
-                                      "tr",
-                                      { staticStyle: { "font-size": "12px" } },
-                                      [
-                                        _c("td", [
-                                          _vm._v(_vm._s(p.level_text))
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("td", [
-                                          _vm._v(_vm._s(p.subcategory_text))
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("td", [
-                                          _vm._v(_vm._s(p.price) + " "),
-                                          _c("b", [_vm._v("€")])
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("td", [
-                                          _c(
-                                            "button",
-                                            {
-                                              staticClass:
-                                                "btn btn-danger btn-xs",
-                                              attrs: { type: "button" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.remove(i, "prices")
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c("span", {
-                                                staticClass: "fa fa-remove"
-                                              })
-                                            ]
-                                          )
-                                        ])
-                                      ]
-                                    )
-                                  : _vm._e()
-                              }),
-                              0
+                              [
+                                _vm._l(_vm.prices, function(p, i) {
+                                  return [
+                                    p.category_id == 2
+                                      ? _c(
+                                          "tr",
+                                          {
+                                            key: i,
+                                            staticStyle: { "font-size": "12px" }
+                                          },
+                                          [
+                                            _c("td", [
+                                              _vm._v(_vm._s(p.level_text))
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("td", [
+                                              _vm._v(_vm._s(p.subcategory_text))
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("td", [
+                                              _vm._v(_vm._s(p.price) + " "),
+                                              _c("b", [_vm._v("€")])
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("td", [
+                                              _c(
+                                                "button",
+                                                {
+                                                  staticClass:
+                                                    "btn btn-danger btn-xs",
+                                                  attrs: { type: "button" },
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.remove(
+                                                        i,
+                                                        "prices"
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _c("span", {
+                                                    staticClass: "fa fa-remove"
+                                                  })
+                                                ]
+                                              )
+                                            ])
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  ]
+                                })
+                              ],
+                              2
                             )
                           ]
                         )
@@ -81528,50 +81830,60 @@ var render = function() {
                             _vm._v(" "),
                             _c(
                               "tbody",
-                              _vm._l(_vm.prices, function(p, i) {
-                                return p.category_id == 3
-                                  ? _c(
-                                      "tr",
-                                      { staticStyle: { "font-size": "12px" } },
-                                      [
-                                        _c("td", [
-                                          _vm._v(_vm._s(p.level_text))
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("td", [
-                                          _vm._v(_vm._s(p.subcategory_text))
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("td", [
-                                          _vm._v(_vm._s(p.price) + " "),
-                                          _c("b", [_vm._v("€")])
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("td", [
-                                          _c(
-                                            "button",
-                                            {
-                                              staticClass:
-                                                "btn btn-danger btn-xs",
-                                              attrs: { type: "button" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.remove(i, "prices")
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c("span", {
-                                                staticClass: "fa fa-remove"
-                                              })
-                                            ]
-                                          )
-                                        ])
-                                      ]
-                                    )
-                                  : _vm._e()
-                              }),
-                              0
+                              [
+                                _vm._l(_vm.prices, function(p, i) {
+                                  return [
+                                    p.category_id == 3
+                                      ? _c(
+                                          "tr",
+                                          {
+                                            key: i,
+                                            staticStyle: { "font-size": "12px" }
+                                          },
+                                          [
+                                            _c("td", [
+                                              _vm._v(_vm._s(p.level_text))
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("td", [
+                                              _vm._v(_vm._s(p.subcategory_text))
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("td", [
+                                              _vm._v(_vm._s(p.price) + " "),
+                                              _c("b", [_vm._v("€")])
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("td", [
+                                              _c(
+                                                "button",
+                                                {
+                                                  staticClass:
+                                                    "btn btn-danger btn-xs",
+                                                  attrs: { type: "button" },
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.remove(
+                                                        i,
+                                                        "prices"
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _c("span", {
+                                                    staticClass: "fa fa-remove"
+                                                  })
+                                                ]
+                                              )
+                                            ])
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  ]
+                                })
+                              ],
+                              2
                             )
                           ]
                         )
@@ -81749,7 +82061,9 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "file" } },
       [
         _c("span", { staticClass: "edit" }),
-        _vm._v(" Seleccione el archivo a Guardar:\n                  ")
+        _vm._v(
+          " Seleccione el archivo a\n                    Guardar:\n                  "
+        )
       ]
     )
   },
@@ -81826,7 +82140,10 @@ var staticRenderFns = [
       _c(
         "button",
         { staticClass: "btn btn-primary btn-lg", attrs: { type: "submit" } },
-        [_c("span", { staticClass: "fa fa-ok" }), _vm._v(" Guardar")]
+        [
+          _c("span", { staticClass: "fa fa-ok" }),
+          _vm._v(" Guardar\n                ")
+        ]
       )
     ])
   },
@@ -84636,7 +84953,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n.borde {border: 1px solid;\n}\np {font-size: 1.3em;\n}\n.StripeElement {\r\n\tbackground-color: white;\r\n\theight: 40px;\r\n\tpadding: 10px 12px;\r\n\tborder-radius: 4px;\r\n\tborder: 1px solid transparent;\r\n\t-webkit-box-shadow: 0 1px 3px 0 #e6ebf1;\r\n\t        box-shadow: 0 1px 3px 0 #e6ebf1;\r\n\t-webkit-transition: box-shadow 150ms ease;\r\n\t-webkit-transition: -webkit-box-shadow 150ms ease;\r\n\ttransition: -webkit-box-shadow 150ms ease;\r\n\ttransition: box-shadow 150ms ease;\r\n\ttransition: box-shadow 150ms ease, -webkit-box-shadow 150ms ease;\n}\n.StripeElement--focus {-webkit-box-shadow: 0 1px 3px 0 #cfd7df;box-shadow: 0 1px 3px 0 #cfd7df;\n}\n.StripeElement--invalid {border-color: #fa755a;\n}\n.StripeElement--webkit-autofill {background-color: #fefde5 !important;\n}\r\n", ""]);
+exports.push([module.i, "\n.borde {\r\n  border: 1px solid;\n}\np {\r\n  font-size: 1.3em;\n}\n.StripeElement {\r\n  background-color: white;\r\n  height: 40px;\r\n  padding: 10px 12px;\r\n  border-radius: 4px;\r\n  border: 1px solid transparent;\r\n  -webkit-box-shadow: 0 1px 3px 0 #e6ebf1;\r\n          box-shadow: 0 1px 3px 0 #e6ebf1;\r\n  -webkit-transition: box-shadow 150ms ease;\r\n  -webkit-transition: -webkit-box-shadow 150ms ease;\r\n  transition: -webkit-box-shadow 150ms ease;\r\n  transition: box-shadow 150ms ease;\r\n  transition: box-shadow 150ms ease, -webkit-box-shadow 150ms ease;\n}\n.StripeElement--focus {\r\n  -webkit-box-shadow: 0 1px 3px 0 #cfd7df;\r\n          box-shadow: 0 1px 3px 0 #cfd7df;\n}\n.StripeElement--invalid {\r\n  border-color: #fa755a;\n}\n.StripeElement--webkit-autofill {\r\n  background-color: #fefde5 !important;\n}\r\n", ""]);
 
 // exports
 
@@ -84835,256 +85152,444 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	name: 'Inscription',
-	components: {
-		'rs-multiselect': __WEBPACK_IMPORTED_MODULE_0_vue_multiselect___default.a
-	},
-	props: ['id'],
-	data: function data() {
-		return {
-			stripe_objec: {},
-			card: {},
-			prices: [],
-			pareja1: '',
-			pareja2: '',
-			t: {},
-			r: '',
-			data: {},
-			tournament: {
-				organizer: {}
-			},
-			msg: {
-				febd_num_1: 'Pareja seleccionada.',
-				febd_num_2: 'Pareja seleccionada.',
-				method_pay: 'Señale el tipo de pago.'
-			},
-			inscription: {
-				user_id: '',
-				tournament_id: '',
-				febd_num_1: '',
-				last_name_1: '',
-				name_1: '',
-				febd_num_2: '',
-				name_2: '',
-				last_name_2: '',
-				price: '',
-				method_pay: '',
-				pay: 0
-			}
-		};
-	},
+  name: "Inscription",
+  props: ["id"],
+  components: { "rs-multiselect": __WEBPACK_IMPORTED_MODULE_0_vue_multiselect___default.a },
+  data: function data() {
+    return {
+      stripe_objec: {},
+      card: {},
+      prices: [],
+      pareja1: "",
+      pareja2: "",
+      t: {},
+      r: "",
+      data: {},
+      tournament: {
+        organizer: {}
+      },
+      msg: {
+        febd_num_1: "Pareja seleccionada.",
+        febd_num_2: "Pareja seleccionada.",
+        method_pay: "Señale el tipo de pago."
+      },
+      inscription: {
+        user_id: "",
+        tournament_id: "",
+        febd_num_1: "",
+        last_name_1: "",
+        name_1: "",
+        febd_num_2: "",
+        name_2: "",
+        last_name_2: "",
+        price: "",
+        method_pay: "",
+        pay: 0
+      }
+    };
+  },
 
-	watch: {
-		prices: function prices(val) {
-			var price = 0,
-			    test = 0;
-			for (var i in val) {
-				for (var o in this.tournament.prices) {
-					if (this.tournament.prices[o].id == val[i]) {
-						if (this.tournament.prices[o].category_id == 1) {
-							price += Number(this.tournament.prices[o].price);
-						}
-						if ((this.tournament.prices[o].category_id == 2 || this.tournament.prices[o].category_id == 3) && test == 0) {
-							price += Number(this.tournament.prices[o].price);
-							test++;
-						}
-						continue;
-					}
-				}
-			}
-			this.inscription.price = val;
-			this.inscription.pay = Number(price);
-		}
-	},
-	mounted: function mounted() {
-		var _this = this;
+  watch: {
+    prices: function prices(val) {
+      var price = 0,
+          test = 0;
+      for (var i in val) {
+        for (var o in this.tournament.prices) {
+          if (this.tournament.prices[o].id == val[i]) {
+            if (this.tournament.prices[o].category_id == 1) {
+              price += Number(this.tournament.prices[o].price);
+            }
+            if ((this.tournament.prices[o].category_id == 2 || this.tournament.prices[o].category_id == 3) && test == 0) {
+              price += Number(this.tournament.prices[o].price);
+              test++;
+            }
+            continue;
+          }
+        }
+      }
+      this.inscription.price = val;
+      this.inscription.pay = Number(price);
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
 
-		setTimeout(function () {
-			_this.inscription.tournament_id = _this.id;
-			_this.get();
-		}, 300);
-	},
+    setTimeout(function () {
+      _this.inscription.tournament_id = _this.id;
+      _this.get();
+    }, 300);
+  },
 
-	methods: {
-		namePrice: function namePrice(id) {
-			for (var o in this.tournament.prices) {
-				if (this.tournament.prices[o].id == id) {
-					return this.tournament.prices[o].level_text + (this.tournament.prices[o].subcategory_text ? ' - ' + this.tournament.prices[o].subcategory_text : '');
-				}
-			}
-		},
-		get: function get() {
-			var _this2 = this;
+  methods: {
+    namePrice: function namePrice(id) {
+      for (var o in this.tournament.prices) {
+        if (this.tournament.prices[o].id == id) {
+          return this.tournament.prices[o].level_text + (this.tournament.prices[o].subcategory_text ? " - " + this.tournament.prices[o].subcategory_text : "");
+        }
+      }
+    },
+    get: function get() {
+      var _this2 = this;
 
-			axios.post('/get-data', { id: this.id }).then(function (response) {
-				if (_this2.can('inscription.store')) {
-					_this2.tournament = response.data.tournament;
-					_this2.inscription.user_id = response.data.user.id;
-					var price = response.data.tournament.prices;
-					_this2.data = response.data.user;
-					if (response.data.state.id) {
-						_this2.r = false;
-					} else {
-						_this2.r = true;
-					}
-					_this2.t = response.data.state;
-					var pareja = response.data.user.parejas;
-					if (_this2.can('inscription.store2')) {
-						if (pareja[0]) {
-							_this2.pareja1 = (pareja[0].febd_num ? pareja[0].febd_num : '') + ' - ' + pareja[0].name + ' ' + pareja[0].last_name;
-							_this2.inscription.febd_num_1 = pareja[0].febd_num;
-							_this2.inscription.last_name_1 = pareja[0].last_name;
-							_this2.inscription.name_1 = pareja[0].name;
-						} else {
-							_this2.msg.febd_num_1 = 'Agrege la pareja en el perfil';
-						}
-						if (pareja[1]) {
-							_this2.pareja2 = (pareja[1].febd_num ? pareja[1].febd_num : '') + ' - ' + pareja[1].name + ' ' + pareja[1].last_name;
-							_this2.inscription.febd_num_2 = pareja[1].febd_num;
-							_this2.inscription.last_name_2 = pareja[1].last_name;
-							_this2.inscription.name_2 = pareja[1].name;
-						} else {
-							_this2.msg.febd_num_2 = 'Agrege la pareja en el perfil';
-						}
-					} else {
-						if (_this2.data.sex == 0) {
-							_this2.pareja2 = (_this2.data.febd_num ? _this2.data.febd_num : '') + ' - ' + _this2.data.name + ' ' + _this2.data.last_name;
-							_this2.inscription.febd_num_2 = _this2.data.febd_num;
-							_this2.inscription.name_2 = _this2.data.name;
-							_this2.inscription.last_name_2 = _this2.data.last_name;
-							if (pareja[0]) {
-								_this2.pareja1 = (pareja[0].febd_num ? pareja[0].febd_num : '') + ' - ' + pareja[0].name + ' ' + pareja[0].last_name;
-								_this2.inscription.febd_num_1 = pareja[0].febd_num;
-								_this2.inscription.last_name_1 = pareja[0].last_name;
-								_this2.inscription.name_1 = pareja[0].name;
-							} else {
-								_this2.msg.febd_num_1 = 'Agrege la pareja en el perfil';
-							}
-						} else {
-							_this2.pareja1 = (_this2.data.febd_num ? _this2.data.febd_num : '') + ' - ' + _this2.data.name + ' ' + _this2.data.last_name;
-							_this2.inscription.febd_num_1 = _this2.data.febd_num;
-							_this2.inscription.name_1 = _this2.data.name;
-							_this2.inscription.last_name_1 = _this2.data.last_name;
-							if (pareja[0]) {
-								_this2.pareja2 = (pareja[0].febd_num ? pareja[0].febd_num : '') + ' - ' + pareja[0].name + ' ' + pareja[0].last_name;
-								_this2.inscription.febd_num_2 = pareja[0].febd_num;
-								_this2.inscription.last_name_2 = pareja[0].last_name;
-								_this2.inscription.name_2 = pareja[0].name;
-							} else {
-								_this2.msg.febd_num_2 = 'Agrege la pareja en el perfil';
-							}
-						}
-					}
-					if (_this2.tournament.organizer.t_publishable_key && _this2.tournament.organizer.t_secret_key) {
-						_this2.stripe(_this2.tournament.organizer.t_publishable_key);
-					}
-				}
-			});
-		},
-		cate: function cate(n) {
-			if (n === 1) {
-				return 'Open';
-			} else if (n === 2) {
-				return 'Latino';
-			} else if (n === 3) {
-				return 'Standard';
-			}
-		},
-		changeType: function changeType(num) {
-			this.inscription.method_pay = num;
-		},
-		open: function open() {
-			$('#confirm').modal('show');
-			setTimeout(function () {
-				$('#confirm, body').css({ 'padding-right': '0px' });
-			}, 100);
-			$('.modal-backdrop').hide();
-		},
-		register: function register(event) {
-			var _this3 = this;
+      axios.post("/get-data", { id: this.id }).then(function (response) {
+        if (_this2.can("inscription.store")) {
+          _this2.tournament = response.data.tournament;
+          _this2.inscription.user_id = response.data.user.id;
+          var price = response.data.tournament.prices;
+          _this2.data = response.data.user;
+          _this2.r = response.data.state.id ? false : true;
+          _this2.t = response.data.state;
+          var pareja = response.data.user.parejas;
+          if (_this2.can("inscription.store2")) {
+            if (pareja[0]) {
+              _this2.pareja1 = (pareja[0].febd_num ? pareja[0].febd_num : "") + " - " + pareja[0].name + " " + pareja[0].last_name;
+              _this2.inscription.febd_num_1 = pareja[0].febd_num;
+              _this2.inscription.last_name_1 = pareja[0].last_name;
+              _this2.inscription.name_1 = pareja[0].name;
+            } else {
+              _this2.msg.febd_num_1 = "Agrege la pareja en el perfil";
+            }
+            if (pareja[1]) {
+              _this2.pareja2 = (pareja[1].febd_num ? pareja[1].febd_num : "") + " - " + pareja[1].name + " " + pareja[1].last_name;
+              _this2.inscription.febd_num_2 = pareja[1].febd_num;
+              _this2.inscription.last_name_2 = pareja[1].last_name;
+              _this2.inscription.name_2 = pareja[1].name;
+            } else {
+              _this2.msg.febd_num_2 = "Agrege la pareja en el perfil";
+            }
+          } else {
+            if (_this2.data.sex == 0) {
+              _this2.pareja2 = (_this2.data.febd_num ? _this2.data.febd_num : "") + " - " + _this2.data.name + " " + _this2.data.last_name;
+              _this2.inscription.febd_num_2 = _this2.data.febd_num;
+              _this2.inscription.name_2 = _this2.data.name;
+              _this2.inscription.last_name_2 = _this2.data.last_name;
+              if (pareja[0]) {
+                _this2.pareja1 = (pareja[0].febd_num ? pareja[0].febd_num : "") + " - " + pareja[0].name + " " + pareja[0].last_name;
+                _this2.inscription.febd_num_1 = pareja[0].febd_num;
+                _this2.inscription.last_name_1 = pareja[0].last_name;
+                _this2.inscription.name_1 = pareja[0].name;
+              } else {
+                _this2.msg.febd_num_1 = "Agrege la pareja en el perfil";
+              }
+            } else {
+              _this2.pareja1 = (_this2.data.febd_num ? _this2.data.febd_num : "") + " - " + _this2.data.name + " " + _this2.data.last_name;
+              _this2.inscription.febd_num_1 = _this2.data.febd_num;
+              _this2.inscription.name_1 = _this2.data.name;
+              _this2.inscription.last_name_1 = _this2.data.last_name;
+              if (pareja[0]) {
+                _this2.pareja2 = (pareja[0].febd_num ? pareja[0].febd_num : "") + " - " + pareja[0].name + " " + pareja[0].last_name;
+                _this2.inscription.febd_num_2 = pareja[0].febd_num;
+                _this2.inscription.last_name_2 = pareja[0].last_name;
+                _this2.inscription.name_2 = pareja[0].name;
+              } else {
+                _this2.msg.febd_num_2 = "Agrege la pareja en el perfil";
+              }
+            }
+          }
+          if (_this2.tournament.organizer.t_publishable_key && _this2.tournament.organizer.t_secret_key) {
+            _this2.stripe(_this2.tournament.organizer.t_publishable_key);
+          }
+        }
+      });
+    },
+    cate: function cate(n) {
+      if (n === 1) {
+        return "Open";
+      } else if (n === 2) {
+        return "Latino";
+      } else if (n === 3) {
+        return "Standard";
+      }
+    },
+    changeType: function changeType(num) {
+      this.inscription.method_pay = num;
+    },
+    open: function open() {
+      $("#confirm").modal("show");
+      setTimeout(function () {
+        $("#confirm, body").css({ "padding-right": "0px" });
+      }, 100);
+      $(".modal-backdrop").hide();
+    },
+    register: function register(event) {
+      var _this3 = this;
 
-			if (this.inscription.method_pay == 3) {
-				this.stripe_objec.createToken(this.card).then(function (result) {
-					if (result.error) {
-						// Inform the user if there was an error.
-						var errorElement = document.getElementById('card-errors');
-						errorElement.textContent = result.error.message;
-						toastr.info('Error En la conexión');
-					} else {
-						// Send the token to your server.
-						_this3.inscription.stripeToken = result.token.id;
-						// this.stripeTokenHandler(result.token);
-						_this3.send();
-					}
-				});
-			} else {
-				this.send();
-			}
-		},
-		send: function send() {
-			var _this4 = this;
+      if (this.inscription.method_pay == 3) {
+        this.stripe_objec.createToken(this.card).then(function (result) {
+          if (result.error) {
+            // Inform the user if there was an error.
+            var errorElement = document.getElementById("card-errors");
+            errorElement.textContent = result.error.message;
+            toastr.info("Error En la conexión");
+          } else {
+            // Send the token to your server.
+            _this3.inscription.stripeToken = result.token.id;
+            // this.stripeTokenHandler(result.token);
+            _this3.send();
+          }
+        });
+      } else {
+        this.send();
+      }
+    },
+    send: function send() {
+      var _this4 = this;
 
-			toastr.info('Procesando Información, ¡por favor espere!');
-			axios.post('/inscription', this.inscription).then(function (response) {
-				if (_this4.inscription.method_pay == 2) {
-					toastr.success('Registro exitoso, espere respuesta de PayPal');
-					setTimeout(function () {
-						return window.location.href = response.data;
-					}, 1000);
-				} else {
-					toastr.success('Registro exitoso');
-					setTimeout(function () {
-						return window.location.reload();
-					}, 1000);
-				}
-			});
-		},
-		stripe: function stripe(public_key) {
-			// Create a Stripe client.
-			this.stripe_objec = Stripe(public_key);
-			// Create an instance of Elements.
-			var elements = this.stripe_objec.elements();
-			// Custom styling can be passed to options when creating an Element.
-			// (Note that this demo uses a wider set of styles than the guide below.)
-			var style = {
-				base: {
-					color: '#32325d',
-					lineHeight: '18px',
-					fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-					fontSmoothing: 'antialiased',
-					fontSize: '16px',
-					'::placeholder': {
-						color: '#aab7c4'
-					}
-				},
-				invalid: {
-					color: '#fa755a',
-					iconColor: '#fa755a'
-				}
-			};
-			// Create an instance of the card Element.
-			var card = elements.create('card', { style: style });
+      toastr.info("Procesando Información, ¡por favor espere!");
+      axios.post("/inscription", this.inscription).then(function (response) {
+        if (_this4.inscription.method_pay == 2) {
+          toastr.success("Registro exitoso, espere respuesta de PayPal");
+          setTimeout(function () {
+            return window.location.href = response.data;
+          }, 1000);
+        } else {
+          toastr.success("Registro exitoso");
+          setTimeout(function () {
+            return window.location.reload();
+          }, 1000);
+        }
+      });
+    },
+    stripe: function stripe(public_key) {
+      // Create a Stripe client.
+      this.stripe_objec = Stripe(public_key);
+      // Create an instance of Elements.
+      var elements = this.stripe_objec.elements();
+      // Custom styling can be passed to options when creating an Element.
+      // (Note that this demo uses a wider set of styles than the guide below.)
+      var style = {
+        base: {
+          color: "#32325d",
+          lineHeight: "18px",
+          fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+          fontSmoothing: "antialiased",
+          fontSize: "16px",
+          "::placeholder": {
+            color: "#aab7c4"
+          }
+        },
+        invalid: {
+          color: "#fa755a",
+          iconColor: "#fa755a"
+        }
+      };
+      // Create an instance of the card Element.
+      var card = elements.create("card", { style: style });
 
-			// Add an instance of the card Element into the `card-element` <div>.
-			setTimeout(function () {
-				card.mount('#card-element');
-			}, 1000);
+      // Add an instance of the card Element into the `card-element` <div>.
+      setTimeout(function () {
+        card.mount("#card-element");
+      }, 1000);
 
-			// Handle real-time validation errors from the card Element.
-			card.addEventListener('change', function (event) {
-				var displayError = document.getElementById('card-errors');
-				if (event.error) {
-					displayError.textContent = event.error.message;
-				} else {
-					displayError.textContent = '';
-				}
-			});
-			this.card = card;
-		}
-	}
+      // Handle real-time validation errors from the card Element.
+      card.addEventListener("change", function (event) {
+        var displayError = document.getElementById("card-errors");
+        if (event.error) {
+          displayError.textContent = event.error.message;
+        } else {
+          displayError.textContent = "";
+        }
+      });
+      this.card = card;
+    }
+  }
 });
 
 /***/ }),
@@ -85193,62 +85698,74 @@ var render = function() {
                           _c("p", [_vm._v("Standard:")]),
                           _vm._v(" "),
                           _vm._l(_vm.tournament.prices, function(p) {
-                            return p.category_id == 3 &&
+                            return [
+                              p.category_id == 3 &&
                               _vm.data.category_s == p.level_id &&
                               _vm.data.group_s == p.subcategory_id
-                              ? _c("div", { staticClass: "form-inline" }, [
-                                  _c("label", { attrs: { for: p.id } }, [
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.prices,
-                                          expression: "prices"
-                                        }
-                                      ],
-                                      attrs: { type: "checkbox", id: p.id },
-                                      domProps: {
-                                        value: p.id,
-                                        checked: Array.isArray(_vm.prices)
-                                          ? _vm._i(_vm.prices, p.id) > -1
-                                          : _vm.prices
-                                      },
-                                      on: {
-                                        change: function($event) {
-                                          var $$a = _vm.prices,
-                                            $$el = $event.target,
-                                            $$c = $$el.checked ? true : false
-                                          if (Array.isArray($$a)) {
-                                            var $$v = p.id,
-                                              $$i = _vm._i($$a, $$v)
-                                            if ($$el.checked) {
-                                              $$i < 0 &&
-                                                (_vm.prices = $$a.concat([$$v]))
-                                            } else {
-                                              $$i > -1 &&
-                                                (_vm.prices = $$a
-                                                  .slice(0, $$i)
-                                                  .concat($$a.slice($$i + 1)))
+                                ? _c(
+                                    "div",
+                                    { key: p.id, staticClass: "form-inline" },
+                                    [
+                                      _c("label", { attrs: { for: p.id } }, [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.prices,
+                                              expression: "prices"
                                             }
-                                          } else {
-                                            _vm.prices = $$c
+                                          ],
+                                          attrs: { id: p.id, type: "checkbox" },
+                                          domProps: {
+                                            value: p.id,
+                                            checked: Array.isArray(_vm.prices)
+                                              ? _vm._i(_vm.prices, p.id) > -1
+                                              : _vm.prices
+                                          },
+                                          on: {
+                                            change: function($event) {
+                                              var $$a = _vm.prices,
+                                                $$el = $event.target,
+                                                $$c = $$el.checked
+                                                  ? true
+                                                  : false
+                                              if (Array.isArray($$a)) {
+                                                var $$v = p.id,
+                                                  $$i = _vm._i($$a, $$v)
+                                                if ($$el.checked) {
+                                                  $$i < 0 &&
+                                                    (_vm.prices = $$a.concat([
+                                                      $$v
+                                                    ]))
+                                                } else {
+                                                  $$i > -1 &&
+                                                    (_vm.prices = $$a
+                                                      .slice(0, $$i)
+                                                      .concat(
+                                                        $$a.slice($$i + 1)
+                                                      ))
+                                                }
+                                              } else {
+                                                _vm.prices = $$c
+                                              }
+                                            }
                                           }
-                                        }
-                                      }
-                                    }),
-                                    _vm._v(
-                                      "\n\t\t\t\t\t\t\t\t" +
-                                        _vm._s(p.level_text) +
-                                        " - " +
-                                        _vm._s(p.subcategory_text) +
-                                        " - " +
-                                        _vm._s(p.price) +
-                                        " €\n\t\t\t\t\t\t\t"
-                                    )
-                                  ])
-                                ])
-                              : _vm._e()
+                                        }),
+                                        _vm._v(
+                                          "\n                  " +
+                                            _vm._s(p.level_text) +
+                                            " - " +
+                                            _vm._s(p.subcategory_text) +
+                                            " -\n                  " +
+                                            _vm._s(p.price) +
+                                            " €\n                "
+                                        )
+                                      ])
+                                    ]
+                                  )
+                                : _vm._e()
+                            ]
                           })
                         ],
                         2
@@ -85261,62 +85778,74 @@ var render = function() {
                           _c("p", [_vm._v("Latino:")]),
                           _vm._v(" "),
                           _vm._l(_vm.tournament.prices, function(p) {
-                            return p.category_id == 2 &&
+                            return [
+                              p.category_id == 2 &&
                               _vm.data.category_l == p.level_id &&
                               _vm.data.group_l == p.subcategory_id
-                              ? _c("div", { staticClass: "form-inline" }, [
-                                  _c("label", { attrs: { for: p.id } }, [
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.prices,
-                                          expression: "prices"
-                                        }
-                                      ],
-                                      attrs: { type: "checkbox", id: p.id },
-                                      domProps: {
-                                        value: p.id,
-                                        checked: Array.isArray(_vm.prices)
-                                          ? _vm._i(_vm.prices, p.id) > -1
-                                          : _vm.prices
-                                      },
-                                      on: {
-                                        change: function($event) {
-                                          var $$a = _vm.prices,
-                                            $$el = $event.target,
-                                            $$c = $$el.checked ? true : false
-                                          if (Array.isArray($$a)) {
-                                            var $$v = p.id,
-                                              $$i = _vm._i($$a, $$v)
-                                            if ($$el.checked) {
-                                              $$i < 0 &&
-                                                (_vm.prices = $$a.concat([$$v]))
-                                            } else {
-                                              $$i > -1 &&
-                                                (_vm.prices = $$a
-                                                  .slice(0, $$i)
-                                                  .concat($$a.slice($$i + 1)))
+                                ? _c(
+                                    "div",
+                                    { key: p.id, staticClass: "form-inline" },
+                                    [
+                                      _c("label", { attrs: { for: p.id } }, [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.prices,
+                                              expression: "prices"
                                             }
-                                          } else {
-                                            _vm.prices = $$c
+                                          ],
+                                          attrs: { id: p.id, type: "checkbox" },
+                                          domProps: {
+                                            value: p.id,
+                                            checked: Array.isArray(_vm.prices)
+                                              ? _vm._i(_vm.prices, p.id) > -1
+                                              : _vm.prices
+                                          },
+                                          on: {
+                                            change: function($event) {
+                                              var $$a = _vm.prices,
+                                                $$el = $event.target,
+                                                $$c = $$el.checked
+                                                  ? true
+                                                  : false
+                                              if (Array.isArray($$a)) {
+                                                var $$v = p.id,
+                                                  $$i = _vm._i($$a, $$v)
+                                                if ($$el.checked) {
+                                                  $$i < 0 &&
+                                                    (_vm.prices = $$a.concat([
+                                                      $$v
+                                                    ]))
+                                                } else {
+                                                  $$i > -1 &&
+                                                    (_vm.prices = $$a
+                                                      .slice(0, $$i)
+                                                      .concat(
+                                                        $$a.slice($$i + 1)
+                                                      ))
+                                                }
+                                              } else {
+                                                _vm.prices = $$c
+                                              }
+                                            }
                                           }
-                                        }
-                                      }
-                                    }),
-                                    _vm._v(
-                                      "\n\t\t\t\t\t\t\t\t" +
-                                        _vm._s(p.level_text) +
-                                        " - " +
-                                        _vm._s(p.subcategory_text) +
-                                        " - " +
-                                        _vm._s(p.price) +
-                                        " €\n\t\t\t\t\t\t\t"
-                                    )
-                                  ])
-                                ])
-                              : _vm._e()
+                                        }),
+                                        _vm._v(
+                                          "\n                  " +
+                                            _vm._s(p.level_text) +
+                                            " - " +
+                                            _vm._s(p.subcategory_text) +
+                                            " -\n                  " +
+                                            _vm._s(p.price) +
+                                            " €\n                "
+                                        )
+                                      ])
+                                    ]
+                                  )
+                                : _vm._e()
+                            ]
                           })
                         ],
                         2
@@ -85329,65 +85858,77 @@ var render = function() {
                           _c("p", [_vm._v("Open:")]),
                           _vm._v(" "),
                           _vm._l(_vm.tournament.prices, function(p) {
-                            return p.category_id == 1
-                              ? _c("div", { staticClass: "form-inline" }, [
-                                  _c("label", { attrs: { for: p.id } }, [
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.prices,
-                                          expression: "prices"
-                                        }
-                                      ],
-                                      attrs: { type: "checkbox", id: p.id },
-                                      domProps: {
-                                        value: p.id,
-                                        checked: Array.isArray(_vm.prices)
-                                          ? _vm._i(_vm.prices, p.id) > -1
-                                          : _vm.prices
-                                      },
-                                      on: {
-                                        change: function($event) {
-                                          var $$a = _vm.prices,
-                                            $$el = $event.target,
-                                            $$c = $$el.checked ? true : false
-                                          if (Array.isArray($$a)) {
-                                            var $$v = p.id,
-                                              $$i = _vm._i($$a, $$v)
-                                            if ($$el.checked) {
-                                              $$i < 0 &&
-                                                (_vm.prices = $$a.concat([$$v]))
-                                            } else {
-                                              $$i > -1 &&
-                                                (_vm.prices = $$a
-                                                  .slice(0, $$i)
-                                                  .concat($$a.slice($$i + 1)))
+                            return [
+                              p.category_id == 1
+                                ? _c(
+                                    "div",
+                                    { key: p.id, staticClass: "form-inline" },
+                                    [
+                                      _c("label", { attrs: { for: p.id } }, [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.prices,
+                                              expression: "prices"
                                             }
-                                          } else {
-                                            _vm.prices = $$c
+                                          ],
+                                          attrs: { id: p.id, type: "checkbox" },
+                                          domProps: {
+                                            value: p.id,
+                                            checked: Array.isArray(_vm.prices)
+                                              ? _vm._i(_vm.prices, p.id) > -1
+                                              : _vm.prices
+                                          },
+                                          on: {
+                                            change: function($event) {
+                                              var $$a = _vm.prices,
+                                                $$el = $event.target,
+                                                $$c = $$el.checked
+                                                  ? true
+                                                  : false
+                                              if (Array.isArray($$a)) {
+                                                var $$v = p.id,
+                                                  $$i = _vm._i($$a, $$v)
+                                                if ($$el.checked) {
+                                                  $$i < 0 &&
+                                                    (_vm.prices = $$a.concat([
+                                                      $$v
+                                                    ]))
+                                                } else {
+                                                  $$i > -1 &&
+                                                    (_vm.prices = $$a
+                                                      .slice(0, $$i)
+                                                      .concat(
+                                                        $$a.slice($$i + 1)
+                                                      ))
+                                                }
+                                              } else {
+                                                _vm.prices = $$c
+                                              }
+                                            }
                                           }
-                                        }
-                                      }
-                                    }),
-                                    _vm._v(
-                                      "\n\t\t\t\t\t\t\t\t" +
-                                        _vm._s(p.level_text) +
-                                        " - " +
-                                        _vm._s(p.price) +
-                                        " €\n\t\t\t\t\t\t\t"
-                                    )
-                                  ])
-                                ])
-                              : _vm._e()
+                                        }),
+                                        _vm._v(
+                                          "\n                  " +
+                                            _vm._s(p.level_text) +
+                                            " - " +
+                                            _vm._s(p.price) +
+                                            " €\n                "
+                                        )
+                                      ])
+                                    ]
+                                  )
+                                : _vm._e()
+                            ]
                           })
                         ],
                         2
                       ),
                       _vm._v(" "),
                       _c("h4", [
-                        _vm._v("Total a Pagar: "),
+                        _vm._v("\n            Total a Pagar: "),
                         _c("b", [_vm._v(_vm._s(_vm.inscription.pay) + " €")])
                       ])
                     ]),
@@ -85410,9 +85951,9 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-12" }, [
                           _vm.tournament.organizer &&
-                          (_vm.tournament.organizer.headline &&
-                            _vm.tournament.organizer.account &&
-                            _vm.tournament.organizer.bank)
+                          _vm.tournament.organizer.headline &&
+                          _vm.tournament.organizer.account &&
+                          _vm.tournament.organizer.bank
                             ? _c(
                                 "div",
                                 {
@@ -85428,7 +85969,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n\t\t\t\t\t\t\tTransferencia\n\t\t\t\t\t\t"
+                                    "\n              Transferencia\n            "
                                   )
                                 ]
                               )
@@ -85449,7 +85990,7 @@ var render = function() {
                                     }
                                   }
                                 },
-                                [_vm._v("\n\t\t\t\t\t\t\tPaypal\n\t\t\t\t\t\t")]
+                                [_vm._v("\n              Paypal\n            ")]
                               )
                             : _vm._e(),
                           _vm._v(" "),
@@ -85470,7 +86011,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n\t\t\t\t\t\t\tTarjeta\n\t\t\t\t\t\t"
+                                    "\n              Tarjeta\n            "
                                   )
                                 ]
                               )
@@ -85484,29 +86025,31 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _vm.inscription.method_pay == 1 &&
-                        (_vm.tournament.organizer.bank &&
-                          _vm.tournament.organizer.headline &&
-                          _vm.tournament.organizer.account)
+                        _vm.tournament.organizer.bank &&
+                        _vm.tournament.organizer.headline &&
+                        _vm.tournament.organizer.account
                           ? _c("div", { staticClass: "col-md-12" }, [
                               _c(
                                 "p",
                                 { staticStyle: { "font-size": "14px" } },
                                 [
                                   _vm._v(
-                                    "Guarde los datos bancarios y deposite la cantidad acordada."
+                                    "\n              Guarde los datos bancarios y deposite la cantidad acordada.\n            "
                                   )
                                 ]
                               ),
                               _vm._v(" "),
                               _c("p", { staticStyle: { margin: "0" } }, [
-                                _vm._v("Banco: "),
+                                _vm._v("\n              Banco: "),
                                 _c("b", [
                                   _vm._v(_vm._s(_vm.tournament.organizer.bank))
                                 ])
                               ]),
                               _vm._v(" "),
                               _c("p", { staticStyle: { margin: "0" } }, [
-                                _vm._v("Cuenta: "),
+                                _vm._v(
+                                  "\n              Cuenta:\n              "
+                                ),
                                 _c("b", [
                                   _vm._v(
                                     _vm._s(_vm.tournament.organizer.account)
@@ -85515,7 +86058,9 @@ var render = function() {
                               ]),
                               _vm._v(" "),
                               _c("p", { staticStyle: { margin: "0" } }, [
-                                _vm._v("Titular: "),
+                                _vm._v(
+                                  "\n              Titular:\n              "
+                                ),
                                 _c("b", [
                                   _vm._v(
                                     _vm._s(_vm.tournament.organizer.headline)
@@ -85524,7 +86069,7 @@ var render = function() {
                               ]),
                               _vm._v(" "),
                               _c("p", { staticStyle: { margin: "0" } }, [
-                                _vm._v("Total: "),
+                                _vm._v("\n              Total: "),
                                 _c("b", [
                                   _vm._v(_vm._s(_vm.inscription.pay) + " €")
                                 ])
@@ -85541,10 +86086,10 @@ var render = function() {
                                 rawName: "v-show",
                                 value:
                                   _vm.inscription.method_pay == 3 &&
-                                  (_vm.tournament.organizer.t_publishable_key &&
-                                    _vm.tournament.organizer.t_secret_key),
+                                  _vm.tournament.organizer.t_publishable_key &&
+                                  _vm.tournament.organizer.t_secret_key,
                                 expression:
-                                  "inscription.method_pay == 3 && (tournament.organizer.t_publishable_key && tournament.organizer.t_secret_key)"
+                                  "\n              inscription.method_pay == 3 &&\n              tournament.organizer.t_publishable_key &&\n              tournament.organizer.t_secret_key\n            "
                               }
                             ],
                             staticClass: "form-row",
@@ -85569,10 +86114,17 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-black",
-                          attrs: { type: "button" },
+                          attrs: {
+                            type: "button",
+                            disabled:
+                              _vm.pareja1 &&
+                              _vm.pareja2 &&
+                              _vm.prices &&
+                              _vm.inscription.method_pay
+                          },
                           on: { click: _vm.open }
                         },
-                        [_vm._v("Registrar")]
+                        [_vm._v("\n          Registrar\n        ")]
                       )
                     ]
                   )
@@ -85586,8 +86138,8 @@ var render = function() {
                       id: "confirm",
                       role: "dialog",
                       "aria-hidden": "true",
-                      "data-backdrop": "static",
-                      "data-keyboard": "false"
+                      "data-keyboard": "false",
+                      "data-backdrop": "static"
                     }
                   },
                   [
@@ -85605,7 +86157,7 @@ var render = function() {
                           _c("div", { staticClass: "modal-body" }, [
                             _c("p", [
                               _vm._v(
-                                " Pareja: " +
+                                "Pareja: " +
                                   _vm._s(_vm.pareja1) +
                                   " y " +
                                   _vm._s(_vm.pareja2)
@@ -85625,16 +86177,21 @@ var render = function() {
                             _c(
                               "p",
                               [
-                                _vm._v(" Categorias: \n\t\t\t\t\t\t\t"),
-                                _vm._l(_vm.prices, function(p) {
+                                _vm._v(
+                                  "\n              Categorias:\n              "
+                                ),
+                                _vm._l(_vm.prices, function(p, i) {
                                   return [
                                     _c(
                                       "span",
-                                      { staticClass: "label label-info" },
+                                      {
+                                        key: i,
+                                        staticClass: "label label-info"
+                                      },
                                       [_vm._v(_vm._s(_vm.namePrice(p)))]
                                     ),
                                     _vm._v(" "),
-                                    _c("span")
+                                    _c("span", { key: i + "-1" })
                                   ]
                                 })
                               ],
@@ -85647,7 +86204,9 @@ var render = function() {
                             }),
                             _vm._v(" "),
                             _c("p", [
-                              _vm._v(" Método de Pago:\n\t\t\t\t\t\t\t"),
+                              _vm._v(
+                                "\n              Método de Pago:\n              "
+                              ),
                               _vm.inscription.method_pay == 1
                                 ? _c("span", [_vm._v("Transferencia")])
                                 : _vm._e(),
@@ -85668,9 +86227,9 @@ var render = function() {
                             _vm._v(" "),
                             _c("p", [
                               _vm._v(
-                                " Total a Pagar: " +
+                                "Total a Pagar: " +
                                   _vm._s(_vm.inscription.pay) +
-                                  " € "
+                                  " €"
                               )
                             ])
                           ]),
@@ -85693,18 +86252,18 @@ var render = function() {
                   { staticClass: "text-center", staticStyle: { margin: "0" } },
                   [
                     _vm._v(
-                      "Tu registro a la competición se ha finalizado correctamente.."
+                      "\n        Tu registro a la competición se ha finalizado correctamente..\n      "
                     )
                   ]
                 ),
                 _vm._v(" "),
                 _c("p", [
                   _vm._v(
-                    "Hola " +
+                    "\n        Hola " +
                       _vm._s(_vm.data.name) +
                       " " +
                       _vm._s(_vm.data.last_name) +
-                      ", Se ha registrado correctamente en la competición."
+                      ", Se ha registrado\n        correctamente en la competición.\n      "
                   )
                 ]),
                 _vm._v(" "),
@@ -85738,6 +86297,7 @@ var render = function() {
                           _c(
                             "span",
                             {
+                              key: p.id,
                               staticClass: "label label-info",
                               staticStyle: {
                                 display: "inline",
@@ -85747,16 +86307,16 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n\t\t\t\t\t\t\t" +
+                                "\n              " +
                                   _vm._s(_vm.cate(p.category_id)) +
-                                  " - " +
+                                  " -\n              " +
                                   _vm._s(_vm.namePrice(p.id)) +
-                                  "\n\t\t\t\t\t\t"
+                                  "\n            "
                               )
                             ]
                           ),
                           _vm._v(" "),
-                          _c("wbr")
+                          _c("wbr", { key: p.id + "-1" })
                         ]
                       })
                     ],
@@ -85783,31 +86343,31 @@ var render = function() {
                   ? _c("div", [
                       _c("p", { staticStyle: { "font-size": "14px" } }, [
                         _vm._v(
-                          "No te olvides de llevar a cabo la forma de pago seleccionada."
+                          "\n          No te olvides de llevar a cabo la forma de pago seleccionada.\n        "
                         )
                       ]),
                       _vm._v(" "),
                       _c("p", { staticStyle: { margin: "0" } }, [
-                        _vm._v("Banco: "),
+                        _vm._v("\n          Banco: "),
                         _c("b", [_vm._v(_vm._s(_vm.tournament.organizer.bank))])
                       ]),
                       _vm._v(" "),
                       _c("p", { staticStyle: { margin: "0" } }, [
-                        _vm._v("Cuenta: "),
+                        _vm._v("\n          Cuenta: "),
                         _c("b", [
                           _vm._v(_vm._s(_vm.tournament.organizer.account))
                         ])
                       ]),
                       _vm._v(" "),
                       _c("p", { staticStyle: { margin: "0" } }, [
-                        _vm._v("Titular: "),
+                        _vm._v("\n          Titular: "),
                         _c("b", [
                           _vm._v(_vm._s(_vm.tournament.organizer.headline))
                         ])
                       ]),
                       _vm._v(" "),
                       _c("p", { staticStyle: { margin: "0" } }, [
-                        _vm._v("Total: "),
+                        _vm._v("\n          Total: "),
                         _c("b", [_vm._v(_vm._s(_vm.t.pay) + " €")])
                       ])
                     ])
@@ -85828,7 +86388,7 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "name_1" } },
       [
         _c("span", { staticClass: "fa fa-name_1" }),
-        _vm._v(" Bailarín:\n\t\t\t\t")
+        _vm._v(" Bailarín:\n        ")
       ]
     )
   },
@@ -85841,7 +86401,7 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "name_2" } },
       [
         _c("span", { staticClass: "fa fa-name_2" }),
-        _vm._v(" Bailarina:\n\t\t\t\t")
+        _vm._v(" Bailarina:\n        ")
       ]
     )
   },
@@ -85851,7 +86411,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-row" }, [
       _c("label", { attrs: { for: "card-element" } }, [
-        _vm._v("\n\t\t\t\t\t\t\t\tTarjeta de Débito y Crédito\n\t\t\t\t\t\t\t")
+        _vm._v(" Tarjeta de Débito y Crédito ")
       ]),
       _vm._v(" "),
       _c("div", { attrs: { id: "card-element" } }),
@@ -85870,8 +86430,8 @@ var staticRenderFns = [
           staticClass: "close",
           attrs: {
             type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
+            "aria-label": "Close",
+            "data-dismiss": "modal"
           }
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
@@ -85879,7 +86439,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("h4", { staticClass: "modal-title" }, [
         _vm._v(
-          "¿Esta Seguro de Registrar su participación en esta competición?"
+          "\n              ¿Esta Seguro de Registrar su participación en esta competición?\n            "
         )
       ])
     ])
@@ -85895,7 +86455,7 @@ var staticRenderFns = [
           staticClass: "btn btn-danger",
           attrs: { type: "button", "data-dismiss": "modal" }
         },
-        [_vm._v("Cancelar")]
+        [_vm._v("\n              Cancelar\n            ")]
       ),
       _vm._v(" "),
       _c(

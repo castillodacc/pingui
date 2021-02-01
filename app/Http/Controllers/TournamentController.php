@@ -99,7 +99,7 @@ class TournamentController extends Controller
         if ($request->image) {
             $imageData = $request->image;
             $data['image'] = 'tournament-' . \Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
-            (new ImageManager)->make($request->image)->save(public_path('storage/') . $data['image']);
+            (new ImageManager)->make($request->image)->save(env('APP_FILES', public_path('storage/')) . $data['image']);
         }
 
         $tournament = Tournament::create($data);
@@ -219,12 +219,12 @@ class TournamentController extends Controller
         }
         $data['record_id'] = \Auth::user()->id;
 
-        if (is_readable(public_path("storage/$request->image"))) {
+        if (is_readable(env('APP_FILES', public_path('storage/')) . $request->image)) {
         } else {
             if (strlen($request->image) > 50) {
                 $imageData = $request->image;
                 $data['image'] = 'tournament-' . \Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
-                (new ImageManager)->make($request->image)->save(public_path('storage/') . $data['image']);
+                (new ImageManager)->make($request->image)->save(env('APP_FILES', public_path('storage/')) . $data['image']);
             }
         }
 
@@ -316,7 +316,7 @@ class TournamentController extends Controller
     {
         $file = $request->file($name);
         $nombre = str_replace(' ', '-', $file->getClientOriginalName());
-        \Storage::disk('local')->put("/$name/$nombre", \File::get($file));
+        \Storage::disk('public')->put("/$name/$nombre", \File::get($file));
         return response()->json($nombre);
     }
 
@@ -351,7 +351,7 @@ class TournamentController extends Controller
             $request->validate(['file' => 'required|mimes:pdf']);
             $folder = 'pdf';
         }
-        \Storage::disk('local')->put("/more_info/$folder/$nombre", \File::get($file));
+        \Storage::disk('public')->put("/more_info/$folder/$nombre", \File::get($file));
         return response()->json("/storage/more_info/$folder/$nombre");
     }
 }
