@@ -221,7 +221,9 @@
             type="button"
             @click="open"
             class="btn btn-black"
-            :disabled="pareja1 && pareja2 && prices && inscription.method_pay"
+            :disabled="
+              pareja1 && pareja2 && prices && inscription.method_pay.length
+            "
           >
             Registrar
           </button>
@@ -277,7 +279,13 @@
               <button type="button" class="btn btn-danger" data-dismiss="modal">
                 Cancelar
               </button>
-              <button type="submit" class="btn btn-success">Confirmar</button>
+              <button
+                type="submit"
+                class="btn btn-success"
+                :disabled="!button_finish"
+              >
+                Confirmar
+              </button>
             </div>
           </div>
         </div>
@@ -386,6 +394,7 @@ export default {
   components: { "rs-multiselect": Multiselect },
   data() {
     return {
+      button_finish: true,
       stripe_objec: {},
       card: {},
       prices: [],
@@ -577,6 +586,7 @@ export default {
       $(".modal-backdrop").hide();
     },
     register: function (event) {
+      this.button_finish = false;
       if (this.inscription.method_pay == 3) {
         this.stripe_objec.createToken(this.card).then((result) => {
           if (result.error) {
@@ -605,6 +615,7 @@ export default {
           toastr.success("Registro exitoso");
           setTimeout(() => window.location.reload(), 1000);
         }
+        this.button_finish = true;
       });
     },
     stripe: function (public_key) {

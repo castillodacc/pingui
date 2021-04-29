@@ -130,7 +130,7 @@ class UsersController extends Controller
     public function dataForRegister()
     {
         $roles = Role::all()->pluck('name');
-        return response()->json(compact(['modules', 'roles']));
+        return response()->json(compact('roles'));
     }
 
 }

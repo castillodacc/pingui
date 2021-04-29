@@ -156,29 +156,29 @@ router.beforeEach((to, from, next) => {
 	if (permission == undefined) {next('error'); return;}
 	if (permission == undefined) {next('error'); return;}
 
-	setTimeout(() => {
-		if (this.a.app.can(permission)) {
-			next(); return;
-		} else if (permission.indexOf('-') != -1) {
-			let split = permission.split('-');
-			for(let i in split) {
-				if (split[i].indexOf('.index') != -1) {
-					if (this.a.app.can(split[i])) {
-						next(); return;
-					}
-				} else {
-					if (this.a.app.can(split[i] + '.index')) {
-						next(); return;
-					}
-				}
-			}
-		}
+	// setTimeout(() => {
+		// if (this.a.app.can(permission)) {
+		// 	next(); return;
+		// } else if (permission.indexOf('-') != -1) {
+		// 	let split = permission.split('-');
+		// 	for(let i in split) {
+		// 		if (split[i].indexOf('.index') != -1) {
+		// 			if (this.a.app.can(split[i])) {
+		// 				next(); return;
+		// 			}
+		// 		} else {
+		// 			if (this.a.app.can(split[i] + '.index')) {
+		// 				next(); return;
+		// 			}
+		// 		}
+		// 	}
+		// }
 		axios.post('/admin/app', {p: permission})
 		.then(response => {
 			if (response.data) {next(); return;}
 			next(false);
 		});
-	}, 10);
+	// }, 10);
 });
 
 router.afterEach((to, from, next) => {
