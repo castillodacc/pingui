@@ -199,7 +199,7 @@
 									<div class="col-md-12">
 										<h5 style="display: inline;">Categorias Opens:</h5>
 										@foreach($tournament->prices->where('category_id', 1) as $c)
-										<span class="label label-success">{{ $c->subO->name }}</span>
+										<span class="label label-success">{{ optional($c->subO)->name }}</span>
 										@endforeach
 									</div>
 								</div>
@@ -207,7 +207,7 @@
 									<div class="col-md-12">
 										<h5 style="display: inline;">Categorias Latinos:</h5>
 										@foreach($tournament->prices->where('category_id', 2) as $c)
-										<span class="label label-success">{{ $c->subL->category_latino->name }} - {{ $c->subL->name }}</span>
+										<span class="label label-success">{{ optional(optional($c->subL)->category_latino)->name }} - {{ optional($c->subL)->name }}</span>
 										@endforeach
 									</div>
 								</div>
@@ -215,7 +215,7 @@
 									<div class="col-md-12">
 										<h5 style="display: inline;">Categorias Standar:</h5>
 										@foreach($tournament->prices->where('category_id', 3) as $c)
-										<span class="label label-success">{{ $c->subS->category_standar->name }} - {{ $c->subS->name }}</span>
+										<span class="label label-success">{{ optional(optional($c->subS)->category_standar)->name }} - {{ optional($c->subS)->name }}</span>
 										@endforeach
 									</div>
 								</div>

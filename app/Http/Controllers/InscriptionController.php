@@ -77,6 +77,18 @@ class InscriptionController extends Controller
 
         $data['user_id'] = \Auth::user()->id;
 
+        $validate = Inscription::where([
+            'user_id' => $data['user_id'],
+            'tournament_id' => $data['tournament_id'],
+            'febd_num_1' => $data['febd_num_1'],
+            'febd_num_2' => $data['febd_num_2'],
+            'pay' => $data['pay'],
+            'method_pay' => $data['method_pay'],
+        ])->first();
+        if ($validate) {
+            return response()->json([]);
+        }
+
         $inscription = Inscription::create($data);
 
         $inscription->prices()->attach(array_unique($data['price']));
