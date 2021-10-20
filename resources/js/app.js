@@ -72,12 +72,15 @@ Vue.mixin({
 });
 
 import Inscription from './components/forms/form-inscription.vue';
+import FormContact from './components/forms/form-contact.vue';
+import Spinner from './components/partials/spinner.vue';
 
-Vue.component('spinner', require('./components/partials/spinner.vue'));
+Vue.component('spinner', Spinner);
 Vue.component('inscription', Inscription);
-Vue.component('contact', require('./components/forms/form-contact.vue'));
+Vue.component('contact', FormContact);
 
 const app = new Vue({
+	el: '#app',
     router,
     data: {
     	permissions: [],
@@ -92,4 +95,4 @@ const app = new Vue({
 			this.permissions = response.data;
 		});
 	},
-}).$mount('#app');
+});

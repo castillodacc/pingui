@@ -432,6 +432,7 @@
                 this.pareja.id = response.data.pareja.id;
                 this.pareja.p_last_name = response.data.pareja.last_name;
                 this.pareja.p_name = response.data.pareja.name;
+                this.pareja.birthdate = response.data.pareja.birthdate;
             }
             if (response.data.pareja2) {
                 this.pareja2.p_email2 = response.data.pareja2.email;
@@ -439,6 +440,7 @@
                 this.pareja2.id = response.data.pareja2.id;
                 this.pareja2.p_last_name2 = response.data.pareja2.last_name;
                 this.pareja2.p_name2 = response.data.pareja2.name;
+                this.pareja2.birthdate = response.data.pareja2.birthdate;
             }
             this.charge(1);
             this.charge(2);
@@ -508,6 +510,7 @@
                 p_email: this.pareja2.p_email2,
                 sex: this.pareja2.sex,
                 p_febd_num: this.pareja2.p_febd_num2,
+                birthdate: this.pareja2.birthdate,
             })
             .then(response => {
                 toastr.success('Datos Actualizados');

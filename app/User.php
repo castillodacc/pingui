@@ -4,8 +4,9 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Traits\ { ModelsTrait, PermissionTrait };
+use App\Traits\{ModelsTrait, PermissionTrait};
 
 class User extends Authenticatable
 {
@@ -28,7 +29,6 @@ class User extends Authenticatable
         'confirm',
         'international_id',
         'sex',
-
         'birthdate',
         'febd_num',
         'category_l',
@@ -41,7 +41,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Los atributos que deberían estar ocultos para las matrices.
+     * The attributes that should be hidden for arrays.
      *
      * @var array
      */
@@ -51,6 +51,16 @@ class User extends Authenticatable
         'created_at',
         'updated_at',
         'deleted_at',
+        'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
     ];
 
     public function sendPasswordResetNotification($token)

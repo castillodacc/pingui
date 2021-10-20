@@ -212,7 +212,6 @@ class InscriptionController extends Controller
     {
         $price = Price::where('tournament_id', $request->id)->get();
         $price->each(function ($p) {
-            ;
             if ($p->category_id == 1) {
                 $p->name = $p->subHelp()->name;
             } elseif ($p->category_id == 2) {

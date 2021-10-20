@@ -8,7 +8,7 @@ use App\Traits\ModelsTrait;
 
 class Pareja extends Model
 {
-	use SoftDeletes, ModelsTrait;
+    use SoftDeletes, ModelsTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -16,12 +16,13 @@ class Pareja extends Model
      * @var array
      */
     protected $fillable = [
-    	'name',
-    	'last_name',
-    	'email',
+        'name',
+        'last_name',
+        'email',
         'sex',
         'febd_num',
-    	'user_id',
+        'user_id',
+        'birthdate'
     ];
 
     /**
@@ -30,6 +31,6 @@ class Pareja extends Model
      * @var array
      */
     protected $hidden = [
-    	'created_at', 'updated_at', 'deleted_at'
+        'created_at', 'updated_at', 'deleted_at'
     ];
 }

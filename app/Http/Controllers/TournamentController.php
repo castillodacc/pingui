@@ -344,7 +344,7 @@ class TournamentController extends Controller
     public function uploadFile(Request $request, $type_id)
     {
         $file = $request->file('file');
-        $nombre = str_replace(' ', '-', $file->getClientOriginalName());
+        $nombre = utf8_encode(str_replace(' ', '-', $file->getClientOriginalName()));
         if ($request->type_id == 2) {
             $folder = 'csv';
         } else {

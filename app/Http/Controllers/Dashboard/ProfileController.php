@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ { ChangePasswordRequest, UpdatePerfilUserRequest };
 use App\Models\ { Club, Pareja, Category_latino, Category_standar, Subcategory_latino, Subcategory_standar };
+use Carbon\Carbon;
 
 class ProfileController extends Controller
 {
@@ -109,7 +110,7 @@ class ProfileController extends Controller
             'p_name' => 'nombre',
         ]);
         if ($request->id) {
-            Pareja::where('user_id', '=', $request->user_id)
+            Pareja::where('user_id', $request->user_id)
             ->findOrFail($request->id)
             ->update([
                 'sex' => $request->sex,
@@ -117,6 +118,7 @@ class ProfileController extends Controller
                 'last_name' => $request->p_last_name,
                 'email' => $request->p_email,
                 'febd_num' => $request->p_febd_num,
+                'birthdate' => $request->birthdate,
             ]);
         } else {
             Pareja::create([
@@ -125,7 +127,8 @@ class ProfileController extends Controller
                 'last_name' => $request->p_last_name,
                 'email' => $request->p_email,
                 'febd_num' => $request->p_febd_num,
-                'user_id' => $request->user_id
+                'user_id' => $request->user_id,
+                'birthdate' => $request->birthdate,
             ]);
         }
     }
