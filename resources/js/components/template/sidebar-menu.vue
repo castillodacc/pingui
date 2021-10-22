@@ -8,7 +8,7 @@
         </li> -->
         <li class="treeview" v-if="can(['user.index','rol.index','permission.index'])">
             <a href="#">
-                <i class="fa fa-laptop"></i>
+                <i class="fa f-laptop"></i>
                 <span>Administración</span>
                 <span class="pull-right-container">
                     <i class="fa fa-angle-left pull-right"></i>
@@ -17,24 +17,24 @@
             <ul class="treeview-menu">
                 <li v-if="can('user.index')">
                     <router-link :to="{ name: 'user.index' }">
-                        <i class="fa fa-users"></i> Usuarios
+                        <i class="fa f-users"></i> Usuarios
                     </router-link>
                 </li>
                 <li v-if="can('rol.index')">
                     <router-link :to="{ name: 'rol.index' }">
-                        <i class="glyphicon glyphicon-compressed"></i> Roles
+                        <i class="glyphicon glyphico-compressed"></i> Roles
                     </router-link>
                 </li>
                 <li v-if="can('permission.index')">
                     <router-link :to="{ name: 'permission.index' }">
-                        <i class="glyphicon glyphicon-th"></i> Permisos
+                        <i class="glyphicon glyphico-th"></i> Permisos
                     </router-link>
                 </li>
             </ul>
         </li>
         <li class="treeview" v-if="can(['categories_l.index','categories_o.index','categories_s.index'])">
             <a href="#">
-                <i class="fa fa-laptop"></i>
+                <i class="fa f-laptop"></i>
                 <span>Categorias</span>
                 <span class="pull-right-container">
                     <i class="fa fa-angle-left pull-right"></i>
@@ -43,17 +43,17 @@
             <ul class="treeview-menu">
                 <li v-if="can('categories_l.index')">
                     <router-link :to="{ name: 'categories_l.index' }">
-                        <i class="fa fa-list"></i> Latinas
+                        <i class="fa f-list"></i> Latinas
                     </router-link>
                 </li>
                 <li v-if="can('categories_o.index')">
                     <router-link :to="{ name: 'categories_o.index' }">
-                        <i class="fa fa-list"></i> Opens
+                        <i class="fa f-list"></i> Opens
                     </router-link>
                 </li>
                 <li v-if="can('categories_s.index')">
                     <router-link :to="{ name: 'categories_s.index' }">
-                        <i class="fa fa-list"></i> Standard
+                        <i class="fa f-list"></i> Standard
                     </router-link>
                 </li>
             </ul>

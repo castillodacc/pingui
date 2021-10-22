@@ -10,7 +10,7 @@
             v-if="can('categories_o.store')"><span class="glyphicon glyphicon-plus"></span></button>
         </div>
         <div class="box-body">
-            <div id="form-categories_o" class="col-md-8 col-md-offset-2" v-if="can(['categories_o.store', 'categories_o.update'])"">
+            <div id="form-categories_o" class="col-md-8 col-md-offset-2" v-if="can(['categories_o.store', 'categories_o.update'])">
                 <div class="row" v-show="form.ready">
                     <h4 v-text="form.title"></h4>
                     <div class="col-sm-10">

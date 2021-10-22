@@ -62,13 +62,11 @@
 </template>
 
 <script>
-    export default {
-        name: 'v-header',
-        props: ['all'],
-        data()  {
-            return {
-                token: window.token.content
-            }
-        },
-    }
+export default {
+  name: "v-header",
+  props: ["all"],
+  data: () => ({
+    token: window.token.content,
+  }),
+};
 </script>

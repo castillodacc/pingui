@@ -1,5 +1,9 @@
 <?php
 
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+
+use App\User;
+use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
 /*
@@ -14,35 +18,35 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(App\User::class, function (Faker $faker) {
-	$emails = [
-		'@sahum.gob.ve',
-		'@gmail.com',
-		'@hotmail.com',
-		'@outlook.com',
-		'@yahoo.com',
-		'@mail.com'
-	];
-	$name = $faker->firstName;
-	$user = $faker->bothify($name.'#?##?');
-	return [
-		'user' => $name,
-		'name' => $name,
-		'last_name' => $faker->lastName,
-		'num_id' => rand(500000, 50000000),
-		'email' => $user.$emails[rand(0, 5)],
-		'password' => bcrypt('secret'),
-		'remember_token' => str_random(10),
-	];
+    $emails = [
+        '@sahum.gob.ve',
+        '@gmail.com',
+        '@hotmail.com',
+        '@outlook.com',
+        '@yahoo.com',
+        '@mail.com'
+    ];
+    $name = $faker->firstName;
+    $user = $faker->bothify($name . '#?##?');
+    return [
+        'user' => $name,
+        'name' => $name,
+        'last_name' => $faker->lastName,
+        'num_id' => rand(500000, 50000000),
+        'email' => $user . $emails[rand(0, 5)],
+        'password' => bcrypt('secret'),
+        'remember_token' => str_random(10),
+    ];
 });
 
 $factory->define(App\Models\Permisologia\Role::class, function (Faker $faker) {
-	$rol = $faker->numerify('Rol ####');
-	return [
-		'name' => $rol,
-		'slug' => $rol,
-		'description' => 'Rol de prueba',
-		'from_at' => \Carbon\Carbon::parse('08:00:00'),
-		'to_at' => \Carbon\Carbon::parse('17:00:00'),
-		'special' => null
-	];
+    $rol = $faker->numerify('Rol ####');
+    return [
+        'name' => $rol,
+        'slug' => $rol,
+        'description' => 'Rol de prueba',
+        'from_at' => \Carbon\Carbon::parse('08:00:00'),
+        'to_at' => \Carbon\Carbon::parse('17:00:00'),
+        'special' => null
+    ];
 });

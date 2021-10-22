@@ -24,7 +24,7 @@ class ClubsController extends Controller
      */
     public function index()
     {
-        $select = ['name', 'id', 'province', 'population'];
+        $select = ['id', 'name', 'province', 'population'];
         $clubs = Club::dataForPaginate($select);
         return $this->dataWithPagination($clubs);
     }

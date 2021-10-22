@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{ Inscription, Tournament, Price, Category_open, Category_latino, Category_standar, Subcategory_latino, Subcategory_standar };
+use App\Models\{Inscription, Tournament, Price, Category_open, Category_latino, Category_standar, Subcategory_latino, Subcategory_standar};
 use App\Payment\Paypal;
 
 class InscriptionController extends Controller
@@ -21,18 +21,35 @@ class InscriptionController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $select = ['id', 'febd_num_1', 'name_1', 'last_name_1', 'febd_num_2', 'name_2', 'last_name_2', 'state_pay', 'method_pay', 'state', 'tournament_id', 'dorsal'];
-        $data = Inscription::orderBy(request()->order?:'id', request()->dir?:'ASC')
-        ->search(request()->search)
-        ->where('tournament_id', request()->d)
-        ->select($select)
-        ->paginate(request()->num?:10);
+        $select = [
+            'id',
+            'febd_num_1',
+            'name_1',
+            'last_name_1',
+            'febd_num_2',
+            'name_2',
+            'last_name_2',
+            'state_pay',
+            'method_pay',
+            'state',
+            'tournament_id',
+            'dorsal'
+        ];
+        if ($request->dir == 1) {
+            $request->dir = 'id';
+        }
+        $data = Inscription::orderBy($request->order ?? 'id', $request->dir ?? 'ASC')
+            ->search($request->search)
+            ->where('tournament_id', $request->d)
+            ->select($select)
+            ->paginate($request->num ?? 10);
         $data->each(function ($d) {
-            $d->dorsal = ($d->dorsal) ?: '------------';
+            $d->dorsal = ($d->dorsal) ?? '------------';
             $d->state = ($d->state == 1) ? 'Aprobado' : 'No Aprobado';
             if ($d->method_pay == 1) {
                 $d->type_pay = 'Transferencia';
@@ -67,7 +84,7 @@ class InscriptionController extends Controller
             'tournament_id' => 'required|numeric',
             'method_pay' => 'required|numeric',
             'pay' => 'required|numeric',
-        ],[],[
+        ], [], [
             'name_1' => 'pareja',
             'name_2' => 'pareja',
             'price' => 'precios',
@@ -150,12 +167,12 @@ class InscriptionController extends Controller
             'state' => 'nullable|numeric',
             'state_pay' => 'nullable|numeric',
             'pay' => 'required'
-        ],[],[
+        ], [], [
             'state' => 'estado de participación',
             'state_pay' => 'estado del pago',
             'pay' => 'pago'
         ]);
-        $prices = $this->validate($request, ['prices' => 'required|array'],[],['prices' => 'precios']);
+        $prices = $this->validate($request, ['prices' => 'required|array'], [], ['prices' => 'precios']);
         $inscription = Inscription::findOrFail($id);
         $inscription->update($data);
         $inscription->update_pivot($request->prices, 'prices');
@@ -200,7 +217,7 @@ class InscriptionController extends Controller
         $count = 1;
         foreach ($prices as $p) {
             foreach ($p->inscriptions as $i) {
-                if($i->state_pay == 1 && $i->state == 1 && $i->dorsal == null) {
+                if ($i->state_pay == 1 && $i->state == 1 && $i->dorsal == null) {
                     $i->update(['dorsal' => $count]);
                     $count++;
                 }
