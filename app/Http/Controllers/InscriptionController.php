@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\{Inscription, Tournament, Price, Category_open, Category_latino, Category_standar, Subcategory_latino, Subcategory_standar};
-use App\Payment\Paypal;
 
 class InscriptionController extends Controller
 {
@@ -41,7 +40,7 @@ class InscriptionController extends Controller
             'dorsal'
         ];
         if ($request->dir == 1) {
-            $request->dir = 'id';
+            $request->dir = 'ASC';
         }
         $data = Inscription::orderBy($request->order ?? 'id', $request->dir ?? 'ASC')
             ->search($request->search)
@@ -112,9 +111,10 @@ class InscriptionController extends Controller
 
         if ($inscription->method_pay == 2) {
             $inscription->delete();
-            $paypal = new Paypal($inscription);
-            $payment = $paypal->generate();
-            return $payment->getApprovalLink();
+            return $this->payWithPayPal($inscription);
+            // $paypal = new Paypal($inscription);
+            // $payment = $paypal->generate();
+            //  $payment->getApprovalLink();
         }
 
         if ($inscription->method_pay == 3) {
@@ -189,27 +189,14 @@ class InscriptionController extends Controller
         Inscription::findOrFail($id)->delete();
     }
 
-    public function paymentStore($id, Request $request)
-    {
-        $inscription = Inscription::withTrashed()->findOrFail($id);
-        $paypal = new Paypal($inscription);
-        $execution = $paypal->execute($request->paymentId, $request->PayerID);
-
-        $inscription->restore();
-        $inscription->update(['state_pay' => true]);
-        $tournament = Tournament::findOrFail($inscription->tournament_id);
-        \Mail::to($inscription->user->email)->send(new \App\Mail\Inscription($inscription));
-        return view('inscription', compact('tournament'));
-    }
-
-    public function paymentCancel($id, Request $request)
-    {
-        if (!isset($request->token)) redirect('/');
-        $inscription = Inscription::withTrashed()->findOrFail($id);
-        $tournament = Tournament::findOrFail($inscription->tournament_id);
-        $cancel = 'Transacción cancelada o fallida.';
-        return view('inscription', compact('tournament', 'cancel'));
-    }
+    // public function paymentCancel($id, Request $request)
+    // {
+    //     if (!isset($request->token)) redirect('/');
+    //     $inscription = Inscription::withTrashed()->findOrFail($id);
+    //     $tournament = Tournament::findOrFail($inscription->tournament_id);
+    //     $cancel = 'Transacción cancelada o fallida.';
+    //     return view('inscription', compact('tournament', 'cancel'));
+    // }
 
     public function generateDorsales($tournament)
     {
@@ -239,4 +226,94 @@ class InscriptionController extends Controller
         });
         return compact('price');
     }
+
+    private function payWithPayPal($inscription)
+    {
+
+        $organizer = $inscription->tournament->organizer;
+
+        $payPalConfig = config('paypal');
+        $payPalConfig['account']['client_id'] = $organizer->paypal_client_id;
+        $payPalConfig['account']['client_secret'] = $organizer->paypal_client_secret;
+
+        $apiContext = new \PayPal\Rest\ApiContext(
+            new \PayPal\Auth\OAuthTokenCredential(
+                $payPalConfig['account']['client_id'],
+                $payPalConfig['account']['client_secret']
+            )
+        );
+
+        $payer = new \PayPal\Api\Payer();
+        $payer->setPaymentMethod('paypal');
+
+        $amount = new \PayPal\Api\Amount();
+        $amount->setTotal($inscription->pay);
+        $amount->setCurrency($payPalConfig['currency']);
+
+        $transaction = new \PayPal\Api\Transaction();
+        $transaction->setAmount($amount);
+        $transaction->setDescription($inscription->tournament->name);
+
+        $callbackUrl = route('payment.status', ['id' => $inscription->id]);
+        $redirectUrls = new \PayPal\Api\RedirectUrls();
+        $redirectUrls->setReturnUrl($callbackUrl)->setCancelUrl($callbackUrl);
+
+        $payment = new \PayPal\Api\Payment();
+        $payment->setIntent('sale')
+            ->setPayer($payer)
+            ->setTransactions(array($transaction))
+            ->setRedirectUrls($redirectUrls);
+
+        try {
+            $payment->create($apiContext);
+            return $payment->getApprovalLink();
+        } catch (\PayPal\Exception\PayPalConnectionException $ex) {
+            echo $ex->getData();
+        }
+    }
+
+    public function paymentStatus($id, Request $request)
+    {
+
+        $inscription = Inscription::withTrashed()->findOrFail($id);
+        $tournament = $inscription->tournament;
+        $cancel = 'Lo sentimos! El pago a través de PayPal no se pudo realizar. Transacción cancelada o fallida.';
+
+        if (!$request->paymentId || !$request->PayerID || !$request->token) {
+            return view('inscription', compact('tournament', 'cancel'));
+        }
+
+        $organizer = $inscription->tournament->organizer;
+
+        $payPalConfig = config('paypal');
+        $payPalConfig['account']['client_id'] = $organizer->paypal_client_id;
+        $payPalConfig['account']['client_secret'] = $organizer->paypal_client_secret;
+
+        $apiContext = new \PayPal\Rest\ApiContext(
+            new \PayPal\Auth\OAuthTokenCredential(
+                $payPalConfig['account']['client_id'],
+                $payPalConfig['account']['client_secret']
+            )
+        );
+
+        $payment = \PayPal\Api\Payment::get($request->paymentId, $apiContext);
+
+        $execution = new \PayPal\Api\PaymentExecution();
+        $execution->setPayerId($request->PayerID);
+
+        /** Execute the payment **/
+        $result = $payment->execute($execution, $apiContext);
+
+        if ($result->getState() === 'approved') {
+            $status = 'Gracias! El pago a través de PayPal se ha ralizado correctamente.';
+
+            $inscription->restore();
+            $inscription->update(['state_pay' => true]);
+            \Mail::to($inscription->user->email)->send(new \App\Mail\Inscription($inscription));
+            return view('inscription', compact('tournament', 'status'));
+        }
+
+        return redirect('/inscription')->with(compact('cancel'));
+    }
 }
+// https://pingui.es.dev:8443/payment/store/8?paymentId=PAYID-MF2PYCQ5JA62911HH495724D&token=EC-2JH65215ET730572Y&PayerID=U6BGQVT8YJJ24

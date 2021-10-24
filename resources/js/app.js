@@ -4,12 +4,12 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+require("./bootstrap");
 
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import router from './router';
-import App from './components/App.vue';
+import Vue from "vue";
+import VueRouter from "vue-router";
+import router from "./router";
+import App from "./components/App.vue";
 
 Vue.use(VueRouter);
 
@@ -25,74 +25,77 @@ Vue.use(VueRouter);
  */
 
 Vue.mixin({
-	methods: {
-		can (accion = null) {
-			let permissions = this.$root.permissions;
-			if (permissions === 'all-access') return true;
-			if (permissions === 'no-access') return false;
-			if (Array.isArray(accion)) {
-				let isset = false;
-				for(let i in accion) {
-					if (permissions.includes(accion[i])) isset = true;
-				}
-				return isset;
-			}
-			return this.$root.permissions.includes(accion);
-		},
-		restoreMsg: function (msg) {
-			for(let i in msg) {
-				$('small#'+i+'Help').html(msg[i]);
-			}
-		},
-		deleted: function (url, updateTable, name = 'name') {
-			let msg = toastr;
-			msg.options.tapToDismiss = false;
-			axios.get(url)
-			.then(response => {
-				msg.info(response.data[name] + '<br /><br /><button id="btn-delete" type="button" class="btn btn-success">Si</button> <button id="no-delete" type="button" class="btn btn-danger" role="button">No</button>', 'Esta seguro de Borrar este Elemento?')
-			})
-			.then(() => {
-				$('button#btn-delete').click(function () {
-					// $(this).parent().parent().parent().fadeOut();
-					toastr.remove();
-					toastr.clear();
-					axios.delete(url)
-					.then(response => {
-						updateTable('this');
-						toastr.success('Borrado Exitosamente');
-					});
-				});
-				$('button#no-delete').click(function () {
-					toastr.remove();
-					toastr.clear();
-				});
-			});
-		}
-	}
+    methods: {
+        can(accion = null) {
+            let permissions = this.$root.permissions;
+            if (permissions === "all-access") return true;
+            if (permissions === "no-access") return false;
+            if (Array.isArray(accion)) {
+                let isset = false;
+                for (let i in accion) {
+                    if (permissions.includes(accion[i])) isset = true;
+                }
+                return isset;
+            }
+            return this.$root.permissions.includes(accion);
+        },
+        restoreMsg: function(msg) {
+            for (let i in msg) {
+                $("small#" + i + "Help").html(msg[i]);
+            }
+        },
+        deleted: function(url, updateTable, name = "name") {
+            let msg = toastr;
+            msg.options.tapToDismiss = false;
+            axios
+                .get(url)
+                .then(response => {
+                    msg.info(
+                        response.data[name] +
+                            '<br /><br /><button id="btn-delete" type="button" class="btn btn-success">Si</button> <button id="no-delete" type="button" class="btn btn-danger" role="button">No</button>',
+                        "Esta seguro de Borrar este Elemento?"
+                    );
+                })
+                .then(() => {
+                    $("button#btn-delete").click(function() {
+                        // $(this).parent().parent().parent().fadeOut();
+                        toastr.remove();
+                        toastr.clear();
+                        axios.delete(url).then(response => {
+                            updateTable("this");
+                            toastr.success("Borrado Exitosamente");
+                        });
+                    });
+                    $("button#no-delete").click(function() {
+                        toastr.remove();
+                        toastr.clear();
+                    });
+                });
+        }
+    }
 });
 
-import Inscription from './components/forms/form-inscription.vue';
-import FormContact from './components/forms/form-contact.vue';
-import Spinner from './components/partials/spinner.vue';
+import Inscription from "./components/forms/form-inscription.vue";
+import FormContact from "./components/forms/form-contact.vue";
+import Spinner from "./components/partials/spinner.vue";
 
-Vue.component('spinner', Spinner);
-Vue.component('inscription', Inscription);
-Vue.component('contact', FormContact);
+Vue.component("spinner", Spinner);
+Vue.component("inscription", Inscription);
+Vue.component("contact", FormContact);
 
 const app = new Vue({
-	el: '#app',
+    el: "#app",
     router,
     data: {
-    	permissions: [],
+        permissions: []
     },
     components: { App },
-    mounted: function () {
-    	if (location.href.indexOf('/login') > 0) return;
-    	if (location.href.indexOf('/registro') > 0) return;
+    mounted: function() {
+        if (location.href.indexOf("/login") > 0) return;
+        if (location.href.indexOf("/registro") > 0) return;
 
-    	axios.post('/app', {rs: 'p'})
-		.then(response => {
-			this.permissions = response.data;
-		});
-	},
+        axios.post("/app", { rs: "p" }).then(response => {
+            this.permissions = response.data;
+        });
+    }
 });

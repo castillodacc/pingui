@@ -11,6 +11,33 @@
 |
 */
 
+use App\Models\Organizer;
+use Illuminate\Support\Facades\Config;
+
+Route::get('/asd', function () {
+
+//     $organizer = Organizer::first();
+
+//     $payPalConfig = Config::get('paypal');
+//     $payPalConfig['account']['client_id'] = $organizer->paypal_client_id;
+//     $payPalConfig['account']['client_secret'] = $organizer->paypal_client_secret;
+
+//     $apiContext = new \PayPal\Rest\ApiContext(
+//         new \PayPal\Auth\OAuthTokenCredential(
+//             $payPalConfig['account']['client_id'],
+//             $payPalConfig['account']['client_secret']
+//         )
+//     );
+
+//     dd($payPalConfig, $apiContext, payWithPayPal($payPalConfig, $apiContext));
+
+//     // $this->apiContext->setConfig($payPalConfig['settings']);
+
+
+});
+
+
+
 Route::get('/', 'RouteController@front');
 Route::get('competicion/{slug}', 'RouteController@publication')->name('publication.show');
 Route::get('confirm/{slug}', 'RouteController@confirm');
@@ -19,8 +46,7 @@ Route::post('contact-save', 'RouteController@contactSave');
 Route::get('competicion/{slug}/inscribir', 'RouteController@inscription')->name('publication.inscription');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('payment/cancel/{id}', 'InscriptionController@paymentCancel')->name('payment.cancel');
-    Route::get('payment/store/{id}', 'InscriptionController@paymentStore')->name('payment.store');
+    Route::get('payment/status/{id}', 'InscriptionController@paymentStatus')->name('payment.status');
     Route::get('csv-competition/{tournament}', 'ReportController@csvCompetition');
 });
 
@@ -76,7 +102,6 @@ Route::group(['middleware' => ['auth', 'onlyAjax']], function () {
 
         // Permissions Routes...
         Route::resource('permissions', 'PermissionsController')->only(['index', 'show', 'update']);
-
     });
 
     Route::get('tournament/user', 'TournamentController@user');
@@ -115,7 +140,6 @@ Route::group(['middleware' => ['auth', 'onlyAjax']], function () {
     });
 
     Route::post('admin/app', 'RouteController@canPermission');
-
 });
 
 Route::get('{any?}', 'RouteController@index')->where('any', '.*');

@@ -3,8 +3,8 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\User;
-use Illuminate\Support\Str;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,14 +18,6 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(App\User::class, function (Faker $faker) {
-    $emails = [
-        '@sahum.gob.ve',
-        '@gmail.com',
-        '@hotmail.com',
-        '@outlook.com',
-        '@yahoo.com',
-        '@mail.com'
-    ];
     $name = $faker->firstName;
     $user = $faker->bothify($name . '#?##?');
     return [
@@ -33,9 +25,10 @@ $factory->define(App\User::class, function (Faker $faker) {
         'name' => $name,
         'last_name' => $faker->lastName,
         'num_id' => rand(500000, 50000000),
-        'email' => $user . $emails[rand(0, 5)],
+        'email' => $faker->unique()->safeEmail,
         'password' => bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'remember_token' => Str::random(10),
+        'email_verified_at' => now(),
     ];
 });
 

@@ -2,11 +2,11 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
+use App\Traits\ModelsTrait;
+use App\Traits\PermissionTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Traits\{ModelsTrait, PermissionTrait};
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {

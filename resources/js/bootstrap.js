@@ -15,7 +15,7 @@ try {
     window.Popper = require("popper.js").default;
     window.$ = window.jQuery = require("jquery");
 
-    require("bootstrap-sass/assets/javascripts/bootstrap.js");
+    require("bootstrap/dist/js/bootstrap.min.js");
 } catch (e) {}
 
 /**
@@ -136,5 +136,5 @@ axios.interceptors.response.use(
 //     broadcaster: 'pusher',
 //     key: process.env.MIX_PUSHER_APP_KEY,
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     encrypted: true
+//     forceTLS: true
 // });
