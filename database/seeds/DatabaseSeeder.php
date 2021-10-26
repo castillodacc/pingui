@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,6 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        Storage::disk('local')->deleteDirectory('/public');
         $this->call(ClearTablesSeeder::class);
         $this->call(PermissionsSeeder::class);
         $this->call(UserRootSeeder::class);

@@ -124,7 +124,7 @@
 										<a href="{{ route('publication.show', $t->slug) }}">{{ $t->name }}</a>
 									</h4>
 									<div class="product-rating-home">
-										<div class="star-rating">Fecha: {{ \Carbon::parse($t->start)->format('d/m/Y') }}.
+										<div class="star-rating">Fecha: {{ Carbon\Carbon::parse($t->start)->format('d/m/Y') }}.
 										</div>
 									</div>
 									<span class="onsale">Inscripción: <b>{{ ($t->inscription) ? 'Abierta' : 'Cerrada' }}</b>.</span><br>

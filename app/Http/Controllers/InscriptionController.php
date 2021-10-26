@@ -112,9 +112,6 @@ class InscriptionController extends Controller
         if ($inscription->method_pay == 2) {
             $inscription->delete();
             return $this->payWithPayPal($inscription);
-            // $paypal = new Paypal($inscription);
-            // $payment = $paypal->generate();
-            //  $payment->getApprovalLink();
         }
 
         if ($inscription->method_pay == 3) {
@@ -316,4 +313,3 @@ class InscriptionController extends Controller
         return redirect('/inscription')->with(compact('cancel'));
     }
 }
-// https://pingui.es.dev:8443/payment/store/8?paymentId=PAYID-MF2PYCQ5JA62911HH495724D&token=EC-2JH65215ET730572Y&PayerID=U6BGQVT8YJJ24

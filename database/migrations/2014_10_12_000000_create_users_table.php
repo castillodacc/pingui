@@ -14,7 +14,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('user', 35);
             $table->string('name', 50);
             $table->string('last_name', 50);
@@ -49,7 +49,7 @@ class CreateUsersTable extends Migration
             $table->string('birthdate', 15)->nullable();
             $table->unsignedInteger('sex')->nullable();
             $table->unsignedInteger('febd_num')->nullable()->unique();
-            $table->unsignedInteger('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
             $table->softDeletes();
 

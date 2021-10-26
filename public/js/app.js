@@ -2083,9 +2083,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     save: function save() {
+      var _this = this;
+
       $("small").text("");
       toastr.info("Espere un momento, Estamos procesando su mensaje.");
       axios.post("/contact-save", this.data).then(function (response) {
+        _this.data = {};
         toastr.success("Su Correo ha sido enviado con exito.");
       });
     }
@@ -5463,11 +5466,51 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'categories_l',
+  name: "categories_l",
   components: {
-    'rs-table': _partials_table_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    "rs-table": _partials_table_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     var _this = this;
@@ -5480,40 +5523,40 @@ __webpack_require__.r(__webpack_exports__);
         data: {}
       },
       msg: {
-        category: 'Nombre de la Categoría.',
-        category_id: 'Seleccione el Nombre de la Categoría.',
-        subcategory: 'Nombre de la subcategoría.'
+        category: "Nombre de la Categoría.",
+        category_id: "Seleccione el Nombre de la Categoría.",
+        subcategory: "Nombre de la subcategoría."
       },
       tabla: {
         columns: [{
-          title: 'N°',
-          field: 'id',
+          title: "N°",
+          field: "id",
           sortable: true
         }, {
-          title: 'Categoría',
-          field: 'category_latino_id',
+          title: "Categoría",
+          field: "category_latino_id",
           sortable: true
         }, {
-          title: 'Subcategoría',
-          field: 'name',
+          title: "Subcategoría",
+          field: "name",
           sortable: true
         }],
         options: [{
-          ico: 'fa fa-edit',
-          "class": 'btn-info',
-          title: 'Editar Categoría',
+          ico: "fa fa-edit",
+          "class": "btn-info",
+          title: "Editar Categoría",
           func: function func(id) {
-            _this.openform('edit', 3, id);
+            _this.openform("edit", 3, id);
           },
-          action: 'categories_l.update'
+          action: "categories_l.update"
         }, {
-          ico: 'fa fa-close',
-          "class": 'btn-danger',
-          title: 'Borrar Categoría',
+          ico: "fa fa-close",
+          "class": "btn-danger",
+          title: "Borrar Categoría",
           func: function func(id) {
-            _this.deleted('/category-l/' + id, _this.$children[0].get, 'subcategory');
+            _this.deleted("/category-l/" + id, _this.$children[0].get, "subcategory");
           },
-          action: 'categories_l.destroy'
+          action: "categories_l.destroy"
         }]
       }
     };
@@ -5525,7 +5568,7 @@ __webpack_require__.r(__webpack_exports__);
     get: function get() {
       var _this2 = this;
 
-      axios.post('/categories-l').then(function (response) {
+      axios.post("/categories-l").then(function (response) {
         _this2.categories = response.data.categories;
       });
     },
@@ -5538,25 +5581,25 @@ __webpack_require__.r(__webpack_exports__);
       this.form.view = view;
 
       if (view == 1) {
-        this.form.title = 'Registrar Categoría.';
-        this.form.url = '/category-l';
+        this.form.title = "Registrar Categoría.";
+        this.form.url = "/category-l";
         this.form.data = {
-          category: '',
-          subcategory: ''
+          category: "",
+          subcategory: ""
         };
         this.form.ready = true;
       } else if (view == 2) {
-        this.form.title = 'Registrar Subcategoría.';
-        this.form.url = '/category-l';
+        this.form.title = "Registrar Subcategoría.";
+        this.form.url = "/category-l";
         this.form.data = {
-          category_id: '',
-          subcategory: ''
+          category_id: "",
+          subcategory: ""
         };
         this.form.ready = true;
       } else if (view == 3) {
-        this.form.url = '/category-l/' + id;
+        this.form.url = "/category-l/" + id;
         axios.get(this.form.url).then(function (response) {
-          _this3.form.title = 'Editar Subcategoría: ' + response.data.name + '.';
+          _this3.form.title = "Editar Subcategoría: " + response.data.category + " / " + response.data.subcategory;
           _this3.form.data = response.data;
           _this3.form.ready = true;
         });
@@ -5567,9 +5610,9 @@ __webpack_require__.r(__webpack_exports__);
 
       this.restoreMsg(this.msg);
 
-      if (this.form.cond == 'plus') {
+      if (this.form.cond == "plus") {
         axios.post(this.form.url, this.form.data).then(function (response) {
-          toastr.success('Registro Exitoso');
+          toastr.success("Registro Exitoso");
 
           _this4.$children[0].get();
 
@@ -5577,11 +5620,11 @@ __webpack_require__.r(__webpack_exports__);
 
           _this4.form.ready = false;
         });
-      } else if (this.form.cond == 'edit') {
+      } else if (this.form.cond == "edit") {
         axios.put(this.form.url, this.form.data).then(function (response) {
-          toastr.success('Actualización Exitosa');
+          toastr.success("Actualización Exitosa");
 
-          _this4.$children[0].get('this');
+          _this4.$children[0].get("this");
 
           _this4.get();
 
@@ -65291,8 +65334,8 @@ var render = function() {
               ],
               staticClass: "form-control",
               attrs: {
-                id: "last_name",
                 type: "text",
+                id: "last_name",
                 placeholder: "Apellidos"
               },
               domProps: { value: _vm.data.last_name },
@@ -65398,10 +65441,10 @@ var render = function() {
               ],
               staticClass: "form-control",
               attrs: {
+                rows: "7",
                 id: "message",
                 placeholder:
-                  "Ingrese su mensaje para nosotros aquí. Nos pondremos en contacto con usted.",
-                rows: "7"
+                  "Ingrese su mensaje para nosotros aquí. Nos pondremos en contacto con usted."
               },
               domProps: { value: _vm.data.message },
               on: {
@@ -71247,7 +71290,7 @@ var render = function() {
                                 }
                               ],
                               staticClass: "form-control",
-                              attrs: { id: "category", type: "text" },
+                              attrs: { type: "text", id: "category" },
                               domProps: { value: _vm.form.data.category },
                               on: {
                                 input: function($event) {
@@ -71479,7 +71522,7 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "category" } },
       [
         _c("span", { staticClass: "fa fa-name" }),
-        _vm._v(" Categoria:\n                        ")
+        _vm._v(" Categoria:\n            ")
       ]
     )
   },
@@ -71492,7 +71535,7 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "category_id" } },
       [
         _c("span", { staticClass: "fa fa-name" }),
-        _vm._v(" Categoria:\n                        ")
+        _vm._v(" Categoria:\n            ")
       ]
     )
   },
@@ -71505,7 +71548,7 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "subcategory" } },
       [
         _c("span", { staticClass: "fa fa-subcategory" }),
-        _vm._v(" Subcategoria:\n                        ")
+        _vm._v(" Subcategoria:\n            ")
       ]
     )
   }

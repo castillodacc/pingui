@@ -59,7 +59,7 @@ class ReportController extends Controller
 		return;
 	}
 
-	public function ListInscriptions($id)
+	public function listInscriptions($id)
 	{
 		$tournament = Tournament::findOrFail($id);
 		if ($tournament == null) return redirect('/');

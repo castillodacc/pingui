@@ -14,7 +14,7 @@ class CreateTournamentTable extends Migration
     public function up()
     {
         Schema::create('tournaments', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name', 100)->unique();
             $table->string('slug', 150)->nullable()->unique();
             $table->text('description')->nullable();
@@ -23,13 +23,12 @@ class CreateTournamentTable extends Migration
             $table->boolean('inscription')->default(0);
             $table->string('image', 100)->nullable()->unique(); // ruta a imagen
             $table->string('results', 100)->nullable()->unique(); // ruta a resultados https://results.pingui.es/events.php?pod_id=%aca%
-            
             $table->boolean('show_hour')->default(0);
             $table->string('hours')->nullable(); // ruta a pdf
             $table->string('maps')->nullable(); // ruta a google maps
             $table->string('info')->nullable(); // ruta al pdf de la hoja informativa
-            $table->unsignedInteger('organizer_id');
-            $table->unsignedInteger('record_id');
+            $table->unsignedBigInteger('organizer_id');
+            $table->unsignedBigInteger('record_id');
             $table->timestamps();
             $table->softDeletes();
 
@@ -38,42 +37,42 @@ class CreateTournamentTable extends Migration
         });
 
         Schema::create('referee_tournament', function (Blueprint $table) {
-            $table->unsignedInteger('referee_id');
-            $table->unsignedInteger('tournament_id');
+            $table->unsignedBigInteger('referee_id');
+            $table->unsignedBigInteger('tournament_id');
 
             $table->foreign('referee_id')->references('id')->on('referees')->onDelete('cascade');
             $table->foreign('tournament_id')->references('id')->on('tournaments')->onDelete('cascade');
         });
 
         Schema::create('category_open_tournament', function (Blueprint $table) {
-            $table->unsignedInteger('category_open_id');
-            $table->unsignedInteger('tournament_id');
+            $table->unsignedBigInteger('category_open_id');
+            $table->unsignedBigInteger('tournament_id');
 
             $table->foreign('category_open_id')->references('id')->on('category_opens')->onDelete('cascade');
             $table->foreign('tournament_id')->references('id')->on('tournaments')->onDelete('cascade');
         });
 
         Schema::create('subcategory_latino_tournament', function (Blueprint $table) {
-            $table->unsignedInteger('subcategory_latino_id');
-            $table->unsignedInteger('tournament_id');
+            $table->unsignedBigInteger('subcategory_latino_id');
+            $table->unsignedBigInteger('tournament_id');
 
             $table->foreign('subcategory_latino_id')->references('id')->on('subcategory_latinos')->onDelete('cascade');
             $table->foreign('tournament_id')->references('id')->on('tournaments')->onDelete('cascade');
         });
 
         Schema::create('subcategory_standar_tournament', function (Blueprint $table) {
-            $table->unsignedInteger('subcategory_standar_id');
-            $table->unsignedInteger('tournament_id');
+            $table->unsignedBigInteger('subcategory_standar_id');
+            $table->unsignedBigInteger('tournament_id');
 
             $table->foreign('subcategory_standar_id')->references('id')->on('subcategory_standars')->onDelete('cascade');
             $table->foreign('tournament_id')->references('id')->on('tournaments')->onDelete('cascade');
         });
 
         Schema::create('hotels', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name', 100);
             $table->string('link', 100);
-            $table->unsignedInteger('tournament_id');
+            $table->unsignedBigInteger('tournament_id');
             $table->timestamps();
             $table->softDeletes();
 
@@ -81,12 +80,12 @@ class CreateTournamentTable extends Migration
         });
 
         Schema::create('prices', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('category_id');
-            $table->unsignedInteger('level_id')->nullable();
-            $table->unsignedInteger('subcategory_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('level_id')->nullable();
+            $table->unsignedBigInteger('subcategory_id')->nullable();
             $table->unsignedInteger('price');
-            $table->unsignedInteger('tournament_id');
+            $table->unsignedBigInteger('tournament_id');
             $table->timestamps();
             $table->softDeletes();
 
@@ -94,12 +93,12 @@ class CreateTournamentTable extends Migration
         });
 
         Schema::create('more_infos', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name', 150);
-            $table->unsignedInteger('type_id');
+            $table->unsignedBigInteger('type_id');
             $table->string('link', 150);
             $table->boolean('active')->default(1);
-            $table->unsignedInteger('tournament_id');
+            $table->unsignedBigInteger('tournament_id');
             $table->timestamps();
             $table->softDeletes();
 
@@ -107,9 +106,9 @@ class CreateTournamentTable extends Migration
         });
 
         Schema::create('inscriptions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('tournament_id');
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('tournament_id');
 
             $table->unsignedInteger('dorsal')->nullable();
 
@@ -134,13 +133,12 @@ class CreateTournamentTable extends Migration
         });
 
         Schema::create('inscription_price', function (Blueprint $table) {
-            $table->unsignedInteger('price_id');
-            $table->unsignedInteger('inscription_id');
+            $table->unsignedBigInteger('price_id');
+            $table->unsignedBigInteger('inscription_id');
 
             $table->foreign('price_id')->references('id')->on('prices')->onDelete('cascade');
             $table->foreign('inscription_id')->references('id')->on('inscriptions')->onDelete('cascade');
         });
-
     }
 
     /**

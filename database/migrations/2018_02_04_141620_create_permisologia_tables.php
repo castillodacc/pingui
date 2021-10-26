@@ -15,7 +15,7 @@ class CreatePermisologiaTables extends Migration
     {
 
         Schema::create('roles', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name', 50);
             $table->string('slug')->unique();
             $table->text('description')->nullable();
@@ -27,8 +27,8 @@ class CreatePermisologiaTables extends Migration
         });
 
         Schema::create('role_user', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned()->index();
-            $table->integer('role_id')->unsigned()->index();
+            $table->unsignedBigInteger('user_id')->index();
+            $table->unsignedBigInteger('role_id')->index();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
@@ -36,7 +36,7 @@ class CreatePermisologiaTables extends Migration
         });
 
         Schema::create('permissions', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name', 30)->unique();
             $table->string('module', 15); // users | roles ..
             $table->string('action', 15); // index | show | store | update | destroy
@@ -46,8 +46,8 @@ class CreatePermisologiaTables extends Migration
         });
 
         Schema::create('permission_role', function (Blueprint $table) {
-            $table->integer('role_id')->unsigned()->index();
-            $table->integer('permission_id')->unsigned()->index();
+            $table->unsignedBigInteger('role_id')->index();
+            $table->unsignedBigInteger('permission_id')->index();
 
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
@@ -55,14 +55,13 @@ class CreatePermisologiaTables extends Migration
         });
 
         Schema::create('permission_user', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned()->index();
-            $table->integer('permission_id')->unsigned()->index();
+            $table->unsignedBigInteger('user_id')->index();
+            $table->unsignedBigInteger('permission_id')->index();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
             $table->primary(['user_id', 'permission_id']);
         });
-
     }
 
     /**

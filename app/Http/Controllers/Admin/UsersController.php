@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ { UserStoreRequest, UserUpdateRequest, ChangePasswordRequest };
-use App\User;
 use App\Models\Permisologia\Role;
+use App\Http\Requests\{UserStoreRequest, UserUpdateRequest, ChangePasswordRequest};
 
 class UsersController extends Controller
 {
@@ -79,11 +79,13 @@ class UsersController extends Controller
      */
     public function update(UserUpdateRequest $request, $id)
     {
-        if ($id == 1) {return response(['errors' => 'Error al modificar usuario'], 422); }
+        if ($id == 1) {
+            return response(['errors' => 'Error al modificar usuario'], 422);
+        }
         $data = $request->validated();
         $data['roles'] = $this->idsOfRol($data['roles']);
 
-        if( !empty($request->password) ){
+        if (!empty($request->password)) {
             $data['password'] = bcrypt($this->validate($request, [
                 'password' => 'string|min:6|confirmed'
             ])['password']);
@@ -104,7 +106,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        if($id === 1) return response(['msg' => 'Error al modificar usuario'], 422);
+        if ($id === 1) return response(['msg' => 'Error al modificar usuario'], 422);
         $user = User::findOrFail($id)->delete();
         return response()->json($user);
     }
@@ -132,5 +134,4 @@ class UsersController extends Controller
         $roles = Role::all()->pluck('name');
         return response()->json(compact('roles'));
     }
-
 }

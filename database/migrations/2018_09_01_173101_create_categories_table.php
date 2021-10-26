@@ -14,7 +14,7 @@ class CreateCategoriesTable extends Migration
     public function up()
     {
         Schema::create('category_opens', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name', 70)->unique();
             $table->text('description')->nullable();
             $table->timestamps();
@@ -22,7 +22,7 @@ class CreateCategoriesTable extends Migration
         });
 
         Schema::create('category_latinos', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name', 70)->unique();
             $table->text('description')->nullable();
             $table->timestamps();
@@ -30,10 +30,10 @@ class CreateCategoriesTable extends Migration
         });
 
         Schema::create('subcategory_latinos', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name', 70);
             $table->text('description')->nullable();
-            $table->unsignedInteger('category_latino_id');
+            $table->unsignedBigInteger('category_latino_id');
             $table->timestamps();
             $table->softDeletes();
 
@@ -41,7 +41,7 @@ class CreateCategoriesTable extends Migration
         });
 
         Schema::create('category_standars', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name', 70)->unique();
             $table->text('description')->nullable();
             $table->timestamps();
@@ -49,10 +49,10 @@ class CreateCategoriesTable extends Migration
         });
 
         Schema::create('subcategory_standars', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name', 70);
             $table->text('description')->nullable();
-            $table->unsignedInteger('category_standar_id');
+            $table->unsignedBigInteger('category_standar_id');
             $table->timestamps();
             $table->softDeletes();
 
