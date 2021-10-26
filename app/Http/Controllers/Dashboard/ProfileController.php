@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ { ChangePasswordRequest, UpdatePerfilUserRequest };
 use App\Models\ { Club, Pareja, Category_latino, Category_standar, Subcategory_latino, Subcategory_standar };
-use Carbon\Carbon;
 
 class ProfileController extends Controller
 {

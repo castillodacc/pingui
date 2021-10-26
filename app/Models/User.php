@@ -1,22 +1,24 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Traits\ModelsTrait;
 use App\Traits\PermissionTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable, ModelsTrait, PermissionTrait, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, ModelsTrait, PermissionTrait, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var string[]    
      */
     protected $fillable = [
         'name',
@@ -42,7 +44,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
+     * The attributes that should be hidden for serialization.
      *
      * @var array
      */
@@ -56,7 +58,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast to native types.
+     * The attributes that should be cast.
      *
      * @var array
      */
@@ -74,8 +76,7 @@ class User extends Authenticatable
      */
     public function roles()
     {
-        // pertenece a muchas
-        return $this->belongsToMany(Models\Permisologia\Role::class);
+        return $this->belongsToMany(Permisologia\Role::class);
     }
 
     /**
@@ -83,16 +84,22 @@ class User extends Authenticatable
      */
     public function permissions()
     {
-        return $this->belongsToMany(Models\Permisologia\Permission::class);
+        return $this->belongsToMany(Permisologia\Permission::class);
     }
 
+    /**
+     * Obtener el club que posee el usuario.
+     */
     public function club()
     {
-        return $this->belongsTo(Models\Club::class);
+        return $this->belongsTo(Club::class);
     }
 
+    /**
+     * Obtener la pareja que posee el usuario.
+     */
     public function parejas()
     {
-        return $this->hasMany(Models\Pareja::class);
+        return $this->hasMany(Pareja::class);
     }
 }

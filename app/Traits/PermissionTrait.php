@@ -4,7 +4,6 @@ namespace App\Traits;
 
 use Auth;
 use Carbon\Carbon;
-use Closure;
 
 trait PermissionTrait
 {
@@ -54,10 +53,10 @@ trait PermissionTrait
     public function canActMod($module, $action)
     {
         return Auth::user()
-        ->permissions
-        ->where('module', '=', $module)
-        ->where('action', '=', $action)
-        ->first();
+            ->permissions
+            ->where('module', '=', $module)
+            ->where('action', '=', $action)
+            ->first();
     }
 
     /**
@@ -65,15 +64,14 @@ trait PermissionTrait
      */
     public function iCan($action, $module)
     {
-        if (self::IsRootOrSuper()) return true;
+        if ($this->IsRootOrSuper()) return true;
 
-        $access = self::specialAccess();
+        $access = $this->specialAccess();
         if ($access == 1) return true;
         if ($access == -1) return false;
 
-        if (! self::isHourToAccess()) return false;
+        if (!$this->isHourToAccess()) return false;
 
-        if (self::canActMod($action, $module)) return true;
+        if ($this->canActMod($action, $module)) return true;
     }
-
 }

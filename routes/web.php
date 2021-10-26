@@ -84,40 +84,40 @@ Route::group(['middleware' => ['auth', 'onlyAjax']], function () {
     Route::group(['prefix' => 'admin', 'as' => 'admin::'], function () {
 
         // Users Routes...
-        Route::resource('users', '\\' . UsersController::class)->except(['create', 'edit']);
+        Route::resource('users', UsersController::class)->except(['create', 'edit']);
         Route::post('get-data-users', [UsersController::class, 'dataForRegister']);
         // Route::get('init-session-user/{id}', [UsersController::class, 'initWithOneUser']);
 
         // Roles Routes...
-        Route::resource('roles', '\\' . RolesController::class)->except(['create', 'edit']);
+        Route::resource('roles', RolesController::class)->except(['create', 'edit']);
         Route::post('get-data-roles', [RolesController::class, 'dataForRegister']);
 
         // Permissions Routes...
-        Route::resource('permissions', '\\' . PermissionsController::class)->only(['index', 'show', 'update']);
+        Route::resource('permissions', PermissionsController::class)->only(['index', 'show', 'update']);
     });
 
     Route::get('tournament/user', [TournamentController::class, 'user']);
-    Route::resource('tournament', '\\' . TournamentController::class)->except(['create', 'edit']);
+    Route::resource('tournament', TournamentController::class)->except(['create', 'edit']);
     Route::post('get-tournament', [TournamentController::class, 'dataForRegister']);
     Route::post('upload/{name}', [TournamentController::class, 'upload']);
     Route::post('upload-file/{type_id}', [TournamentController::class, 'uploadFile']);
 
-    Route::resource('organizer', '\\' . OrganizerController::class)->except(['create', 'edit']);
+    Route::resource('organizer', OrganizerController::class)->except(['create', 'edit']);
 
-    Route::resource('clubs', '\\' . ClubsController::class)->except(['create', 'edit']);
+    Route::resource('clubs', ClubsController::class)->except(['create', 'edit']);
 
-    Route::resource('referees', '\\' . RefereeController::class)->except(['create', 'edit']);
+    Route::resource('referees', RefereeController::class)->except(['create', 'edit']);
 
-    Route::resource('category-s', '\\' . CategorySController::class)->except(['create', 'edit']);
+    Route::resource('category-s', CategorySController::class)->except(['create', 'edit']);
     Route::post('categories-s', [CategorySController::class, 'dataForRegister']);
 
-    Route::resource('category-o', '\\' . CategoryOController::class)->except(['create', 'edit']);
+    Route::resource('category-o', CategoryOController::class)->except(['create', 'edit']);
     Route::post('categories-o', [CategoryOController::class, 'dataForRegister']);
 
-    Route::resource('category-l', '\\' . CategoryLController::class)->except(['create', 'edit']);
+    Route::resource('category-l', CategoryLController::class)->except(['create', 'edit']);
     Route::post('categories-l', [CategoryLController::class, 'dataForRegister']);
 
-    Route::resource('inscription', '\\' . InscriptionController::class)->except(['create', 'edit']);
+    Route::resource('inscription', InscriptionController::class)->except(['create', 'edit']);
     Route::post('generate/{tournament}', [InscriptionController::class, 'generateDorsales']);
     Route::post('get-data-inscription', [InscriptionController::class, 'getData']);
 

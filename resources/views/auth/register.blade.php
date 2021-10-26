@@ -132,8 +132,8 @@
                                     <label for="sex" class="control-label">Sexo:</label>
                                     <select id="sex" name="sex" class="form-control">
                                         <option value="">Seleccione el Sexo</option>
-                                        <option value="0" @if(old('sex') === 0) selected="" @endif>Femenino</option>
-                                        <option value="1" @if(old('sex') === 1) selected="" @endif>Masculino</option>
+                                        <option value="0" @if(old('sex') === '0') selected="" @endif>Femenino</option>
+                                        <option value="1" @if(old('sex') === '1') selected="" @endif>Masculino</option>
                                     </select>
                                     @if ($errors->has('sex'))
                                     <span class="help-block">
