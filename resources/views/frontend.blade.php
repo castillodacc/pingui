@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Pingui</title>
     <link rel="shortcut icon" href="{{ asset('/favicon.png') }}" type="image/x-icon">
-    <link rel="stylesheet" href="/css/app.css" type="text/css" media="all">
+    <link rel="stylesheet" href="{{ mix('/css/app.css') }}" type="text/css" media="all">
     <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="/css/jquery.flexslider.min.css" type="text/css" media="all">
     <link rel="stylesheet" href="/css/css-style.css" type="text/css" media="all">

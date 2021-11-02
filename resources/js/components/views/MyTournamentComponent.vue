@@ -22,7 +22,7 @@
 				tabla: {
 					columns: [
 					{ title: 'Competencia', field: 'tournament', sort: 'name' },
-					{ title: 'Bailarín', field: 'name_1', sort: 'name', sortable: true },
+					{ title: 'Bailarín', field: 'name_1', sortable: true },
 					{ title: 'Bailarina', field: 'pareja', sort: 'name_2', sortable: true },
 					{ title: 'Tipo de pago', field: 'type_pay', sort: 'name_2', sortable: true },
 					{ title: 'Estado del pago', field: 'state_pay', sortable: true, class: 'text-center' },

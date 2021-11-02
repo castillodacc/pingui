@@ -10,7 +10,7 @@
         <title>@yield('title', '') {{ config('app.name') }}</title>
 
         <link rel="shortcut icon" href="{{ asset('/favicon.png') }}" type="image/x-icon">
-        <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
+        <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('/adminlte/css/AdminLTE.min.css') }}">
         <link rel="stylesheet" href="{{ asset('/adminlte/css/skins/'.config('frontend.theme').'.min.css') }}">
 
@@ -26,7 +26,7 @@
 
     @yield('end')
 
-    <script src="{{ asset('/js/app.js') }}"></script>
+    <script src="{{ mix('/js/app.js') }}"></script>
     <script src="{{ asset('/adminlte/js/adminlte.min.js') }}"></script>
     @yield('footer')
 </html>

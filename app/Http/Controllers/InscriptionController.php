@@ -216,9 +216,9 @@ class InscriptionController extends Controller
             if ($p->category_id == 1) {
                 $p->name = $p->subHelp()->name;
             } elseif ($p->category_id == 2) {
-                $p->name = $p->subHelp()->category_latino->name . ' - ' . Subcategory_latino::findOrFail($p->subcategory_id)->name;
+                $p->name = $p->subHelp()->category_latino->name . ' - ' . optional(Subcategory_latino::find($p->subcategory_id))->name;
             } elseif ($p->category_id == 3) {
-                $p->name = $p->subHelp()->category_standar->name . ' - ' . Subcategory_standar::findOrFail($p->subcategory_id)->name;
+                $p->name = $p->subHelp()->category_standar->name . ' - ' . Subcategory_standar::find($p->subcategory_id)->name;
             }
         });
         return compact('price');
@@ -306,7 +306,7 @@ class InscriptionController extends Controller
 
             $inscription->restore();
             $inscription->update(['state_pay' => true]);
-            \Mail::to($inscription->user->email)->send(new \App\Mail\Inscription($inscription));
+            // \Mail::to($inscription->user->email)->send(new \App\Mail\Inscription($inscription));
             return view('inscription', compact('tournament', 'status'));
         }
 

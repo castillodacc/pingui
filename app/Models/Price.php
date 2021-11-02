@@ -39,17 +39,17 @@ class Price extends Model
 
     public function subO()
     {
-        return $this->belongsTo(Category_open::class, 'subcategory_id', 'id');
+        return $this->belongsTo(Category_open::class, 'subcategory_id', 'id')->withTrashed();
     }
 
     public function subL()
     {
-        return $this->belongsTo(Subcategory_latino::class, 'subcategory_id', 'id');
+        return $this->belongsTo(Subcategory_latino::class, 'subcategory_id', 'id')->withTrashed();
     }
 
     public function subS()
     {
-        return $this->belongsTo(Subcategory_standar::class, 'subcategory_id', 'id');
+        return $this->belongsTo(Subcategory_standar::class, 'subcategory_id', 'id')->withTrashed();
     }
 
     public function subHelp()

@@ -6637,7 +6637,6 @@ __webpack_require__.r(__webpack_exports__);
         }, {
           title: 'Bailarín',
           field: 'name_1',
-          sort: 'name',
           sortable: true
         }, {
           title: 'Bailarina',

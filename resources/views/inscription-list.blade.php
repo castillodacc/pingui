@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="/css/css-style.css" type="text/css" media="all">
 	<link rel="stylesheet" href="/css/shop-isle-style.css" type="text/css" media="all">
 	<link type="text/css" href="/css/optanon.css" rel="stylesheet">
-	<link type="text/css" href="/css/app.css" rel="stylesheet">
+	<link type="text/css" href="{{ mix('/css/app.css') }}" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script type="text/javascript" src="/js/jquery.min.1.12.4.js"></script>
 	<script type="text/javascript" src="/js/jquery-migrate.min.js"></script>
@@ -141,6 +141,6 @@
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/jquery.flexslider.min.js"></script>
 	<script type="text/javascript" src="/js/custom.js"></script>
-	<script type="text/javascript" src="/js/app.js"></script>
+	<script type="text/javascript" src="{{ mix('/js/app.js') }}"></script>
 </body>
 </html>

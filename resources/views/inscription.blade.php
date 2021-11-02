@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Pingui</title>
     <link rel="shortcut icon" href="{{ asset('/favicon.png') }}" type="image/x-icon">
-    <link type="text/css" href="/css/app.css" rel="stylesheet">
+    <link type="text/css" href="{{ mix('/css/app.css') }}" rel="stylesheet">
     {{-- <link rel="stylesheet" href="/css/jquery.flexslider.min.css" type="text/css" media="all"> --}}
     <link rel="stylesheet" href="/css/shop-isle-style.css" type="text/css" media="all">
     <link type="text/css" href="/css/optanon.css" rel="stylesheet">
@@ -145,9 +145,9 @@
         </div>
     </div>
     <script src="https://js.stripe.com/v3/"></script>
-    <script type="text/javascript" src="/js/jquery.flexslider.min.js"></script>
-    <script type="text/javascript" src="/js/custom.js"></script>
-    <script type="text/javascript" src="/js/app.js"></script>
+    <script type="text/javascript" src="{{ asset('/js/jquery.flexslider.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/custom.js') }}"></script>
+    <script type="text/javascript" src="{{ mix('/js/app.js') }}"></script>
 </body>
 
 </html>

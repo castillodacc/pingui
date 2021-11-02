@@ -7,13 +7,13 @@
 	<title>Pingui</title>
 	<link rel="shortcut icon" href="{{ asset('/favicon.png') }}" type="image/x-icon">
 	{{-- <link rel="stylesheet" href="/css/app.css" type="text/css" media="all"> --}}
-	<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
-	<link rel="stylesheet" href="/css/jquery.flexslider.min.css" type="text/css" media="all">
-	<link rel="stylesheet" href="/css/css-style.css" type="text/css" media="all">
-	<link rel="stylesheet" href="/css/shop-isle-style.css" type="text/css" media="all">
-	<link type="text/css" href="/css/optanon.css" rel="stylesheet">
-	<script type="text/javascript" src="/js/jquery.min.1.12.4.js"></script>
-	<script type="text/javascript" src="/js/jquery-migrate.min.js"></script>
+	<link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}" type="text/css">
+	<link rel="stylesheet" href="{{ asset('/css/jquery.flexslider.min.css') }}" type="text/css" media="all">
+	<link rel="stylesheet" href="{{ asset('/css/css-style.css') }}" type="text/css" media="all">
+	<link rel="stylesheet" href="{{ asset('/css/shop-isle-style.css') }}" type="text/css" media="all">
+	<link type="text/css" href="{{ asset('/css/optanon.css') }}" rel="stylesheet">
+	<script type="text/javascript" src="{{ asset('/js/jquery.min.1.12.4.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('/js/jquery-migrate.min.js') }}"></script>
 </head>
 <body class="home blog">
 	<header class="header">
@@ -249,9 +249,9 @@
 			</footer>
 		</div>
 	</div>
-	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/js/jquery.flexslider.min.js"></script>
-	<script type="text/javascript" src="/js/custom.js"></script>
-	<script type="text/javascript" src="/js/app.js"></script>
+	<script type="text/javascript" src="{{ asset('/js/bootstrap.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('/js/jquery.flexslider.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('/js/custom.js') }}"></script>
+	<script type="text/javascript" src="{{ mix('/js/app.js') }}"></script>
 </body>
 </html>
