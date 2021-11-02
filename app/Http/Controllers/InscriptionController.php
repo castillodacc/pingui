@@ -39,7 +39,7 @@ class InscriptionController extends Controller
             'tournament_id',
             'dorsal'
         ];
-        if ($request->dir == 1) {
+        if (is_numeric($request->dir)) {
             $request->dir = 'ASC';
         }
         $data = Inscription::orderBy($request->order ?? 'id', $request->dir ?? 'ASC')
