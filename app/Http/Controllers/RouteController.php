@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Permisologia\Permission;
 use App\User;
-use App\Models\ { Inscription, Tournament, Category_open, Category_latino, Subcategory_latino, Category_standar, Subcategory_standar };
+use App\Models\Tournament;
+use App\Models\Inscription;
+use Illuminate\Http\Request;
+use App\Models\Category_open;
+use App\Models\Category_latino;
+use App\Models\Category_standar;
+use App\Models\Subcategory_latino;
+use App\Models\Subcategory_standar;
 
 class RouteController extends Controller
 {
-
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth')->only([
             'index',
             'canPermission',
@@ -25,7 +30,7 @@ class RouteController extends Controller
      */
     public function index()
     {
-    	return view('index');
+        return view('index');
     }
 
     /**
@@ -34,7 +39,9 @@ class RouteController extends Controller
      */
     public function dataForTemplate()
     {
-        if (! \Auth::check()) return response()->json();
+        if (! \Auth::check()) {
+            return response()->json();
+        }
 
         if (request()->rs == 'ras') {
             $user = \Auth::user();
@@ -67,11 +74,15 @@ class RouteController extends Controller
     public function canPermission(Request $request)
     {
         $whiteList = ['error', 'profile', 'dashboard'];
-        if (in_array($request->p, $whiteList)) return response()->json(true);
+        if (in_array($request->p, $whiteList)) {
+            return response()->json(true);
+        }
         $separated = explode('.', $request->p);
         $module = $separated[0];
         $action = $separated[1];
-        if (\Auth::user()->iCan($module, $action)) return response()->json(true);
+        if (\Auth::user()->iCan($module, $action)) {
+            return response()->json(true);
+        }
         if (strpos($request->p, '-') > 0) {
             $modules_separated = explode('-', $request->p);
             $lastArray = array_pop($modules_separated);
@@ -79,10 +90,14 @@ class RouteController extends Controller
             $module = $separated[0];
             $action = $separated[1];
 
-            if (\Auth::user()->iCan($module, $action)) return response()->json(true);
+            if (\Auth::user()->iCan($module, $action)) {
+                return response()->json(true);
+            }
 
             foreach ($modules_separated as $ms) {
-                if (\Auth::user()->iCan($ms, $action)) return response()->json(true);
+                if (\Auth::user()->iCan($ms, $action)) {
+                    return response()->json(true);
+                }
             }
         }
 
@@ -108,14 +123,18 @@ class RouteController extends Controller
     public function publication($slug)
     {
         $tournament = Tournament::where('slug', '=', $slug)->first();
-        if ($tournament == null) return redirect('/');
+        if ($tournament == null) {
+            return redirect('/');
+        }
         return view('publicacion', compact('tournament'));
     }
 
     public function inscription($slug)
     {
         $tournament = Tournament::where('slug', '=', $slug)->first();
-        if ($tournament == null) return redirect('/');
+        if ($tournament == null) {
+            return redirect('/');
+        }
         return view('inscription', compact('tournament'));
     }
 
@@ -130,7 +149,7 @@ class RouteController extends Controller
             } else {
                 return view('errors.404', ['msg' => 'Ups! al parecer te has perdido...']);
             }
-        } catch(QueryException $e) {
+        } catch (QueryException $e) {
             return redirect('/');
         }
     }
@@ -138,16 +157,26 @@ class RouteController extends Controller
     public function data(Request $request)
     {
         $tournament = Tournament::select(['id', 'name', 'slug', 'organizer_id'])->findOrFail($request->id);
-        $tournament->prices->each(function ($p) {
+        $tournament->prices = $tournament->prices->map(function ($p) {
             if ($p->category_id == 1) {
-                $p->level_text = Category_open::findOrFail($p->subcategory_id)->name;
+                $p->level_text = optional(Category_open::find($p->subcategory_id))->name;
+                if (!$p->level_text) {
+                    return false;
+                }
             } elseif ($p->category_id == 2) {
-                $p->level_text = Category_latino::findOrFail($p->level_id)->name;
-                $p->subcategory_text = Subcategory_latino::findOrFail($p->subcategory_id)->name;
+                $p->level_text = optional(Category_latino::find($p->level_id))->name;
+                $p->subcategory_text = optional(Subcategory_latino::find($p->subcategory_id))->name;
+                if (!$p->level_text || !$p->subcategory_text) {
+                    return false;
+                }
             } elseif ($p->category_id == 3) {
-                $p->level_text = Category_standar::findOrFail($p->level_id)->name;
-                $p->subcategory_text = Subcategory_standar::findOrFail($p->subcategory_id)->name;
+                $p->level_text = optional(Category_standar::find($p->level_id))->name;
+                $p->subcategory_text = optional(Subcategory_standar::find($p->subcategory_id))->name;
+                if (!$p->level_text || !$p->subcategory_text) {
+                    return false;
+                }
             }
+            return $p;
         });
         $tournament->organizer;
         $tournament->organizer->paypal_client_id = ($tournament->organizer->paypal_client_id) ? true : false;
@@ -155,7 +184,7 @@ class RouteController extends Controller
         $tournament->organizer->t_secret_key = ($tournament->organizer->t_secret_key) ? true : false;
 
         $inscription = Inscription::where('tournament_id', '=', $request->id)
-        ->where('user_id', '=', \Auth::user()->id)
+        ->where('user_id', auth()->user()->id)
         ->select(['id', 'last_name_1', 'last_name_2', 'method_pay', 'name_1', 'name_2', 'pay', 'state', 'state_pay'])
         ->first();
         $state = false;
@@ -165,8 +194,10 @@ class RouteController extends Controller
                 unset($p->pivot, $p->tournament_id);
             });
         }
-        if (\Auth::guest()) return;
-        $user = \Auth::user();
+        if (auth()->guest()) {
+            return;
+        }
+        $user = auth()->user();
         $user->parejas;
         return response()->json(compact('user', 'state', 'tournament'));
     }
@@ -191,7 +222,9 @@ class RouteController extends Controller
     public function list($slug)
     {
         $tournament = Tournament::where('slug', $slug)->first();
-        if ($tournament == null) return redirect('/');
+        if ($tournament == null) {
+            return redirect('/');
+        }
         return view('inscription-list', compact('tournament'));
     }
 }
