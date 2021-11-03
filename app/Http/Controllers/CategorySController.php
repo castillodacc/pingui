@@ -48,7 +48,7 @@ class CategorySController extends Controller
                 'subcategory' => 'subcategoria',
             ]);
             Subcategory_standar::create([
-                'name' => ucfirst(mb_strtolower($data['subcategory'])),
+                'name' => $data['subcategory'],
                 'category_standar_id' => $data['category_id'],
             ]);
         } else {
@@ -59,9 +59,9 @@ class CategorySController extends Controller
                 'category' => 'categoria',
                 'subcategory' => 'subcategoria',
             ]);
-            $c = Category_standar::create(['name' => ucfirst(mb_strtolower($data['category']))]);
+            $c = Category_standar::create(['name' => $data['category']]);
             Subcategory_standar::create([
-                'name' => ucfirst(mb_strtolower($data['subcategory'])),
+                'name' => $data['subcategory'],
                 'category_standar_id' => $c->id,
             ]);
         }
@@ -102,9 +102,9 @@ class CategorySController extends Controller
             'subcategory' => 'subcategoria',
         ]);
         Category_standar::findOrFail($data['category_id'])
-        ->update(['name' => ucfirst(mb_strtolower($data['category']))]);
+        ->update(['name' => $data['category']]);
         Subcategory_standar::findOrFail($id)
-        ->update(['name' => ucfirst(mb_strtolower($data['subcategory']))]);
+        ->update(['name' => $data['subcategory']]);
     }
 
     /**

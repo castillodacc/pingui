@@ -39,7 +39,7 @@ class CategoryOController extends Controller
         $data = $this->validate($request, [
             'name' => 'required|string|min:3|max:35|unique:category_opens',
         ],[],['name' => 'categoria']);
-        $data['name'] = ucfirst(mb_strtolower($data['name']));
+        $data['name'] = $data['name'];
         Category_open::create($data);
     }
 
@@ -67,7 +67,7 @@ class CategoryOController extends Controller
         $data = $this->validate($request, [
             'name' => 'required|string|min:3|max:35|unique1:category_opens',
         ],[],['name' => 'categoria']);
-        $data['name'] = ucfirst(mb_strtolower($data['name']));
+        $data['name'] = $data['name'];
         Category_open::findOrFail($id)->update($data);
     }
 
