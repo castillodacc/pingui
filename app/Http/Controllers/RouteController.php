@@ -159,19 +159,19 @@ class RouteController extends Controller
         $tournament = Tournament::select(['id', 'name', 'slug', 'organizer_id'])->findOrFail($request->id);
         $tournament->prices = $tournament->prices->map(function ($p) {
             if ($p->category_id == 1) {
-                $p->level_text = optional(Category_open::find($p->subcategory_id))->name;
+                $p->level_text = optional(Category_open::withTrashed()->find($p->subcategory_id))->name;
                 if (!$p->level_text) {
                     return false;
                 }
             } elseif ($p->category_id == 2) {
-                $p->level_text = optional(Category_latino::find($p->level_id))->name;
-                $p->subcategory_text = optional(Subcategory_latino::find($p->subcategory_id))->name;
+                $p->level_text = optional(Category_latino::withTrashed()->find($p->level_id))->name;
+                $p->subcategory_text = optional(Subcategory_latino::withTrashed()->find($p->subcategory_id))->name;
                 if (!$p->level_text || !$p->subcategory_text) {
                     return false;
                 }
             } elseif ($p->category_id == 3) {
-                $p->level_text = optional(Category_standar::find($p->level_id))->name;
-                $p->subcategory_text = optional(Subcategory_standar::find($p->subcategory_id))->name;
+                $p->level_text = optional(Category_standar::withTrashed()->find($p->level_id))->name;
+                $p->subcategory_text = optional(Subcategory_standar::withTrashed()->find($p->subcategory_id))->name;
                 if (!$p->level_text || !$p->subcategory_text) {
                     return false;
                 }

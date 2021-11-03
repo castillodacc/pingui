@@ -140,15 +140,24 @@ class TournamentController extends Controller
         $tournament->referee_tournament = $tournament->referees->pluck('name');
         $tournament->hotels;
         $tournament->moreInfo;
-        $tournament->prices->each(function ($p) {
+        $tournament->prices = $tournament->prices->each(function ($p) {
             if ($p->category_id == 1) {
-                $p->level_text = Category_open::findOrFail($p->subcategory_id)->name;
+                $p->level_text = optional(Category_open::withTrashed()->find($p->subcategory_id))->name;
+                if (!$p->level_text) {
+                    return false;
+                }
             } elseif ($p->category_id == 2) {
-                $p->level_text = Category_latino::findOrFail($p->level_id)->name;
-                $p->subcategory_text = Subcategory_latino::findOrFail($p->subcategory_id)->name;
+                $p->level_text = optional(Category_latino::withTrashed()->find($p->level_id))->name;
+                $p->subcategory_text = optional(Subcategory_latino::withTrashed()->find($p->subcategory_id))->name;
+                if (!$p->level_text || !$p->subcategory_text) {
+                    return false;
+                }
             } elseif ($p->category_id == 3) {
-                $p->level_text = Category_standar::findOrFail($p->level_id)->name;
-                $p->subcategory_text = Subcategory_standar::findOrFail($p->subcategory_id)->name;
+                $p->level_text = optional(Category_standar::withTrashed()->find($p->level_id))->name;
+                $p->subcategory_text = optional(Subcategory_standar::withTrashed()->find($p->subcategory_id))->name;
+                if (!$p->level_text || !$p->subcategory_text) {
+                    return false;
+                }
             }
         });
         unset($tournament->referees, $tournament->category_opens, $tournament->subcategory_latinos, $tournament->subcategory_standars);
