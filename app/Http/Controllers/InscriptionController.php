@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Price;
+use App\Models\Inscription;
 use Illuminate\Http\Request;
-use App\Models\{Inscription, Tournament, Price, Category_open, Category_latino, Category_standar, Subcategory_latino, Subcategory_standar};
+use App\Models\Subcategory_latino;
+use App\Models\Subcategory_standar;
+use Illuminate\Support\Facades\Mail;
 
 class InscriptionController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('can:inscription,index')->only(['index']);
@@ -91,7 +94,7 @@ class InscriptionController extends Controller
             'pay' => 'pago',
         ]);
 
-        $data['user_id'] = \Auth::user()->id;
+        $data['user_id'] = auth()->user()->id;
 
         $validate = Inscription::where([
             'user_id' => $data['user_id'],
@@ -129,7 +132,7 @@ class InscriptionController extends Controller
             }
         }
 
-        \Mail::to($inscription->user->email)->send(new \App\Mail\Inscription($inscription));
+        Mail::to($inscription->user->email)->send(new \App\Mail\Inscription($inscription));
     }
 
     /**
@@ -212,21 +215,23 @@ class InscriptionController extends Controller
     public function getData(Request $request)
     {
         $price = Price::where('tournament_id', $request->id)->get();
-        $price->each(function ($p) {
+        $price = $price->map(function ($p) {
             if ($p->category_id == 1) {
-                $p->name = $p->subHelp()->name;
+                $p->name = optional($p->subHelp())->name;
             } elseif ($p->category_id == 2) {
-                $p->name = $p->subHelp()->category_latino->name . ' - ' . optional(Subcategory_latino::find($p->subcategory_id))->name;
+                $p->name = optional($p->subHelp())->category_latino->name . ' - ' . 
+                optional(Subcategory_latino::withTrashed()->find($p->subcategory_id))->name;
             } elseif ($p->category_id == 3) {
-                $p->name = $p->subHelp()->category_standar->name . ' - ' . Subcategory_standar::find($p->subcategory_id)->name;
+                $p->name = optional($p->subHelp())->category_standar->name . ' - ' . 
+                optional(Subcategory_standar::withTrashed()->find($p->subcategory_id))->name;
             }
+            return $p;
         });
         return compact('price');
     }
 
     private function payWithPayPal($inscription)
     {
-
         $organizer = $inscription->tournament->organizer;
 
         $payPalConfig = config('paypal');
@@ -271,7 +276,6 @@ class InscriptionController extends Controller
 
     public function paymentStatus($id, Request $request)
     {
-
         $inscription = Inscription::withTrashed()->findOrFail($id);
         $tournament = $inscription->tournament;
         $cancel = 'Lo sentimos! El pago a través de PayPal no se pudo realizar. Transacción cancelada o fallida.';
