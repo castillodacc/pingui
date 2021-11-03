@@ -310,7 +310,7 @@ class InscriptionController extends Controller
 
             $inscription->restore();
             $inscription->update(['state_pay' => true]);
-            // \Mail::to($inscription->user->email)->send(new \App\Mail\Inscription($inscription));
+            \Mail::to($inscription->user->email)->send(new \App\Mail\Inscription($inscription));
             return view('inscription', compact('tournament', 'status'));
         }
 
