@@ -15,10 +15,10 @@ use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\InscriptionController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Admin\PermissionsController;
 use App\Http\Controllers\Dashboard\ProfileController;
-use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,12 +61,11 @@ Route::group(['middleware' => 'guest'], function () {
     }
 });
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
-// Route::get('logout', [LoginController::class, 'logout']);
 
-Route::get('password/reiniciar', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-Route::get('password/reiniciar/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-Route::post('password/reiniciar', [ResetPasswordController::class, 'reset']);
+Route::get('password/reiniciar', [PasswordResetLinkController::class, 'create'])->name('password.request');
+Route::post('password/email', [PasswordResetLinkController::class, 'store'])->name('password.email');
+Route::get('password/reiniciar/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
+Route::post('password/reiniciar', [NewPasswordController::class, 'store'])->name('password.update');
 
 Route::post('app', [RouteController::class, 'dataForTemplate']);
 
