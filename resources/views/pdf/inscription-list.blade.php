@@ -81,7 +81,8 @@
                         @endif
                     </span>
                 </h3>
-                @foreach ($tournament->prices->where('category_id', $n) as $p)
+                    <br><br>
+					@foreach ($tournament->prices->where('category_id', $n) as $p)
                     @if (!$p->inscriptions->count()) <?php continue; ?> @endif
                     <h3
                         style="min-width: 100%;display: block;padding-top:10px;color:#e32727;border-bottom: 1px solid #000; line-height: 0.1em; margin: 0px 0 14px; text-align: center;">
