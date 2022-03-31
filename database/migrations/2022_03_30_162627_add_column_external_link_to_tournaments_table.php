@@ -14,7 +14,7 @@ class AddColumnExternalLinkToTournamentsTable extends Migration
     public function up()
     {
         Schema::table('tournaments', function (Blueprint $table) {
-            $table->string('external_link');
+            $table->string('external_link')->nullable();
         });
     }
 
