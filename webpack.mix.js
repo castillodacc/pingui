@@ -17,7 +17,7 @@ mix.js("resources/js/app.js", "public/js")
     .postCss("resources/css/app.css", "public/css", [
         //
     ])
-    .browserSync("http://pingui.es.dev/")
+    .browserSync("https://pingui.es.rs/")
     .version();
 
 if (mix.inProduction()) {

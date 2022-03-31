@@ -61,6 +61,7 @@ class TournamentController extends Controller
             'prices' => 'nullable|array',
             'subcategory_latino' => 'nullable|array',
             'subcategory_standar' => 'nullable|array',
+            'external_link' => 'nullable|string',
         ],[],[
             'name' => 'titulo',
             'description' => 'detalles',
@@ -78,6 +79,7 @@ class TournamentController extends Controller
             'category_open' => 'categoria open',
             'subcategory_latino' => 'categoria latino',
             'subcategory_standar' => 'categoria standard',
+            'external_link' => 'link',
         ]);
 
         $data['slug'] = str_replace(' ', '-', $data['name']);
@@ -193,6 +195,7 @@ class TournamentController extends Controller
             'hoteles' => 'nullable|array',
             'subcategory_latino' => 'nullable|array',
             'subcategory_standar' => 'nullable|array',
+            'external_link' => 'nullable|string',
         ],[],[
             'name' => 'titulo',
             'description' => 'detalles',
@@ -210,6 +213,7 @@ class TournamentController extends Controller
             'category_open' => 'categoria open',
             'subcategory_latino' => 'categoria latino',
             'subcategory_standar' => 'categoria standard',
+            'external_link' => 'link',
         ]);
 
         $data['slug'] = str_replace(' ', '-', $data['name']);

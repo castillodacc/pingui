@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Models\User;
 use App\Models\Tournament;
 use App\Models\Inscription;
 use Illuminate\Http\Request;
@@ -134,6 +134,9 @@ class RouteController extends Controller
         $tournament = Tournament::where('slug', '=', $slug)->first();
         if ($tournament == null) {
             return redirect('/');
+        }
+        if ($tournament->external_link) {
+            return redirect($tournament->external_link);
         }
         return view('inscription', compact('tournament'));
     }

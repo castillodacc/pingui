@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="es"class="yes-js js_active js cye-disabled cye-nm">
+<html lang="es" class="yes-js js_active js cye-disabled cye-nm">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>Pingui</title>
 	<link rel="shortcut icon" href="{{ asset('/favicon.png') }}" type="image/x-icon">
-	{{-- <link rel="stylesheet" href="/css/app.css" type="text/css" media="all"> --}}
+	{{--
+	<link rel="stylesheet" href="/css/app.css" type="text/css" media="all"> --}}
 	<link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}" type="text/css">
 	<link rel="stylesheet" href="{{ asset('/css/jquery.flexslider.min.css') }}" type="text/css" media="all">
 	<link rel="stylesheet" href="{{ asset('/css/css-style.css') }}" type="text/css" media="all">
@@ -15,15 +17,18 @@
 	<script type="text/javascript" src="{{ asset('/js/jquery.min.1.12.4.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/js/jquery-migrate.min.js') }}"></script>
 </head>
+
 <body class="home blog">
 	<header class="header">
-		<nav class="navbar navbar-custom navbar-fixed-top  navbar-color-on-scroll navbar-transparent" role="navigation" style="background-color: rgba(10, 10, 10, 0.9) !important;">
+		<nav class="navbar navbar-custom navbar-fixed-top  navbar-color-on-scroll navbar-transparent" role="navigation"
+			style="background-color: rgba(10, 10, 10, 0.9) !important;">
 			<div class="container">
 				<div class="header-container">
 					<div class="navbar-header">
 						<div class="shop_isle_header_title">
 							<div class="shop-isle-header-title-inner">
-								<h1 class="site-title"><a href="/" title="ShopIsle" rel="home">{!! config('frontend.logo_lg') !!}</a></h1>
+								<h1 class="site-title"><a href="/" title="ShopIsle" rel="home">{!!
+										config('frontend.logo_lg') !!}</a></h1>
 								<p class="site-description"><a href="/" title="" rel="home"></a></p>
 							</div>
 						</div>
@@ -36,13 +41,27 @@
 					<div class="header-menu-wrap">
 						<div class="collapse navbar-collapse" id="custom-collapse">
 							<ul id="menu-menu-1" class="nav navbar-nav navbar-right">
-								<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home"><a href="/" class="section-scroll">Home</a></li>
-								<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home"><a href="/#competitions" class="section-scroll">Competiciones</a></li>
-								<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753"><a href="/contacto">Contacto</a></li>
+								<li
+									class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home">
+									<a href="/" class="section-scroll">Home</a>
+								</li>
+								<li
+									class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home">
+									<a href="/#competitions" class="section-scroll">Competiciones</a>
+								</li>
+								<li id="menu-item-2753"
+									class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2753">
+									<a href="/contacto">Contacto</a>
+								</li>
 								@if(\Auth::check())
-								<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home"><a href="/perfil">Perfil</a></li>
-								<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home">
-									<a href="#" data-toggle="tooltip" title="Salir" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+								<li
+									class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home">
+									<a href="/perfil">Perfil</a>
+								</li>
+								<li
+									class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home">
+									<a href="#" data-toggle="tooltip" title="Salir"
+										onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
 										<span class="fa fa-lock"></span> Salir
 									</a>
 								</li>
@@ -51,8 +70,14 @@
 									<input type="hidden" name="_method" value="POST">
 								</form>
 								@else
-								<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home"><a href="/login">Iniciar Sesión</a></li>
-								<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home"><a href="/registro">Registrate</a></li>
+								<li
+									class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home">
+									<a href="/login">Iniciar Sesión</a>
+								</li>
+								<li
+									class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home">
+									<a href="/registro">Registrate</a>
+								</li>
 								@endif
 							</ul>
 						</div>
@@ -66,21 +91,29 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<div class="row hidden-md hidden-lg"><h1 class="text-center" >{{ $tournament->name }}</h1></div>
+						<div class="row hidden-md hidden-lg">
+							<h1 class="text-center">{{ $tournament->name }}</h1>
+						</div>
 						<div class="pull-left col-md-4 col-xs-12 thumb-contenido">
-							<img class="center-block img-responsive" src="{{ asset('storage/' . $tournament->image) }}" />
+							<img class="center-block img-responsive"
+								src="{{ asset('storage/' . $tournament->image) }}" />
 						</div>
 						<div class="pull-right col-md-8 col-xs-12">
 							<div class="row">
-								<h1  class="hidden-xs hidden-sm">{{ $tournament->name }}</h1>
+								<h1 class="hidden-xs hidden-sm">{{ $tournament->name }}</h1>
 							</div>
 							<div class="row">
 								<div class="pull-left col-md-5 col-xs-12">
-									<small>Se realizará: {{ Carbon::parse($tournament->start)->format('d/m/Y') }}.</small><br>
+									<small>Se realizará: {{ Carbon::parse($tournament->start)->format('d/m/Y')
+										}}.</small><br>
 									<small><strong>Organizador:</strong> {{ $tournament->organizer->name }}.</small><br>
-									<small><strong>Inscripción: {{ ($tournament->inscription) ? 'Abierta' : 'Cerrada' }}.</strong></small><br>
+									<small><strong>Inscripción: {{ ($tournament->inscription) ? 'Abierta' : 'Cerrada'
+											}}.</strong></small><br>
 									@if($tournament->info)
-									<small><strong>Precio de competición:</strong> <a href="{{ asset('storage/info/' . $tournament->info) }}" class="btn btn-info btn-block" target="_blank">Consultar Hoja Informativa</a></small><br>
+									<small><strong>Precio de competición:</strong> <a
+											href="{{ asset('storage/info/' . $tournament->info) }}"
+											class="btn btn-info btn-block" target="_blank">Consultar Hoja
+											Informativa</a></small><br>
 									<div class="col-md-4">
 
 									</div>
@@ -95,7 +128,8 @@
 										@endforeach
 									</ul>
 								</div>
-								@if(\Auth::check() && $tournament->inscriptions->where('user_id', \Auth::user()->id)->count() == 1)
+								@if(\Auth::check() && $tournament->inscriptions->where('user_id',
+								\Auth::user()->id)->count() == 1)
 								<div id="app" class="col-md-7">
 									<inscription id="{{ $tournament->id }}"></inscription>
 								</div>
@@ -113,14 +147,20 @@
 								</div>
 								@endif
 								@if(\Auth::guest())
-								<div class="pull-right col-md-4 col-xs-12 hidden-xs hidden-sm" style="border: 1px solid; border-radius: 10px">
+								<div class="pull-right col-md-4 col-xs-12 hidden-xs hidden-sm"
+									style="border: 1px solid; border-radius: 10px; margin-bottom: 15px;">
 									<div class="card card-container ">
-										<span id="profile-name" class="profile-name-card"><b class="text-center">Inicia Sesión</b></span>
+										<span id="profile-name" class="profile-name-card"><b class="text-center">Inicia
+												Sesión</b></span>
 										<form class="form-signin" action="/login" method="post">
 											@csrf
-											<div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
+											<div
+												class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
 												<label for="email" class="control-label">Correo:</label>
-												<input id="email" type="email" class="form-control" name="email"  placeholder="Email" value="{{ (env('APP_ENV') == 'local') ? 'root@pingui.es' : old('email') }}" required autofocus>
+												<input id="email" type="email" class="form-control" name="email"
+													placeholder="Email"
+													value="{{ (env('APP_ENV') == 'local') ? 'root@pingui.es' : old('email') }}"
+													required autofocus>
 												<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 												@if ($errors->has('email'))
 												<span class="help-block">
@@ -128,9 +168,12 @@
 												</span>
 												@endif
 											</div>
-											<div class="form-group {{ $errors->has('password') ? 'has-error' : '' }} has-feedback">
+											<div
+												class="form-group {{ $errors->has('password') ? 'has-error' : '' }} has-feedback">
 												<label for="password" class="control-label">Contraseña:</label>
-												<input id="password" type="password" class="form-control" name="password"  placeholder="Contraseña" value="{{ (env('APP_ENV') == 'local') ? 'secret' : '' }}" required>
+												<input id="password" type="password" class="form-control"
+													name="password" placeholder="Contraseña"
+													value="{{ (env('APP_ENV') == 'local') ? 'secret' : '' }}" required>
 												<span class="glyphicon glyphicon-cog form-control-feedback"></span>
 												@if ($errors->has('password'))
 												<span class="help-block">
@@ -146,7 +189,8 @@
 								@endif
 							</div>
 							<div class="row">
-								@if(\Auth::check() && $tournament->inscriptions->where('user_id', \Auth::user()->id)->count() == 0)
+								@if(\Auth::check() && $tournament->inscriptions->where('user_id',
+								\Auth::user()->id)->count() == 0)
 								<div class="col-md-12">
 									<div class="alert alert-info" role="alert">
 										<span class="text-warning">
@@ -164,25 +208,37 @@
 										@endif
 										@if($tournament->maps)
 										<div class="col-md-2">
-											<a href="{{ $tournament->maps }}" class="btn btn-black btn-block" target="_blank">Mapa</a>
+											<a href="{{ $tournament->maps }}" class="btn btn-black btn-block"
+												target="_blank">Mapa</a>
 										</div>
 										@endif
 										@if($tournament->hours && $tournament->show_hour)
 										<div class="col-md-3">
-											<a href="{{ asset('storage/hours/' . $tournament->hours) }}" class="btn btn-success btn-block" target="_blank">Horarios</a>
+											<a href="{{ asset('storage/hours/' . $tournament->hours) }}"
+												class="btn btn-success btn-block" target="_blank">Horarios</a>
 										</div>
 										@endif
 										@if($tournament->inscription)
-										@if(\Auth::guest() || (\Auth::check() && $tournament->inscriptions->where('user_id', \Auth::user()->id)->count() == 0))
+										@if(\Auth::guest() || (\Auth::check() &&
+										$tournament->inscriptions->where('user_id', \Auth::user()->id)->count() == 0))
 										<div class="col-md-3">
-											<a href="{{ route('publication.inscription', $tournament->slug) }}" class="btn btn-warning btn-block">
+											@if($tournament->external_link)
+											<a href="{{ $tournament->external_link }}" target="_blank"
+												class="btn btn-warning btn-block">
 												Inscripción
 											</a>
+											@else
+											<a href="{{ route('publication.inscription', $tournament->slug) }}"
+												class="btn btn-warning btn-block">
+												Inscripción
+											</a>
+											@endif
 										</div>
 										@endif
 										@elseif($tournament->results)
 										<div class="col-md-4">
-											<a href="http://results.pingui.es/events.php?pod_id={{ $tournament->results }}" class="btn btn-danger btn-block" target="_blank">Resultados</a>
+											<a href="http://results.pingui.es/events.php?pod_id={{ $tournament->results }}"
+												class="btn btn-danger btn-block" target="_blank">Resultados</a>
 										</div>
 										@endif
 									</div>
@@ -208,7 +264,9 @@
 									<div class="col-md-12">
 										<h5 style="display: inline;">Categorias Latinos:</h5>
 										@foreach($tournament->prices->where('category_id', 2) as $c)
-										<span class="label label-success">{{ optional(optional($c->subL)->category_latino)->name }} - {{ optional($c->subL)->name }}</span>
+										<span class="label label-success">{{
+											optional(optional($c->subL)->category_latino)->name }} - {{
+											optional($c->subL)->name }}</span>
 										@endforeach
 									</div>
 								</div>
@@ -216,7 +274,9 @@
 									<div class="col-md-12">
 										<h5 style="display: inline;">Categorias Standar:</h5>
 										@foreach($tournament->prices->where('category_id', 3) as $c)
-										<span class="label label-success">{{ optional(optional($c->subS)->category_standar)->name }} - {{ optional($c->subS)->name }}</span>
+										<span class="label label-success">{{
+											optional(optional($c->subS)->category_standar)->name }} - {{
+											optional($c->subS)->name }}</span>
 										@endforeach
 									</div>
 								</div>
@@ -254,4 +314,5 @@
 	<script type="text/javascript" src="{{ asset('/js/custom.js') }}"></script>
 	<script type="text/javascript" src="{{ mix('/js/app.js') }}"></script>
 </body>
+
 </html>

@@ -3574,6 +3574,151 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3626,6 +3771,10 @@ __webpack_require__.r(__webpack_exports__);
           id: "results",
           icon: "edit"
         }, {
+          label: "Link de Inscripción Externo",
+          id: "external_link",
+          icon: "edit"
+        }, {
           label: "Ruta al Mapa",
           id: "maps",
           icon: "edit"
@@ -3655,7 +3804,9 @@ __webpack_require__.r(__webpack_exports__);
         subcategory_latino: "Seleccione las categorias latinos que participan.",
         subcategory_standar: "Seleccione las categorias standard  que participan.",
         hotel: "Ingrese el nombre del hotel",
-        link: "Ingrese el link del hotel"
+        link: "Ingrese el link del hotel",
+        external_link: "Enlace a Google Form",
+        organizer_id: "Organizador del evento"
       }
     };
   },
@@ -69064,7 +69215,7 @@ var render = function () {
     _c("div", { staticClass: "box-header" }, [
       _c("h3", { staticClass: "box-title" }, [
         _c("span", { class: "glyphicon glyphicon-" + _vm.ico }),
-        _vm._v(" " + _vm._s(_vm.title) + "\n    "),
+        _vm._v(" " + _vm._s(_vm.title) + "\n        "),
       ]),
     ]),
     _vm._v(" "),
@@ -69155,7 +69306,9 @@ var render = function () {
                       },
                       [
                         _c("option", { attrs: { value: "" } }, [
-                          _vm._v("Seleccione un organizador"),
+                          _vm._v(
+                            "\n                                    Seleccione un organizador\n                                "
+                          ),
                         ]),
                         _vm._v(" "),
                         _vm._l(_vm.organizers, function (o, i) {
@@ -69178,98 +69331,6 @@ var render = function () {
                     }),
                   ]),
                 ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "col-md-6", staticStyle: { height: "100px" } },
-                  [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "checkbox",
-                        staticStyle: { "padding-top": "25px" },
-                      },
-                      [
-                        _c(
-                          "label",
-                          {
-                            staticClass: "control-label",
-                            staticStyle: { "font-weight": "600" },
-                            attrs: { for: "inscription" },
-                          },
-                          [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.data.inscription,
-                                  expression: "data.inscription",
-                                },
-                              ],
-                              staticClass: "checkbox",
-                              attrs: { id: "inscription", type: "checkbox" },
-                              domProps: {
-                                checked: Array.isArray(_vm.data.inscription)
-                                  ? _vm._i(_vm.data.inscription, null) > -1
-                                  : _vm.data.inscription,
-                              },
-                              on: {
-                                change: function ($event) {
-                                  var $$a = _vm.data.inscription,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = null,
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.data,
-                                          "inscription",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.data,
-                                          "inscription",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.data, "inscription", $$c)
-                                  }
-                                },
-                              },
-                            }),
-                            _vm._v(" "),
-                            _c("span", { staticClass: "edit" }),
-                            _vm._v(" Inscripción:\n                "),
-                            _c("b", [
-                              _vm._v(
-                                _vm._s(
-                                  _vm.data.inscription ? "Abierta" : "Cerrada"
-                                )
-                              ),
-                            ]),
-                          ]
-                        ),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c("small", {
-                          staticClass: "form-text text-muted",
-                          attrs: { id: "inscriptionHelp" },
-                          domProps: {
-                            textContent: _vm._s(_vm.msg.inscription),
-                          },
-                        }),
-                      ]
-                    ),
-                  ]
-                ),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-6" }, [
                   _c(
@@ -69341,6 +69402,85 @@ var render = function () {
                     ],
                     1
                   ),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "checkbox" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "control-label",
+                        staticStyle: { "font-weight": "600" },
+                        attrs: { for: "inscription" },
+                      },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.data.inscription,
+                              expression: "data.inscription",
+                            },
+                          ],
+                          staticClass: "checkbox",
+                          attrs: { id: "inscription", type: "checkbox" },
+                          domProps: {
+                            checked: Array.isArray(_vm.data.inscription)
+                              ? _vm._i(_vm.data.inscription, null) > -1
+                              : _vm.data.inscription,
+                          },
+                          on: {
+                            change: function ($event) {
+                              var $$a = _vm.data.inscription,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = null,
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 &&
+                                    _vm.$set(
+                                      _vm.data,
+                                      "inscription",
+                                      $$a.concat([$$v])
+                                    )
+                                } else {
+                                  $$i > -1 &&
+                                    _vm.$set(
+                                      _vm.data,
+                                      "inscription",
+                                      $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1))
+                                    )
+                                }
+                              } else {
+                                _vm.$set(_vm.data, "inscription", $$c)
+                              }
+                            },
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "edit" }),
+                        _vm._v(
+                          " Inscripción:\n                                "
+                        ),
+                        _c("b", [
+                          _vm._v(
+                            _vm._s(_vm.data.inscription ? "Abierta" : "Cerrada")
+                          ),
+                        ]),
+                      ]
+                    ),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("small", {
+                      staticClass: "form-text text-muted",
+                      attrs: { id: "inscriptionHelp" },
+                      domProps: { textContent: _vm._s(_vm.msg.inscription) },
+                    }),
+                  ]),
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-6" }, [
@@ -69441,26 +69581,30 @@ var render = function () {
                   ]),
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _vm._m(5),
-                    _vm._v(" "),
-                    _c("input", {
-                      attrs: {
-                        id: "info",
-                        type: "file",
-                        accept: "application/pdf",
-                      },
-                      on: { change: _vm.onSelected },
-                    }),
-                    _vm._v(" "),
-                    _c("small", {
-                      staticClass: "form-text text-muted",
-                      attrs: { id: "infoHelp" },
-                      domProps: { innerHTML: _vm._s(_vm.msg.info) },
-                    }),
-                  ]),
-                ]),
+                _c(
+                  "div",
+                  { staticClass: "col-md-6", staticStyle: { height: "94px" } },
+                  [
+                    _c("div", { staticClass: "form-group" }, [
+                      _vm._m(5),
+                      _vm._v(" "),
+                      _c("input", {
+                        attrs: {
+                          id: "info",
+                          type: "file",
+                          accept: "application/pdf",
+                        },
+                        on: { change: _vm.onSelected },
+                      }),
+                      _vm._v(" "),
+                      _c("small", {
+                        staticClass: "form-text text-muted",
+                        attrs: { id: "infoHelp" },
+                        domProps: { innerHTML: _vm._s(_vm.msg.info) },
+                      }),
+                    ]),
+                  ]
+                ),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-6" }, [
                   _c(
@@ -69592,7 +69736,8 @@ var render = function () {
                               _c(
                                 "button",
                                 {
-                                  staticClass: "btn btn-danger btn-xs",
+                                  staticClass:
+                                    "\n                                                    btn btn-danger btn-xs\n                                                ",
                                   attrs: { type: "button" },
                                   on: {
                                     click: function ($event) {
@@ -69828,7 +69973,9 @@ var render = function () {
                               attrs: { href: m.link, target: "_blank" },
                               domProps: { textContent: _vm._s(m.name) },
                             }),
-                            _vm._v(" -\n                    "),
+                            _vm._v(
+                              "\n                                        -\n                                        "
+                            ),
                             m.type_id == 1
                               ? _c("span", [_vm._v("LINK")])
                               : m.type_id == 2
@@ -70154,7 +70301,7 @@ var render = function () {
                                                 "button",
                                                 {
                                                   staticClass:
-                                                    "btn btn-danger btn-xs",
+                                                    "\n                                                        btn\n                                                        btn-danger\n                                                        btn-xs\n                                                    ",
                                                   attrs: { type: "button" },
                                                   on: {
                                                     click: function ($event) {
@@ -70225,7 +70372,9 @@ var render = function () {
                                             _vm._v(" "),
                                             _c("td", [
                                               _vm._v(
-                                                _vm._s(p.subcategory_text)
+                                                "\n                                                " +
+                                                  _vm._s(p.subcategory_text) +
+                                                  "\n                                            "
                                               ),
                                             ]),
                                             _vm._v(" "),
@@ -70239,7 +70388,7 @@ var render = function () {
                                                 "button",
                                                 {
                                                   staticClass:
-                                                    "btn btn-danger btn-xs",
+                                                    "\n                                                        btn\n                                                        btn-danger\n                                                        btn-xs\n                                                    ",
                                                   attrs: { type: "button" },
                                                   on: {
                                                     click: function ($event) {
@@ -70310,7 +70459,9 @@ var render = function () {
                                             _vm._v(" "),
                                             _c("td", [
                                               _vm._v(
-                                                _vm._s(p.subcategory_text)
+                                                "\n                                                " +
+                                                  _vm._s(p.subcategory_text) +
+                                                  "\n                                            "
                                               ),
                                             ]),
                                             _vm._v(" "),
@@ -70324,7 +70475,7 @@ var render = function () {
                                                 "button",
                                                 {
                                                   staticClass:
-                                                    "btn btn-danger btn-xs",
+                                                    "\n                                                        btn\n                                                        btn-danger\n                                                        btn-xs\n                                                    ",
                                                   attrs: { type: "button" },
                                                   on: {
                                                     click: function ($event) {
@@ -70373,7 +70524,7 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "organizer_id" } },
       [
         _c("span", { staticClass: "edit" }),
-        _vm._v(" Organizador:\n              "),
+        _vm._v(" Organizador:\n                            "),
       ]
     )
   },
@@ -70386,7 +70537,9 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "start" } },
       [
         _c("span", { staticClass: "edit" }),
-        _vm._v(" Fecha de inicio de competición:\n              "),
+        _vm._v(
+          " Fecha de inicio\n                                de competición:\n                            "
+        ),
       ]
     )
   },
@@ -70399,7 +70552,9 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "end" } },
       [
         _c("span", { staticClass: "edit" }),
-        _vm._v(" Fecha final de competición:\n              "),
+        _vm._v(
+          " Fecha final de\n                                competición:\n                            "
+        ),
       ]
     )
   },
@@ -70410,7 +70565,10 @@ var staticRenderFns = [
     return _c(
       "label",
       { staticClass: "control-label", attrs: { for: "image" } },
-      [_c("span", { staticClass: "edit" }), _vm._v(" Imagen:\n              ")]
+      [
+        _c("span", { staticClass: "edit" }),
+        _vm._v(" Imagen:\n                            "),
+      ]
     )
   },
   function () {
@@ -70422,7 +70580,9 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "hours" } },
       [
         _c("span", { staticClass: "edit" }),
-        _vm._v(" Horario del evento:\n              "),
+        _vm._v(
+          " Horario del\n                                evento:\n                            "
+        ),
       ]
     )
   },
@@ -70435,7 +70595,9 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "info" } },
       [
         _c("span", { staticClass: "edit" }),
-        _vm._v(" Información del evento:\n              "),
+        _vm._v(
+          " Información del\n                                evento:\n                            "
+        ),
       ]
     )
   },
@@ -70448,7 +70610,9 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "referee" } },
       [
         _c("span", { staticClass: "edit" }),
-        _vm._v(" Referees del evento:\n              "),
+        _vm._v(
+          " Referees del\n                                evento:\n                            "
+        ),
       ]
     )
   },
@@ -70461,7 +70625,9 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "hotel" } },
       [
         _c("span", { staticClass: "edit" }),
-        _vm._v(" Nombre del hotel:\n                  "),
+        _vm._v(
+          " Nombre\n                                        del hotel:\n                                    "
+        ),
       ]
     )
   },
@@ -70474,7 +70640,9 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "link" } },
       [
         _c("span", { staticClass: "edit" }),
-        _vm._v(" Link de la pagina del hotel:\n                  "),
+        _vm._v(
+          " Link de\n                                        la pagina del hotel:\n                                    "
+        ),
       ]
     )
   },
@@ -70487,7 +70655,7 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "type_id" } },
       [
         _c("span", { staticClass: "edit" }),
-        _vm._v(" Tipo:\n                  "),
+        _vm._v(" Tipo:\n                                    "),
       ]
     )
   },
@@ -70500,7 +70668,9 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "name" } },
       [
         _c("span", { staticClass: "edit" }),
-        _vm._v(" Nombre del Hipervinculo:\n                  "),
+        _vm._v(
+          " Nombre\n                                        del Hipervinculo:\n                                    "
+        ),
       ]
     )
   },
@@ -70513,7 +70683,9 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "link" } },
       [
         _c("span", { staticClass: "edit" }),
-        _vm._v(" Hipervinculo:\n                  "),
+        _vm._v(
+          "\n                                        Hipervinculo:\n                                    "
+        ),
       ]
     )
   },
@@ -70527,7 +70699,7 @@ var staticRenderFns = [
       [
         _c("span", { staticClass: "edit" }),
         _vm._v(
-          " Seleccione el archivo a\n                    Guardar:\n                  "
+          "\n                                        Seleccione el archivo a Guardar:\n                                    "
         ),
       ]
     )
@@ -70541,7 +70713,9 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "p_category" } },
       [
         _c("span", { staticClass: "edit" }),
-        _vm._v(" Categoría:\n                  "),
+        _vm._v(
+          "\n                                        Categoría:\n                                    "
+        ),
       ]
     )
   },
@@ -70554,7 +70728,9 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "subcategory_latino" } },
       [
         _c("span", { staticClass: "edit" }),
-        _vm._v(" Categorias Latino:\n                  "),
+        _vm._v(
+          "\n                                        Categorias Latino:\n                                    "
+        ),
       ]
     )
   },
@@ -70567,7 +70743,9 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "subcategory_standar" } },
       [
         _c("span", { staticClass: "edit" }),
-        _vm._v(" Categorias Standards:\n                  "),
+        _vm._v(
+          "\n                                        Categorias Standards:\n                                    "
+        ),
       ]
     )
   },
@@ -70580,7 +70758,9 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "category_open" } },
       [
         _c("span", { staticClass: "edit" }),
-        _vm._v(" Categorias Open:\n                  "),
+        _vm._v(
+          "\n                                        Categorias Open:\n                                    "
+        ),
       ]
     )
   },
@@ -70593,7 +70773,7 @@ var staticRenderFns = [
       { staticClass: "control-label", attrs: { for: "price" } },
       [
         _c("span", { staticClass: "edit" }),
-        _vm._v(" Precio:\n                  "),
+        _vm._v(" Precio:\n                                    "),
       ]
     )
   },
@@ -70607,7 +70787,7 @@ var staticRenderFns = [
         { staticClass: "btn btn-primary btn-lg", attrs: { type: "submit" } },
         [
           _c("span", { staticClass: "fa fa-ok" }),
-          _vm._v(" Guardar\n                "),
+          _vm._v(" Guardar\n                                "),
         ]
       ),
     ])

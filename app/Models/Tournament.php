@@ -32,6 +32,7 @@ class Tournament extends Model
         // 'price',
         // 'entrance_price',
         'record_id',
+        'external_link'
     ];
 
     /**
