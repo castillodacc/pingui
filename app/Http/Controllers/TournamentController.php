@@ -2,8 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category_latino;
+use App\Models\Category_open;
+use App\Models\Category_standar;
+use App\Models\Hotel;
+use App\Models\Inscription;
+use App\Models\MoreInfo;
+use App\Models\Organizer;
+use App\Models\Price;
+use App\Models\Referee;
+use App\Models\Subcategory_latino;
+use App\Models\Subcategory_standar;
+use App\Models\Tournament;
 use Illuminate\Http\Request;
-use App\Models\ { Tournament, Referee, Category_open, Category_latino, Subcategory_latino, Category_standar, Subcategory_standar, Hotel, Price, Organizer, Inscription, MoreInfo };
 use Intervention\Image\ImageManager;
 
 class TournamentController extends Controller
@@ -27,7 +38,7 @@ class TournamentController extends Controller
     {
         $tournament = Tournament::dataForPaginate(['*'], function ($t) {
             $t->name = (strlen($t->name) > 40) ? substr($t->name, 0, 40) . '...' : $t->name;
-            $t->description = (strlen($t->description) > 70) ? substr($t->description, 0, 70) . '...' : $t->description;
+            $t->description = (strlen($t->description) > 70) ? mb_substr($t->description, 0, 70) . '...' : $t->description;
             $t->inscription = ($t->inscription) ? 'Abierta' : 'Cerrada';
         });
         return $this->dataWithPagination($tournament);
@@ -62,7 +73,7 @@ class TournamentController extends Controller
             'subcategory_latino' => 'nullable|array',
             'subcategory_standar' => 'nullable|array',
             'external_link' => 'nullable|string',
-        ],[],[
+        ], [], [
             'name' => 'titulo',
             'description' => 'detalles',
             'start' => 'fecha de comienzo',
@@ -125,7 +136,6 @@ class TournamentController extends Controller
         }
 
         $tournament->referees()->attach($data['referee']);
-
     }
 
     /**
@@ -196,7 +206,7 @@ class TournamentController extends Controller
             'subcategory_latino' => 'nullable|array',
             'subcategory_standar' => 'nullable|array',
             'external_link' => 'nullable|string',
-        ],[],[
+        ], [], [
             'name' => 'titulo',
             'description' => 'detalles',
             'start' => 'fecha de comienzo',
@@ -336,11 +346,11 @@ class TournamentController extends Controller
     public function user(Request $request)
     {
         $select = ['id', 'febd_num_1', 'name_1', 'last_name_1', 'febd_num_2', 'name_2', 'last_name_2', 'state_pay', 'method_pay', 'state', 'tournament_id'];
-        $data = Inscription::orderBy($request->order?:'id', $request->dir?:'ASC')
-        ->search($request->search)
-        ->where('user_id', \Auth::user()->id)
-        ->select($select)
-        ->paginate($request->num?:10);
+        $data = Inscription::orderBy($request->order ?: 'id', $request->dir ?: 'ASC')
+            ->search($request->search)
+            ->where('user_id', \Auth::user()->id)
+            ->select($select)
+            ->paginate($request->num ?: 10);
         $data->each(function ($d) {
             $d->state = ($d->state == 1) ? 'Aprobado' : 'Por Aprobar';
             $d->type_pay = ($d->method_pay == 1) ? 'Transferencia' : 'Paypal';
